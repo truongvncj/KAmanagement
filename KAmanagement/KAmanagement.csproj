@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A73260CF-F7D1-4B42-AC47-6F8FFBC418E7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KAmanagement</RootNamespace>
+    <AssemblyName>KAmanagement</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>KAmanagement.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>kamanagement_gav_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\Control_ac.cs" />
+    <Compile Include="Control\DGV_DateTimePicker.cs" />
+    <Compile Include="Control\PriceCheck\BAseprice.cs" />
+    <Compile Include="LinqtoSQL.designer.cs">
+      <DependentUpon>LinqtoSQL.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Model\MassConfirm.cs" />
+    <Compile Include="Model\Salesinput_ctrl.cs" />
+    <Compile Include="Model\customerinput_ctrl.cs" />
+    <Compile Include="Model\fuctionprog.cs" />
+    <Compile Include="Model\Contract.cs" />
+    <Compile Include="Model\programlist.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Username.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsCallogs.cs">
+      <DependentUpon>dsCallogs.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsCallogs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsCallogs.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="shared\Constants.cs" />
+    <Compile Include="shared\ExtractToDataTableOptions.cs" />
+    <Compile Include="shared\LinQToExcel.cs" />
+    <Compile Include="shared\StringExtensions.cs" />
+    <Compile Include="View\Caculating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Caculating.Designer.cs">
+      <DependentUpon>Caculating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditContractItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditContractItem.Designer.cs">
+      <DependentUpon>EditContractItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Createpayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Createpayment.Designer.cs">
+      <DependentUpon>Createpayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreatnewCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CreatnewCust.Designer.cs">
+      <DependentUpon>CreatnewCust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KASeachaddcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KASeachaddcode.Designer.cs">
+      <DependentUpon>KASeachaddcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\masscreateContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\masscreateContract.Designer.cs">
+      <DependentUpon>masscreateContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KaconvertProductdetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KaconvertProductdetail.Designer.cs">
+      <DependentUpon>KaconvertProductdetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KafromtoSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KafromtoSelect.Designer.cs">
+      <DependentUpon>KafromtoSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kamasscontractChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kamasscontractChange.Designer.cs">
+      <DependentUpon>kamasscontractChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kamassCofirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kamassCofirm.Designer.cs">
+      <DependentUpon>kamassCofirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kAuserRightsetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kAuserRightsetup.Designer.cs">
+      <DependentUpon>kAuserRightsetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Noouthourise.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Noouthourise.Designer.cs">
+      <DependentUpon>Noouthourise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Passwordchange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Passwordchange.Designer.cs">
+      <DependentUpon>Passwordchange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SetCustGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SetCustGroup.Designer.cs">
+      <DependentUpon>SetCustGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\selectinput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\selectinput.Designer.cs">
+      <DependentUpon>selectinput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Kainputaddcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Kainputaddcode.Designer.cs">
+      <DependentUpon>Kainputaddcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Viewdatatable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Viewdatatable.Designer.cs">
+      <DependentUpon>Viewdatatable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kapricingcheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kapricingcheck.Designer.cs">
+      <DependentUpon>kapricingcheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kaconfirmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kaconfirmPayment.Designer.cs">
+      <DependentUpon>kaconfirmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kaPriodmake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kaPriodmake.Designer.cs">
+      <DependentUpon>kaPriodmake.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kareportsform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kareportsform.Designer.cs">
+      <DependentUpon>kareportsform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kasaleupload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kasaleupload.Designer.cs">
+      <DependentUpon>kasaleupload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KAcontractlisting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KAcontractlisting.Designer.cs">
+      <DependentUpon>KAcontractlisting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreatenewContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CreatenewContract.Designer.cs">
+      <DependentUpon>CreatenewContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Datepick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Datepick.Designer.cs">
+      <DependentUpon>Datepick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KAmasterinput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KAmasterinput.Designer.cs">
+      <DependentUpon>KAmasterinput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\kaPriodpicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kaPriodpicker.Designer.cs">
+      <DependentUpon>kaPriodpicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrintLetterOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PrintLetterOption.Designer.cs">
+      <DependentUpon>PrintLetterOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\KASeachcontract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KASeachcontract.Designer.cs">
+      <DependentUpon>KASeachcontract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Seachcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Seachcode.Designer.cs">
+      <DependentUpon>Seachcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Serversetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Serversetup.Designer.cs">
+      <DependentUpon>Serversetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SetGroupFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SetGroupFrom.Designer.cs">
+      <DependentUpon>SetGroupFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\valueinput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\valueinput.Designer.cs">
+      <DependentUpon>valueinput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\VInputchange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\VInputchange.Designer.cs">
+      <DependentUpon>VInputchange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="shared\Utils.cs" />
+    <Compile Include="View\Reportsview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Reportsview.Designer.cs">
+      <DependentUpon>Reportsview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Viewtable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Viewtable.Designer.cs">
+      <DependentUpon>Viewtable.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reports\PaymentRequest.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Caculating.resx">
+      <DependentUpon>Caculating.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EditContractItem.resx">
+      <DependentUpon>EditContractItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Createpayment.resx">
+      <DependentUpon>Createpayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CreatnewCust.resx">
+      <DependentUpon>CreatnewCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KASeachaddcode.resx">
+      <DependentUpon>KASeachaddcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\masscreateContract.resx">
+      <DependentUpon>masscreateContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KaconvertProductdetail.resx">
+      <DependentUpon>KaconvertProductdetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KafromtoSelect.resx">
+      <DependentUpon>KafromtoSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kamasscontractChange.resx">
+      <DependentUpon>kamasscontractChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kamassCofirm.resx">
+      <DependentUpon>kamassCofirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kAuserRightsetup.resx">
+      <DependentUpon>kAuserRightsetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Noouthourise.resx">
+      <DependentUpon>Noouthourise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Passwordchange.resx">
+      <DependentUpon>Passwordchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SetCustGroup.resx">
+      <DependentUpon>SetCustGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\selectinput.resx">
+      <DependentUpon>selectinput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Kainputaddcode.resx">
+      <DependentUpon>Kainputaddcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Viewdatatable.resx">
+      <DependentUpon>Viewdatatable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kapricingcheck.resx">
+      <DependentUpon>kapricingcheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kaconfirmPayment.resx">
+      <DependentUpon>kaconfirmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kaPriodmake.resx">
+      <DependentUpon>kaPriodmake.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kareportsform.resx">
+      <DependentUpon>kareportsform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kasaleupload.resx">
+      <DependentUpon>kasaleupload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KAcontractlisting.resx">
+      <DependentUpon>KAcontractlisting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CreatenewContract.resx">
+      <DependentUpon>CreatenewContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Datepick.resx">
+      <DependentUpon>Datepick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KAmasterinput.resx">
+      <DependentUpon>KAmasterinput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kaPriodpicker.resx">
+      <DependentUpon>kaPriodpicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PrintLetterOption.resx">
+      <DependentUpon>PrintLetterOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KASeachcontract.resx">
+      <DependentUpon>KASeachcontract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Seachcode.resx">
+      <DependentUpon>Seachcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Serversetup.resx">
+      <DependentUpon>Serversetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SetGroupFrom.resx">
+      <DependentUpon>SetGroupFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\valueinput.resx">
+      <DependentUpon>valueinput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\VInputchange.resx">
+      <DependentUpon>VInputchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Reportsview.resx">
+      <DependentUpon>Reportsview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Viewtable.resx">
+      <DependentUpon>Viewtable.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="View\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="LinqtoSQL.dbml.layout">
+      <DependentUpon>LinqtoSQL.dbml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="LinqtoSQL.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LinqtoSQL.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\tblFBL5Nnew.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reports\dsCallogs.xsc">
+      <DependentUpon>dsCallogs.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsCallogs.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCallogs.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsCallogs.xss">
+      <DependentUpon>dsCallogs.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="kamanagement_gav_icon.ico" />
+    <None Include="Resources\file-dam-management.gif" />
+    <None Include="Resources\coca_cola.gif" />
+    <None Include="Resources\input22.png" />
+    <None Include="Resources\Reports2.png" />
+    <None Include="Resources\Reports1.png" />
+    <None Include="Resources\saleupdate2.png" />
+    <None Include="Resources\saleupdate1.png" />
+    <None Include="Resources\master2.png" />
+    <None Include="Resources\master1.png" />
+    <None Include="Resources\payment12.png" />
+    <None Include="Resources\payment22.png" />
+    <None Include="Resources\USERSETUP2.png" />
+    <None Include="Resources\USERSETUP1.png" />
+    <None Include="Resources\payment2.png" />
+    <None Include="Resources\payment1.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

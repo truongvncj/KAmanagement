@@ -1,0 +1,1659 @@
+USE [KAmanagement]
+GO
+
+/****** Object:  StoredProcedure [dbo].[AccrualContractinSQLbySQL]    Script Date: 04/04/2016 9:19:12 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+ALTER procedure [dbo].[AccrualContractinSQLbySQL]
+( @Accrualdate Datetime
+-- @Document_Number float
+)
+
+as
+
+Begin
+
+begin  -- update detail sales achiver all contract
+			begin  -- update region and status con tract
+	
+						  UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SalesOrg = tbl_kacontractdata.SalesOrg,
+			            tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts,
+				tbl_kacontractsdatadetail.ConType =tbl_kacontractdata.ConType,
+				tbl_kacontractsdatadetail.Customercode =tbl_kacontractdata.Customer,
+					tbl_kacontractsdatadetail.CustomerType =tbl_kacontractdata.CustomerType,
+					tbl_kacontractsdatadetail.SALORG_CTR =tbl_kacontractdata.SALORG_CTR,
+						tbl_kacontractsdatadetail.Fullname   =tbl_kacontractdata.Fullname
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+
+
+			end
+			
+begin
+   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.EffFrm = tbl_kacontractdata.EffDate
+			          --  tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts
+				
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+				and tbl_kacontractsdatadetail.EffFrm is null
+
+
+end
+
+
+begin
+   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.EffTo = tbl_kacontractdata.EftDate
+			          --  tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts
+				
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+				and tbl_kacontractsdatadetail.EffTo is null
+
+
+end
+
+
+
+	         	begin
+	
+			   UPDATE tbl_kacontractsdatadetail
+				SET    --tbl_kacontractsdatadetail.AccSponsoredTotal = '0',
+				tbl_kacontractsdatadetail.UCVolAched =isnull( ( select sum(tbl_kasales.UC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp)),0),
+				tbl_kacontractsdatadetail.PCVolAched =isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp)),0),
+				tbl_kacontractsdatadetail.[ECAched] = isnull(( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0),
+				tbl_kacontractsdatadetail.[NSRAched] = isnull(( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0),
+				tbl_kacontractsdatadetail.[LitAched] = isnull(( select sum(tbl_kasales.Litter ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0)
+				
+				
+				from tbl_kacontractsdatadetail
+			   -- where tbl_kacontractsdatadetail.contr = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+end-- update detail sales achiver all contract
+
+begin --tính payment và request
+			
+				 begin
+				UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.PaidRequestAmt = isnull((select sum(tbl_kacontractsdetailpayment.PaidRequestAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  tbl_kacontractsdatadetail.ContractNo and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'REQ'),0)
+				--tbl_kacontractsdatadetail.PayControl = 'REQ'
+
+				from tbl_kacontractsdetailpayment,tbl_kacontractsdatadetail
+				--where tbl_kacontractsdetailpayment.ContractNo = @Contractno-- 
+		
+				end
+
+						begin
+						 UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.PaidAmt = isnull((select sum(tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  tbl_kacontractsdatadetail.ContractNo and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'PAY'),0)
+					--	tbl_kacontractsdatadetail.PayControl = 'PAY'
+
+						from tbl_kacontractsdetailpayment
+					--	where tbl_kacontractsdetailpayment.ContractNo = @Contractno 
+						end
+end --tính payment và request
+
+begin -- tính volachive and total accrsponersol
+
+begin -- caculation	  #region  caculation tyPe "C00"
+	   UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where tbl_kacontractsdatadetail.PayControl ='C00'
+		
+
+	end
+
+	
+			 UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.[Sponsoredcommit] =  tbl_kacontractsdatadetail.SponsoredAmt,
+		tbl_kacontractsdatadetail.AccSponsoredTotal =  tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where tbl_kacontractsdatadetail.PayControl ='C00'
+		or tbl_kacontractsdatadetail.PayControl ='C01'
+			or tbl_kacontractsdatadetail.PayControl ='C05'
+		or tbl_kacontractsdatadetail.PayControl ='C02' 
+		or tbl_kacontractsdatadetail.PayControl ='C03' 
+			or tbl_kacontractsdatadetail.PayControl ='C04' 
+
+
+	
+			
+	
+--BEGIN -- caculation	  #region  caculation tyPe "C01"
+				
+--					begin
+--					   UPDATE tbl_kacontractsdatadetail
+--						SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+--						from tbl_kacontractsdatadetail
+--						where  tbl_kacontractsdatadetail.PayControl ='C01' and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+
+--					end
+
+--			 END
+	
+
+BEGIN  --- c02
+
+
+
+					--begin  --c05
+					--   UPDATE tbl_kacontractsdatadetail
+					--	SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+					--	from tbl_kacontractsdatadetail
+					--	where  tbl_kacontractsdatadetail.PayControl ='C05' and tbl_kacontractsdatadetail.EffFrm < = tbl_kacontractsdatadetail.AccruedDate 
+
+					--end  --c05
+
+
+	--BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/isnull(tbl_kacontractsdatadetail.TagetAchivement,1))*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement <> 0 and  tbl_kacontractsdatadetail.TagetPercentage <=100
+			    end
+
+					begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/1)*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement = 0
+			    end
+
+				 	
+				
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt-- *tbl_kacontractsdatadetail.TagetPercentage)/100
+	                 
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+			and  tbl_kacontractsdatadetail.TagetPercentage > 100
+		--	and tbl_kacontractsdatadetail.TagetAchivement <> 0
+			    end
+  -- END
+
+   END --- c02
+		 
+
+
+--BEGIN  --c03
+--			 	begin
+--			   UPDATE tbl_kacontractsdatadetail
+--				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+--				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ isnull( tbl_kacontractsdatadetail.BeginAchvmt,0)
+--				from tbl_kacontractsdatadetail
+--				where  tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+--			    end
+
+--				 	begin
+--			   UPDATE tbl_kacontractsdatadetail
+--				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+--				from tbl_kacontractsdatadetail
+--				where  tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+--				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+--			    end
+
+--   END    --c03
+
+
+   	
+
+--BEGIN  --c04
+--			 	begin
+--			   UPDATE tbl_kacontractsdatadetail
+--				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+--				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+--				from tbl_kacontractsdatadetail
+--				where tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+--			    end
+
+--				 	begin
+--			   UPDATE tbl_kacontractsdatadetail
+--				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+--				from tbl_kacontractsdatadetail
+--				where tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+--				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+--			    end
+
+--   END --c04
+   
+
+    
+
+BEGIN --do1
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+			--	and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --d01
+  
+
+   
+
+BEGIN  --do2
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.Litter ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --d02
+   
+
+   
+
+BEGIN  --do3
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --d03
+   
+
+     
+
+BEGIN --p00
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --p00
+  
+
+      
+
+	BEGIN --p01
+			 
+			 --  begin
+			 --UPDATE tbl_kacontractsdatadetail
+				--SET  tbl_kacontractsdatadetail.AccruedDate = getdate()
+	
+				--from tbl_kacontractsdatadetail
+				--where  tbl_kacontractsdatadetail.AccruedDate is null
+				--end	
+			 
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] =(tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P01' and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --p01
+   
+
+    
+
+BEGIN --p02
+
+	DECLARE @beginachivenetsale  float
+    DECLARE @achivenetsale  float
+
+				--begin
+				--set @beginachivenetsale = ( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno)
+				--end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				@beginachivenetsale =isnull (( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractsdatadetail.ContractNo),0),
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL(@beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where   tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --p02
+   
+
+    
+
+BEGIN  --p03
+
+	--DECLARE @beginachivenetsale  float
+--DECLARE @achivenetvolume  float
+
+				--begin
+				--set @beginachivenetsale = ( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno)
+				--end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.AccSponsoredTotal = 0,
+				@beginachivenetsale = isnull(( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractsdatadetail.ContractNo),0),
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( @beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.AccSponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --p03
+  
+  begin -- tinh accrula detail
+ --    tbl_kacontractdata.EftNoOfMonth = iif(DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)=0,1,DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)) ,
+		  
+		  
+	--	tbl_kacontractdata.CurrentMonth = iif(DATEDIFF(MONTH, tbl_kacontractdata.EffDate ,  @Accrualdate) > DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate),DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate),DATEDIFF(MONTH,  tbl_kacontractdata.EffDate, @Accrualdate) ),
+	    
+  
+    			begin
+								UPDATE tbl_kacontractsdatadetail
+								SET   
+								
+								 tbl_kacontractsdatadetail.EftNoOfMonth = iif(DATEDIFF(MONTH, tbl_kacontractsdatadetail.[EffFrm], tbl_kacontractsdatadetail.[EffTo])=0,1,DATEDIFF(MONTH, tbl_kacontractsdatadetail.[EffFrm], tbl_kacontractsdatadetail.[EffTo])) ,
+									    tbl_kacontractsdatadetail.CurrentMonth = iif(DATEDIFF(MONTH, tbl_kacontractsdatadetail.[EffFrm] ,  @Accrualdate) > DATEDIFF(MONTH, tbl_kacontractsdatadetail.[EffFrm], tbl_kacontractsdatadetail.[EffTo]),DATEDIFF(MONTH, tbl_kacontractsdatadetail.[EffFrm], tbl_kacontractsdatadetail.[EffTo]),DATEDIFF(MONTH,  tbl_kacontractsdatadetail.[EffFrm], @Accrualdate) ),
+							  
+							  
+							      tbl_kacontractsdatadetail.PaidAmt =     	isnull(( select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractsdatadetail.ContractNo and tbl_kacontractsdetailpayment.PayID  = tbl_kacontractsdatadetail.PayID),0),
+	                             tbl_kacontractsdatadetail.PaidRequestAmt =     	isnull(( select sum( tbl_kacontractsdetailpayment.PaidRequestAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractsdatadetail.ContractNo and tbl_kacontractsdetailpayment.PayID  = tbl_kacontractsdatadetail.PayID),0)
+							
+								from tbl_kacontractsdatadetail
+							
+		       	end
+
+			
+    			begin
+								UPDATE tbl_kacontractsdatadetail
+								SET 
+									  
+							           tbl_kacontractsdatadetail.AccruedAmt =  iif((((tbl_kacontractsdatadetail.CurrentMonth*tbl_kacontractsdatadetail.AccSponsoredTotal)/tbl_kacontractsdatadetail.EftNoOfMonth)-tbl_kacontractsdatadetail.PaidAmt)>0,(((tbl_kacontractsdatadetail.CurrentMonth*tbl_kacontractsdatadetail.AccSponsoredTotal)/tbl_kacontractsdatadetail.EftNoOfMonth)-tbl_kacontractsdatadetail.PaidAmt),0)
+	 
+	                 
+								from tbl_kacontractsdatadetail
+								where tbl_kacontractsdatadetail.CurrentMonth <= tbl_kacontractsdatadetail.EftNoOfMonth and tbl_kacontractsdatadetail.CurrentMonth >0 and tbl_kacontractsdatadetail.EftNoOfMonth >0
+							
+			    end
+
+				begin
+								UPDATE tbl_kacontractsdatadetail
+								SET 
+									  
+							           tbl_kacontractsdatadetail.AccruedAmt =  0
+	 
+	                 
+								from tbl_kacontractsdatadetail
+								where tbl_kacontractsdatadetail.CurrentMonth >= tbl_kacontractsdatadetail.EftNoOfMonth or tbl_kacontractsdatadetail.CurrentMonth <0 or tbl_kacontractsdatadetail.EftNoOfMonth <0
+							
+			    end
+
+	
+end
+
+end
+       begin -- updatebalance
+	
+		 UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.Balance = iif(tbl_kacontractsdatadetail.AccSponsoredTotal -  tbl_kacontractsdatadetail.PaidAmt >0,tbl_kacontractsdatadetail.AccSponsoredTotal -  tbl_kacontractsdatadetail.PaidAmt,0)
+	                 
+				from tbl_kacontractsdatadetail
+			
+
+		end
+
+
+begin  -- tinh total all contract
+
+     
+
+         UPDATE tbl_kacontractdata 
+         SET
+		 
+
+
+		  tbl_kacontractdata.Cash = isnull(( select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'CAS'),0),-- + isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.MKTFun = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'MKT'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.POS = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'POS'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.FreeGood = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'FRE'),0),-- + isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.Promotion = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'PRM'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.TotDeal = isnull((select sum( tbl_kacontractsdatadetail.SponsoredTotal) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo ),0),--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0) + isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.TotSponsoredcommit = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo ),0),--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0) + isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+
+
+		 tbl_kacontractdata.Cash_Acc = isnull(( select sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'CAS'),0),
+		 tbl_kacontractdata.MKTFun_Acc =isnull( (select  sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'MKT'),0),
+		 tbl_kacontractdata.POS_Acc =isnull( (select  sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'POS'),0),
+		 tbl_kacontractdata.FreeGood_Acc =isnull( (select sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'FRE'),0),
+		 tbl_kacontractdata.Promotion_Acc =isnull( (select sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'PRM'),0),
+		 tbl_kacontractdata.TotDeal_Acc = isnull((select sum( tbl_kacontractsdatadetail.AccruedAmt) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo ),0),
+	  
+
+	  --tbl_kacontractdata.ConTerm = iif(DATEDIFF(year, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)=0,1,DATEDIFF(year, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate) ) ,
+	    tbl_kacontractdata.EftNoOfMonth = iif(DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)=0,1,DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)) ,
+		  
+		  
+		tbl_kacontractdata.CurrentMonth = iif(DATEDIFF(MONTH, tbl_kacontractdata.EffDate ,  @Accrualdate) > DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate),DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate),DATEDIFF(MONTH,  tbl_kacontractdata.EffDate, @Accrualdate) ),
+	    
+		tbl_kacontractdata.ConTerm  = ceiling (tbl_kacontractdata.EftNoOfMonth/12 ),--,0), 
+	
+	--  tbl_kacontractdata.NSRPer = isnull(tbl_kacontractdata.NSRComm,0) /iif(tbl_kacontractdata.ConTerm =0,1,tbl_kacontractdata.ConTerm),
+
+	    tbl_kacontractdata.AnnualVolume = isnull(tbl_kacontractdata.VolComm,0)/ iif(tbl_kacontractdata.ConTerm =0,1,tbl_kacontractdata.ConTerm),
+
+
+	
+
+	     tbl_kacontractdata.Cash_paid = isnull(( select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'CAS'),0),
+		 tbl_kacontractdata.MKTFun_paid = isnull((select  sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'MKT'),0),
+		 tbl_kacontractdata.POS_paid =isnull( (select  sum (tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'POS'),0),
+		 tbl_kacontractdata.FreeGood_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'FRE'),0),
+		 tbl_kacontractdata.Promotion_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'PRM'),0),
+		 tbl_kacontractdata.Tot_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo),0),
+
+		
+	     
+	     tbl_kacontractdata.Revenue = isnull((select sum( tbl_kacontractbegindata.Revenue) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo),0) +isnull( (select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate   ),0),
+
+		tbl_kacontractdata.NSRAched = isnull((select sum( tbl_kacontractbegindata.NSRAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull((select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+		tbl_kacontractdata.ECAched = isnull((select sum( tbl_kacontractbegindata.FTNAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.EC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.LitAched = isnull((select sum( tbl_kacontractbegindata.LitAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.Litter) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.UCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched_S) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.UC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.PCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.PC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate   ),0)
+	
+		from tbl_kacontractdata
+		--where tbl_kacontractdata.ContractNo = @Contractno
+		
+
+end
+
+
+
+end
+
+
+
+
+
+
+GO
+
+----------------
+
+
+USE [KAmanagement]
+GO
+
+/****** Object:  StoredProcedure [dbo].[CaculationALLContractinSQLbySQL]    Script Date: 04/04/2016 9:19:26 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+
+ALTER procedure [dbo].[CaculationALLContractinSQLbySQL]
+--( @Contractno nvarchar (225)
+---- @Document_Number float
+--)
+
+as
+
+Begin
+
+begin  -- update detail sales achiver all contract
+begin  -- update region and status con tract
+	
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SalesOrg = tbl_kacontractdata.SalesOrg,
+			            tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts,
+				tbl_kacontractsdatadetail.ConType =tbl_kacontractdata.ConType,
+				tbl_kacontractsdatadetail.Customercode =tbl_kacontractdata.Customer,
+					tbl_kacontractsdatadetail.CustomerType =tbl_kacontractdata.CustomerType,
+					tbl_kacontractsdatadetail.SALORG_CTR =tbl_kacontractdata.SALORG_CTR,
+					tbl_kacontractsdatadetail.Fullname   =tbl_kacontractdata.Fullname
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+
+end
+
+begin
+   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.EffFrm = tbl_kacontractdata.EffDate
+			          --  tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts
+				
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+				and tbl_kacontractsdatadetail.EffFrm is null
+
+
+end
+
+
+begin
+   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.EffTo = tbl_kacontractdata.EftDate
+			          --  tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts
+				
+				from tbl_kacontractdata
+				where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+				and tbl_kacontractsdatadetail.EffTo is null
+
+
+end
+
+
+	         	begin
+	
+			   UPDATE tbl_kacontractsdatadetail
+
+
+
+				SET    --tbl_kacontractsdatadetail.SponsoredTotal = '0',
+				tbl_kacontractsdatadetail.UCVolAched =isnull( ( select sum(tbl_kasales.UC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp)),0) ,--+(select sum(tbl_kacontractbegindatadetail.) from tbl_kacontractbegindatadetail where tbl_kacontractbegindatadetail.ContractNo = tbl_kacontractsdatadetail.ContractNo ),
+				tbl_kacontractsdatadetail.PCVolAched =isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp)),0),
+				tbl_kacontractsdatadetail.[ECAched] = isnull(( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0),
+				tbl_kacontractsdatadetail.[NSRAched] = isnull(( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0),
+				tbl_kacontractsdatadetail.[LitAched] = isnull(( select sum(tbl_kasales.Litter ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0)
+				
+				
+				from tbl_kacontractsdatadetail
+			   -- where tbl_kacontractsdatadetail.contr = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+end-- update detail sales achiver all contract
+
+begin --tính payment và request
+			
+				 begin
+				UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.PaidRequestAmt = isnull((select sum(tbl_kacontractsdetailpayment.PaidRequestAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  tbl_kacontractsdatadetail.ContractNo and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'REQ'),0)
+				--tbl_kacontractsdatadetail.PayControl = 'REQ'
+
+				from tbl_kacontractsdetailpayment,tbl_kacontractsdatadetail
+				--where tbl_kacontractsdetailpayment.ContractNo = @Contractno-- 
+		
+				end
+
+						begin
+						 UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.PaidAmt = isnull((select sum(tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  tbl_kacontractsdatadetail.ContractNo and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'PAY'),0)
+					--	tbl_kacontractsdatadetail.PayControl = 'PAY'
+
+						from tbl_kacontractsdetailpayment
+					--	where tbl_kacontractsdetailpayment.ContractNo = @Contractno 
+						end
+end --tính payment và request
+
+begin -- tính volachive and total sponersol
+
+begin -- caculation	  #region  caculation tyPe "C00"
+	   UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where tbl_kacontractsdatadetail.PayControl ='C00'
+		
+
+	end
+
+	
+			 UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.[Sponsoredcommit] =  tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where tbl_kacontractsdatadetail.PayControl ='C00'
+		or tbl_kacontractsdatadetail.PayControl ='C01'
+			or tbl_kacontractsdatadetail.PayControl ='C05'
+		or tbl_kacontractsdatadetail.PayControl ='C02' 
+		or tbl_kacontractsdatadetail.PayControl ='C03' 
+			or tbl_kacontractsdatadetail.PayControl ='C04' 
+
+
+
+
+	
+BEGIN -- caculation	  #region  caculation tyPe "C01"
+					--begin
+					--   UPDATE tbl_kacontractsdatadetail
+					--	SET  tbl_kacontractsdatadetail.AccruedDate = getdate()
+	
+					--	from tbl_kacontractsdatadetail
+					--	where tbl_kacontractsdatadetail.AccruedDate is null
+
+					--end
+	
+
+
+					begin
+					   UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+						from tbl_kacontractsdatadetail
+						where  tbl_kacontractsdatadetail.PayControl ='C01' and tbl_kacontractsdatadetail.CommittedDate < = getdate()
+
+					end
+
+			 END
+	
+	
+--- c02
+		 		
+	-- caculation	  #region  caculation tyPe "C05"
+			BEGIN
+				begin
+					   UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+						from tbl_kacontractsdatadetail
+						where  tbl_kacontractsdatadetail.PayControl ='C05' and tbl_kacontractsdatadetail.EffFrm < = getdate()
+
+					end
+
+			 END
+
+			 --- c05
+
+			 -----------
+			 
+	BEGIN
+
+		begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/isnull(tbl_kacontractsdatadetail.TagetAchivement,1))*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement <> 0 and  tbl_kacontractsdatadetail.TagetPercentage <=100
+			    end
+
+					begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/1)*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement = 0
+			    end
+
+				 	
+				
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt-- *tbl_kacontractsdatadetail.TagetPercentage)/100
+	                 
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+			and  tbl_kacontractsdatadetail.TagetPercentage > 100
+		--	and tbl_kacontractsdatadetail.TagetAchivement <> 0
+			    end
+
+
+   END
+
+			 -------
+
+
+		 
+		
+
+BEGIN  --c03
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END    --c03
+
+
+   	
+
+BEGIN  --c04
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --c04
+   
+
+    
+
+BEGIN --do1
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+			
+			
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                  tbl_kacontractsdatadetail.[Sponsoredcommit] =  tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+		--		and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --d01
+  
+
+   
+
+BEGIN  --do2
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.Litter ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	               tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --d02
+   
+
+   
+
+BEGIN  --do3
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --d03
+   
+
+     
+
+BEGIN --p00
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --p00
+  
+
+      
+
+	BEGIN --p01
+			 
+			 --  begin
+			 --UPDATE tbl_kacontractsdatadetail
+				--SET  tbl_kacontractsdatadetail.AccruedDate = getdate()
+	
+				--from tbl_kacontractsdatadetail
+				--where  tbl_kacontractsdatadetail.AccruedDate is null
+				--end	
+			 
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P01' and tbl_kacontractsdatadetail.CommittedDate < = getdate()
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --p01
+   
+
+    
+
+BEGIN --p02
+
+	DECLARE @beginachivenetsale  float
+    DECLARE @achivenetsale  float
+
+				--begin
+				--set @beginachivenetsale = ( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno)
+				--end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				@beginachivenetsale = isnull(( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractsdatadetail.ContractNo),0),
+				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL(@beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where   tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END --p02
+   
+
+    
+
+BEGIN  --p03
+
+	--DECLARE @beginachivenetsale  float
+--DECLARE @achivenetvolume  float
+
+				--begin
+				--set @beginachivenetsale = ( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno)
+				--end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				@beginachivenetsale =isnull (( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractsdatadetail.ContractNo),0),
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( @beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] =  (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END  --p03
+  
+
+
+end
+
+begin  -- tinh total all contract
+
+---- ex
+--   BEGIN
+
+--         UPDATE tbl_kacontractdata 
+--         SET 
+		
+--		 tbl_kacontractdata.UCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched_S) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.UC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+--	     tbl_kacontractdata.LitAched = isnull((select sum( tbl_kacontractbegindata.LitAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.Litter) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+--	     tbl_kacontractdata.Revenue = isnull((select sum( tbl_kacontractbegindata.Revenue) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+--	     tbl_kacontractdata.PCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.PC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0)
+	
+--		from tbl_kacontractdata
+--		where tbl_kacontractdata.ContractNo = @Contractno
+		
+
+----ex
+
+
+
+
+
+
+
+
+     
+
+         UPDATE tbl_kacontractdata 
+         SET 
+
+		 tbl_kacontractdata.Cash = isnull(( select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'CAS'),0),-- + isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.MKTFun = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'MKT'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.POS = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'POS'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.FreeGood = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'FRE'),0),-- + isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.Promotion = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdatadetail.PayType  = 'PRM'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.TotDeal = isnull((select sum( tbl_kacontractsdatadetail.SponsoredTotal) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo ),0),--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0)+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0) + isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo ),0),
+		 tbl_kacontractdata.TotSponsoredcommit = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = tbl_kacontractdata.ContractNo ),0),
+
+	    tbl_kacontractdata.EftNoOfMonth = iif(DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)=0,1,DATEDIFF(MONTH, tbl_kacontractdata.EffDate, tbl_kacontractdata.EftDate)) ,
+	     tbl_kacontractdata.ConTerm  = ceiling (tbl_kacontractdata.EftNoOfMonth/12 ),
+
+	    tbl_kacontractdata.AnnualVolume = isnull(tbl_kacontractdata.VolComm,0)/ iif(tbl_kacontractdata.ConTerm =0,1,tbl_kacontractdata.ConTerm),
+
+	     tbl_kacontractdata.Cash_paid = isnull(( select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'CAS'),0),
+		 tbl_kacontractdata.MKTFun_paid = isnull((select  sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'MKT'),0),
+		 tbl_kacontractdata.POS_paid =isnull( (select  sum (tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'POS'),0),
+		 tbl_kacontractdata.FreeGood_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'FRE'),0),
+		 tbl_kacontractdata.Promotion_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo and tbl_kacontractsdetailpayment.PayType  = 'PRM'),0),
+		 tbl_kacontractdata.Tot_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = tbl_kacontractdata.ContractNo),0),
+
+		
+	   
+	     tbl_kacontractdata.Revenue = isnull((select sum( tbl_kacontractbegindata.Revenue) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo),0) +isnull( (select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate   ),0),
+
+		tbl_kacontractdata.NSRAched = isnull((select sum( tbl_kacontractbegindata.NSRAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull((select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+		tbl_kacontractdata.ECAched = isnull((select sum( tbl_kacontractbegindata.FTNAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.EC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.LitAched = isnull((select sum( tbl_kacontractbegindata.LitAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.Litter) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.UCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched_S) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.UC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate  ),0),
+	    tbl_kacontractdata.PCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = tbl_kacontractdata.ContractNo) ,0) +isnull( (select sum(tbl_kasales.PC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer and tbl_kasales.[Invoice Date] <= tbl_kacontractdata.EffDate and tbl_kasales.[Invoice Date] >= tbl_kacontractdata.ExtDate   ),0)
+	
+		from tbl_kacontractdata
+	
+	
+end
+
+
+		begin -- updatebalance
+	
+		 UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.Balance = iif(tbl_kacontractsdatadetail.AccSponsoredTotal -  tbl_kacontractsdatadetail.PaidAmt >0,tbl_kacontractsdatadetail.AccSponsoredTotal -  tbl_kacontractsdatadetail.PaidAmt,0)
+	                 
+				from tbl_kacontractsdatadetail
+			
+
+		end
+
+		 BEGIN -- update cost percasse
+
+         UPDATE tbl_kacontractdata 
+         SET tbl_kacontractdata.SponsorPerCase =   tbl_kacontractdata.TotDeal/ tbl_kacontractdata.ECAched
+	    from tbl_kacontractdata
+		where  tbl_kacontractdata.ECAched <> 0 -- tbl_kacontractdata.ContractNo = @Contractno and
+		
+		end
+
+end
+
+
+
+
+
+
+
+GO
+----------------------
+
+USE [KAmanagement]
+GO
+
+/****** Object:  StoredProcedure [dbo].[kaCaculationContractinSQLdetail]    Script Date: 04/04/2016 9:19:42 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+
+ALTER procedure [dbo].[kaCaculationContractinSQLdetail]
+( @Contractno nvarchar (225) 
+-- @Document_Number float
+)
+
+as
+
+Begin
+
+
+--DECLARE @Invoice_Registration nvarchar(225) 
+--DECLARE @Invoice_Number nvarchar(225) 
+--DECLARE @SoDelivery  nvarchar(225) 
+DECLARE @achivenetsale  float
+DECLARE @achivenetvolume  float
+
+				 begin
+				UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.PaidRequestAmt = isnull((select sum(tbl_kacontractsdetailpayment.PaidRequestAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  @Contractno and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'REQ'),0)
+				--tbl_kacontractsdatadetail.PayControl = 'REQ'
+
+				from tbl_kacontractsdetailpayment,tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno-- 
+		
+				end
+
+						begin
+						 UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.PaidAmt = isnull( (select sum(tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo =  @Contractno and  tbl_kacontractsdetailpayment.PayID = tbl_kacontractsdatadetail.PayID and tbl_kacontractsdetailpayment.PayControl = 'PAY'),0)
+					--	tbl_kacontractsdatadetail.PayControl = 'PAY'
+
+						from tbl_kacontractsdetailpayment
+						where tbl_kacontractsdatadetail.ContractNo = @Contractno 
+						end
+
+			--begin  -- update region and status con tract
+	
+			--			  UPDATE tbl_kacontractsdatadetail
+			--	SET    tbl_kacontractsdatadetail.SalesOrg = tbl_kacontractdata.SalesOrg,
+			--            tbl_kacontractsdatadetail.Constatus = tbl_kacontractdata.Consts,
+			--	tbl_kacontractsdatadetail.ConType =tbl_kacontractdata.ConType,
+			--	tbl_kacontractsdatadetail.Customercode =tbl_kacontractdata.Customer,
+			--		tbl_kacontractsdatadetail.CustomerType =tbl_kacontractdata.CustomerType,
+			--		tbl_kacontractsdatadetail.SALORG_CTR =tbl_kacontractdata.SALORG_CTR,
+			--			tbl_kacontractsdatadetail.Fullname   =tbl_kacontractdata.Fullname
+
+			--	from tbl_kacontractdata
+			--	where tbl_kacontractdata.ContractNo =tbl_kacontractsdatadetail.ContractNo
+
+
+			--end
+
+
+-- caculation	  #region  caculation tyPe "C00"
+	begin
+	   UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C00'
+		
+
+	end
+
+	
+			 UPDATE tbl_kacontractsdatadetail
+		SET  tbl_kacontractsdatadetail.[Sponsoredcommit] =  tbl_kacontractsdatadetail.SponsoredAmt
+	
+		from tbl_kacontractsdatadetail
+		where  tbl_kacontractsdatadetail.ContractNo = @Contractno and (
+		tbl_kacontractsdatadetail.PayControl ='C00'
+		or tbl_kacontractsdatadetail.PayControl ='C01'
+			or tbl_kacontractsdatadetail.PayControl ='C05'
+		or tbl_kacontractsdatadetail.PayControl ='C02' 
+		or tbl_kacontractsdatadetail.PayControl ='C03' 
+			or tbl_kacontractsdatadetail.PayControl ='C04' )
+
+			
+	-- caculation	  #region  caculation tyPe "C01"
+			BEGIN
+				begin
+					   UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+						from tbl_kacontractsdatadetail
+						where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C01' and tbl_kacontractsdatadetail.CommittedDate < = getdate()
+
+					end
+
+			 END
+
+			
+			 
+
+			 		
+	-- caculation	  #region  caculation tyPe "C01"
+			BEGIN
+				begin
+					   UPDATE tbl_kacontractsdatadetail
+						SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	
+						from tbl_kacontractsdatadetail
+						where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C05' and tbl_kacontractsdatadetail.EffFrm < = getdate()
+
+					end
+
+			 END
+
+			 --- c02
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/isnull(tbl_kacontractsdatadetail.TagetAchivement,1))*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement <> 0 and  tbl_kacontractsdatadetail.TagetPercentage <=100
+				and tbl_kacontractsdatadetail.ContractNo = @Contractno
+			    end
+
+					begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.TagetPercentage = ((isnull( ( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0))/1)*100
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and tbl_kacontractsdatadetail.TagetAchivement = 0
+				and tbl_kacontractsdatadetail.ContractNo = @Contractno
+			    end
+
+				 	
+				
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt-- *tbl_kacontractsdatadetail.TagetPercentage)/100
+	                 
+				from tbl_kacontractsdatadetail
+				where  tbl_kacontractsdatadetail.PayControl ='C02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+			and  tbl_kacontractsdatadetail.TagetPercentage > 100
+			and tbl_kacontractsdatadetail.ContractNo = @Contractno
+		--	and tbl_kacontractsdatadetail.TagetAchivement <> 0
+			    end
+   END
+		 --- c02
+		 --c03
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --c03
+
+   	 --c04
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =  isnull(( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmt
+	                 
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='C04' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --c04
+
+    --do1
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal =0,
+				tbl_kacontractsdatadetail.VolAchvmt =isnull  (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + isnull(tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --d01
+
+    --do2
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.Litter ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ) ,0)+ ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --d02
+
+    --do3
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = tbl_kacontractsdatadetail.SponsoredAmtperPC *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='D03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --d03
+
+     --p00
+
+	BEGIN
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =   isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) *tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P00' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --p00
+
+      --p01
+
+	BEGIN
+			 
+			 --  begin
+			 --UPDATE tbl_kacontractsdatadetail
+				--SET  tbl_kacontractsdatadetail.AccruedDate = getdate()
+	
+				--from tbl_kacontractsdatadetail
+				--where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.AccruedDate is null
+				--end	
+			 
+			 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt =isnull  (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P01' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal =( tbl_kacontractsdatadetail.FundPercentage /100)*tbl_kacontractsdatadetail.VolAchvmt,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = ( tbl_kacontractsdatadetail.FundPercentage /100)*tbl_kacontractsdatadetail.VolAchvmt
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P01' and tbl_kacontractsdatadetail.CommittedDate < = getdate()
+				--and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --p01
+
+    --p02
+
+	BEGIN
+
+	DECLARE @beginachivenetsale  float
+--DECLARE @achivenetvolume  float
+
+				begin
+				set @beginachivenetsale =isnull ( ( select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0)
+				end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.EC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL(@beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] =  (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P02' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END
+   --p02
+
+     --p03
+
+	BEGIN
+
+	--DECLARE @beginachivenetsale  float
+--DECLARE @achivenetvolume  float
+
+				begin
+				set @beginachivenetsale = isnull( (select sum(tbl_kacontractbegindata.VolAched ) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0)
+				end
+
+			 	begin
+			    UPDATE tbl_kacontractsdatadetail
+				SET    tbl_kacontractsdatadetail.SponsoredTotal = 0,
+				tbl_kacontractsdatadetail.VolAchvmt = isnull (( select sum(tbl_kasales.PC ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( @beginachivenetsale,0),
+			     @achivenetsale = isnull (( select sum(tbl_kasales.NSR ) from tbl_kasales where tbl_kasales.[Invoice Date] <= tbl_kacontractsdatadetail.EffTo and tbl_kasales.[Invoice Date] >= tbl_kacontractsdatadetail.EffFrm and tbl_kasales.[Sold-to] = tbl_kacontractsdatadetail.Customercode and tbl_kasales.[Mat Number] in (select tbl_kaProductGRDetail.MatNumber from tbl_kaProductGRDetail where  tbl_kaProductGRDetail.PrdGrp = tbl_kacontractsdatadetail.PrdGrp) ),0) + ISNULL( tbl_kacontractsdatadetail.BeginAchvmt,0)
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				
+			    end
+
+				 	begin
+			   UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.SponsoredTotal = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale,
+	                 tbl_kacontractsdatadetail.[Sponsoredcommit] = (tbl_kacontractsdatadetail.FundPercentage/100) * @achivenetsale
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno  and tbl_kacontractsdatadetail.PayControl ='P03' --and tbl_kacontractsdatadetail.CommittedDate < = tbl_kacontractsdatadetail.AccruedDate 
+				and  tbl_kacontractsdatadetail.VolAchvmt > tbl_kacontractsdatadetail.TagetAchivement
+			    end
+
+   END   --p03
+
+
+		begin -- updatebalance
+	
+		 UPDATE tbl_kacontractsdatadetail
+				SET  tbl_kacontractsdatadetail.Balance = tbl_kacontractsdatadetail.SponsoredTotal -  tbl_kacontractsdatadetail.PaidAmt
+	                 
+				from tbl_kacontractsdatadetail
+				where tbl_kacontractsdatadetail.ContractNo = @Contractno 
+
+		end
+
+end
+
+
+
+
+
+
+
+GO
+
+--------------------
+USE [KAmanagement]
+GO
+
+/****** Object:  StoredProcedure [dbo].[kaCaculationContractinSQLmaster]    Script Date: 04/04/2016 9:19:54 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+ALTER procedure [dbo].[kaCaculationContractinSQLmaster]
+( @Contractno nvarchar (225)
+-- @Document_Number float
+)
+
+as
+
+Begin
+
+
+--DECLARE @Invoice_Registration nvarchar(225) 
+--DECLARE @Invoice_Number nvarchar(225) 
+--DECLARE @SoDelivery  nvarchar(225) 
+--DECLARE @Assignment  nvarchar(225)
+
+
+       BEGIN
+
+         UPDATE tbl_kacontractdata 
+         SET tbl_kacontractdata.Cash = isnull(( select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno and tbl_kacontractsdatadetail.PayType  = 'CAS'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+		 tbl_kacontractdata.MKTFun = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno and tbl_kacontractsdatadetail.PayType  = 'MKT'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+		 tbl_kacontractdata.POS = isnull((select  sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno and tbl_kacontractsdatadetail.PayType  = 'POS'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+		 tbl_kacontractdata.FreeGood = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno and tbl_kacontractsdatadetail.PayType  = 'FRE'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+		 tbl_kacontractdata.Promotion = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno and tbl_kacontractsdatadetail.PayType  = 'PRM'),0) ,--+ isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+		 tbl_kacontractdata.TotDeal = isnull((select sum( tbl_kacontractsdatadetail.SponsoredTotal) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno ),0),--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0) + isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+	  tbl_kacontractdata.TotSponsoredcommit  = isnull((select sum( tbl_kacontractsdatadetail.Sponsoredcommit) from tbl_kacontractsdatadetail where tbl_kacontractsdatadetail.ContractNo = @Contractno ),0),--+ isnull(( select sum( tbl_kacontractbegindata.Cash) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.MKTFun) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.POS) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0)+ isnull(( select sum( tbl_kacontractbegindata.FreeGood) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0) + isnull(( select sum( tbl_kacontractbegindata.Promotion) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno ),0),
+
+
+	     tbl_kacontractdata.Cash_paid = isnull(( select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno and tbl_kacontractsdetailpayment.PayType  = 'CAS'),0),
+		 tbl_kacontractdata.MKTFun_paid = isnull((select  sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno and tbl_kacontractsdetailpayment.PayType  = 'MKT'),0),
+		 tbl_kacontractdata.POS_paid = isnull((select  sum (tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno and tbl_kacontractsdetailpayment.PayType  = 'POS'),0),
+		 tbl_kacontractdata.FreeGood_paid = isnull((select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno and tbl_kacontractsdetailpayment.PayType  = 'FRE'),0),
+		 tbl_kacontractdata.Promotion_paid = isnull((select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno and tbl_kacontractsdetailpayment.PayType  = 'PRM'),0),
+		 tbl_kacontractdata.Tot_paid =isnull( (select sum( tbl_kacontractsdetailpayment.PaidAmt) from tbl_kacontractsdetailpayment where tbl_kacontractsdetailpayment.ContractNo = @Contractno),0),
+		 
+
+		 tbl_kacontractdata.UCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched_S) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.UC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+	     tbl_kacontractdata.LitAched = isnull((select sum( tbl_kacontractbegindata.LitAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.Litter) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+	     tbl_kacontractdata.Revenue = isnull((select sum( tbl_kacontractbegindata.Revenue) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.NSR) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+	     tbl_kacontractdata.PCVolAched = isnull((select sum( tbl_kacontractbegindata.VolAched_S) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.PC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0),
+	     tbl_kacontractdata.ECAched = isnull((select sum( tbl_kacontractbegindata.VolAched) from tbl_kacontractbegindata where tbl_kacontractbegindata.ContractNo = @Contractno),0) + isnull( (select sum(tbl_kasales.EC) from tbl_kasales where tbl_kasales.[Sold-to] = tbl_kacontractdata.Customer  ),0)
+
+
+		from tbl_kacontractdata
+		where tbl_kacontractdata.ContractNo = @Contractno
+		
+		 END
+
+	  BEGIN -- update cost percasse
+
+         UPDATE tbl_kacontractdata 
+         SET tbl_kacontractdata.SponsorPerCase =   tbl_kacontractdata.TotDeal/ tbl_kacontractdata.ECAched
+	    from tbl_kacontractdata
+		where tbl_kacontractdata.ContractNo = @Contractno and tbl_kacontractdata.ECAched <> 0
+		
+		end
+end
+
+
+
+
+
+GO
+
+----------------
+

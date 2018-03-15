@@ -1,0 +1,947 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KAmanagement" Class="LinqtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-8D4F853\SQLEXPRESS;Initial Catalog=KAmanagement;Persist Security Info=True;User ID=sa" SettingsObjectName="KAmanagement.Properties.Settings" SettingsPropertyName="KAmanagementConnectionString3" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_autodataContract" Member="tbl_autodataContracts">
+    <Type Name="tbl_autodataContract">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tka_RightContracttypeview" Member="Tka_RightContracttypeviews">
+    <Type Name="Tka_RightContracttypeview">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Contracttype" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_detailTEMP" Member="tbl_detailTEMPs">
+    <Type Name="tbl_detailTEMP">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_ka_prCustomer" Member="tbl_ka_prCustomers">
+    <Type Name="tbl_ka_prCustomer">
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="House" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Telephone" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SalesOff" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Plant" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TermPayment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PriceList" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="KeyAccount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Salesdistrict" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Createdon" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="VATRegistration" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="blockOrder" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="blockArea" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KAbaseprice" Member="tbl_KAbaseprices">
+    <Type Name="tbl_KAbaseprice">
+      <Column Name="Material" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="MaterialNAme" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="UoM" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Valid From]" Member="Valid_From" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Valid to]" Member="Valid_to" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PriceList" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaChannel" Member="tbl_kaChannels">
+    <Type Name="tbl_kaChannel">
+      <Column Name="Channel" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Detail" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractbegindata" Member="tbl_kacontractbegindatas">
+    <Type Name="tbl_kacontractbegindata">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Consts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MEANo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EffDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EftDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExtDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Channel" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreditLimit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreditTerm" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConTerm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AnnualVolume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolComm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NSRComm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Revenue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolAched_S" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolPer_S" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LitPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LitAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FTNAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotDeal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Cash" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFunPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsorPerCase" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotDealPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CashPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POSPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGoodPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PromotionPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFunPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Tot_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Tot_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CRDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="BatchNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SignOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MFD" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SALORG_CTR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EftNoOfMonth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CurrentMonth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractbegindatadetail" Member="tbl_kacontractbegindatadetails">
+    <Type Name="tbl_kacontractbegindatadetail">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayID" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SubID" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayControl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FundPercentage" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AmountPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsoredAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DisAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolAchvmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CommittedDate_frm" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CommittedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AccruedAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccruedDate" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PaidOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PaidAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ConfAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PrintChk" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BatchNo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DoneOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IntOrdNum" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="APDocNum" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CRDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MFD" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BLOCKED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VAT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EffFrm" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EffTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EffDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EFFPCs" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EFFNSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractCustcode" Member="tbl_kacontractCustcodes">
+    <Type Name="tbl_kacontractCustcode">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerCode" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Addedby" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractdata" Member="tbl_kacontractdatas">
+    <Type Name="tbl_kacontractdata">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Consts" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EffDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EftDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExtDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Customer" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerType" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Channel" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HouseNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreditLimit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreditTerm" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConTerm" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AnnualVolume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolComm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NSRComm" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Revenue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UCVolAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PCVolAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LitAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ECAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PCVolPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFunPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LitPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UCVolPer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotDeal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Cash" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotDeal_Acc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsorPerCase" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotDealPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CashPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POSPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGoodPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PromotionPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFunPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Tot_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Tot_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cash_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="POS_Ached" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FreeGood_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Promotion_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MKTFun_rem" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CRDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SignOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MFD" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EftNoOfMonth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CurrentMonth" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="SALORG_CTR" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TotSponsoredcommit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ListCodeinGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractsdatadetail" Member="tbl_kacontractsdatadetails">
+    <Type Name="tbl_kacontractsdatadetail">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayControl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FundPercentage" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsoredAmtperPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsoredAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SponsorUnit" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="SponsoredTotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DisAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolAchvmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TagetPercentage" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TagetAchivement" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TargetUnit" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="BeginAchvmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BeginSponsoredAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CommittedDate_frm" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CommittedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidRequestAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidConfAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BalanceAft" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PrintChk" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="BatchNo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DoneOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IntOrdNum" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="APDocNum" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CRDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CRDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Customercode" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CustomerType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MFD" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BLOCKED" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExtCondition" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EffFrm" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EffTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EftNoOfMonth" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CurrentMonth" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EFFPCs" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EFFNSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PCVolAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UCVolAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LitAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ECAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRAched" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccruedAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccruedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="AccSponsoredTotal" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Constatus" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubID" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sponsoredcommit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ConType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SALORG_CTR" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ExtNote" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CombineItem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CombineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractsdetailpayment" Member="tbl_kacontractsdetailpayments">
+    <Type Name="tbl_kacontractsdetailpayment">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SubID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayControl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PaidRequestAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaidOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PrintChk" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PrintDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BatchNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CRDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CRDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PaidNote" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PaymentDoc" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="DoneOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDUSR" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="int" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="Reprint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="BLOCKED" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="BeginSubID" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractsvolume" Member="tbl_kacontractsvolumes">
+    <Type Name="tbl_kacontractsvolume">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Priod" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="EC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontractsvolumePrductGRP" Member="tbl_kacontractsvolumePrductGRPs">
+    <Type Name="tbl_kacontractsvolumePrductGRP">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProductGRP" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Priod" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="EC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacontracttype" Member="tbl_kacontracttypes">
+    <Type Name="tbl_kacontracttype">
+      <Column Name="Contractype" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaConvertProductlist" Member="tbl_kaConvertProductlists">
+    <Type Name="tbl_kaConvertProductlist">
+      <Column Name="MatNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ConverttoMatNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ConvertRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KaCreatCrtracttemp" Member="tbl_KaCreatCrtracttemps">
+    <Type Name="tbl_KaCreatCrtracttemp">
+      <Column Name="Programe" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CommitmentAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CommitmentPerPC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CommitmentPercentage" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Total Achived]" Member="Total_Achived" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Total Paid]" Member="Total_Paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kacurrency" Member="tbl_kacurrencies">
+    <Type Name="tbl_kacurrency">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KaCustomer" Member="tbl_KaCustomers">
+    <Type Name="tbl_KaCustomer">
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="FullNameN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Telephone1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PaymentTerms" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="PriceList" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="KeyAcc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SalesDistrict" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReconciliationAcct" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CentralOrBlk" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrBlk" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CTDescription" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="KANAME" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CCDescription" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="KAGROUP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CHN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BU" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Vendor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Grpcode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SFAcode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SapCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="indirectCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SALORG_CTR" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaCustomerGroup" Member="tbl_kaCustomerGroups">
+    <Type Name="tbl_kaCustomerGroup">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Customergropcode" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Customercode" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KaCustomertemp" Member="tbl_KaCustomertemps">
+    <Type Name="tbl_KaCustomertemp">
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="FullNameN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Region" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="Telephone1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PaymentTerms" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="PriceList" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="KeyAcc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SalesDistrict" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReconciliationAcct" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CentralOrBlk" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OrBlk" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CTDescription" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="KANAME" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="UPDDAT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CCDescription" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="KAGROUP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CHN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BU" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KAdetailprogrRpt" Member="tbl_KAdetailprogrRpts">
+    <Type Name="tbl_KAdetailprogrRpt">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Programe" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Sponsorship" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Paid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PaymentRequest" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BalanceAftApproval" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Kafuctionlist" Member="tbl_Kafuctionlists">
+    <Type Name="tbl_Kafuctionlist">
+      <Column Name="Code" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Explan" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Example" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KAlistpricefunction" Member="tbl_KAlistpricefunctions">
+    <Type Name="tbl_KAlistpricefunction">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[function]" Member="function" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KapaymentrequestRpt" Member="tbl_KapaymentrequestRpts">
+    <Type Name="tbl_KapaymentrequestRpt">
+      <Column Name="Customercode" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Vendor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="TradeName" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="CityProvince" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="ContractType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TermYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EffectiveDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExpireDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExtendDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Deliveredby" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Channel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Colddrinks" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Committedvol" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AchievedVol" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AchvRevenue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Fundspercent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Costpercase" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Creditlimit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProductGroup" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Annualvolume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Achievedpercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AchievedVolPCs" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SupportCase" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Discount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Creditterm" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(225)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReferrenceDoc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NSRcommit" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaPrcingreportsTem" Member="tbl_kaPrcingreportsTems">
+    <Type Name="tbl_kaPrcingreportsTem">
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SOrg" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="SDict" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="PL" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="KeyAcc" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[KA Group]" Member="KA_Group" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="Mat" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="MatGroup" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="FuctionAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FuctionPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FucFrom" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FuncTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PromotionAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PromotionPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProFrom" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ProTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SurChargeAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SurChargePercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SurFrom" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SurTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaPrdgrp" Member="tbl_kaPrdgrps">
+    <Type Name="tbl_kaPrdgrp">
+      <Column Name="PrdGrp" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="ProductGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WStatement" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaPrdgrpTMPadmin" Member="tbl_kaPrdgrpTMPadmins">
+    <Type Name="tbl_kaPrdgrpTMPadmin">
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProductGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WStatement" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Kapriod" Member="tbl_Kapriods">
+    <Type Name="tbl_Kapriod">
+      <Column Name="Priod" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="fromdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="todate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="block" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaProductGRDetail" Member="tbl_kaProductGRDetails">
+    <Type Name="tbl_kaProductGRDetail">
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MatNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MatText" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaProductlist" Member="tbl_kaProductlists">
+    <Type Name="tbl_kaProductlist">
+      <Column Name="MatNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MatText" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UoM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Pcrate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Ucrate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UnitSize" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="PackUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MatGroup" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaProductlistemp" Member="tbl_kaProductlistemps">
+    <Type Name="tbl_kaProductlistemp">
+      <Column Name="MatNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MatText" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UoM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Pcrate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Ucrate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UnitSize" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="PackUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaProgramedetailTemp" Member="tbl_kaProgramedetailTemps">
+    <Type Name="tbl_kaProgramedetailTemp">
+      <Column Name="Program" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Product Group]" Member="Product_Group" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Tracking id]" Member="Tracking_id" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Payment Control]" Member="Payment_Control" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Payment Description]" Member="Payment_Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Fund Percent]" Member="Fund_Percent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Amount Per Pc/Lit/FTN]" Member="Amount_Per_Pc_Lit_FTN" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Sponsored Amount]" Member="Sponsored_Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Ditributor 's Amount]" Member="Ditributor__s_Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Achivement" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Prepered On]" Member="Prepered_On" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Ref No]" Member="Ref_No" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Paid Amount]" Member="Paid_Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Print]" Member="Print" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Done On]" Member="Done_On" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="VAT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[From Date]" Member="From_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[To Date]" Member="To_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaprogramlist" Member="tbl_kaprogramlists">
+    <Type Name="tbl_kaprogramlist">
+      <Column Name="Code" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KApromotinprice" Member="tbl_KApromotinprices">
+    <Type Name="tbl_KApromotinprice">
+      <Column Name="sales_region" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="customerid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="keyaccount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="saledistrict" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="product_group" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="percent_amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="fromdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="todate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="programId" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="row" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KApromotinpriceTMP" Member="tbl_KApromotinpriceTMPs">
+    <Type Name="tbl_KApromotinpriceTMP">
+      <Column Name="sales_region" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="customerid" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="keyaccount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="saledistrict" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="product_code" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="product_group" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="percent_amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="fromdate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="todate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="programId" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="row" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_karegion" Member="tbl_karegions">
+    <Type Name="tbl_karegion">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Region" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kasales" Member="tbl_kasales">
+    <Type Name="tbl_kasale">
+      <Column Name="Priod" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="[Sold-to]" Member="Sold_to" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Cust Name]" Member="Cust_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Sales Org]" Member="Sales_Org" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Mat Number]" Member="Mat_Number" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Invoice Doc Nr]" Member="Invoice_Doc_Nr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Outbound Delivery]" Member="Outbound_Delivery" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Delivery Date]" Member="Delivery_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Sales District]" Member="Sales_District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Sales District desc]" Member="Sales_District_desc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Key Acc Nr]" Member="Key_Acc_Nr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Mat Group]" Member="Mat_Group" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Mat Group Text]" Member="Mat_Group_Text" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Mat Text]" Member="Mat_Text" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UoM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="PC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Invoice Date]" Member="Invoice_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kasalesTemp" Member="tbl_kasalesTemps">
+    <Type Name="tbl_kasalesTemp">
+      <Column Name="[Sold-to]" Member="Sold_to" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Cust Name]" Member="Cust_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Sales Org]" Member="Sales_Org" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Mat Number]" Member="Mat_Number" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Invoice Doc Nr]" Member="Invoice_Doc_Nr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Outbound Delivery]" Member="Outbound_Delivery" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Delivery Date]" Member="Delivery_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[Sales District]" Member="Sales_District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Sales District desc]" Member="Sales_District_desc" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Key Acc Nr]" Member="Key_Acc_Nr" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Mat Group]" Member="Mat_Group" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Mat Group Text]" Member="Mat_Group_Text" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Mat Text]" Member="Mat_Text" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UoM" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Priod" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="PC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Invoice Date]" Member="Invoice_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Cond Type]" Member="Cond_Type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EmptyCountValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NETP" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_MassConfirmTemp" Member="tbl_MassConfirmTemps">
+    <Type Name="tbl_MassConfirmTemp">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BatchNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PaidRequestAmt" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PaidNote" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentDoc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_MassContractChangeTemp" Member="tbl_MassContractChangeTemps">
+    <Type Name="tbl_MassContractChangeTemp">
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Consts" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_PaymentTerm" Member="tbl_PaymentTerms">
+    <Type Name="tbl_PaymentTerm">
+      <Column Name="PaymentTerm" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_PriceRptCustomer" Member="tbl_PriceRptCustomers">
+    <Type Name="tbl_PriceRptCustomer">
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MatNumber" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MatText" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Region" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="BasePrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FuctionDiscountY1" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PromotionDiscountY2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SurchargeDiscountY3" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KeyAccount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SalesDistrict" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="NetPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MatGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PriceList" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Temp" Member="tbl_Temps">
+    <Type Name="tbl_Temp">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Version" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionCode" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="userright" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="note" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="inputcontract" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="inputcontractconfirm" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="inputcontractfinalcontrol" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="paymentdisplay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="paymentcreate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="saleupdate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="saleview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="saledeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="salechange" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="reports" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="masterdata" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="masterbegin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="userssetup" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="pricingcheckview" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="pricingcheckupdate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="masterdatafuction" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="changeitem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="btaddnewItem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tempcontractsdatadetail" Member="tbl_tempcontractsdatadetails">
+    <Type Name="tbl_tempcontractsdatadetail">
+      <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Programe" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="PayControl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PrdGrp" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Sponsored Amount]" Member="Sponsored_Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EffFrom" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EffTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tempmastercontractmasscreate" Member="tbl_tempmastercontractmasscreates">
+    <Type Name="tbl_tempmastercontractmasscreate">
+      <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SalesOrg" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="ConType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="EfFromDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EftoDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExtendDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Customer" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CustomerType" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Fullname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Representative" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Channel" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="DeliveredBy" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HouseNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="District" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Province" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreditLimit" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CreditTerm" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AnnualVolume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="VolCommitment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NSRCommitment" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tka_RegionRight" Member="Tka_RegionRights">
+    <Type Name="Tka_RegionRight">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Region" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="RegionCode" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
