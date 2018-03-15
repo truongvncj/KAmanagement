@@ -2671,7 +2671,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
 
                         string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
-
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
                                                                                                                                     //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                                                                                                                                     //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
@@ -3178,7 +3181,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
 
                         string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
-
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
                                                                                                                                     //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                                                                                                                                     //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
@@ -3982,7 +3988,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
 
                         string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
-
+                        if (! Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
                                                                                                                                     //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
@@ -4112,7 +4121,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
 
                         string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
-
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
                                                                                                                                     //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
@@ -4242,7 +4254,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
                         // NSRcommit.Text
                         string NSRcommitvol = (NSRcommit.Text.Replace(",", "")).Replace(".", "");
-
+                        if (!Utils.IsValidnumber(NSRcommitvol))
+                        {
+                            NSRcommitvol = "0";
+                        }
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(NSRcommitvol);//System.DBNull.Value;
                                                                                                                             //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";
@@ -4911,17 +4926,21 @@ namespace KAmanagement.View
 
             if (kq == "OK")
             {
-              //  MessageBox.Show("OK", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                //    MessageBox.Show("OK", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                newcontract.ContractNo = tb_contractno.Text;
 
             }
             else
             {
                 MessageBox.Show("Contract No Error, That must be :" + kq, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             //   tbl_kacontractsdatadetaillist = null;
-                newcontract = null;
+                //   tbl_kacontractsdatadetaillist = null;
                 checkcontract = false;
+                newcontract = null;
                 return;
+
+                //newcontract = null;
+                //checkcontract = false;
+                //return;
             };
 
 

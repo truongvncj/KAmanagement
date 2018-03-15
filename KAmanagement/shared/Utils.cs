@@ -187,17 +187,19 @@ namespace KAmanagement
 
         public static string IsValidContractName(string testContractNo, string region, string contracttype, string channel)
         {
+            string kq = "OK";
+
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "RKA")
             {
                 Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
 
                 if( regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/KA/YY-YY/XXX";
+                    kq = "S/KA/YY-YY/XXX";
                 }
 
             }
@@ -208,11 +210,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/KA/YY-YY/XXX";
+                    kq = "C/KA/YY-YY/XXX";
                 }
             }
 
@@ -222,11 +224,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/KA/YY-YY/XXX";
+                    kq = "N/KA/YY-YY/XXX";
                 }
             }
 
@@ -237,11 +239,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/NKA/YY-YY/XXX";
+                    kq = "S/NKA/YY-YY/XXX";
                 }
             }
 
@@ -251,11 +253,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/NKA/YY-YY/XXX";
+                    kq = "C/NKA/YY-YY/XXX";
                 }
             }
 
@@ -265,11 +267,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/NKA/YY-YY/XXX";
+                    kq = "N/NKA/YY-YY/XXX";
                 }
             }
             // SCHOOL   EDU
@@ -279,11 +281,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/SCH/YY-YY/XXX";
+                    kq = "S/SCH/YY-YY/XXX";
                 }
             }
 
@@ -293,11 +295,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/SCH/YY-YY/XXX";
+                    kq = "C/SCH/YY-YY/XXX";
                 }
             }
 
@@ -307,11 +309,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/SCH/YY-YY/XXX";
+                    kq = "N/SCH/YY-YY/XXX";
                 }
             }
             // ASMPQ
@@ -321,11 +323,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/ASMPQ/YY-YY/XXX";
+                    kq = "S/ASMPQ/YY-YY/XXX";
                 }
             }
 
@@ -335,11 +337,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/ASMPQ/YY-YY/XXX";
+                    kq = "C/ASMPQ/YY-YY/XXX";
                 }
             }
 
@@ -349,11 +351,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/ASMPQ/YY-YY/XXX";
+                    kq = "N/ASMPQ/YY-YY/XXX";
                 }
             }
             // DASANI
@@ -363,11 +365,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/DAS/YY-YY/XXX";
+                    kq = "S/DAS/YY-YY/XXX";
                 }
             }
 
@@ -377,11 +379,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/DAS/YY-YY/XXX";
+                    kq = "C/DAS/YY-YY/XXX";
                 }
             }
 
@@ -391,11 +393,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/DAS/YY-YY/XXX";
+                    kq = "N/DAS/YY-YY/XXX";
                 }
             }
 
@@ -406,11 +408,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "S/ATW/YY-YY/XXX";
+                    kq = "S/ATW/YY-YY/XXX";
                 }
             }
 
@@ -420,11 +422,11 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "C/ATW/YY-YY/XXX";
+                    kq = "C/ATW/YY-YY/XXX";
                 }
             }
 
@@ -434,14 +436,14 @@ namespace KAmanagement
 
                 if (regex.IsMatch(testContractNo))
                 {
-                    return "OK";
+                    kq = "OK";
                 }
                 else
                 {
-                    return "N/ATW/YY-YY/XXX";
+                    kq = "N/ATW/YY-YY/XXX";
                 }
             }
-            return "OK";
+            return kq ;
 
         }
 
