@@ -76,14 +76,7 @@ namespace KAmanagement.View
                 }
 
                 // pricingcheckview
-                if (used.pricingcheckview)
-                {
-                    btpricingcheck.Enabled = true;
-                }
-                else
-                {
-                    btpricingcheck.Enabled = false;
-                }
+            
 
                 // usersetup     
                 if (used.userssetup==true)
@@ -2489,6 +2482,10 @@ namespace KAmanagement.View
 
 
                 var rs = Control.Control_ac.getViewcontractMaster(db);
+
+
+
+
 
 
                 View.KAcontractlisting KAcontractlisting = new View.KAcontractlisting(rs,db,"Input Contract");

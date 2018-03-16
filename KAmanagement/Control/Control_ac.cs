@@ -1983,6 +1983,10 @@ namespace KAmanagement.Control
             var regioncode = (from tbl_Temp in db.tbl_Temps
                               where tbl_Temp.username == username
                               select tbl_Temp.RegionCode).FirstOrDefault();
+
+
+           
+
             var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
                                where Tka_RightContracttypeview.UserName == username
                                select Tka_RightContracttypeview.Contracttype;

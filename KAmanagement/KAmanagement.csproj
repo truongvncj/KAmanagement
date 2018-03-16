@@ -145,6 +145,12 @@
     <Compile Include="View\KASeachaddcode.Designer.cs">
       <DependentUpon>KASeachaddcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\KASeachpaymentRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\KASeachpaymentRequest.Designer.cs">
+      <DependentUpon>KASeachpaymentRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\masscreateContract.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\KASeachaddcode.resx">
       <DependentUpon>KASeachaddcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\KASeachpaymentRequest.resx">
+      <DependentUpon>KASeachpaymentRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\masscreateContract.resx">
       <DependentUpon>masscreateContract.cs</DependentUpon>

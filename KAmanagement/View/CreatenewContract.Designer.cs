@@ -256,6 +256,7 @@ namespace KAmanagement.View
             this.btchangecontrcatype.Name = "btchangecontrcatype";
             this.btchangecontrcatype.Size = new System.Drawing.Size(24, 21);
             this.btchangecontrcatype.TabIndex = 73;
+            this.btchangecontrcatype.TabStop = false;
             this.btchangecontrcatype.Text = "#";
             this.btchangecontrcatype.UseVisualStyleBackColor = true;
             this.btchangecontrcatype.Click += new System.EventHandler(this.button2_Click_1);
@@ -268,6 +269,7 @@ namespace KAmanagement.View
             this.btchangeregion.Name = "btchangeregion";
             this.btchangeregion.Size = new System.Drawing.Size(29, 21);
             this.btchangeregion.TabIndex = 72;
+            this.btchangeregion.TabStop = false;
             this.btchangeregion.Text = "#";
             this.btchangeregion.UseVisualStyleBackColor = true;
             this.btchangeregion.Click += new System.EventHandler(this.button1_Click_7);
@@ -280,6 +282,7 @@ namespace KAmanagement.View
             this.btchanegcontract.Name = "btchanegcontract";
             this.btchanegcontract.Size = new System.Drawing.Size(29, 21);
             this.btchanegcontract.TabIndex = 71;
+            this.btchanegcontract.TabStop = false;
             this.btchanegcontract.Text = "#";
             this.btchanegcontract.UseVisualStyleBackColor = true;
             this.btchanegcontract.Click += new System.EventHandler(this.button1_Click_6);
@@ -293,6 +296,7 @@ namespace KAmanagement.View
             this.btchangecret.Name = "btchangecret";
             this.btchangecret.Size = new System.Drawing.Size(29, 20);
             this.btchangecret.TabIndex = 70;
+            this.btchangecret.TabStop = false;
             this.btchangecret.Text = "#";
             this.btchangecret.UseVisualStyleBackColor = true;
             this.btchangecret.Click += new System.EventHandler(this.button3_Click_1);
@@ -305,6 +309,7 @@ namespace KAmanagement.View
             this.btcfromdate.Name = "btcfromdate";
             this.btcfromdate.Size = new System.Drawing.Size(29, 21);
             this.btcfromdate.TabIndex = 38;
+            this.btcfromdate.TabStop = false;
             this.btcfromdate.Text = "#";
             this.btcfromdate.UseVisualStyleBackColor = true;
             this.btcfromdate.Click += new System.EventHandler(this.button2_Click);
@@ -317,6 +322,7 @@ namespace KAmanagement.View
             this.btchagetodate.Name = "btchagetodate";
             this.btchagetodate.Size = new System.Drawing.Size(29, 21);
             this.btchagetodate.TabIndex = 37;
+            this.btchagetodate.TabStop = false;
             this.btchagetodate.Text = "#";
             this.btchagetodate.UseVisualStyleBackColor = true;
             this.btchagetodate.Click += new System.EventHandler(this.button1_Click_5);
@@ -329,6 +335,7 @@ namespace KAmanagement.View
             this.bt_etcontract.Name = "bt_etcontract";
             this.bt_etcontract.Size = new System.Drawing.Size(29, 21);
             this.bt_etcontract.TabIndex = 27;
+            this.bt_etcontract.TabStop = false;
             this.bt_etcontract.Text = "#";
             this.bt_etcontract.UseVisualStyleBackColor = true;
             this.bt_etcontract.Click += new System.EventHandler(this.bt_etcontract_Click);
@@ -357,6 +364,7 @@ namespace KAmanagement.View
             this.btfinddeliveryby.Name = "btfinddeliveryby";
             this.btfinddeliveryby.Size = new System.Drawing.Size(20, 21);
             this.btfinddeliveryby.TabIndex = 36;
+            this.btfinddeliveryby.TabStop = false;
             this.btfinddeliveryby.Text = ">>";
             this.btfinddeliveryby.UseVisualStyleBackColor = true;
             this.btfinddeliveryby.Click += new System.EventHandler(this.btfinddeliveryby_Click);
@@ -678,7 +686,7 @@ namespace KAmanagement.View
             this.tb_contractno.Location = new System.Drawing.Point(105, 14);
             this.tb_contractno.Name = "tb_contractno";
             this.tb_contractno.Size = new System.Drawing.Size(222, 20);
-            this.tb_contractno.TabIndex = 1;
+            this.tb_contractno.TabIndex = 0;
             this.tb_contractno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_contractno_KeyPress);
             // 
             // label2
@@ -848,9 +856,6 @@ namespace KAmanagement.View
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btremoveCusgroup);
-            this.groupBox2.Controls.Add(this.btviewcode);
-            this.groupBox2.Controls.Add(this.btAddGroupcode);
             this.groupBox2.Controls.Add(this.btrepresent);
             this.groupBox2.Controls.Add(this.btvatchange);
             this.groupBox2.Controls.Add(this.btchangeprovince);
@@ -893,10 +898,11 @@ namespace KAmanagement.View
             this.btremoveCusgroup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btremoveCusgroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btremoveCusgroup.ForeColor = System.Drawing.Color.Red;
-            this.btremoveCusgroup.Location = new System.Drawing.Point(106, 34);
+            this.btremoveCusgroup.Location = new System.Drawing.Point(808, 391);
             this.btremoveCusgroup.Name = "btremoveCusgroup";
             this.btremoveCusgroup.Size = new System.Drawing.Size(117, 20);
             this.btremoveCusgroup.TabIndex = 72;
+            this.btremoveCusgroup.TabStop = false;
             this.btremoveCusgroup.Text = "Remove GroupCode";
             this.btremoveCusgroup.UseVisualStyleBackColor = false;
             this.btremoveCusgroup.Visible = false;
@@ -906,10 +912,11 @@ namespace KAmanagement.View
             // 
             this.btviewcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btviewcode.ForeColor = System.Drawing.Color.Red;
-            this.btviewcode.Location = new System.Drawing.Point(231, 34);
+            this.btviewcode.Location = new System.Drawing.Point(931, 391);
             this.btviewcode.Name = "btviewcode";
             this.btviewcode.Size = new System.Drawing.Size(130, 20);
             this.btviewcode.TabIndex = 71;
+            this.btviewcode.TabStop = false;
             this.btviewcode.Text = "View GroupCode";
             this.btviewcode.UseVisualStyleBackColor = true;
             this.btviewcode.Visible = false;
@@ -922,10 +929,11 @@ namespace KAmanagement.View
             this.btAddGroupcode.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btAddGroupcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAddGroupcode.ForeColor = System.Drawing.Color.Red;
-            this.btAddGroupcode.Location = new System.Drawing.Point(5, 34);
+            this.btAddGroupcode.Location = new System.Drawing.Point(708, 391);
             this.btAddGroupcode.Name = "btAddGroupcode";
             this.btAddGroupcode.Size = new System.Drawing.Size(94, 20);
             this.btAddGroupcode.TabIndex = 70;
+            this.btAddGroupcode.TabStop = false;
             this.btAddGroupcode.Text = "Add GroupCode";
             this.btAddGroupcode.UseVisualStyleBackColor = false;
             this.btAddGroupcode.Visible = false;
@@ -939,6 +947,7 @@ namespace KAmanagement.View
             this.btrepresent.Name = "btrepresent";
             this.btrepresent.Size = new System.Drawing.Size(29, 20);
             this.btrepresent.TabIndex = 69;
+            this.btrepresent.TabStop = false;
             this.btrepresent.Text = "#";
             this.btrepresent.UseVisualStyleBackColor = true;
             this.btrepresent.Click += new System.EventHandler(this.btrepresent_Click);
@@ -952,6 +961,7 @@ namespace KAmanagement.View
             this.btvatchange.Name = "btvatchange";
             this.btvatchange.Size = new System.Drawing.Size(29, 20);
             this.btvatchange.TabIndex = 68;
+            this.btvatchange.TabStop = false;
             this.btvatchange.Text = "#";
             this.btvatchange.UseVisualStyleBackColor = true;
             this.btvatchange.Click += new System.EventHandler(this.btvatchange_Click);
@@ -965,6 +975,7 @@ namespace KAmanagement.View
             this.btchangeprovince.Name = "btchangeprovince";
             this.btchangeprovince.Size = new System.Drawing.Size(29, 20);
             this.btchangeprovince.TabIndex = 67;
+            this.btchangeprovince.TabStop = false;
             this.btchangeprovince.Text = "#";
             this.btchangeprovince.UseVisualStyleBackColor = true;
             this.btchangeprovince.Click += new System.EventHandler(this.btchangeprovince_Click);
@@ -978,6 +989,7 @@ namespace KAmanagement.View
             this.btchangedistric.Name = "btchangedistric";
             this.btchangedistric.Size = new System.Drawing.Size(29, 20);
             this.btchangedistric.TabIndex = 66;
+            this.btchangedistric.TabStop = false;
             this.btchangedistric.Text = "#";
             this.btchangedistric.UseVisualStyleBackColor = true;
             this.btchangedistric.Click += new System.EventHandler(this.btchangedistric_Click);
@@ -990,6 +1002,7 @@ namespace KAmanagement.View
             this.bthomeso.Name = "bthomeso";
             this.bthomeso.Size = new System.Drawing.Size(29, 20);
             this.bthomeso.TabIndex = 65;
+            this.bthomeso.TabStop = false;
             this.bthomeso.Text = "#";
             this.bthomeso.UseVisualStyleBackColor = true;
             this.bthomeso.Click += new System.EventHandler(this.bthomeso_Click);
@@ -1002,6 +1015,7 @@ namespace KAmanagement.View
             this.btchangetradename.Name = "btchangetradename";
             this.btchangetradename.Size = new System.Drawing.Size(29, 20);
             this.btchangetradename.TabIndex = 64;
+            this.btchangetradename.TabStop = false;
             this.btchangetradename.Text = "#";
             this.btchangetradename.UseVisualStyleBackColor = true;
             this.btchangetradename.Click += new System.EventHandler(this.btchangetradename_Click);
@@ -1075,6 +1089,7 @@ namespace KAmanagement.View
             this.btfindsfa.Name = "btfindsfa";
             this.btfindsfa.Size = new System.Drawing.Size(24, 22);
             this.btfindsfa.TabIndex = 35;
+            this.btfindsfa.TabStop = false;
             this.btfindsfa.Text = ">>";
             this.btfindsfa.UseVisualStyleBackColor = true;
             this.btfindsfa.Click += new System.EventHandler(this.btfindsfa_Click);
@@ -1087,6 +1102,7 @@ namespace KAmanagement.View
             this.btfindcust.Name = "btfindcust";
             this.btfindcust.Size = new System.Drawing.Size(24, 22);
             this.btfindcust.TabIndex = 28;
+            this.btfindcust.TabStop = false;
             this.btfindcust.Text = ">>";
             this.btfindcust.UseVisualStyleBackColor = true;
             this.btfindcust.Click += new System.EventHandler(this.btfindcust_Click);
@@ -1452,7 +1468,10 @@ namespace KAmanagement.View
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btremoveCusgroup);
+            this.panel1.Controls.Add(this.btviewcode);
             this.panel1.Controls.Add(this.btchangevolcomit);
+            this.panel1.Controls.Add(this.btAddGroupcode);
             this.panel1.Controls.Add(this.btchangensrcomit);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.btchangeRemark);
@@ -1501,6 +1520,7 @@ namespace KAmanagement.View
             this.btchangevolcomit.Name = "btchangevolcomit";
             this.btchangevolcomit.Size = new System.Drawing.Size(24, 20);
             this.btchangevolcomit.TabIndex = 65;
+            this.btchangevolcomit.TabStop = false;
             this.btchangevolcomit.Text = "#";
             this.btchangevolcomit.UseVisualStyleBackColor = true;
             this.btchangevolcomit.Click += new System.EventHandler(this.btchangevolcomit_Click);
@@ -1513,6 +1533,7 @@ namespace KAmanagement.View
             this.btchangensrcomit.Name = "btchangensrcomit";
             this.btchangensrcomit.Size = new System.Drawing.Size(24, 20);
             this.btchangensrcomit.TabIndex = 64;
+            this.btchangensrcomit.TabStop = false;
             this.btchangensrcomit.Text = "#";
             this.btchangensrcomit.UseVisualStyleBackColor = true;
             this.btchangensrcomit.Click += new System.EventHandler(this.btchangensrcomit_Click);
@@ -1814,6 +1835,7 @@ namespace KAmanagement.View
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.Size = new System.Drawing.Size(1307, 223);
             this.dataGridView6.TabIndex = 20;
+            this.dataGridView6.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellContentClick);
             // 
             // tab_paymentinf
             // 
@@ -1887,6 +1909,7 @@ namespace KAmanagement.View
             this.dataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridView7.Size = new System.Drawing.Size(1189, 221);
             this.dataGridView7.TabIndex = 20;
+            this.dataGridView7.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellContentClick);
             this.dataGridView7.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellContentDoubleClick);
             this.dataGridView7.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView7_CellDoubleClick);
             // 
@@ -1898,6 +1921,7 @@ namespace KAmanagement.View
             this.btchangeRemark.Name = "btchangeRemark";
             this.btchangeRemark.Size = new System.Drawing.Size(23, 20);
             this.btchangeRemark.TabIndex = 63;
+            this.btchangeRemark.TabStop = false;
             this.btchangeRemark.Text = "#";
             this.btchangeRemark.UseVisualStyleBackColor = true;
             this.btchangeRemark.Click += new System.EventHandler(this.btchangeRemark_Click);
@@ -1923,7 +1947,7 @@ namespace KAmanagement.View
             this.btchangecontractitem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btchangecontractitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btchangecontractitem.ForeColor = System.Drawing.Color.Red;
-            this.btchangecontractitem.Location = new System.Drawing.Point(1066, 392);
+            this.btchangecontractitem.Location = new System.Drawing.Point(1067, 391);
             this.btchangecontractitem.Name = "btchangecontractitem";
             this.btchangecontractitem.Size = new System.Drawing.Size(121, 21);
             this.btchangecontractitem.TabIndex = 61;

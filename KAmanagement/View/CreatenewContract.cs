@@ -1787,6 +1787,9 @@ namespace KAmanagement.View
         }
         ComboBox cbm;
         DataGridViewCell currentCell;
+
+        public CreatenewContract formcreatCtract { get; private set; }
+
         //  private DateTimePicker cellDateTimePicker = new DateTimePicker();
         // DateTimePicker[] sp = new DateTimePicker[100];
         void EndEdit()
@@ -3988,7 +3991,7 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
 
                         string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
-                        if (! Utils.IsValidnumber(txtvaluevolumecommit))
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
                         {
                             txtvaluevolumecommit = "0";
                         }
@@ -5208,7 +5211,7 @@ namespace KAmanagement.View
                 }
 
 
-            
+
 
 
                 #endregion
@@ -5383,7 +5386,7 @@ namespace KAmanagement.View
 
 
                 }
-             
+
                 if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C03")
                 {
 
@@ -5466,7 +5469,7 @@ namespace KAmanagement.View
 
 
                 }
-              
+
                 if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C04")
                 {
 
@@ -6409,7 +6412,7 @@ namespace KAmanagement.View
                 }
                 else
                 {
-                 
+
                     MessageBox.Show("Remarks is too long, please check !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbl_kacontractsdatadetaillist = null;
                     newcontract = null;
@@ -6430,7 +6433,12 @@ namespace KAmanagement.View
                 }
 
 
-
+                if (checkcontract == false)
+                {
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    return;
+                }
 
 
                 newcontract.SALORG_CTR = Utils.getfirstusersalescontrolregion();
@@ -6830,6 +6838,243 @@ namespace KAmanagement.View
 
                 }
             }
+
+            if (!kq && this.Text == "Payment Input")
+        //        if (true)  // có queyefn view để duyệt thì hiện lên báo cáo view duyet
+            {
+                string connection_string = Utils.getConnectionstr();
+
+
+                LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+                LinqtoSQLDataContext da = new LinqtoSQLDataContext(connection_string);
+
+                string ContractNo = tb_contractno.Text;
+                int PayID = int.Parse(this.dataGridView7.Rows[this.dataGridView7.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+
+                int SubID = int.Parse(this.dataGridView7.Rows[this.dataGridView7.CurrentCell.RowIndex].Cells["SubID"].Value.ToString());
+
+
+
+                int BatchNo = int.Parse(this.dataGridView7.Rows[this.dataGridView7.CurrentCell.RowIndex].Cells["BatchNo"].Value.ToString());
+
+
+                #region delete  DETAIL AND GRUOP RPT BY USER
+
+
+                string username = Utils.getusername();
+                //  string connection_string = Utils.getConnectionstr();
+                //   LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                string sqltext = "DELETE FROM tbl_KAdetailprogrRpt WHERE tbl_KAdetailprogrRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+                sqltext = "DELETE FROM tbl_KapaymentrequestRpt WHERE tbl_KapaymentrequestRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+
+                sqltext = "DELETE FROM tbl_KapaymentrequestRpt WHERE tbl_KapaymentrequestRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+                #endregion
+
+
+
+                #region  input detail request payment
+
+                tbl_KAdetailprogrRpt detailrpt2 = new tbl_KAdetailprogrRpt();  //total line
+                detailrpt2.Balance = 0;
+                detailrpt2.BalanceAftApproval = 0;
+                detailrpt2.Paid = 0;
+                detailrpt2.PaymentRequest = 0;
+                detailrpt2.Sponsorship = 0;
+                detailrpt2.Programe = "Total";
+                detailrpt2.Username = username;
+
+                var rss1 = from tbl_kaprogramlist in dc.tbl_kaprogramlists
+                           where tbl_kaprogramlist.Code != "DIS"
+                           select tbl_kaprogramlist;
+
+                foreach (var item in rss1)
+                {
+
+                    tbl_KAdetailprogrRpt detailrpt = new tbl_KAdetailprogrRpt();  //detail line
+                    detailrpt.Programe = item.Name;
+                    detailrpt.Username = username;
+                    detailrpt.Remarks = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                         where tbl_kacontractsdatadetail.PayType.Trim() == item.Code.Trim() && tbl_kacontractsdatadetail.ContractNo == ContractNo && tbl_kacontractsdatadetail.PayID == PayID && tbl_kacontractsdatadetail.PayType != "DIS"
+                                         select tbl_kacontractsdatadetail.Remark).FirstOrDefault();
+
+
+
+                    var totaldetailrs = (from tbl_kacontractsdatadetail in db.tbl_kacontractsdatadetails
+                                         where tbl_kacontractsdatadetail.PayType == item.Code && tbl_kacontractsdatadetail.ContractNo.Trim() == ContractNo.Trim()
+                                         group tbl_kacontractsdatadetail by tbl_kacontractsdatadetail.PayType into g
+                                         select new
+                                         {
+
+                                             PayType = g.Key,
+                                             Paid = g.Sum(gg => gg.PaidAmt).GetValueOrDefault(0),
+
+                                             Sponsorship = g.Sum(gg => gg.SponsoredTotal).GetValueOrDefault(0),
+
+                                         }).FirstOrDefault();
+
+                    if (totaldetailrs != null)
+                    {
+
+                        detailrpt.Paid = totaldetailrs.Paid;
+                        detailrpt.Sponsorship = totaldetailrs.Sponsorship;
+
+                        detailrpt.Balance = detailrpt.Sponsorship - detailrpt.Paid;
+
+
+
+                        detailrpt.PaymentRequest = (from tbl_kacontractsdetailpayment in da.tbl_kacontractsdetailpayments
+                                                    where tbl_kacontractsdetailpayment.BatchNo == BatchNo && tbl_kacontractsdetailpayment.ContractNo == ContractNo && tbl_kacontractsdetailpayment.PayType == item.Code && tbl_kacontractsdetailpayment.DoneOn == null
+                                                    select tbl_kacontractsdetailpayment.PaidRequestAmt).Sum().GetValueOrDefault(0);
+
+
+                        detailrpt.BalanceAftApproval = detailrpt.Balance - detailrpt.PaymentRequest;
+
+                    }
+                    else
+                    {
+                        detailrpt.PaymentRequest = 0;
+                        detailrpt.Paid = 0;
+                        detailrpt.Sponsorship = 0;
+                        detailrpt.Balance = 0;
+                        detailrpt.BalanceAftApproval = 0;
+                    }
+
+
+                    detailrpt2.Balance = detailrpt2.Balance + detailrpt.Balance;
+                    detailrpt2.BalanceAftApproval = detailrpt2.BalanceAftApproval + detailrpt.BalanceAftApproval;
+                    detailrpt2.Paid = detailrpt2.Paid + detailrpt.Paid;
+                    detailrpt2.PaymentRequest = detailrpt2.PaymentRequest + detailrpt.PaymentRequest;
+                    detailrpt2.Sponsorship = detailrpt2.Sponsorship + detailrpt.Sponsorship;
+
+
+
+                    dc.tbl_KAdetailprogrRpts.InsertOnSubmit(detailrpt);
+                    dc.SubmitChanges();
+
+                }
+
+
+
+                dc.tbl_KAdetailprogrRpts.InsertOnSubmit(detailrpt2);
+                dc.SubmitChanges();
+
+                #endregion
+
+                
+
+                #region  MAKE master rpt
+
+                var itemmasterKA = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                    where tbl_kacontractdata.ContractNo == ContractNo
+                                    select tbl_kacontractdata).FirstOrDefault();
+
+
+                if (itemmasterKA != null)
+                {
+                    tbl_KapaymentrequestRpt requestmaster = new tbl_KapaymentrequestRpt();
+
+                    requestmaster.ContractNo = itemmasterKA.ContractNo;
+                    requestmaster.Username = username;
+                    //     requestmaster.AchvRevenue
+                    // requestmaster.address  = itemmasterKA.a
+                    requestmaster.Annualvolume = itemmasterKA.AnnualVolume;
+                    requestmaster.Channel = itemmasterKA.Channel;
+                    requestmaster.CityProvince = itemmasterKA.Province;
+                    // requestmaster.Colddrinks
+                    requestmaster.Committedvol = itemmasterKA.VolComm;
+                    // requestmaster.ContractNo 
+                    requestmaster.ContractType = itemmasterKA.ConType;
+                    // requestmaster.Costpercase
+                    requestmaster.Creditlimit = itemmasterKA.CreditLimit;
+                    requestmaster.Creditterm = itemmasterKA.CreditTerm;
+                    requestmaster.Currency = itemmasterKA.Currency;
+                    requestmaster.Customercode = itemmasterKA.Customer;
+                    requestmaster.Deliveredby = itemmasterKA.DeliveredBy;
+
+                    // requestmaster.Discount
+                    requestmaster.District = itemmasterKA.District;
+                    requestmaster.EffectiveDate = itemmasterKA.EffDate;
+                    requestmaster.ExpireDate = itemmasterKA.EftDate;
+                    requestmaster.ExtendDate = itemmasterKA.ExtDate;
+                    // requestmaster.Fundspercent
+                    requestmaster.Note = itemmasterKA.Remarks;
+                    //      requestmaster.ProductGroup = itemmasterKA.PrdGrp;
+                    requestmaster.Representative = itemmasterKA.Representative;
+                    requestmaster.SalesOrg = itemmasterKA.SalesOrg;
+                    requestmaster.Street = itemmasterKA.HouseNo;
+                    // requestmaster.SupportCase
+                    requestmaster.TermYear = (itemmasterKA.EftDate.Value.Year - itemmasterKA.EffDate.Value.Year);
+                    requestmaster.TradeName = itemmasterKA.Fullname;
+                    requestmaster.ReferrenceDoc = BatchNo.ToString();
+                    //requestmaster.Username
+                    requestmaster.AchievedVolPCs = itemmasterKA.PCVolAched;
+                    requestmaster.NSRcommit = itemmasterKA.NSRComm;  // hiện nsa co,,it
+                    requestmaster.AchvRevenue = itemmasterKA.NSRAched;
+
+                    if (itemmasterKA.VolComm > 0 && itemmasterKA.VolComm != null && itemmasterKA.PCVolAched != null)
+                    {
+
+
+                        requestmaster.Achievedpercent = ((itemmasterKA.PCVolAched) / itemmasterKA.VolComm);
+                    }
+
+
+                    dc.tbl_KapaymentrequestRpts.InsertOnSubmit(requestmaster);
+                    dc.SubmitChanges();
+
+
+                }
+
+                //requestmaster.Vendor
+
+
+
+
+
+                #endregion
+
+                #region  view reports payment request  
+
+                Control_ac ctrac = new Control_ac();
+
+                var rs1 = ctrac.KArptdataset1(dc);
+                var rs2 = ctrac.KArptdataset2(dc);
+
+
+
+
+
+                if (rs1 != null && rs2 != null)
+                {
+
+                    Utils ut = new Utils();
+                    var dataset1 = ut.ToDataTable(dc, rs1);
+                    var dataset2 = ut.ToDataTable(dc, rs2);
+                    Reportsview rpt = new Reportsview(dataset1, dataset2, "PaymentRequest.rdlc", BatchNo, ContractNo, formcreatCtract);
+                    rpt.ShowDialog();
+
+                }
+
+                #endregion view reports payment request  // 
+
+
+
+            }
+
+
+
+
+
             if (!kq && this.Text == "Input Contract")  // pahir la pay ment requyet mowi sduoc tra tien 
                                                        //     if (!kq)
             {
@@ -8534,9 +8779,11 @@ namespace KAmanagement.View
                     if (statusrs != null)
                     {
                         statusrs.Consts = "ALV";
-                        cb_contractstatus.Text = "ALV";
+                     
                         db.SubmitChanges();
+                      
 
+                        cb_contractstatus.Text = "ALV";
                         bt_fin.Visible = false;
                         bt_cancel.Visible = true;
                         bt_close.Visible = true;
@@ -8574,6 +8821,8 @@ namespace KAmanagement.View
 
 
                     }
+
+            
                     var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
                                  where tbl_kacontractsdatadetail.ContractNo.Equals(contractno)
                                  select tbl_kacontractsdatadetail;
@@ -8584,6 +8833,7 @@ namespace KAmanagement.View
                         {
                             item.Constatus = "ALV";
                             dc.SubmitChanges();
+                           
                         }
                     }
 
@@ -11371,6 +11621,16 @@ namespace KAmanagement.View
 
             };
 
+
+        }
+
+        private void dataGridView7_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView6_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

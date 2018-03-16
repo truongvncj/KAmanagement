@@ -42,7 +42,7 @@ namespace KAmanagement.View
         public static string connection_string = Utils.getConnectionstr();
 
         LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-      //  dc.CommandTimeout = 0;
+        //  dc.CommandTimeout = 0;
 
         //   public List<ComboboxItem> dataCollectionaccount;
 
@@ -156,7 +156,62 @@ namespace KAmanagement.View
 
         }
 
+        public void ReloadKASeachPayment(string sendingBatchno, string sendingcontract, string sendingname)
+        {
 
+            //   this.sendingcode.Text, this.sendingcontract.Text, this.sendingname.Text
+            string connection_string = Utils.getConnectionstr();
+
+            LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+            string username = Utils.getusername();
+
+            //var regioncode = (from tbl_Temp in dc.tbl_Temps
+            //                  where tbl_Temp.username == username
+            //                  select tbl_Temp.RegionCode).FirstOrDefault();
+
+            //var liveandinregion = from tbl_kacontractdata in dc.tbl_kacontractdatas
+            //                      where tbl_kacontractdata.Consts == "ALV"
+            //                      && (from Tka_RegionRight in dc.Tka_RegionRights
+            //                          where Tka_RegionRight.RegionCode == regioncode
+            //                          select Tka_RegionRight.Region
+            //                  ).Contains(tbl_kacontractdata.SALORG_CTR)
+            //                      select tbl_kacontractdata.ContractNo;
+
+
+
+            var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                             where tbl_kacontractsdetailpayment.PayControl == "REQ"
+                             //      && liveandinregion.Contains(sendingcontract)
+                             && tbl_kacontractsdetailpayment.ContractNo.Contains(sendingcontract)
+                             && tbl_kacontractsdetailpayment.ContracName.Contains(sendingname)
+                                && ((int)tbl_kacontractsdetailpayment.BatchNo).ToString().Contains(sendingBatchno)
+
+                             select new
+                             {
+                                 tbl_kacontractsdetailpayment.ContractNo,
+
+                                 tbl_kacontractsdetailpayment.BatchNo,
+                                 ContracName =   tbl_kacontractsdetailpayment.ContracName.Trim(),
+                                 tbl_kacontractsdetailpayment.PayType,
+                                 tbl_kacontractsdetailpayment.PayID,
+                                 Description =     tbl_kacontractsdetailpayment.Description.Trim(),
+                                 tbl_kacontractsdetailpayment.PaidRequestAmt,
+                                 tbl_kacontractsdetailpayment.PayControl,
+                                 tbl_kacontractsdetailpayment.PrintDate,
+                                 Remark =   tbl_kacontractsdetailpayment.Remark.Trim(),
+                             
+                                 tbl_kacontractsdetailpayment.CRDDAT,
+                                 tbl_kacontractsdetailpayment.CRDUSR,
+                                 tbl_kacontractsdetailpayment.SubID,
+
+                             };
+
+
+            dataGridView1.DataSource = rscustemp2;
+
+
+            // throw new NotImplementedException();
+        }
 
         private void UpdateText(string Billed_Qty, string NSR, string UC, string PC, string GSR)
         {
@@ -295,7 +350,16 @@ namespace KAmanagement.View
         }
         void Control_KeyPress(object sender, KeyEventArgs e)
         {
+
+            // KASeachpaymentRequest 
             // if (viewcode == 2)// nuew la bàng salsetemp update
+            if ((viewcode == 3) && e.KeyCode == Keys.F3)
+            {
+                View.KASeachpaymentRequest seach = new KASeachpaymentRequest(this, "KASeachPaymentRequest");
+                seach.Show();
+
+            }
+
 
             if ((viewcode == 2) && e.KeyCode == Keys.F3)
             {
@@ -335,6 +399,8 @@ namespace KAmanagement.View
 
 
         public BindingSource source2;
+        private CreatenewContract formcreatCtract;
+
         public Viewtable(IQueryable rs, LinqtoSQLDataContext dc, string fornname, int viewcode)
         {
             //    this.dataGridView1.DataSource = rs;
@@ -347,6 +413,7 @@ namespace KAmanagement.View
 
             this.dataGridView1.DataSource = rs;
             this.Dtgridview = dataGridView1;
+
 
             this.db = dc;
             this.viewcode = viewcode;
@@ -367,6 +434,13 @@ namespace KAmanagement.View
                                                                                                             //  this.lb_totalrecord.ForeColor = Color.Chocolate;
                                                                                                             //   this.Show();
             this.KeyPreview = true;
+
+            //      this.lb_seach
+            if (viewcode == 3)//nếu là massconffimr
+            {
+                this.lb_seach.Visible = true;
+            }
+
 
             if (viewcode == 100)//nếu là massconffimr
             {
@@ -537,7 +611,7 @@ namespace KAmanagement.View
 
             }
 
-            if (viewcode == 1 || viewcode == 2|| viewcode == 100)// nếu là hiện salevolum ta cộng salesvolume
+            if (viewcode == 1 || viewcode == 2 || viewcode == 100)// nếu là hiện salevolum ta cộng salesvolume
             {
                 #region view code = 1 hoac 2
 
@@ -545,7 +619,7 @@ namespace KAmanagement.View
                 Pl_endview.Visible = true;
                 bt_addtomaster.Visible = true;
 
-                if (viewcode == 2|| viewcode == 100)
+                if (viewcode == 2 || viewcode == 100)
                 {
                     bt_addtomaster.Visible = false;
                     lb_seach.Visible = true;
@@ -621,28 +695,7 @@ namespace KAmanagement.View
                     cbocntracttype.Items.Add(item);
                 }
 
-                //    //
-                //    tbl_kacontractsdatadetail.SalesOrg,
-                //                     tbl_kacontractsdatadetail.CommittedDate,
-                //                     tbl_kacontractsdatadetail.ContractNo,
-                //                     tbl_kacontractsdatadetail.ConType,
-                //                     tbl_kacontractsdatadetail.Constatus,
-                //                     tbl_kacontractsdatadetail.Customercode,
-                //                     tbl_kacontractsdatadetail.Fullname,
-                //                     tbl_kacontractsdatadetail.Address,
-
-                //                     tbl_kacontractsdatadetail.PayType,
-                //                     tbl_kacontractsdatadetail.PayControl,
-                //                     tbl_kacontractsdatadetail.Description,
-
-                //                     Achived = tbl_kacontractsdatadetail.SponsoredTotal,
-                //                     Paid = tbl_kacontractsdatadetail.PaidAmt,
-                //                     Unpaid = tbl_kacontractsdatadetail.SponsoredTotal - tbl_kacontractsdatadetail.PaidAmt,
-
-                //                     tbl_kacontractsdatadetail.EffFrm,
-                //                     tbl_kacontractsdatadetail.EffTo,
-                //                     tbl_kacontractsdatadetail.Remark,
-                ////
+             
 
 
                 this.dataGridView1.Columns["Achived"].DefaultCellStyle.Format = "N0";
@@ -685,6 +738,8 @@ namespace KAmanagement.View
 
             if (viewcode == 2)// nuew la bàng salsetemp update
             {
+                #region VIEW CODE == 2 nuew la bàng salsetemp update
+
 
                 // string connection_string = Utils.getConnectionstr();
 
@@ -695,15 +750,15 @@ namespace KAmanagement.View
                 string colheadertext = "";
                 try
                 {
-                     colheadertext = this.dataGridView1.Columns[this.dataGridView1.CurrentCell.ColumnIndex].HeaderText;
+                    colheadertext = this.dataGridView1.Columns[this.dataGridView1.CurrentCell.ColumnIndex].HeaderText;
 
                 }
                 catch (Exception)
                 {
 
-                     colheadertext = "";
+                    colheadertext = "";
                 }
-          
+
 
 
                 dc.CommandTimeout = 0;
@@ -856,9 +911,13 @@ namespace KAmanagement.View
 
 
 
-
+                #endregion  VIEW CODE == 2 nuew la bàng salsetemp update
 
             }
+
+
+
+
 
         }
 
@@ -954,41 +1013,264 @@ namespace KAmanagement.View
 
 
 
-            if (this.formlabel.Text == "List Detail Payment Request" && viewcode == 3)
+            if (viewcode == 3) // HIEN THI PAYMENT REGWET
             {
 
-                Model.Username used = new Model.Username();
+                string connection_string = Utils.getConnectionstr();
 
-                if (used.inputcontractconfirm)
+
+                LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+                LinqtoSQLDataContext da = new LinqtoSQLDataContext(connection_string);
+
+                //   string ContractNo = tb_contractno.Text;
+                string ContractNo = "0";// this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["PayID"].Value.ToString();
+
+                int PayID = 0;// int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+
+                int SubID = 0;// int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["SubID"].Value.ToString());
+
+
+
+                int BatchNo = 0;// int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["BatchNo"].Value.ToString());
+
+
+
+                try
+                {
+                    ContractNo = this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["ContractNo"].Value.ToString();
+
+                    PayID = int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+
+                    SubID = int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["SubID"].Value.ToString());
+
+                    BatchNo = int.Parse(this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["BatchNo"].Value.ToString());
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+
+                    return;
+                }
+
+
+                #region delete  DETAIL AND GRUOP RPT BY USER
+
+
+                string username = Utils.getusername();
+                //  string connection_string = Utils.getConnectionstr();
+                //   LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                string sqltext = "DELETE FROM tbl_KAdetailprogrRpt WHERE tbl_KAdetailprogrRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+                sqltext = "DELETE FROM tbl_KapaymentrequestRpt WHERE tbl_KapaymentrequestRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+
+                sqltext = "DELETE FROM tbl_KapaymentrequestRpt WHERE tbl_KapaymentrequestRpt.Username = '" + username + "'";
+                dc.ExecuteCommand(sqltext);
+                dc.SubmitChanges();
+
+                #endregion
+
+
+
+                #region  input detail request payment
+
+                tbl_KAdetailprogrRpt detailrpt2 = new tbl_KAdetailprogrRpt();  //total line
+                detailrpt2.Balance = 0;
+                detailrpt2.BalanceAftApproval = 0;
+                detailrpt2.Paid = 0;
+                detailrpt2.PaymentRequest = 0;
+                detailrpt2.Sponsorship = 0;
+                detailrpt2.Programe = "Total";
+                detailrpt2.Username = username;
+
+                var rss1 = from tbl_kaprogramlist in dc.tbl_kaprogramlists
+                           where tbl_kaprogramlist.Code != "DIS"
+                           select tbl_kaprogramlist;
+
+                foreach (var item in rss1)
                 {
 
+                    tbl_KAdetailprogrRpt detailrpt = new tbl_KAdetailprogrRpt();  //detail line
+                    detailrpt.Programe = item.Name;
+                    detailrpt.Username = username;
+                    detailrpt.Remarks = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                         where tbl_kacontractsdatadetail.PayType.Trim() == item.Code.Trim() && tbl_kacontractsdatadetail.ContractNo == ContractNo && tbl_kacontractsdatadetail.PayID == PayID && tbl_kacontractsdatadetail.PayType != "DIS"
+                                         select tbl_kacontractsdatadetail.Remark).FirstOrDefault();
 
-                    string ContractNo = (string)this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["ContractNo"].Value;
 
-                    var mastercontracf = (from tbl_kacontractdata in dc.tbl_kacontractdatas
-                                          where tbl_kacontractdata.ContractNo.Equals(ContractNo)
-                                          select tbl_kacontractdata);
-                    if (mastercontracf.Count() == 0)
+
+                    var totaldetailrs = (from tbl_kacontractsdatadetail in db.tbl_kacontractsdatadetails
+                                         where tbl_kacontractsdatadetail.PayType == item.Code && tbl_kacontractsdatadetail.ContractNo.Trim() == ContractNo.Trim()
+                                         group tbl_kacontractsdatadetail by tbl_kacontractsdatadetail.PayType into g
+                                         select new
+                                         {
+
+                                             PayType = g.Key,
+                                             Paid = g.Sum(gg => gg.PaidAmt).GetValueOrDefault(0),
+
+                                             Sponsorship = g.Sum(gg => gg.SponsoredTotal).GetValueOrDefault(0),
+
+                                         }).FirstOrDefault();
+
+                    if (totaldetailrs != null)
                     {
-                        MessageBox.Show("ContractNo not in master list, please check !", "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+
+                        detailrpt.Paid = totaldetailrs.Paid;
+                        detailrpt.Sponsorship = totaldetailrs.Sponsorship;
+
+                        detailrpt.Balance = detailrpt.Sponsorship - detailrpt.Paid;
 
 
 
-                    if (ContractNo != "" && ContractNo != null)
-                    {
-                        CreatenewContract newcontrac = new CreatenewContract("ENTRY SCREEN DISPLAY CONTRACT", ContractNo);
-                        newcontrac.Text = "Input Contract";
-                        newcontrac.ShowDialog();
+                        detailrpt.PaymentRequest = (from tbl_kacontractsdetailpayment in da.tbl_kacontractsdetailpayments
+                                                    where tbl_kacontractsdetailpayment.BatchNo == BatchNo && tbl_kacontractsdetailpayment.ContractNo == ContractNo && tbl_kacontractsdetailpayment.PayType == item.Code && tbl_kacontractsdetailpayment.DoneOn == null
+                                                    select tbl_kacontractsdetailpayment.PaidRequestAmt).Sum().GetValueOrDefault(0);
+
+
+                        detailrpt.BalanceAftApproval = detailrpt.Balance - detailrpt.PaymentRequest;
 
                     }
                     else
                     {
-                        MessageBox.Show("Please check contract no", "Thông báo !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        detailrpt.PaymentRequest = 0;
+                        detailrpt.Paid = 0;
+                        detailrpt.Sponsorship = 0;
+                        detailrpt.Balance = 0;
+                        detailrpt.BalanceAftApproval = 0;
                     }
 
+
+                    detailrpt2.Balance = detailrpt2.Balance + detailrpt.Balance;
+                    detailrpt2.BalanceAftApproval = detailrpt2.BalanceAftApproval + detailrpt.BalanceAftApproval;
+                    detailrpt2.Paid = detailrpt2.Paid + detailrpt.Paid;
+                    detailrpt2.PaymentRequest = detailrpt2.PaymentRequest + detailrpt.PaymentRequest;
+                    detailrpt2.Sponsorship = detailrpt2.Sponsorship + detailrpt.Sponsorship;
+
+
+
+                    dc.tbl_KAdetailprogrRpts.InsertOnSubmit(detailrpt);
+                    dc.SubmitChanges();
+
                 }
+
+
+
+                dc.tbl_KAdetailprogrRpts.InsertOnSubmit(detailrpt2);
+                dc.SubmitChanges();
+
+                #endregion
+
+
+
+                #region  MAKE master rpt
+
+                var itemmasterKA = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                    where tbl_kacontractdata.ContractNo == ContractNo
+                                    select tbl_kacontractdata).FirstOrDefault();
+
+
+                if (itemmasterKA != null)
+                {
+                    tbl_KapaymentrequestRpt requestmaster = new tbl_KapaymentrequestRpt();
+
+                    requestmaster.ContractNo = itemmasterKA.ContractNo;
+                    requestmaster.Username = username;
+                    //     requestmaster.AchvRevenue
+                    // requestmaster.address  = itemmasterKA.a
+                    requestmaster.Annualvolume = itemmasterKA.AnnualVolume;
+                    requestmaster.Channel = itemmasterKA.Channel;
+                    requestmaster.CityProvince = itemmasterKA.Province;
+                    // requestmaster.Colddrinks
+                    requestmaster.Committedvol = itemmasterKA.VolComm;
+                    // requestmaster.ContractNo 
+                    requestmaster.ContractType = itemmasterKA.ConType;
+                    // requestmaster.Costpercase
+                    requestmaster.Creditlimit = itemmasterKA.CreditLimit;
+                    requestmaster.Creditterm = itemmasterKA.CreditTerm;
+                    requestmaster.Currency = itemmasterKA.Currency;
+                    requestmaster.Customercode = itemmasterKA.Customer;
+                    requestmaster.Deliveredby = itemmasterKA.DeliveredBy;
+
+                    // requestmaster.Discount
+                    requestmaster.District = itemmasterKA.District;
+                    requestmaster.EffectiveDate = itemmasterKA.EffDate;
+                    requestmaster.ExpireDate = itemmasterKA.EftDate;
+                    requestmaster.ExtendDate = itemmasterKA.ExtDate;
+                    // requestmaster.Fundspercent
+                    requestmaster.Note = itemmasterKA.Remarks;
+                    //      requestmaster.ProductGroup = itemmasterKA.PrdGrp;
+                    requestmaster.Representative = itemmasterKA.Representative;
+                    requestmaster.SalesOrg = itemmasterKA.SalesOrg;
+                    requestmaster.Street = itemmasterKA.HouseNo;
+                    // requestmaster.SupportCase
+                    requestmaster.TermYear = (itemmasterKA.EftDate.Value.Year - itemmasterKA.EffDate.Value.Year);
+                    requestmaster.TradeName = itemmasterKA.Fullname;
+                    requestmaster.ReferrenceDoc = BatchNo.ToString();
+                    //requestmaster.Username
+                    requestmaster.AchievedVolPCs = itemmasterKA.PCVolAched;
+                    requestmaster.NSRcommit = itemmasterKA.NSRComm;  // hiện nsa co,,it
+                    requestmaster.AchvRevenue = itemmasterKA.NSRAched;
+
+                    if (itemmasterKA.VolComm > 0 && itemmasterKA.VolComm != null && itemmasterKA.PCVolAched != null)
+                    {
+
+
+                        requestmaster.Achievedpercent = ((itemmasterKA.PCVolAched) / itemmasterKA.VolComm);
+                    }
+
+
+                    dc.tbl_KapaymentrequestRpts.InsertOnSubmit(requestmaster);
+                    dc.SubmitChanges();
+
+
+                }
+
+                //requestmaster.Vendor
+
+
+
+
+
+                #endregion
+
+                #region  view reports payment request  
+
+                Control_ac ctrac = new Control_ac();
+
+                var rs1 = ctrac.KArptdataset1(dc);
+                var rs2 = ctrac.KArptdataset2(dc);
+
+
+
+
+
+                if (rs1 != null && rs2 != null)
+                {
+
+                    Utils ut = new Utils();
+                    var dataset1 = ut.ToDataTable(dc, rs1);
+                    var dataset2 = ut.ToDataTable(dc, rs2);
+                    formcreatCtract = null;
+
+                    Reportsview rpt = new Reportsview(dataset1, dataset2, "PaymentRequest.rdlc", BatchNo, ContractNo, formcreatCtract);
+                    rpt.ShowDialog();
+
+                }
+
+                #endregion view reports payment request  // 
+
+
+
+
+
+
+
             }
 
 
@@ -1328,7 +1610,7 @@ namespace KAmanagement.View
                     var excelist = from tbl_MassContractChangeTemp in db.tbl_MassContractChangeTemps
                                    where tbl_MassContractChangeTemp.Username == username && tbl_MassContractChangeTemp.status == false
                                    select tbl_MassContractChangeTemp;
-                    if (excelist.Count() >=0)
+                    if (excelist.Count() >= 0)
                     {
 
 

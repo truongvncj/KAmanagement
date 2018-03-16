@@ -670,7 +670,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractdata.SALORG_CTR.Trim()) && tbl_kacontractdata.Consts == "ALV"
+                                          ).Contains(tbl_kacontractdata.SALORG_CTR.Trim()) 
                                           && typecontract.Contains(tbl_kacontractdata.ConType)
                                    select new
                                    {

@@ -8396,6 +8396,8 @@ namespace KAmanagement
 		
 		private string _ContractNo;
 		
+		private string _ContracName;
+		
 		private string _PayType;
 		
 		private System.Nullable<int> _PayID;
@@ -8450,6 +8452,8 @@ namespace KAmanagement
     partial void OnCreated();
     partial void OnContractNoChanging(string value);
     partial void OnContractNoChanged();
+    partial void OnContracNameChanging(string value);
+    partial void OnContracNameChanged();
     partial void OnPayTypeChanging(string value);
     partial void OnPayTypeChanged();
     partial void OnPayIDChanging(System.Nullable<int> value);
@@ -8521,6 +8525,26 @@ namespace KAmanagement
 					this._ContractNo = value;
 					this.SendPropertyChanged("ContractNo");
 					this.OnContractNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContracName", DbType="NVarChar(255)")]
+		public string ContracName
+		{
+			get
+			{
+				return this._ContracName;
+			}
+			set
+			{
+				if ((this._ContracName != value))
+				{
+					this.OnContracNameChanging(value);
+					this.SendPropertyChanging();
+					this._ContracName = value;
+					this.SendPropertyChanged("ContracName");
+					this.OnContracNameChanged();
 				}
 			}
 		}

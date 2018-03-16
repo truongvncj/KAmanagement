@@ -194,7 +194,7 @@ namespace KAmanagement.View
                 string username = Utils.getusername();
 
                 LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
-          
+
 
 
 
@@ -558,24 +558,27 @@ namespace KAmanagement.View
             var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
                              where tbl_kacontractsdetailpayment.PayControl == "REQ"
                              && liveandinregion.Contains(tbl_kacontractsdetailpayment.ContractNo)
-                      
+
                              select new
                              {
                                  tbl_kacontractsdetailpayment.ContractNo,
 
                                  tbl_kacontractsdetailpayment.BatchNo,
+                                 ContracName = tbl_kacontractsdetailpayment.ContracName.Trim(),
                                  tbl_kacontractsdetailpayment.PayType,
-                                 tbl_kacontractsdetailpayment.PayControl,
-                                 tbl_kacontractsdetailpayment.Description,
+                                 tbl_kacontractsdetailpayment.PayID,
+                                 Description = tbl_kacontractsdetailpayment.Description.Trim(),
                                  tbl_kacontractsdetailpayment.PaidRequestAmt,
-                                 tbl_kacontractsdetailpayment.Remark,
+                                 tbl_kacontractsdetailpayment.PayControl,
                                  tbl_kacontractsdetailpayment.PrintDate,
+                                 Remark = tbl_kacontractsdetailpayment.Remark.Trim(),
+
                                  tbl_kacontractsdetailpayment.CRDDAT,
                                  tbl_kacontractsdetailpayment.CRDUSR,
-
+                                 tbl_kacontractsdetailpayment.SubID,
 
                              };
-            Viewtable viewtbl = new Viewtable(rscustemp2, dc, "List Detail Payment Request", 3);// view code 1 la can viet them lenh
+            Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST PAYMENT REQUEST FOR APPROVAL", 3);// view code 1 la can viet them lenh
 
             viewtbl.Show();
         }
@@ -591,13 +594,13 @@ namespace KAmanagement.View
                               select tbl_Temp.RegionCode).FirstOrDefault();
 
 
-       
+
 
             var rscustemp2 = from tbl_kacontractsdatadetail in da.tbl_kacontractsdatadetails
                              where tbl_kacontractsdatadetail.SponsoredTotal > tbl_kacontractsdatadetail.PaidAmt
                               && (from Tka_RegionRight in da.Tka_RegionRights
-                                 where Tka_RegionRight.RegionCode == regioncode
-                                 select Tka_RegionRight.Region
+                                  where Tka_RegionRight.RegionCode == regioncode
+                                  select Tka_RegionRight.Region
                               ).Contains(tbl_kacontractsdatadetail.SALORG_CTR)
 
                              select new
@@ -748,7 +751,7 @@ namespace KAmanagement.View
             #endregion
 
 
-            
+
 
 
 
@@ -762,8 +765,8 @@ namespace KAmanagement.View
 
             var rscustemp2 = from tbl_kacontractdata in da.tbl_kacontractdatas
                              where (from Tka_RegionRight in da.Tka_RegionRights
-                                  where Tka_RegionRight.RegionCode == regioncode
-                                  select Tka_RegionRight.Region
+                                    where Tka_RegionRight.RegionCode == regioncode
+                                    select Tka_RegionRight.Region
                               ).Contains(tbl_kacontractdata.SALORG_CTR)
 
                              select new

@@ -357,6 +357,7 @@
   <Table Name="dbo.tbl_kacontractsdetailpayment" Member="tbl_kacontractsdetailpayments">
     <Type Name="tbl_kacontractsdetailpayment">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PayType" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SubID" Type="System.Int32" DbType="Int" CanBeNull="true" />

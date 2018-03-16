@@ -33,6 +33,7 @@ namespace KAmanagement.View
                          select new
                          {
                              tbl_kacontractsdetailpayment.ContractNo,
+                             tbl_kacontractsdetailpayment.ContracName,
                              PayType = tbl_kacontractsdetailpayment.PayType.Trim(),
                              tbl_kacontractsdetailpayment.PayID,
                              tbl_kacontractsdetailpayment.SubID,
@@ -234,6 +235,10 @@ namespace KAmanagement.View
                             tbl_kacontractsdetailpayment newrequestpayment = new tbl_kacontractsdetailpayment();
 
                             newrequestpayment.ContractNo = txt_contractno.Text;
+                            newrequestpayment.ContracName = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                                             where tbl_kacontractdata.ContractNo == contractno
+                                                             select tbl_kacontractdata.Fullname).FirstOrDefault();
+
                             //  newrequestpayment.BLOCKED = false;
 
                             newrequestpayment.PaidRequestAmt = double.Parse(txt_paymentamount.Text);

@@ -153,7 +153,12 @@ namespace KAmanagement.View
                     item.PrintDate = DateTime.Today;
               //      item.
                     dc.SubmitChanges();
-                    this.formcreatCtract.loadDetailContractView(contractno);
+
+                    if (formcreatCtract != null)
+                    {
+                        this.formcreatCtract.loadDetailContractView(contractno);
+                    }
+                    
                 }
             }
 
