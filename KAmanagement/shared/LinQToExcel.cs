@@ -77,17 +77,17 @@ namespace KAmanagement
 
 
             cExcel.Application xlApp = new cExcel.Application();
-    //        cExcel.Workbooks xlWorkBook = null;
+            //        cExcel.Workbooks xlWorkBook = null;
 
-        //    cExcel.Worksheet xlWorkSheet = GetworksheetObject(filename);
+            //    cExcel.Worksheet xlWorkSheet = GetworksheetObject(filename);
             //================
-            cExcel.Application ExcelObj = new cExcel.Application();
+            //    cExcel.Application ExcelObj = new cExcel.Application();
 
             cExcel.Workbook theWorkbook = null;
 
-         //   string strPath = FileName;// "MENTION PATH OF EXCEL FILE HERE";
+            //   string strPath = FileName;// "MENTION PATH OF EXCEL FILE HERE";
 
-            theWorkbook = ExcelObj.Workbooks.Open(filename);
+            theWorkbook = xlApp.Workbooks.Open(filename);
             cExcel.Sheets sheets = theWorkbook.Worksheets;
 
             cExcel.Worksheet worksheet = (cExcel.Worksheet)sheets.get_Item(1);//Get the reference of second worksheet
@@ -150,18 +150,20 @@ namespace KAmanagement
             //    dataGridView1.DataSource = mainDt;
 
             //   xlWorkBook.Close();// (true, missing, missing);
-            xlRange = null;
-            worksheet = null;
-        //    xlWorkBook = null;
+     //       xlRange = null;
+       //     worksheet = null;
+            //    xlWorkBook = null;
             xlApp.Quit();
             releaseObject(xlRange);
+            releaseObject(sheets);
             releaseObject(worksheet);
+            releaseObject(theWorkbook);
             releaseObject(xlApp);
             //releaseObject(xlRange);
             //releaseObject(xlWorkSheet);
             //releaseObject(xlWorkBook);
             //releaseObject(xlApp);
-
+            //  GC.Collect();
             return mainDt;
         }
         //-- get string dâttaable
