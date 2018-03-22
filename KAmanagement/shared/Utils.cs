@@ -193,7 +193,7 @@ namespace KAmanagement
             {
                 Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
 
-                if( regex.IsMatch(testContractNo))
+                if (regex.IsMatch(testContractNo))
                 {
                     kq = "OK";
                 }
@@ -204,7 +204,7 @@ namespace KAmanagement
 
             }
 
-            if ((region == "VN13" ) && contracttype == "RKA")
+            if ((region == "VN13") && contracttype == "RKA")
             {
                 Regex regex = new Regex(@"^C/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
 
@@ -331,7 +331,7 @@ namespace KAmanagement
                 }
             }
 
-            if ((region == "VN13") && contracttype == "ASMPQ" )
+            if ((region == "VN13") && contracttype == "ASMPQ")
             {
                 Regex regex = new Regex(@"^C/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
 
@@ -345,7 +345,7 @@ namespace KAmanagement
                 }
             }
 
-            if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "ASMPQ" )
+            if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "ASMPQ")
             {
                 Regex regex = new Regex(@"^N/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
 
@@ -443,7 +443,7 @@ namespace KAmanagement
                     kq = "N/ATW/YY-YY/XXX";
                 }
             }
-            return kq ;
+            return kq;
 
         }
 
@@ -795,230 +795,231 @@ namespace KAmanagement
 
         //Phương thức check xem có workbook excel nào đang được mở hay k?
         // đổi kiểu dd.MM.yyyy thành datime
-        public static DateTime chageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
-        {
 
-            string get_data = exceldatedotstring;//.Replace("9999",(DateTime.Now.Year +1).ToString());
-            char spl2 = '.';
-            //get_data
+        //public static DateTime chageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
+        //{
+
+        //    string get_data = exceldatedotstring;//.Replace("9999",(DateTime.Now.Year +1).ToString());
+        //    char spl2 = '.';
+        //    //get_data
+        //    if (get_data.Contains("/"))
+        //    {
+
+        //        spl2 = '/';
+        //    }
+        //    else
+        //    {
+        //        if (get_data.Contains("-"))
+        //        {
+        //            spl2 = '-';
+
+        //        }
+        //        else
+        //        {
+        //            spl2 = '.';
+
+        //        }
+
+        //    }
+
+        //    List<string> lst_get_data = get_data.Split(spl2).ToList();
+        //    // cmd.Parameters.AddWithValue("?", GetDateWithoutMilliseconds(DateTime.Now));
+
+        //    //private DateTime GetDateWithoutMilliseconds(DateTime d)
+        //    //        {
+        //    //            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
+        //    //        }
+        //    DateTime kq;
+        //    try
+        //    {
+        //        kq = new DateTime(int.Parse(lst_get_data[2]), int.Parse(lst_get_data[1]), int.Parse(lst_get_data[0]));
+
+        //    }
+        //    catch (Exception) //DateTime year, month, day
+        //    {
+        //        kq = new DateTime(9999,12,31);
+
+
+        //        //  throw;
+        //    }
+
+        //    //     DateTime result = new DateTime(kq.Year, kq.Month, kq.Day, kq.Hour, kq.Minute, kq.Second);
+        //    // string result =  lst_get_data[2] + "-" + lst_get_data[1] + "-" + lst_get_data[0] ;
+        //    return kq;
+        //    //throw new NotImplementedException();
+        //}
+
+        public static DateTime chageExceldatetoData(string get_data)
+
+
+        {
+            //   DateTime result_date;
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            //     this.Clearing_date = DateTime.ParseExact("21/10/1979", "{dd/mm/yyyy }", provider);
+
+
+            DateTime result_date;//= DateTime.Now;
+                                 //   get_data = "";
+                                 //   if (excelDate != "")
+                                 // {
+                                 //    string get_data = excelDate;
+                                 //  }
+
+            #region // lấy format hệ thống , kiểm tra xem ngày ở số i; tháng ở bản j ; năm ở bản k byte
+
+
+            DateTime check_date = DateTime.Now;
+            string sysFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+            char spl = '.';
+            if (sysFormat.Contains("/"))
+            {
+
+                spl = '/';
+            }
+            else
+            {
+                if (sysFormat.Contains("-"))
+                {
+                    spl = '-';
+
+                }
+                else
+                {
+                    spl = '.';
+
+                }
+
+            }
+
+
+            List<string> lst_get_sys = sysFormat.Split(spl).ToList();
+
+
+
+            int dayid = 0;
+            int monthid = 0;
+            int yearid = 0;
+
+            for (int i = 0; i <= lst_get_sys.Count - 1; i++)
+            {
+                if (lst_get_sys[i].Contains("d") || lst_get_sys[i].Contains("D"))
+                {
+                    dayid = i;
+                }
+
+                if (lst_get_sys[i].Contains("m") || lst_get_sys[i].Contains("M"))
+                {
+                    monthid = i;
+                }
+                if (lst_get_sys[i].Contains("y") || lst_get_sys[i].Contains("Y"))
+                {
+                    yearid = i;
+                }
+
+            }
+
+
+            #endregion
+            //   MessageBox.Show(get_data);
+            //lấy về format date của hệ thống
+
+            //chặt nhỏ giá trị date time lấy được từ file excel theo format date của hệ thống
+
+
+
+            //---
             if (get_data.Contains("/"))
             {
 
-                spl2 = '/';
+                spl = '/';
             }
             else
             {
                 if (get_data.Contains("-"))
                 {
-                    spl2 = '-';
+                    spl = '-';
 
                 }
                 else
                 {
-                    spl2 = '.';
+                    spl = '.';
 
                 }
 
             }
+            List<string> lst_get_data = get_data.Split(spl).ToList();
+            //--
 
-            List<string> lst_get_data = get_data.Split(spl2).ToList();
-            // cmd.Parameters.AddWithValue("?", GetDateWithoutMilliseconds(DateTime.Now));
 
-            //private DateTime GetDateWithoutMilliseconds(DateTime d)
-            //        {
-            //            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
-            //        }
-            DateTime kq;
-            try
+
+            if (lst_get_data.Count == 3)
+
             {
-                kq = new DateTime(int.Parse(lst_get_data[2]), int.Parse(lst_get_data[1]), int.Parse(lst_get_data[0]));
+                if (lst_get_data[dayid].Length == 1)
+                {
+                    lst_get_data[dayid] = "0" + lst_get_data[dayid];
+
+
+                }
+                if (lst_get_data[monthid].Length == 1)
+                {
+                    lst_get_data[monthid] = "0" + lst_get_data[monthid];
+
+
+                }
+                if (lst_get_data[yearid].Length == 2)
+                {
+                    lst_get_data[yearid] = "20" + lst_get_data[yearid];
+
+
+                }
+
+                if (lst_get_data[yearid].Length > 4)
+                {
+
+                    List<string> lst_get_year = lst_get_data[yearid].Split(' ').ToList();
+                    lst_get_data[yearid] = lst_get_year[0];
+
+                    if (lst_get_data[yearid].Length == 2)
+                    {
+                        lst_get_data[yearid] = "20" + lst_get_data[yearid];
+
+
+                    }
+
+
+                }
+
+                string sresultdate = lst_get_data[dayid] + "/" + lst_get_data[monthid] + "/" + lst_get_data[yearid];
+
+                result_date = DateTime.ParseExact(sresultdate, "dd/MM/yyyy", provider);
+
+
+                return result_date;
+
 
             }
-            catch (Exception) //DateTime year, month, day
+            else
             {
-                kq = new DateTime(9999,12,31);
 
+                if (Utils.IsValidnumber(get_data))
+                {
+                    result_date = DateTime.FromOADate(double.Parse(get_data));
+                    return result_date;
+                }
+                //else
+                //{
+                //    return null;
+                //}
+                ////     MessageBox.Show("Lỗi format ngày tháng !");
 
-                //  throw;
+                result_date = DateTime.ParseExact("01/01/0001", "dd/MM/yyyy", provider);
+
             }
 
-            //     DateTime result = new DateTime(kq.Year, kq.Month, kq.Day, kq.Hour, kq.Minute, kq.Second);
-            // string result =  lst_get_data[2] + "-" + lst_get_data[1] + "-" + lst_get_data[0] ;
-            return kq;
-            //throw new NotImplementedException();
+            return result_date;
+
         }
-
-        //public static DateTime chageExceldatetoData(string get_data)
-
-
-        //{
-        //    //   DateTime result_date;
-        //    CultureInfo provider = CultureInfo.InvariantCulture;
-        //    //     this.Clearing_date = DateTime.ParseExact("21/10/1979", "{dd/mm/yyyy }", provider);
-
-
-        //    DateTime result_date;//= DateTime.Now;
-        //                         //   get_data = "";
-        //                         //   if (excelDate != "")
-        //                         // {
-        //                         //    string get_data = excelDate;
-        //                         //  }
-
-        //    #region // lấy format hệ thống , kiểm tra xem ngày ở số i; tháng ở bản j ; năm ở bản k byte
-
-
-        //    DateTime check_date = DateTime.Now;
-        //    string sysFormat = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
-        //    char spl = '.';
-        //    if (sysFormat.Contains("/"))
-        //    {
-
-        //        spl = '/';
-        //    }
-        //    else
-        //    {
-        //        if (sysFormat.Contains("-"))
-        //        {
-        //            spl = '-';
-
-        //        }
-        //        else
-        //        {
-        //            spl = '.';
-
-        //        }
-
-        //    }
-
-
-        //    List<string> lst_get_sys = sysFormat.Split(spl).ToList();
-
-
-
-        //    int dayid = 0;
-        //    int monthid = 0;
-        //    int yearid = 0;
-
-        //    for (int i = 0; i <= lst_get_sys.Count - 1; i++)
-        //    {
-        //        if (lst_get_sys[i].Contains("d") || lst_get_sys[i].Contains("D"))
-        //        {
-        //            dayid = i;
-        //        }
-
-        //        if (lst_get_sys[i].Contains("m") || lst_get_sys[i].Contains("M"))
-        //        {
-        //            monthid = i;
-        //        }
-        //        if (lst_get_sys[i].Contains("y") || lst_get_sys[i].Contains("Y"))
-        //        {
-        //            yearid = i;
-        //        }
-
-        //    }
-
-
-        //    #endregion
-        //    //   MessageBox.Show(get_data);
-        //    //lấy về format date của hệ thống
-
-        //    //chặt nhỏ giá trị date time lấy được từ file excel theo format date của hệ thống
-
-
-
-        //    //---
-        //    if (get_data.Contains("/"))
-        //    {
-
-        //        spl = '/';
-        //    }
-        //    else
-        //    {
-        //        if (sysFormat.Contains("-"))
-        //        {
-        //            spl = '-';
-
-        //        }
-        //        else
-        //        {
-        //            spl = '.';
-
-        //        }
-
-        //    }
-        //    List<string> lst_get_data = get_data.Split(spl).ToList();
-        //    //--
-
-
-
-        //    if (lst_get_data.Count == 3)
-
-        //    {
-        //        if (lst_get_data[dayid].Length == 1)
-        //        {
-        //            lst_get_data[dayid] = "0" + lst_get_data[dayid];
-
-
-        //        }
-        //        if (lst_get_data[monthid].Length == 1)
-        //        {
-        //            lst_get_data[monthid] = "0" + lst_get_data[monthid];
-
-
-        //        }
-        //        if (lst_get_data[yearid].Length == 2)
-        //        {
-        //            lst_get_data[yearid] = "20" + lst_get_data[yearid];
-
-
-        //        }
-
-        //        if (lst_get_data[yearid].Length > 4)
-        //        {
-
-        //            List<string> lst_get_year = lst_get_data[yearid].Split(' ').ToList();
-        //            lst_get_data[yearid] = lst_get_year[0];
-
-        //            if (lst_get_data[yearid].Length == 2)
-        //            {
-        //                lst_get_data[yearid] = "20" + lst_get_data[yearid];
-
-
-        //            }
-
-
-        //        }
-
-        //        string sresultdate = lst_get_data[dayid] + "/" + lst_get_data[monthid] + "/" + lst_get_data[yearid];
-
-        //        result_date = DateTime.ParseExact(sresultdate, "dd/MM/yyyy", provider);
-
-
-        //        return result_date;
-
-
-        //    }
-        //    else
-        //    {
-
-        //        if (Utils.IsValidnumber(get_data))
-        //        {
-        //            result_date = DateTime.FromOADate(double.Parse(get_data));
-        //            return result_date;
-        //        }
-        //        //else
-        //        //{
-        //        //    return null;
-        //        //}
-        //        ////     MessageBox.Show("Lỗi format ngày tháng !");
-
-        //        result_date = DateTime.ParseExact("01/01/0001", "dd/MM/yyyy", provider);
-
-        //    }
-
-        //    return result_date;
-
-        //}
 
 
 
