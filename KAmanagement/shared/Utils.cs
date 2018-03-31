@@ -188,6 +188,10 @@ namespace KAmanagement
         public static string IsValidContractName(string testContractNo, string region, string contracttype, string channel)
         {
             string kq = "OK";
+            region = region.Trim();
+            testContractNo = testContractNo.Trim();
+            contracttype = contracttype.Trim();
+            channel = channel.Trim();
 
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "RKA")
             {

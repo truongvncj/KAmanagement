@@ -4922,33 +4922,7 @@ namespace KAmanagement.View
 
             #endregion cacs nut 
 
-            #region  check hop dong và contract type
-
-            string kq = Utils.IsValidContractName(tb_contractno.Text, cb_salesogr.Text, cb_contracttype.Text, cb_channel.Text);
-
-
-            if (kq == "OK")
-            {
-                //    MessageBox.Show("OK", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                newcontract.ContractNo = tb_contractno.Text;
-
-            }
-            else
-            {
-                MessageBox.Show("Contract No Error, That must be :" + kq, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //   tbl_kacontractsdatadetaillist = null;
-                checkcontract = false;
-                newcontract = null;
-                return;
-
-                //newcontract = null;
-                //checkcontract = false;
-                //return;
-            };
-
-
-            #endregion
-
+        
 
 
             #region kiem tra va updaate dataGridProgramdetail vao detail
@@ -6392,6 +6366,34 @@ namespace KAmanagement.View
 
 
             #endregion
+
+            #region  check hop dong và contract type
+
+            string kq = Utils.IsValidContractName(tb_contractno.Text, cb_salesogr.Text, cb_contracttype.Text, cb_channel.Text);
+
+
+            if (kq == "OK")
+            {
+                //    MessageBox.Show("OK", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                newcontract.ContractNo = tb_contractno.Text;
+
+            }
+            else
+            {
+                MessageBox.Show("Wrong struct of Contract No, it must be: " + kq, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //   tbl_kacontractsdatadetaillist = null;
+                checkcontract = false;
+                newcontract = null;
+                return;
+
+                //newcontract = null;
+                //checkcontract = false;
+                //return;
+            };
+
+
+            #endregion
+
             if (tbl_kacontractsdatadetaillist.Count > 0)
             {
 
