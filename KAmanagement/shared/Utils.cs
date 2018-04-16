@@ -195,7 +195,7 @@ namespace KAmanagement
 
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "RKA")
             {
-                Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -210,7 +210,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "RKA")
             {
-                Regex regex = new Regex(@"^C/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -224,7 +224,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "RKA")
             {
-                Regex regex = new Regex(@"^N/KA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -239,7 +239,7 @@ namespace KAmanagement
             // NKA
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "NKA")
             {
-                Regex regex = new Regex(@"^S/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -253,7 +253,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "NKA")
             {
-                Regex regex = new Regex(@"^C/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -267,7 +267,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "NKA")
             {
-                Regex regex = new Regex(@"^N/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/NKA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -281,7 +281,7 @@ namespace KAmanagement
             // SCHOOL   EDU
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "SCHOOL" && channel == "EDU")
             {
-                Regex regex = new Regex(@"^S/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -295,7 +295,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "SCHOOL" && channel == "EDU")
             {
-                Regex regex = new Regex(@"^C/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -309,7 +309,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "SCHOOL" && channel == "EDU")
             {
-                Regex regex = new Regex(@"^N/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/SCH/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -323,7 +323,7 @@ namespace KAmanagement
             // ASMPQ
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "ASMPQ")
             {
-                Regex regex = new Regex(@"^S/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -337,7 +337,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "ASMPQ")
             {
-                Regex regex = new Regex(@"^C/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -351,7 +351,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "ASMPQ")
             {
-                Regex regex = new Regex(@"^N/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/ASMPQ/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -365,7 +365,7 @@ namespace KAmanagement
             // DASANI
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "DASANI")
             {
-                Regex regex = new Regex(@"^S/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -379,7 +379,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "DASANI")
             {
-                Regex regex = new Regex(@"^C/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -393,7 +393,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "DASANI")
             {
-                Regex regex = new Regex(@"^N/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/DAS/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -408,7 +408,7 @@ namespace KAmanagement
             // AT WORK   ATW
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "AT WORK" && channel == "ATW")
             {
-                Regex regex = new Regex(@"^S/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^S/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -422,7 +422,7 @@ namespace KAmanagement
 
             if ((region == "VN13") && contracttype == "AT WORK" && channel == "ATW")
             {
-                Regex regex = new Regex(@"^C/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^C/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
@@ -436,7 +436,7 @@ namespace KAmanagement
 
             if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "AT WORK" && channel == "ATW")
             {
-                Regex regex = new Regex(@"^N/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3})$");
+                Regex regex = new Regex(@"^N/ATW/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
 
                 if (regex.IsMatch(testContractNo))
                 {
