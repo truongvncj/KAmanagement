@@ -19,7 +19,7 @@ namespace KAmanagement.View
         {
             InitializeComponent();
             this.contractnew = contractnew;
-            txtcode.Enabled = false;
+            //   txtcode.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -105,10 +105,10 @@ namespace KAmanagement.View
                     return;
 
                 }
-            //    newcUST.Grpcode = false;
-              //  newcUST.SFAcode = false;
-              //  newcUST.SapCode = true;
-               // newcUST.indirectCode = true;
+                //    newcUST.Grpcode = false;
+                //  newcUST.SFAcode = false;
+                //  newcUST.SapCode = true;
+                // newcUST.indirectCode = true;
 
             }
 
@@ -118,6 +118,8 @@ namespace KAmanagement.View
             #region if SFA code
             if (cbsfa.Checked == true)
             {
+
+
                 if (txtcode.Text != "")
                 {
 
@@ -144,13 +146,7 @@ namespace KAmanagement.View
 
 
                     }
-               //     else
-                  //  {
-                //        txtcode.Focus();
-                //    MessageBox.Show("Please check SFA Code fied Must be blank  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-               //    return;
 
-                 //   }
 
 
 
@@ -181,7 +177,7 @@ namespace KAmanagement.View
                     var rs1 = (from tbl_KaCustomer in dc.tbl_KaCustomers
                                where tbl_KaCustomer.indirectCode == true && tbl_KaCustomer.SFAcode == true
                                    && tbl_KaCustomer.Customer != null
-                               select  tbl_KaCustomer.Customer).FirstOrDefault();
+                               select tbl_KaCustomer.Customer).FirstOrDefault();
 
                     if (rs1 == null)
                     {
@@ -226,8 +222,8 @@ namespace KAmanagement.View
                     //  MessageBox.Show("Please check Customer Code  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     //  return;
                 }
-            //    newcUST.Grpcode = false;
-              
+                //    newcUST.Grpcode = false;
+
 
 
 
@@ -505,7 +501,7 @@ namespace KAmanagement.View
             {
                 cbsfa.Checked = true;
             }
-       
+
 
 
         }
@@ -518,7 +514,7 @@ namespace KAmanagement.View
 
                 cbsapcode.Checked = false;
                 txtcode.Text = "";
-                txtcode.Enabled = false;
+                txtcode.Enabled = true;
 
             }
             else
@@ -527,7 +523,7 @@ namespace KAmanagement.View
                 txtcode.Text = "";
                 txtcode.Enabled = true;
             }
-         
+
 
         }
     }
