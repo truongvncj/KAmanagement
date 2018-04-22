@@ -74,21 +74,22 @@ namespace KAmanagement.Model
                 t1.IsBackground = true;
                 t1.Start(new datainportF() { filename = filename });
 
+                View.Caculating wat = new View.Caculating();
                 Thread t2 = new Thread(showwait);
-                t2.Start();
-                //   autoEvent.WaitOne(); //join
+                t2.Start(new datashowwait() { wat = wat });
+
+
                 t1.Join();
                 if (t1.ThreadState != ThreadState.Running)
                 {
 
+                    // t2.Abort();
+
+                    wat.Invoke(wat.myDelegate);
 
 
-                    Thread.Sleep(555);
-                    t2.Abort();
+
                 }
-
-
-
 
 
 
@@ -102,14 +103,30 @@ namespace KAmanagement.Model
 
 
         }
-
-        private void showwait()
+        class datashowwait
         {
-            View.Caculating wat = new View.Caculating();
+
+            public View.Caculating wat { get; set; }
+
+
+        }
+
+
+
+        private void showwait(object obj)
+        {
+            // View.Caculating wat = new View.Caculating();
+
+            //            View.Caculating wat = (View.Caculating)obj;
+            datashowwait obshow = (datashowwait)obj;
+
+            View.Caculating wat = obshow.wat;
+
             wat.ShowDialog();
 
 
         }
+
 
 
         private void importFuctionexcel(object obj)

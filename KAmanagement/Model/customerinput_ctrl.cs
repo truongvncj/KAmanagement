@@ -563,13 +563,32 @@ City ,    Telephone1,  VATregistrationNo, Indirect,
 
 
 
-        private void showwait()
+        class datashowwait
         {
-            View.Caculating wat = new View.Caculating();
+
+            public View.Caculating wat { get; set; }
+
+
+        }
+
+
+
+        private void showwait(object obj)
+        {
+            // View.Caculating wat = new View.Caculating();
+
+            //            View.Caculating wat = (View.Caculating)obj;
+            datashowwait obshow = (datashowwait)obj;
+
+            View.Caculating wat = obshow.wat;
+
             wat.ShowDialog();
 
 
         }
+
+
+
         public void customerinput()
         {
 
@@ -593,69 +612,23 @@ City ,    Telephone1,  VATregistrationNo, Indirect,
                 t1.IsBackground = true;
                 t1.Start(new datainportF() { filename = filename });
 
-                //      ThreadPool.QueueUserWorkItem(new WaitCallback(importsexcel)); //join
-
-                // sina
-                // dynamic_cast<AutoResetEvent*>(stateInfo)->Set();
-                // ((AutoResetEvent)stateInfo).Set();
+                View.Caculating wat = new View.Caculating();
                 Thread t2 = new Thread(showwait);
-                t2.Start();
-                //   autoEvent.WaitOne(); //join
+                t2.Start(new datashowwait() { wat = wat });
+
+
                 t1.Join();
                 if (t1.ThreadState != ThreadState.Running)
                 {
 
+                    // t2.Abort();
+
+                    wat.Invoke(wat.myDelegate);
 
 
 
-
-                    Thread.Sleep(1999);
-                    t2.Abort();
-
-
-                    //    MessageBox.Show("Upload Customer done !", "Thông báo !", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                //#region updateCustgoupinListcust
-
-
-                //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-                //var qr = from tblCustomer in dc.tblCustomers
-                //             //  where tblCustomer.Reportsend == true
-                //         select tblCustomer;
-                ////------------//
-                //foreach (var tblCustomer in qr)
-                //{
-
-                //    var qr2 = (from tbl_CustomerGroup in dc.tbl_CustomerGroups
-                //               where tbl_CustomerGroup.Customercode == tblCustomer.Customer && 
-                //               select tbl_CustomerGroup).FirstOrDefault();
-
-
-                //    if (qr2 != null)
-                //    {
-                //        tblCustomer.Cusromergroup = qr2.Customergropcode;
-
-
-                //    }
-
-
-                //    if (qr2 == null)
-                //    {
-                //        tblCustomer.Cusromergroup = tblCustomer.Customer;
-
-                //    }
-
-
-
-                //    dc.SubmitChanges();
-
-
-
-                //}
-
-                //#endregion updateCustgoupinListcust
 
 
             }
@@ -688,69 +661,23 @@ City ,    Telephone1,  VATregistrationNo, Indirect,
                 t1.IsBackground = true;
                 t1.Start(new datainportF() { filename = filename });
 
-                //      ThreadPool.QueueUserWorkItem(new WaitCallback(importsexcel)); //join
 
-                // sina
-                // dynamic_cast<AutoResetEvent*>(stateInfo)->Set();
-                // ((AutoResetEvent)stateInfo).Set();
+                View.Caculating wat = new View.Caculating();
                 Thread t2 = new Thread(showwait);
-                t2.Start();
-                //   autoEvent.WaitOne(); //join
+                t2.Start(new datashowwait() { wat = wat });
+
+
                 t1.Join();
                 if (t1.ThreadState != ThreadState.Running)
                 {
 
+                    // t2.Abort();
+
+                    wat.Invoke(wat.myDelegate);
 
 
 
-
-                    Thread.Sleep(1999);
-                    t2.Abort();
-
-
-                    //    MessageBox.Show("Upload Customer done !", "Thông báo !", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                //#region updateCustgoupinListcust
-
-
-                //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-                //var qr = from tblCustomer in dc.tblCustomers
-                //             //  where tblCustomer.Reportsend == true
-                //         select tblCustomer;
-                ////------------//
-                //foreach (var tblCustomer in qr)
-                //{
-
-                //    var qr2 = (from tbl_CustomerGroup in dc.tbl_CustomerGroups
-                //               where tbl_CustomerGroup.Customercode == tblCustomer.Customer && 
-                //               select tbl_CustomerGroup).FirstOrDefault();
-
-
-                //    if (qr2 != null)
-                //    {
-                //        tblCustomer.Cusromergroup = qr2.Customergropcode;
-
-
-                //    }
-
-
-                //    if (qr2 == null)
-                //    {
-                //        tblCustomer.Cusromergroup = tblCustomer.Customer;
-
-                //    }
-
-
-
-                //    dc.SubmitChanges();
-
-
-
-                //}
-
-                //#endregion updateCustgoupinListcust
 
 
             }
