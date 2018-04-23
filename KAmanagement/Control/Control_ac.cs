@@ -1995,7 +1995,7 @@ namespace KAmanagement.Control
                      where (from Tka_RegionRight in db.Tka_RegionRights
                             where Tka_RegionRight.RegionCode == regioncode
                             select Tka_RegionRight.Region
-                            ).Contains(tbl_kacontractdata.SALORG_CTR) && tbl_kacontractdata.Consts == "ALV"
+                            ).Contains(tbl_kacontractdata.SalesOrg) && tbl_kacontractdata.Consts == "ALV"
                             && typecontract.Contains(tbl_kacontractdata.ConType)
                      orderby tbl_kacontractdata.ConType, tbl_kacontractdata.ContractNo
 
