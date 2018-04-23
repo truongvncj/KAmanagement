@@ -1269,7 +1269,12 @@ namespace KAmanagement.View
 
 
                     // ToString("#,#", CultureInfo.InvariantCulture);
-                    this.txt_term.Text = rs.ConTerm.ToString();// (this.dateTimePicker2.Value.Year - this.dateTimePicker1.Value.Year + 1).ToString();
+
+                    if (rs.ConTerm != null)
+                    {
+                        this.txt_term.Text = rs.ConTerm.ToString();// (this.dateTimePicker2.Value.Year - this.dateTimePicker1.Value.Year + 1).ToString();
+
+                    }
 
                     if (rs.ConTerm == null)
                     {
@@ -1407,13 +1412,23 @@ namespace KAmanagement.View
                     this.cb_contracttype.Enabled = false;
 
                     this.cb_salesogr.DropDownStyle = ComboBoxStyle.Simple;// = false;
-                    this.cb_salesogr.Text = rs.SalesOrg;
+
+                    if (rs.SalesOrg != null)
+                    {
+                        this.cb_salesogr.Text = rs.SalesOrg;
+                    }
+                      
                     this.cb_salesogr.Enabled = false;
 
 
 
                     this.cb_channel.DropDownStyle = ComboBoxStyle.Simple;// = false;
-                    this.cb_channel.Text = rs.Channel;
+
+                    if (rs.Channel != null)
+                    {
+                        this.cb_channel.Text = rs.Channel;
+
+                    }
                     this.cb_channel.Enabled = false;
 
 
@@ -1436,26 +1451,45 @@ namespace KAmanagement.View
                     this.cb_delivery.Text = rs.DeliveredBy;
                     this.cb_delivery.Enabled = false;
 
+                    if (rs.Representative != null)
+                    {
+                        this.txt_represennt.Text = rs.Representative;
 
-                    this.txt_represennt.Text = rs.Representative;
+                    }
                     this.txt_represennt.Enabled = false;
 
+                    if (rs.Fullname != null)
+                    {
+                        this.txt_chananame.Text = rs.Fullname;
 
-                    this.txt_chananame.Text = rs.Fullname;
+                    }
                     this.txt_chananame.Enabled = false;
 
-                    this.txt_houseno.Text = rs.HouseNo;
+                    if (rs.HouseNo != null)
+                    {
+                        this.txt_houseno.Text = rs.HouseNo;
+
+                    }
                     this.txt_houseno.Enabled = false;
 
-                    this.txt_provicen.Text = rs.Province;
+                    if (rs.Province != null)
+                    {
+                        this.txt_provicen.Text = rs.Province;
+
+                    }
                     this.txt_provicen.Enabled = false;
 
-
-                    this.txt_district.Text = rs.District;
+                    if (rs.District != null)
+                    {
+                        this.txt_district.Text = rs.District;
+                    }
                     this.txt_district.Enabled = false;
 
+                    if (rs.VATregistrationNo != null)
+                    {
+                        txtVATno.Text = rs.VATregistrationNo;
 
-                    txtVATno.Text = rs.VATregistrationNo;
+                    }
                     txtVATno.Enabled = false;
 
                     //this.Achivedvol.Enabled = false;
