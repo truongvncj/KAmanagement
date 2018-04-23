@@ -54,7 +54,7 @@ namespace KAmanagement.View
                                   && (from Tka_RegionRight in dc.Tka_RegionRights
                                       where Tka_RegionRight.RegionCode == regioncode
                                       select Tka_RegionRight.Region
-                                              ).Contains(tbl_KaCustomer.SALORG_CTR)
+                                              ).Contains(tbl_KaCustomer.SalesOrg)
 
                                   select tbl_KaCustomer).FirstOrDefault();
                         if (rs == null)

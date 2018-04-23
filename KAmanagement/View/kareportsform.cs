@@ -207,7 +207,7 @@ namespace KAmanagement.View
                          where (from Tka_RegionRight in db.Tka_RegionRights
                                 where Tka_RegionRight.RegionCode == regioncode
                                 select Tka_RegionRight.Region
-                                ).Contains(tbl_kacontractsdatadetail.SALORG_CTR) && tbl_kacontractsdatadetail.Constatus == "ALV"
+                                ).Contains(tbl_kacontractsdatadetail.SalesOrg) && tbl_kacontractsdatadetail.Constatus == "ALV"
                          select new
                          {
 
@@ -550,7 +550,7 @@ namespace KAmanagement.View
                                   && (from Tka_RegionRight in dc.Tka_RegionRights
                                       where Tka_RegionRight.RegionCode == regioncode
                                       select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractdata.SALORG_CTR)
+                              ).Contains(tbl_kacontractdata.SalesOrg)
                                   select tbl_kacontractdata.ContractNo;
 
 
@@ -601,7 +601,7 @@ namespace KAmanagement.View
                               && (from Tka_RegionRight in da.Tka_RegionRights
                                   where Tka_RegionRight.RegionCode == regioncode
                                   select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractsdatadetail.SALORG_CTR)
+                              ).Contains(tbl_kacontractsdatadetail.SalesOrg)
 
                              select new
                              {
@@ -663,7 +663,7 @@ namespace KAmanagement.View
                      where (from Tka_RegionRight in db.Tka_RegionRights
                             where Tka_RegionRight.RegionCode == regioncode
                             select Tka_RegionRight.Region
-                            ).Contains(tbl_kacontractsdatadetail.SALORG_CTR) && tbl_kacontractsdatadetail.Constatus == "ALV"
+                            ).Contains(tbl_kacontractsdatadetail.SalesOrg) && tbl_kacontractsdatadetail.Constatus == "ALV"
                      select new
                      {
 
@@ -767,7 +767,7 @@ namespace KAmanagement.View
                              where (from Tka_RegionRight in da.Tka_RegionRights
                                     where Tka_RegionRight.RegionCode == regioncode
                                     select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractdata.SALORG_CTR)
+                              ).Contains(tbl_kacontractdata.SalesOrg)
 
                              select new
                              {

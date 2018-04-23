@@ -4338,7 +4338,7 @@ namespace KAmanagement.View
                 var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                              where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && tbl_KaCustomer.SapCode == true
                              && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                               ).Contains(tbl_KaCustomer.SALORG_CTR)
+                               ).Contains(tbl_KaCustomer.SalesOrg)
                              select new
                              {
                                  tbl_KaCustomer.Region,
@@ -4401,7 +4401,7 @@ namespace KAmanagement.View
                 var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.Customer.ToString().Contains(valueinput) && (tbl_KaCustomer.SapCode == true)
                              && (from Tka_RegionRight in dc.Tka_RegionRights
-                                 select Tka_RegionRight.Region).Contains(tbl_KaCustomer.SALORG_CTR)
+                                 select Tka_RegionRight.Region).Contains(tbl_KaCustomer.SalesOrg)
 
                              select new
                              {
@@ -7919,7 +7919,7 @@ namespace KAmanagement.View
                 var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.FullNameN.Contains(valueinput) && tbl_KaCustomer.indirectCode == true // || tbl_KaCustomer.SapCode ==true)
                                  && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                                  ).Contains(tbl_KaCustomer.SALORG_CTR)
+                                  ).Contains(tbl_KaCustomer.SalesOrg)
                              select new
                              {
                                  tbl_KaCustomer.Region,
@@ -7984,7 +7984,7 @@ namespace KAmanagement.View
             var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                          where tbl_KaCustomer.FullNameN.ToString().Contains(valueinput) && (tbl_KaCustomer.SFAcode == true)
                                      && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                           ).Contains(tbl_KaCustomer.SALORG_CTR)
+                           ).Contains(tbl_KaCustomer.SalesOrg)
                          select new
                          {
                              tbl_KaCustomer.Region,
@@ -8069,7 +8069,7 @@ namespace KAmanagement.View
                 var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.FullNameN.ToString().Contains(valueinput) && (tbl_KaCustomer.Grpcode == true)
                                 && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                                  ).Contains(tbl_KaCustomer.SALORG_CTR)
+                                  ).Contains(tbl_KaCustomer.SalesOrg)
                              select new
                              {
                                  tbl_KaCustomer.Region,
@@ -8482,7 +8482,7 @@ namespace KAmanagement.View
                 var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
                              where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && (tbl_KaCustomer.SFAcode == true)
                               && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                                  ).Contains(tbl_KaCustomer.SALORG_CTR)
+                                  ).Contains(tbl_KaCustomer.SalesOrg)
 
                              select new
                              {
@@ -8713,7 +8713,7 @@ namespace KAmanagement.View
                 var rs = (from tbl_KaCustomer in dc.tbl_KaCustomers
                           where tbl_KaCustomer.Customer == double.Parse(selectedcode) && tbl_KaCustomer.SFAcode == true
                                    && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                          ).Contains(tbl_KaCustomer.SALORG_CTR)
+                          ).Contains(tbl_KaCustomer.SalesOrg)
 
 
                           select tbl_KaCustomer).FirstOrDefault();

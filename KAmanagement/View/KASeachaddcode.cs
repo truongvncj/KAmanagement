@@ -154,7 +154,7 @@ namespace KAmanagement.View
                     && ((int)tbl_KaCustomer.Customer).ToString().Contains(txtcode.Text.ToString()) 
 
                          && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                              ).Contains(tbl_KaCustomer.SALORG_CTR)
+                              ).Contains(tbl_KaCustomer.SalesOrg)
                          select new
                          {
                              Region = tbl_KaCustomer.Region,
@@ -189,7 +189,7 @@ namespace KAmanagement.View
              && ((int)tbl_KaCustomer.Customer).ToString().Contains(txtcode.Text.ToString())
 
                          && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                                           ).Contains(tbl_KaCustomer.SALORG_CTR)
+                                           ).Contains(tbl_KaCustomer.SalesOrg)
 
                          select new
                          {

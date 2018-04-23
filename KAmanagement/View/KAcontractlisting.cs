@@ -670,7 +670,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractdata.SALORG_CTR.Trim()) 
+                                          ).Contains(tbl_kacontractdata.SalesOrg.Trim()) 
                                           && typecontract.Contains(tbl_kacontractdata.ConType)
                                    select new
                                    {
@@ -838,7 +838,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractdata.SALORG_CTR.Trim()) &&
+                                          ).Contains(tbl_kacontractdata.SalesOrg.Trim()) &&
                                           (tbl_kacontractdata.ContractNo).Contains(contract) &&
                                                  ((int)tbl_kacontractdata.Customer).ToString().Contains(code)
                                                  && tbl_kacontractdata.Fullname.Contains(name)
@@ -941,7 +941,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractsdatadetail.SALORG_CTR.Trim()) &&
+                                          ).Contains(tbl_kacontractsdatadetail.SalesOrg.Trim()) &&
                                           (tbl_kacontractsdatadetail.ContractNo).Contains(contract) &&
                                                  ((int)tbl_kacontractsdatadetail.Customercode).ToString().Contains(code)
                                                      && tbl_kacontractsdatadetail.Fullname.Contains(name)
@@ -1129,7 +1129,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractdata.SALORG_CTR.Trim()) &&
+                                          ).Contains(tbl_kacontractdata.SalesOrg.Trim()) &&
                                           (tbl_kacontractdata.ContractNo).Contains(contract) &&
                                                  ((int)tbl_kacontractdata.Customer).ToString().Contains(code)
                                                  && tbl_kacontractdata.Fullname.Contains(name)
@@ -1225,7 +1225,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractsdatadetail.SALORG_CTR.Trim()) &&
+                                          ).Contains(tbl_kacontractsdatadetail.SalesOrg.Trim()) &&
                                           (tbl_kacontractsdatadetail.ContractNo).Contains(contract) &&
                                                  ((int)tbl_kacontractsdatadetail.Customercode).ToString().Contains(code)
                                                      && tbl_kacontractsdatadetail.Fullname.Contains(name)

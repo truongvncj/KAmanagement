@@ -1341,7 +1341,7 @@ namespace KAmanagement.View
                               && (from Tka_RegionRight in dc.Tka_RegionRights
                                   where Tka_RegionRight.RegionCode == regioncode
                                   select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractsdatadetail.SALORG_CTR)
+                              ).Contains(tbl_kacontractsdatadetail.SalesOrg)
                               && tbl_kacontractsdatadetail.ConType.Contains(contractype)
                               && tbl_kacontractsdatadetail.Constatus.Contains(contractstatus)
 
@@ -1404,7 +1404,7 @@ namespace KAmanagement.View
                               && (from Tka_RegionRight in dc.Tka_RegionRights
                                   where Tka_RegionRight.RegionCode == regioncode
                                   select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractsdatadetail.SALORG_CTR)
+                              ).Contains(tbl_kacontractsdatadetail.SalesOrg)
                               && tbl_kacontractsdatadetail.ConType.Contains(contractype)
                               && tbl_kacontractsdatadetail.Constatus.Contains(contractstatus)
 
