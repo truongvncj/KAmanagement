@@ -54,6 +54,16 @@ namespace KAmanagement.View
 
             this.rs = rs;
 
+
+            if ( fornname == "Payment Input") 
+            {
+
+                tbmasscreatecontract.Visible = false;
+                btmassconfirm.Visible = false;
+                btmasschange.Visible = false;
+
+            }
+
             if (fornname == "Accrual reports detail")
             {
 
@@ -670,7 +680,7 @@ namespace KAmanagement.View
                                    where (from Tka_RegionRight in db.Tka_RegionRights
                                           where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
-                                          ).Contains(tbl_kacontractdata.SalesOrg.Trim()) 
+                                          ).Contains(tbl_kacontractdata.SalesOrg.Trim())
                                           && typecontract.Contains(tbl_kacontractdata.ConType)
                                    select new
                                    {
@@ -963,7 +973,7 @@ namespace KAmanagement.View
                                        CustomerCode = tbl_kacontractsdatadetail.Customercode,
                                        CustomerName = tbl_kacontractsdatadetail.Fullname,
                                        tbl_kacontractsdatadetail.Address,
-                                      // tbl_kacontractsdatadetail.PR
+                                       // tbl_kacontractsdatadetail.PR
 
                                        //     Address = tbl_kacontractdata.HouseNo + " " + tbl_kacontractdata.District + " " + tbl_kacontractdata.Province,
                                        VATregistrationNo = tbl_kacontractsdatadetail.VATregistrationNo,
@@ -977,7 +987,7 @@ namespace KAmanagement.View
                                        NSRAched = tbl_kacontractsdatadetail.NSRAched,
                                        AccruedAmt = tbl_kacontractsdatadetail.AccruedAmt,
                                        BegindetailCotractAched = tbl_kacontractsdatadetail.BeginAchvmt,
-                                       
+
                                        PayControl = tbl_kacontractsdatadetail.PayControl,
                                        tbl_kacontractsdatadetail.PayType,
                                        Description = tbl_kacontractsdatadetail.Description,
@@ -992,7 +1002,7 @@ namespace KAmanagement.View
                                        tbl_kacontractsdatadetail.Remark,
                                        tbl_kacontractsdatadetail.UPDUSR,
                                        tbl_kacontractsdatadetail.UPDDAT,
-                                     
+
                                    };
 
 
@@ -1015,7 +1025,7 @@ namespace KAmanagement.View
                 this.dataGridView1.Columns["BegindetailCotractAched"].DefaultCellStyle.Format = "N0";
                 this.dataGridView1.Columns["BegindetailCotractAched"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
 
-            
+
                 //ContractNo = tbl_kacontractsdatadetail.ContractNo,
                 //Region = tbl_kacontractsdatadetail.SalesOrg,
 
@@ -1638,7 +1648,7 @@ namespace KAmanagement.View
 
 
 
-    private void btmasschange_Click(object sender, EventArgs e)
+        private void btmasschange_Click(object sender, EventArgs e)
         {
             FormCollection fc = System.Windows.Forms.Application.OpenForms;
 

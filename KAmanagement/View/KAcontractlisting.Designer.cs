@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KAcontractlisting));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbmasscreatecontract = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btmassconfirm = new System.Windows.Forms.Button();
             this.btmasschange = new System.Windows.Forms.Button();
             this.filterlabel = new System.Windows.Forms.Label();
             this.cbcontracttypefil = new System.Windows.Forms.ComboBox();
@@ -53,7 +53,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.tbmasscreatecontract);
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btmassconfirm);
             this.panel1.Controls.Add(this.btmasschange);
             this.panel1.Controls.Add(this.filterlabel);
             this.panel1.Controls.Add(this.cbcontracttypefil);
@@ -84,19 +84,19 @@
             this.tbmasscreatecontract.UseVisualStyleBackColor = false;
             this.tbmasscreatecontract.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button3
+            // btmassconfirm
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button3.Location = new System.Drawing.Point(581, 27);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(113, 21);
-            this.button3.TabIndex = 49;
-            this.button3.Text = " Mass Confirm";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_2);
+            this.btmassconfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btmassconfirm.BackColor = System.Drawing.SystemColors.Control;
+            this.btmassconfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btmassconfirm.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btmassconfirm.Location = new System.Drawing.Point(581, 27);
+            this.btmassconfirm.Name = "btmassconfirm";
+            this.btmassconfirm.Size = new System.Drawing.Size(113, 21);
+            this.btmassconfirm.TabIndex = 49;
+            this.btmassconfirm.Text = " Mass Confirm";
+            this.btmassconfirm.UseVisualStyleBackColor = false;
+            this.btmassconfirm.Click += new System.EventHandler(this.button3_Click_2);
             // 
             // btmasschange
             // 
@@ -269,7 +269,7 @@
         private System.Windows.Forms.ComboBox cbcontracttypefil;
         private System.Windows.Forms.Label filterlabel;
         private System.Windows.Forms.Button btmasschange;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btmassconfirm;
         private System.Windows.Forms.Button tbmasscreatecontract;
     }
 }
