@@ -1417,7 +1417,7 @@ namespace KAmanagement.View
                     {
                         this.cb_salesogr.Text = rs.SalesOrg;
                     }
-                      
+
                     this.cb_salesogr.Enabled = false;
 
 
@@ -4956,7 +4956,7 @@ namespace KAmanagement.View
 
             #endregion cacs nut 
 
-        
+
 
 
             #region kiem tra va updaate dataGridProgramdetail vao detail
@@ -6876,7 +6876,7 @@ namespace KAmanagement.View
             }
 
             if (!kq && this.Text == "Payment Input")
-        //        if (true)  // có queyefn view để duyệt thì hiện lên báo cáo view duyet
+            //        if (true)  // có queyefn view để duyệt thì hiện lên báo cáo view duyet
             {
                 string connection_string = Utils.getConnectionstr();
 
@@ -7006,7 +7006,7 @@ namespace KAmanagement.View
 
                 #endregion
 
-                
+
 
                 #region  MAKE master rpt
 
@@ -8815,9 +8815,9 @@ namespace KAmanagement.View
                     if (statusrs != null)
                     {
                         statusrs.Consts = "ALV";
-                     
+
                         db.SubmitChanges();
-                      
+
 
                         cb_contractstatus.Text = "ALV";
                         bt_fin.Visible = false;
@@ -8858,7 +8858,7 @@ namespace KAmanagement.View
 
                     }
 
-            
+
                     var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
                                  where tbl_kacontractsdatadetail.ContractNo.Equals(contractno)
                                  select tbl_kacontractsdatadetail;
@@ -8869,7 +8869,7 @@ namespace KAmanagement.View
                         {
                             item.Constatus = "ALV";
                             dc.SubmitChanges();
-                           
+
                         }
                     }
 
@@ -10996,7 +10996,31 @@ namespace KAmanagement.View
             Utils ut = new Utils();
             var tblcustomer = ut.ToDataTable(dc, rscode);
 
+            var rscode2 = from tbl_KaCustomer in dc.tbl_KaCustomers
+                              //  where tbl_KaCustomer.ContractNo == contractNo
+                          select new
+                          {
+                              // Region =   tbl_kacontractCustcode.,
+
+
+                              Customer = tbl_KaCustomer.Customer,
+
+                              Name = tbl_KaCustomer.FullNameN,
+
+                              Region = tbl_KaCustomer.SalesOrg,//Region1,// + " : " + tbl_KaCustomer.ContractNo,
+                             // custype  = tbl_KaCustomer.SapCode
+                              //       Contract = tbl_kacontractCustcode.ContractNo,
+
+
+                              // , //Region,
+
+                          };
+            var tblcustomer2 = ut.ToDataTable(dc, rscode2);
+
             Viewdatatable viewtb = new Viewdatatable(tblcustomer, "Please, Choose one code !");
+
+
+
             viewtb.ShowDialog();
             string codetemp = viewtb.valuecode;
 
@@ -11043,7 +11067,107 @@ namespace KAmanagement.View
                     }
                     else
                     {
-                        MessageBox.Show("Code :" + codetemp + " is father code, that can not remove !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+
+                        Model.Username us = new Model.Username();
+                        if (us.masterdata == true)
+                        {
+
+
+                            Viewdatatable viewtb2 = new Viewdatatable(tblcustomer2, "Please, Choose one code to Replace the main code !");
+                            viewtb2.ShowDialog();
+                            string codetemp2 = viewtb2.valuecode;
+                          
+
+                            if (codetemp2 != "0" && codetemp2 != null)
+                            {
+
+                                var updatenewcode = (from tbl_kacontractCustcode in dc.tbl_kacontractCustcodes
+                                                     where tbl_kacontractCustcode.CustomerCode == double.Parse(codetemp)
+                                                     && tbl_kacontractCustcode.ContractNo == contractNo
+                                                         && tbl_kacontractCustcode.CustomerCode == double.Parse(contractcode)
+                                                     select tbl_kacontractCustcode).FirstOrDefault();
+
+                                if (updatenewcode != null)
+                                {
+
+                                    updatenewcode.CustomerCode = double.Parse(codetemp2);
+                                    updatenewcode.Addedby = username;
+                                    //   dc.tbl_kacontractCustcodes.DeleteOnSubmit(rscoderemoved3);
+                                    dc.SubmitChanges();
+                                    //  MessageBox.Show("Code :" + codetemp + " remove from Groupcode done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                              
+
+                                var updatenewcode3 = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                                      where tbl_kacontractdata.ContractNo == contractNo
+                                                      select tbl_kacontractdata).FirstOrDefault();
+
+                                if (updatenewcode3 != null)
+                                {
+                                   // custype = updatenewcode3.CustomerType;
+                                    updatenewcode3.Customer = double.Parse(codetemp2);
+                                    //  updatenewcode2.Addedby = username;
+                                    //   dc.tbl_kacontractCustcodes.DeleteOnSubmit(rscoderemoved3);
+                                    dc.SubmitChanges();
+
+                                }
+
+
+
+
+                                var updatenewcode2 = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                                      where tbl_kacontractsdatadetail.ContractNo == contractNo
+                                                      select tbl_kacontractsdatadetail).FirstOrDefault();
+
+                                if (updatenewcode2 != null)
+                                {
+
+                                    updatenewcode2.Customercode = double.Parse(codetemp2);
+                                    //  updatenewcode2.Addedby = username;
+                                    //   dc.tbl_kacontractCustcodes.DeleteOnSubmit(rscoderemoved3);
+                                    dc.SubmitChanges();
+
+                                }
+
+                                if (cb_customerka.Text != "")
+                                {
+                                    cb_customerka.Text = codetemp2;
+                                    txtfindsacode.Text = "";
+                                }
+                                else
+                                {
+                                    cb_customerka.Text = "";
+                                    txtfindsacode.Text = codetemp2;
+                                }
+
+
+                                MessageBox.Show("Code :" + codetemp2 + " replece code: " + codetemp + "  done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+
+
+
+
+
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Code :" + codetemp + " is main code, that can not remove !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Code :" + codetemp + " is main code, that can not remove !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                        }
+
+
+
                     }
 
                 }

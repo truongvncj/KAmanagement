@@ -30,30 +30,30 @@ namespace KAmanagement.View
             valuecode = "0";
             chon = false;
 
-        
 
-            }
+
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if (dataGridView1.RowCount>0)
+            if (dataGridView1.RowCount > 0)
             {
 
 
 
-          
-                    if (this.dataGridView1.CurrentCell.RowIndex >= 0)
-                    {
-                     valuecode = this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["Customer"].Value.ToString();
 
-               
+                if (this.dataGridView1.CurrentCell.RowIndex >= 0)
+                {
+                    valuecode = this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["Customer"].Value.ToString();
+
+
                     region = this.dataGridView1.Rows[this.dataGridView1.CurrentCell.RowIndex].Cells["Region"].Value.ToString();
 
                     chon = true;
 
                     this.Close();
-                    }
+                }
 
 
 
