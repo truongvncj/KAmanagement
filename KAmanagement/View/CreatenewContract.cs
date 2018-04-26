@@ -11116,14 +11116,17 @@ namespace KAmanagement.View
 
 
 
-                                var updatenewcode2 = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                var updatenewcode2 = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
                                                       where tbl_kacontractsdatadetail.ContractNo == contractNo
-                                                      select tbl_kacontractsdatadetail).FirstOrDefault();
+                                                      select tbl_kacontractsdatadetail;
 
-                                if (updatenewcode2 != null)
+
+                                foreach (var item in updatenewcode2)
                                 {
 
-                                    updatenewcode2.Customercode = double.Parse(codetemp2);
+
+
+                                    item.Customercode = double.Parse(codetemp2);
                                     //  updatenewcode2.Addedby = username;
                                     //   dc.tbl_kacontractCustcodes.DeleteOnSubmit(rscoderemoved3);
                                     dc.SubmitChanges();
