@@ -10186,6 +10186,11 @@ namespace KAmanagement.View
                     dc.SubmitChanges();
                 }
 
+          
+
+
+
+
             }
 
 
@@ -10221,6 +10226,21 @@ namespace KAmanagement.View
 
                     dc.SubmitChanges();
                 }
+
+                var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                             where tbl_kacontractsdatadetail.ContractNo.Equals(tb_contractno.Text)
+                             select tbl_kacontractsdatadetail;
+
+                if (detail.Count() >= 0)
+                {
+                    foreach (var item in detail)
+                    {
+                        item.Fullname = newremark;
+                        dc.SubmitChanges();
+                    }
+                }
+
+
 
             }
 
@@ -10258,6 +10278,22 @@ namespace KAmanagement.View
                     dc.SubmitChanges();
                 }
 
+
+                string Addressnew = this.txt_houseno.Text.Trim() + " " + txt_district.Text.Trim() + " " + txt_provicen.Text.Trim();
+                var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                             where tbl_kacontractsdatadetail.ContractNo.Equals(tb_contractno.Text)
+                             select tbl_kacontractsdatadetail;
+
+                if (detail.Count() >= 0)
+                {
+                    foreach (var item in detail)
+                    {
+                        item.Address = Addressnew;
+                        dc.SubmitChanges();
+                    }
+                }
+
+
             }
 
         }
@@ -10291,6 +10327,19 @@ namespace KAmanagement.View
                     txt_district.Text = newremark;
 
                     dc.SubmitChanges();
+                }
+                string Addressnew = this.txt_houseno.Text.Trim() + " " + txt_district.Text.Trim() + " " + txt_provicen.Text.Trim();
+                var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                             where tbl_kacontractsdatadetail.ContractNo.Equals(tb_contractno.Text)
+                             select tbl_kacontractsdatadetail;
+
+                if (detail.Count() >= 0)
+                {
+                    foreach (var item in detail)
+                    {
+                        item.Address = Addressnew;
+                        dc.SubmitChanges();
+                    }
                 }
 
             }
@@ -10326,6 +10375,23 @@ namespace KAmanagement.View
                     dc.SubmitChanges();
                 }
 
+                string Addressnew = this.txt_houseno.Text.Trim() + " " + txt_district.Text.Trim() + " " + txt_provicen.Text.Trim();
+                var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                             where tbl_kacontractsdatadetail.ContractNo.Equals(tb_contractno.Text)
+                             select tbl_kacontractsdatadetail;
+
+                if (detail.Count() >= 0)
+                {
+                    foreach (var item in detail)
+                    {
+                        item.Address = Addressnew;
+                        dc.SubmitChanges();
+                    }
+                }
+
+
+
+
             }
         }
 
@@ -10358,6 +10424,20 @@ namespace KAmanagement.View
 
                     dc.SubmitChanges();
                 }
+
+                var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                             where tbl_kacontractsdatadetail.ContractNo.Equals(tb_contractno.Text)
+                             select tbl_kacontractsdatadetail;
+
+                if (detail.Count() >= 0)
+                {
+                    foreach (var item in detail)
+                    {
+                        item.VATregistrationNo = newremark;
+                        dc.SubmitChanges();
+                    }
+                }
+
 
             }
         }
