@@ -14,16 +14,16 @@ namespace KAmanagement.View
 
     public partial class CreatnewCust : Form
     {
-        public class ComboboxItem
-        {
-            public string Text { get; set; }
-            public object Value { get; set; }
+        //public class ComboboxItem
+        //{
+        //    public string Text { get; set; }
+        //    public object Value { get; set; }
 
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
+        //    public override string ToString()
+        //    {
+        //        return Text;
+        //    }
+        //}
 
         public View.CreatenewContract contractnew;
         public CreatnewCust(View.CreatenewContract contractnew)
@@ -47,8 +47,8 @@ namespace KAmanagement.View
             {
                 //  newcontract.Channel = this.cb_channel.SelectedItem.ToString();
 
-                newcUST.Region = (cbregion.SelectedItem as ComboboxItem).Value.ToString();// (cbm.SelectedItem as ComboboxItem).Value.ToString();
-
+                newcUST.Region = cbregion.SelectedItem.ToString();// (cbm.SelectedItem as ComboboxItem).Value.ToString();
+                newcUST.SalesOrg = cbregion.SelectedItem.ToString();//
             }
             else
             {

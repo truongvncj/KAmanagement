@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreatnewCust));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbregion = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.vatno = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -51,8 +53,6 @@
             this.txt_chananame = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbregion = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,8 +82,36 @@
             this.panel1.Controls.Add(this.label21);
             this.panel1.Location = new System.Drawing.Point(5, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(495, 384);
+            this.panel1.Size = new System.Drawing.Size(495, 435);
             this.panel1.TabIndex = 0;
+            // 
+            // cbregion
+            // 
+            this.cbregion.FormattingEnabled = true;
+            this.cbregion.Items.AddRange(new object[] {
+            "VN11",
+            "VN12",
+            "VN13",
+            "VN15",
+            "VN16",
+            "VN17",
+            "VN19"});
+            this.cbregion.Location = new System.Drawing.Point(118, 109);
+            this.cbregion.Name = "cbregion";
+            this.cbregion.Size = new System.Drawing.Size(131, 21);
+            this.cbregion.TabIndex = 75;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(14, 112);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 16);
+            this.label4.TabIndex = 74;
+            this.label4.Text = "Region";
             // 
             // vatno
             // 
@@ -172,7 +200,7 @@
             this.button5.BackColor = System.Drawing.Color.Transparent;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.Red;
-            this.button5.Location = new System.Drawing.Point(171, 354);
+            this.button5.Location = new System.Drawing.Point(183, 389);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(124, 21);
             this.button5.TabIndex = 8;
@@ -319,39 +347,11 @@
             this.label21.TabIndex = 49;
             this.label21.Text = "Representative";
             // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(14, 112);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 16);
-            this.label4.TabIndex = 74;
-            this.label4.Text = "Region";
-            // 
-            // cbregion
-            // 
-            this.cbregion.FormattingEnabled = true;
-            this.cbregion.Items.AddRange(new object[] {
-            "VN11",
-            "VN12",
-            "VN13",
-            "VN15",
-            "VN16",
-            "VN17",
-            "VN19"});
-            this.cbregion.Location = new System.Drawing.Point(118, 109);
-            this.cbregion.Name = "cbregion";
-            this.cbregion.Size = new System.Drawing.Size(131, 21);
-            this.cbregion.TabIndex = 75;
-            // 
             // CreatnewCust
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 391);
+            this.ClientSize = new System.Drawing.Size(502, 450);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
