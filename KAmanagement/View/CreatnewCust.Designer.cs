@@ -51,12 +51,16 @@
             this.txt_chananame = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbregion = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbregion);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.vatno);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.groupBox1);
@@ -315,6 +319,34 @@
             this.label21.TabIndex = 49;
             this.label21.Text = "Representative";
             // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(14, 112);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(94, 16);
+            this.label4.TabIndex = 74;
+            this.label4.Text = "Region";
+            // 
+            // cbregion
+            // 
+            this.cbregion.FormattingEnabled = true;
+            this.cbregion.Items.AddRange(new object[] {
+            "VN11",
+            "VN12",
+            "VN13",
+            "VN15",
+            "VN16",
+            "VN17",
+            "VN19"});
+            this.cbregion.Location = new System.Drawing.Point(118, 109);
+            this.cbregion.Name = "cbregion";
+            this.cbregion.Size = new System.Drawing.Size(131, 21);
+            this.cbregion.TabIndex = 75;
+            // 
             // CreatnewCust
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,5 +392,7 @@
         private System.Windows.Forms.CheckBox cbsapcode;
         private System.Windows.Forms.TextBox vatno;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbregion;
+        private System.Windows.Forms.Label label4;
     }
 }

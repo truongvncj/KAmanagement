@@ -14,6 +14,17 @@ namespace KAmanagement.View
 
     public partial class CreatnewCust : Form
     {
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
         public View.CreatenewContract contractnew;
         public CreatnewCust(View.CreatenewContract contractnew)
         {
@@ -31,6 +42,24 @@ namespace KAmanagement.View
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
             tbl_KaCustomer newcUST = new tbl_KaCustomer();
+
+            if (this.cbregion.SelectedItem != null)
+            {
+                //  newcontract.Channel = this.cb_channel.SelectedItem.ToString();
+
+                newcUST.Region = (cbregion.SelectedItem as ComboboxItem).Value.ToString();// (cbm.SelectedItem as ComboboxItem).Value.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a region ", "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //     tbl_kacontractsdatadetaillist = null;
+                //     newcontract = null;
+                //  checkcontract = false;
+                newcUST = null;
+                cbregion.Focus();
+                return;
+            }
 
 
             #region cbsapcode.Checked
