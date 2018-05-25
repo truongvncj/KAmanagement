@@ -125,14 +125,11 @@ namespace KAmanagement
             // Get the row information
             for (int a = 1; a <= vertical; a++)
             {
-
-
                 //SEE Below line for QUESTION..
-
                 //Excel sheet cell has data as "11-30-11" but when i import it convert to "78608".  So i want import those data with data as "11-30-11".  
-
-
-                string x = Convert.ToString(myValues.GetValue(a, 2));
+                
+           //     string x = Convert.ToString(myValues.GetValue(a, 2)); ///a , lấy value này làm gì
+                
                 object[] poop = new object[horizontal];
                 //if (x == "11-30-11")
                 //{                    
@@ -153,6 +150,7 @@ namespace KAmanagement
      //       xlRange = null;
        //     worksheet = null;
             //    xlWorkBook = null;
+
             xlApp.Quit();
             releaseObject(xlRange);
             releaseObject(sheets);
