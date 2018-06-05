@@ -691,6 +691,7 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.Currency,
                                        Validfrom = tbl_kacontractdata.EffDate,
                                        Validto = tbl_kacontractdata.EftDate,
+                                       extDate = tbl_kacontractdata.ExtDate,
 
                                        tbl_kacontractdata.Customer,
                                        tbl_kacontractdata.Fullname,
