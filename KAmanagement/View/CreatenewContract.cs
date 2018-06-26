@@ -1276,10 +1276,13 @@ namespace KAmanagement.View
 
                     }
 
+               //     int varyear = 0;// int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+
                     if (rs.ConTerm == null)
                     {
-                        int varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-                        this.txt_term.Text = varyear.ToString();
+                        //         varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                        //  this.txt_term.Text = varyear.ToString();
+                        this.txt_term.Text = rs.ConTerm.ToString();
                     }
 
 
@@ -1299,15 +1302,15 @@ namespace KAmanagement.View
 
                     NSRcommit.Enabled = false;
 
-                    if (rs.ConTerm != null && rs.ConTerm > 0 && rs.NSRComm != null)
-                    {
-                        Nsaperyear.Text = ((double)(rs.NSRComm / rs.ConTerm)).ToString("#,#", CultureInfo.InvariantCulture);
+                    //if (rs.ConTerm != null && rs.ConTerm > 0 && rs.NSRComm != null)
+                    //{
+                    //    Nsaperyear.Text = ((double)(rs.NSRComm / varyear)).ToString("#,#", CultureInfo.InvariantCulture);
 
-                    }
-                    else
-                    {
-                        Nsaperyear.Text = "0";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Nsaperyear.Text = "0";
+                    //}
 
                     this.Nsaperyear.Enabled = false;
 
@@ -4872,7 +4875,8 @@ namespace KAmanagement.View
 
             try
             {
-                varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+            //    varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                     varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
 
                 if (varyear <= 0)
                 {
