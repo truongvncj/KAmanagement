@@ -80,14 +80,7 @@ namespace KAmanagement.View
 
         public void loadtotaldContractnew()
         {
-            //       [Programe]
-            //,[CommitmentAmount]
-            //,[CommitmentPerPC]
-            //,[CommitmentPercentage]
-            //,[Total Achived]
-            //,[Total Paid]
-            //,[Balance]
-
+          
 
             #region load teamtotal
             string connection_string = Utils.getConnectionstr();
@@ -162,12 +155,7 @@ namespace KAmanagement.View
             #endregion
 
 
-            //dataGridViewtotal.ReadOnly = false;
-            //dataGridViewtotal.Rows[3].Cells["Balance"].Style.BackColor = Color.Blue;
-            //dataGridViewtotal.Rows[2].Cells["Balance"].Style.ForeColor = Color.Red;
-            //dataGridViewtotal.ReadOnly = true;
-
-
+           
 
 
         }
@@ -628,16 +616,6 @@ namespace KAmanagement.View
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
 
-            //var rsdetaildele = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
-            //                    where tbl_kacontractsdetailpayment.ContractNo.Equals(ContractNoin)
-            //                    && tbl_kacontractsdetailpayment.BatchNo == 0
-            //                    select tbl_kacontractsdetailpayment);
-            //if (rsdetaildele != null)
-            //{
-            //    dc.tbl_kacontractsdetailpayments.DeleteAllOnSubmit(rsdetaildele);
-            //    dc.SubmitChanges();
-
-            //}
 
 
 
@@ -1276,13 +1254,13 @@ namespace KAmanagement.View
 
                     }
 
-               //     int varyear = 0;// int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                  int varyear = 0;// int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
 
                     if (rs.ConTerm == null)
                     {
-                        //         varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-                        //  this.txt_term.Text = varyear.ToString();
-                        this.txt_term.Text = rs.ConTerm.ToString();
+                                varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                        this.txt_term.Text = varyear.ToString();
+                      //  this.txt_term.Text = rs.ConTerm.ToString();
                     }
 
 
@@ -1360,16 +1338,31 @@ namespace KAmanagement.View
                     if (rs.AnnualVolume != null)
                     {
                         this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
+
                     }
+                    else
+                    {
+                        this.txt_annualvolume.Text = ((double)rs.VolComm/varyear).ToString("#,#", CultureInfo.InvariantCulture);
+
+                    }
+
+
+
 
                     this.txt_annualvolume.Enabled = false;
 
                     this.Nsaperyear.Enabled = false;
+
                     if (rs.NSRPer != null)
                     {
                         this.Nsaperyear.Text = ((double)rs.NSRPer).ToString("#,#", CultureInfo.InvariantCulture);
-                    }
 
+                    }
+                    else
+                    {
+                        this.Nsaperyear.Text = ((double)rs.NSRComm/varyear).ToString("#,#", CultureInfo.InvariantCulture);
+
+                    }
 
 
 
