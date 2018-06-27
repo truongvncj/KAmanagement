@@ -32,13 +32,11 @@ namespace KAmanagement.View
         public void loadpaymentstausgridview(IQueryable rs)
         {
 
-            //  dataGridView7.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridView7.DataSource = rs;
 
 
 
-            //  throw new NotImplementedException();
         }
 
         public void ReloadKASeachcontract(string text)
@@ -80,7 +78,7 @@ namespace KAmanagement.View
 
         public void loadtotaldContractnew()
         {
-          
+
 
             #region load teamtotal
             string connection_string = Utils.getConnectionstr();
@@ -104,14 +102,6 @@ namespace KAmanagement.View
             this.dataGridViewtotal.Columns["CommitmentPerPC"].DefaultCellStyle.Format = "N0";
 
 
-            //this.dataGridViewtotal.Columns["Commitment"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
-            //this.dataGridViewtotal.Columns["Commitment"].HeaderText = "Commitment";
-
-            //this.dataGridViewtotal.Columns["FundPercentage"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
-            //this.dataGridViewtotal.Columns["FundPercentage"].HeaderText = "Percent";
-
-            //this.dataGridViewtotal.Columns["CommitPercentage"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
-            //this.dataGridViewtotal.Columns["CommitPercentage"].HeaderText = "Commitment";
 
 
             this.dataGridViewtotal.Columns["Total_Achived"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
@@ -155,7 +145,7 @@ namespace KAmanagement.View
             #endregion
 
 
-           
+
 
 
         }
@@ -823,9 +813,6 @@ namespace KAmanagement.View
             tb_contractno.AutoCompleteSource = AutoCompleteSource.CustomSource;
             tb_contractno.AutoCompleteCustomSource = contractdata;
 
-            //            tb_contractno.AutoCompleteSource = contractdata;
-
-
 
             btchangecontractitem.Visible = false;
             btaddnewItem.Visible = false;
@@ -834,8 +821,6 @@ namespace KAmanagement.View
             this.formlabel.Text = formlabel;
 
             cbcust.Enabled = false;
-            //   txtfindsacode.Enabled = false;
-            //  cbgroup.Enabled = false;
             cbsfa.Enabled = false;
             txtinfor.Visible = false;
 
@@ -1182,18 +1167,8 @@ namespace KAmanagement.View
                 }
 
 
-
-                //groupBox3.Enabled = false;
-                //    Control.Control_ac.VolumeupdateperContract(ContractNoin);
-                //        Control.Control_ac.VolumeupdateperContractbyPRdgrp(ContractNoin);
-
-                //Control.Control_ac.CaculationContract(contractno);//  CaculationContract();
-                //                                                  //    string contractno = tb_contractno.Text;
-                //Control.Control_ac.CaculationContractinSQLmaster(contractno);
                 txtVATno.Enabled = false;
-                //txtcustgroup.Enabled = false;
                 btfindcust.Enabled = false;
-                // btfingroup.Enabled = false;
                 btfinddeliveryby.Enabled = false;
                 btfindsfa.Enabled = false;
                 this.cb_contractstatus.Enabled = false;
@@ -1201,6 +1176,10 @@ namespace KAmanagement.View
                 Control_ac.CaculationContract(ContractNoin); // tinhs toasn contract truo c khi view
 
                 Control.Control_ac.CaculationContractinSQLmaster(ContractNoin);
+
+
+
+
 
                 #region loaddata 
 
@@ -1254,15 +1233,7 @@ namespace KAmanagement.View
 
                     }
 
-                  int varyear = 0;// int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-
-                    if (rs.ConTerm == null)
-                    {
-                                varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-                        this.txt_term.Text = varyear.ToString();
-                      //  this.txt_term.Text = rs.ConTerm.ToString();
-                    }
-
+              
 
 
                     this.txt_term.Enabled = false;
@@ -1280,16 +1251,7 @@ namespace KAmanagement.View
 
                     NSRcommit.Enabled = false;
 
-                    //if (rs.ConTerm != null && rs.ConTerm > 0 && rs.NSRComm != null)
-                    //{
-                    //    Nsaperyear.Text = ((double)(rs.NSRComm / varyear)).ToString("#,#", CultureInfo.InvariantCulture);
-
-                    //}
-                    //else
-                    //{
-                    //    Nsaperyear.Text = "0";
-                    //}
-
+                 
                     this.Nsaperyear.Enabled = false;
 
                     AchievdVolPCs.Enabled = false;
@@ -1303,12 +1265,6 @@ namespace KAmanagement.View
                         RevenueAched.Text = double.Parse(rs.Revenue.ToString()).ToString("#,#", CultureInfo.InvariantCulture);
                     }
                     RevenueAched.Enabled = false;
-
-                    //if (rs.ECAched != null)
-                    //{
-                    //    AchievdVolPCs.Text = double.Parse(rs.ECAched.ToString()).ToString("#,#", CultureInfo.InvariantCulture);
-
-                    //}
 
 
 
@@ -1340,12 +1296,6 @@ namespace KAmanagement.View
                         this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
 
                     }
-                    else
-                    {
-                        this.txt_annualvolume.Text = ((double)rs.VolComm/varyear).ToString("#,#", CultureInfo.InvariantCulture);
-
-                    }
-
 
 
 
@@ -1356,11 +1306,6 @@ namespace KAmanagement.View
                     if (rs.NSRPer != null)
                     {
                         this.Nsaperyear.Text = ((double)rs.NSRPer).ToString("#,#", CultureInfo.InvariantCulture);
-
-                    }
-                    else
-                    {
-                        this.Nsaperyear.Text = ((double)rs.NSRComm/varyear).ToString("#,#", CultureInfo.InvariantCulture);
 
                     }
 
@@ -1385,11 +1330,7 @@ namespace KAmanagement.View
                         this.cb_customerka.Text = rs.Customer.ToString();
                         cbcust.Checked = true;
                     }
-                    //if (rs.CustomerType.Trim() == "GRP")
-                    //{
-                    //    this.txtcustgroup.Text = rs.Customer.ToString();
-                    //    cbgroup.Checked = true;
-                    //}
+
                     if (rs.CustomerType.Trim() == "SFA")
                     {
                         this.txtfindsacode.Text = rs.Customer.ToString();
@@ -1426,12 +1367,6 @@ namespace KAmanagement.View
 
                     }
                     this.cb_channel.Enabled = false;
-
-
-
-                    //this.cb_channel.DropDownStyle = ComboBoxStyle.Simple;// = false;
-                    //this.cb_channel.Text = rs.Channel;
-                    //this.cb_channel.Enabled = false;
 
 
                     this.cb_paymentterm.DropDownStyle = ComboBoxStyle.Simple;// = false;
@@ -1488,26 +1423,7 @@ namespace KAmanagement.View
                     }
                     txtVATno.Enabled = false;
 
-                    //this.Achivedvol.Enabled = false;
-                    //this.Achivedvol.Text = rs.VolAched.ToString();
 
-
-                    //this.RevenueAched.Enabled = false;
-                    //this.RevenueAched.Text = rs.Revenue.ToString();
-
-
-                    //this.AchievdVolPCs.Enabled = false;
-                    //this.AchievdVolPCs.Text = rs.VolAched_S.ToString();
-
-
-                    //this.Funpercentage.Enabled = false;
-                    //this.Funpercentage.Text = ((rs.Tot_paid*100) / rs.TotDeal).ToString();
-
-
-
-
-                    //this.Costpercase.Enabled = false;
-                    //this.Costpercase.Text = (rs.TotDeal/rs.VolAched).ToString();
 
                     this.txt_remarkstt.Text = rs.Remarks;
 
@@ -1587,11 +1503,6 @@ namespace KAmanagement.View
                         this.bt_etcontract.Visible = false;
                     }
 
-                    //     MessageBox.Show(this.Text);
-
-                    // txt_term
-                    //  MessageBox.Show(rs.ConType);
-
 
                     #endregion
 
@@ -1661,14 +1572,7 @@ namespace KAmanagement.View
 
                         bt_fin.Visible = true;
                         btdelete.Enabled = true;
-                        // btcfromdate.Visible = true;
-                        //     btchagetodate.Visible = true;
 
-                        //bt_finundo.Visible = false;
-                        //bt_cancel.Visible = false;
-                        //bt_close.Visible = false;
-                        //bt_undoclose.Visible = false;
-                        //bt_undocancel.Visible = false;
                     }
                 }
                 #endregion view
@@ -1874,21 +1778,7 @@ namespace KAmanagement.View
         {
 
 
-            //string colheadertext = this.dataGridProgramdetail.Columns[this.dataGridProgramdetail.CurrentCell.ColumnIndex].HeaderText;
-            //if (colheadertext == "TargetUnit")
-            //{
 
-            //    if (this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Payment_Control"].Value != null && this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Program"].Value != null)
-            //    {
-
-            //        string paymentcontrol = this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Payment_Control"].Value.ToString();
-            //        string progarme = this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Program"].Value.ToString();
-
-
-
-            //        MessageBox.Show("ok done !" + paymentcontrol + ":" + progarme);
-            //    }
-            //}
 
 
         }
@@ -4868,8 +4758,8 @@ namespace KAmanagement.View
 
             try
             {
-            //    varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-                     varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                //    varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
+                varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
 
                 if (varyear <= 0)
                 {
@@ -10183,7 +10073,7 @@ namespace KAmanagement.View
                     dc.SubmitChanges();
                 }
 
-          
+
 
 
 
@@ -11085,8 +10975,8 @@ namespace KAmanagement.View
                               Name = tbl_KaCustomer.FullNameN,
 
                               Region = tbl_KaCustomer.SalesOrg,//Region1,// + " : " + tbl_KaCustomer.ContractNo,
-                             // custype  = tbl_KaCustomer.SapCode
-                              //       Contract = tbl_kacontractCustcode.ContractNo,
+                                                               // custype  = tbl_KaCustomer.SapCode
+                                                               //       Contract = tbl_kacontractCustcode.ContractNo,
 
 
                               // , //Region,
@@ -11154,7 +11044,7 @@ namespace KAmanagement.View
                             Viewdatatable viewtb2 = new Viewdatatable(tblcustomer2, "Please, Choose one code to Replace the main code !");
                             viewtb2.ShowDialog();
                             string codetemp2 = viewtb2.valuecode;
-                          
+
 
                             if (codetemp2 != "0" && codetemp2 != null)
                             {
@@ -11174,7 +11064,7 @@ namespace KAmanagement.View
                                     dc.SubmitChanges();
                                     //  MessageBox.Show("Code :" + codetemp + " remove from Groupcode done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
-                              
+
 
                                 var updatenewcode3 = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                                       where tbl_kacontractdata.ContractNo == contractNo
@@ -11182,7 +11072,7 @@ namespace KAmanagement.View
 
                                 if (updatenewcode3 != null)
                                 {
-                                   // custype = updatenewcode3.CustomerType;
+                                    // custype = updatenewcode3.CustomerType;
                                     updatenewcode3.Customer = double.Parse(codetemp2);
                                     //  updatenewcode2.Addedby = username;
                                     //   dc.tbl_kacontractCustcodes.DeleteOnSubmit(rscoderemoved3);
@@ -11194,8 +11084,8 @@ namespace KAmanagement.View
 
 
                                 var updatenewcode2 = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
-                                                      where tbl_kacontractsdatadetail.ContractNo == contractNo
-                                                      select tbl_kacontractsdatadetail;
+                                                     where tbl_kacontractsdatadetail.ContractNo == contractNo
+                                                     select tbl_kacontractsdatadetail;
 
 
                                 foreach (var item in updatenewcode2)
