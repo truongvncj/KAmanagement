@@ -853,7 +853,7 @@ namespace KAmanagement
         //    //throw new NotImplementedException();
         //}
 
-        public static DateTime chageExceldatetoData(string get_data)
+        public static DateTime oldchageExceldatetoData(string get_data)
 
 
         {
@@ -1025,6 +1025,60 @@ namespace KAmanagement
 
         }
 
+
+        public static DateTime chageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
+        {
+
+            string get_data = exceldatedotstring;//.Replace("9999",(DateTime.Now.Year +1).ToString());
+            char spl2 = '.';
+            //get_data
+            if (get_data.Contains("/"))
+            {
+
+                spl2 = '/';
+            }
+            else
+            {
+                if (get_data.Contains("-"))
+                {
+                    spl2 = '-';
+
+                }
+                else
+                {
+                    spl2 = '.';
+
+                }
+
+            }
+
+            List<string> lst_get_data = get_data.Split(spl2).ToList();
+            // cmd.Parameters.AddWithValue("?", GetDateWithoutMilliseconds(DateTime.Now));
+
+            //private DateTime GetDateWithoutMilliseconds(DateTime d)
+            //        {
+            //            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
+            //        }
+            DateTime kq;
+            try
+            {
+                kq = new DateTime(int.Parse(lst_get_data[2]), int.Parse(lst_get_data[1]), int.Parse(lst_get_data[0]));
+
+            }
+            catch (Exception) //DateTime year, month, day
+            {
+                kq = new DateTime(9999, 12, 31);
+               MessageBox.Show("Please check Format date in excel file !","Please check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                //  throw;
+            }
+
+            //     DateTime result = new DateTime(kq.Year, kq.Month, kq.Day, kq.Hour, kq.Minute, kq.Second);
+            // string result =  lst_get_data[2] + "-" + lst_get_data[1] + "-" + lst_get_data[0] ;
+            return kq;
+            //throw new NotImplementedException();
+        }
 
 
 
