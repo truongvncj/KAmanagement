@@ -440,9 +440,16 @@ namespace KAmanagement.Model
                     dr["Netvalue"] = double.Parse(sourceData.Rows[rowixd][Netvalueid].ToString().Trim());
 
                     dr["Currency"] = sourceData.Rows[rowixd][Currencyid].ToString().Trim();
+                    if (Utils.IsValidnumber(sourceData.Rows[rowixd][CondValueid].ToString().Trim()))
+                    {
+                        dr["CondValue"] = double.Parse(sourceData.Rows[rowixd][CondValueid].ToString().Trim());
 
-                    dr["CondValue"] = double.Parse(sourceData.Rows[rowixd][CondValueid].ToString().Trim());
-
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check CondValue in row: " + rowixd.ToString() + " Colum "+ CondValueid.ToString(), "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                     dr["InvoiceDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString());// Utils.GetValueOfCellInExcel(worksheet, rowid, columValid_to);
                     dr["UoM"] = sourceData.Rows[rowixd][UoMid].ToString().Trim();
