@@ -1028,8 +1028,15 @@ namespace KAmanagement
 
         public static DateTime chageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
         {
+            DateTime kq = new DateTime(9999, 12, 31); ;
+            if (exceldatedotstring == "" || exceldatedotstring == null)
+            {
+               
+                MessageBox.Show("Please check Format date in excel file !", "Please check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+              //  return;
+            }
 
-            string get_data = exceldatedotstring;//.Replace("9999",(DateTime.Now.Year +1).ToString());
+            string get_data = exceldatedotstring.Trim();//.Replace("9999",(DateTime.Now.Year +1).ToString());
             char spl2 = '.';
             //get_data
             if (get_data.Contains("/"))
@@ -1044,12 +1051,7 @@ namespace KAmanagement
                     spl2 = '-';
 
                 }
-                else
-                {
-                    spl2 = '.';
-
-                }
-
+               
             }
 
             List<string> lst_get_data = get_data.Split(spl2).ToList();
@@ -1059,7 +1061,7 @@ namespace KAmanagement
             //        {
             //            return new DateTime(d.Year, d.Month, d.Day, d.Hour, d.Minute, d.Second);
             //        }
-            DateTime kq;
+            
             try
             {
                 kq = new DateTime(int.Parse(lst_get_data[2]), int.Parse(lst_get_data[1]), int.Parse(lst_get_data[0]));
