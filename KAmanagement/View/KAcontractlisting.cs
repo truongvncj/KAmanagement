@@ -55,7 +55,7 @@ namespace KAmanagement.View
             this.rs = rs;
 
 
-            if ( fornname == "Payment Input") 
+            if (fornname == "Payment Input")
             {
 
                 tbmasscreatecontract.Visible = false;
@@ -279,6 +279,14 @@ namespace KAmanagement.View
 
             //  }
 
+            string username = Utils.getusername();
+
+
+            var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
+                               where Tka_RightContracttypeview.UserName == username
+                               select Tka_RightContracttypeview.Contracttype;
+
+
 
             if (e.KeyCode == Keys.F7) // this.formname.Text == "Detail Contract" &&
             {
@@ -289,10 +297,10 @@ namespace KAmanagement.View
 
 
 
-                string username = Utils.getusername();
-
                 if (this.formname.Text == "Accrual reports master")
                 {
+
+                    #region
 
 
                     this.formname.Text = "Accrual reports detail";
@@ -300,15 +308,16 @@ namespace KAmanagement.View
                     //var regioncode = (from tbl_Temp in db.tbl_Temps
                     //                  where tbl_Temp.username == username
                     //                  select tbl_Temp.RegionCode).FirstOrDefault();
-                    var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
-                                       where Tka_RightContracttypeview.UserName == username
-                                       select Tka_RightContracttypeview.Contracttype;
+
+                    //var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
+                    //                   where Tka_RightContracttypeview.UserName == username
+                    //                   select Tka_RightContracttypeview.Contracttype;
 
 
 
                     var rsthisperiod = from tbl_kacontractsdatadetail in db.tbl_kacontractsdatadetails
                                        where (from Tka_RegionRight in db.Tka_RegionRights
-                                           //   where// Tka_RegionRight.RegionCode == regioncode
+                                                  //   where// Tka_RegionRight.RegionCode == regioncode
                                               select Tka_RegionRight.Region
                                               ).Contains(tbl_kacontractsdatadetail.SalesOrg) && tbl_kacontractsdatadetail.Constatus == "ALV"
                                                 && typecontract.Contains(tbl_kacontractsdatadetail.ConType)
@@ -463,7 +472,7 @@ namespace KAmanagement.View
 
 
 
-
+                    #endregion = "Accrual reports master")
 
                 }
                 else
@@ -471,21 +480,26 @@ namespace KAmanagement.View
 
                     statusview.Text = "Detail";
 
-                    //var regioncode = (from tbl_Temp in db.tbl_Temps
-                    //                  where tbl_Temp.username == username
-                    //                  select tbl_Temp.RegionCode).FirstOrDefault();
+                    //(from Tka_RegionRight in db.Tka_RegionRights
+                    //     //   where// Tka_RegionRight.RegionCode == regioncode
+                    // select Tka_RegionRight.Region
+                    //                           ).Contains(tbl_kacontractsdatadetail.SalesOrg) && tbl_kacontractsdatadetail.Constatus == "ALV"
+                    //                             && typecontract.Contains(tbl_kacontractsdatadetail.ConType)
 
-                    var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
-                                       where Tka_RightContracttypeview.UserName == username
-                                       select Tka_RightContracttypeview.Contracttype;
+
+
+                    //var typecontract2 = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
+                    //                    where Tka_RightContracttypeview.UserName == username
+                    //                    select Tka_RightContracttypeview.Contracttype;
 
 
                     var rsthisperiod = from tbl_kacontractsdatadetail in db.tbl_kacontractsdatadetails
                                        where (from Tka_RegionRight in db.Tka_RegionRights
-                                           //   where Tka_RegionRight.RegionCode == regioncode
+
                                               select Tka_RegionRight.Region
-                                    ).Contains(tbl_kacontractsdatadetail.SalesOrg)
-                                    && typecontract.Contains(tbl_kacontractsdatadetail.ConType)
+                                               ).Contains(tbl_kacontractsdatadetail.SalesOrg) && tbl_kacontractsdatadetail.Constatus == "ALV"
+                                                 && typecontract.Contains(tbl_kacontractsdatadetail.ConType)
+
                                        select new
                                        {
 
@@ -664,16 +678,16 @@ namespace KAmanagement.View
 
                 System.Data.DataTable dt = new System.Data.DataTable();
 
-                string username = Utils.getusername();
+             //   string username = Utils.getusername();
 
                 var regioncode = (from tbl_Temp in db.tbl_Temps
                                   where tbl_Temp.username == username
                                   select tbl_Temp.RegionCode).FirstOrDefault();
 
 
-                var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
-                                   where Tka_RightContracttypeview.UserName == username
-                                   select Tka_RightContracttypeview.Contracttype;
+                //var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
+                //                   where Tka_RightContracttypeview.UserName == username
+                //                   select Tka_RightContracttypeview.Contracttype;
 
 
                 var rsthisperiod = from tbl_kacontractdata in db.tbl_kacontractdatas
@@ -847,7 +861,7 @@ namespace KAmanagement.View
 
                 var rsthisperiod = from tbl_kacontractdata in db.tbl_kacontractdatas
                                    where (from Tka_RegionRight in db.Tka_RegionRights
-                                  //        where Tka_RegionRight.RegionCode == regioncode
+                                              //        where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
                                           ).Contains(tbl_kacontractdata.SalesOrg.Trim()) &&
                                           (tbl_kacontractdata.ContractNo).Contains(contract) &&
@@ -950,7 +964,7 @@ namespace KAmanagement.View
                 var rsthisperiod = from tbl_kacontractsdatadetail in db.tbl_kacontractsdatadetails
 
                                    where (from Tka_RegionRight in db.Tka_RegionRights
-                            //              where Tka_RegionRight.RegionCode == regioncode
+                                              //              where Tka_RegionRight.RegionCode == regioncode
                                           select Tka_RegionRight.Region.Trim()
                                           ).Contains(tbl_kacontractsdatadetail.SalesOrg.Trim()) &&
                                           (tbl_kacontractsdatadetail.ContractNo).Contains(contract) &&
