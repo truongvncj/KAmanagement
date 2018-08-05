@@ -1293,7 +1293,8 @@ namespace KAmanagement.View
 
                     if (rs.AnnualVolume != null)
                     {
-                        this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
+                        //     this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
+                        this.txt_annualvolume.Text = ((double)(rs.VolComm/rs.ConTerm)).ToString("#,#", CultureInfo.InvariantCulture);
 
                     }
 
