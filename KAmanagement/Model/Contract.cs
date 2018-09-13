@@ -343,8 +343,18 @@ namespace KAmanagement.Model
                 // headindex = 1;
                 for (int columid = 0; columid < sourceData.Columns.Count; columid++)
                 {
+                    string value;
+                    try
+                    {
+                         value = sourceData.Rows[rowid][columid].ToString();
+                    }
+                    catch (Exception)
+                    {
 
-                    string value = sourceData.Rows[rowid][columid].ToString();
+                        value = null;
+                    }
+
+               
                     //            MessageBox.Show(value +":"+ rowid);
 
                     if (value != null)
@@ -815,8 +825,17 @@ namespace KAmanagement.Model
                 // headindex = 1;
                 for (int columid = 0; columid < sourceData.Columns.Count; columid++)
                 {
+                    string value;
+                    try
+                    {
+                         value = sourceData.Rows[rowid][columid].ToString();
+                    }
+                    catch (Exception)
+                    {
 
-                    string value = sourceData.Rows[rowid][columid].ToString();
+                        value = null;
+                    }
+                 
                     //            MessageBox.Show(value +":"+ rowid);
 
                     if (value != null)
