@@ -3139,6 +3139,140 @@ namespace KAmanagement.View
                     #endregion
 
 
+                    #region payment type  C07  - tra a%so tien  neu dat a% NSR comnit la bao nhieu do
+
+
+                    if (paymentcontrol == "C07")
+                    {
+
+
+                        #region nomal all
+                        //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = false;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = false;
+
+                        //     dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
+
+
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = false;
+
+                        //       dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = false;
+
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].ReadOnly = false;
+
+
+                        #endregion nomale all
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.DarkGray;
+                        ////dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = true;
+
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
+
+                        string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
+                                                                                                                                    //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "VND";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
+                                                                                                                                                                                                               //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Value = "VND";
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = dateTimePicker1.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = dateTimePicker2.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.DarkGray;
+
+
+
+                    }
+                    #endregion
+
+
+
 
 
                     #region payment type  D01  - Trả theo két thùng bán được
@@ -5576,6 +5710,88 @@ namespace KAmanagement.View
                 #endregion
 
 
+
+
+                #region dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07"
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+
+                    newdetailContract.SponsoredAmt = (double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value;
+
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+                    MessageBox.Show("Please check SponsoredAmt line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+
+                    newdetailContract.TagetAchivement = (double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value;
+
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+                    MessageBox.Show("Please check NSR Taget_Achivement line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+
+                    newdetailContract.EffFrm = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value;
+
+                }
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+                    MessageBox.Show("Please check Effect_From line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+                //--
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+
+                    newdetailContract.EffTo = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value;
+
+                }
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C07")
+                {
+                    MessageBox.Show("Please check Effect_To line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+
+
+                //     newdetailContract.TargetUnit = (string)dataGridProgramdetail.Rows[idrow].Cells["TargetUnit"].Value;
+
+
+
+                #endregion
 
 
 
