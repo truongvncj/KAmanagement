@@ -193,6 +193,53 @@ namespace KAmanagement
             contracttype = contracttype.Trim();
             channel = channel.Trim();
 
+            //----------------
+            if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "KA")
+            {
+                Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
+
+                if (regex.IsMatch(testContractNo))
+                {
+                    kq = "OK";
+                }
+                else
+                {
+                    kq = "S/KA/YY-YY/XXX";
+                }
+
+            }
+
+            if ((region == "VN13") && contracttype == "KA")
+            {
+                Regex regex = new Regex(@"^C/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
+
+                if (regex.IsMatch(testContractNo))
+                {
+                    kq = "OK";
+                }
+                else
+                {
+                    kq = "C/KA/YY-YY/XXX";
+                }
+            }
+
+            if ((region == "VN12" || region == "VN16" || region == "VN19") && contracttype == "KA")
+            {
+                Regex regex = new Regex(@"^N/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
+
+                if (regex.IsMatch(testContractNo))
+                {
+                    kq = "OK";
+                }
+                else
+                {
+                    kq = "N/KA/YY-YY/XXX";
+                }
+            }
+
+
+            //--------------------------
+
             if ((region == "VN11" || region == "VN15" || region == "VN17") && contracttype == "RKA")
             {
                 Regex regex = new Regex(@"^S/KA/([0-9]{2})-([0-9]{2})/([0-9]{3,5})$");
