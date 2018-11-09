@@ -118,7 +118,7 @@ namespace KAmanagement.View
 
                         Model.Username user = new Model.Username();
                         int Ver = user.Version;
-                        if (Ver == 64)
+                        if (Ver == 65)
                         {
 
                         this.Hide();
