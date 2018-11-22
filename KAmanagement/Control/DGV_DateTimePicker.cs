@@ -43,6 +43,8 @@ namespace KAmanagement.Control
                 this.Style.Format = "dd.MM.yyyy";
             }
 
+
+
             public override void InitializeEditingControl(int rowIndex, object
                 initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
             {

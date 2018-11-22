@@ -900,7 +900,7 @@ namespace KAmanagement
         //    //throw new NotImplementedException();
         //}
 
-        public static DateTime oldchageExceldatetoData(string get_data)
+        public static DateTime chageExceldatetoData(string get_data)
 
 
         {
@@ -1073,7 +1073,7 @@ namespace KAmanagement
         }
 
 
-        public static DateTime chageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
+        public static DateTime newringchageExceldatetoData(string exceldatedotstring)  // dd.MM.YYYY to date
         {
             DateTime kq = new DateTime(9999, 12, 31); ;
             if (exceldatedotstring == "" || exceldatedotstring == null)
