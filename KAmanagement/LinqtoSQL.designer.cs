@@ -159,7 +159,7 @@ namespace KAmanagement
     #endregion
 		
 		public LinqtoSQLDataContext() : 
-				base(global::KAmanagement.Properties.Settings.Default.KAmanagementConnectionString3, mappingSource)
+				base(global::KAmanagement.Properties.Settings.Default.KAmanagementConnectionString4, mappingSource)
 		{
 			OnCreated();
 		}
@@ -6838,6 +6838,8 @@ namespace KAmanagement
 		
 		private string _CombineType;
 		
+		private System.Nullable<double> _Temp;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -6980,6 +6982,8 @@ namespace KAmanagement
     partial void OnCombineItemChanged();
     partial void OnCombineTypeChanging(string value);
     partial void OnCombineTypeChanged();
+    partial void OnTempChanging(System.Nullable<double> value);
+    partial void OnTempChanged();
     #endregion
 		
 		public tbl_kacontractsdatadetail()
@@ -8367,6 +8371,26 @@ namespace KAmanagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Temp", DbType="Float")]
+		public System.Nullable<double> Temp
+		{
+			get
+			{
+				return this._Temp;
+			}
+			set
+			{
+				if ((this._Temp != value))
+				{
+					this.OnTempChanging(value);
+					this.SendPropertyChanging();
+					this._Temp = value;
+					this.SendPropertyChanged("Temp");
+					this.OnTempChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8395,8 +8419,6 @@ namespace KAmanagement
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _ContractNo;
-		
-		private string _ContracName;
 		
 		private string _PayType;
 		
@@ -8446,14 +8468,14 @@ namespace KAmanagement
 		
 		private string _BeginSubID;
 		
+		private string _ContracName;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnContractNoChanging(string value);
     partial void OnContractNoChanged();
-    partial void OnContracNameChanging(string value);
-    partial void OnContracNameChanged();
     partial void OnPayTypeChanging(string value);
     partial void OnPayTypeChanged();
     partial void OnPayIDChanging(System.Nullable<int> value);
@@ -8502,6 +8524,8 @@ namespace KAmanagement
     partial void OnSystemContChanged();
     partial void OnBeginSubIDChanging(string value);
     partial void OnBeginSubIDChanged();
+    partial void OnContracNameChanging(string value);
+    partial void OnContracNameChanged();
     #endregion
 		
 		public tbl_kacontractsdetailpayment()
@@ -8525,26 +8549,6 @@ namespace KAmanagement
 					this._ContractNo = value;
 					this.SendPropertyChanged("ContractNo");
 					this.OnContractNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContracName", DbType="NVarChar(255)")]
-		public string ContracName
-		{
-			get
-			{
-				return this._ContracName;
-			}
-			set
-			{
-				if ((this._ContracName != value))
-				{
-					this.OnContracNameChanging(value);
-					this.SendPropertyChanging();
-					this._ContracName = value;
-					this.SendPropertyChanged("ContracName");
-					this.OnContracNameChanged();
 				}
 			}
 		}
@@ -9025,6 +9029,26 @@ namespace KAmanagement
 					this._BeginSubID = value;
 					this.SendPropertyChanged("BeginSubID");
 					this.OnBeginSubIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContracName", DbType="NVarChar(255)")]
+		public string ContracName
+		{
+			get
+			{
+				return this._ContracName;
+			}
+			set
+			{
+				if ((this._ContracName != value))
+				{
+					this.OnContracNameChanging(value);
+					this.SendPropertyChanging();
+					this._ContracName = value;
+					this.SendPropertyChanged("ContracName");
+					this.OnContracNameChanged();
 				}
 			}
 		}

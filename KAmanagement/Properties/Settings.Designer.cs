@@ -77,5 +77,15 @@ namespace KAmanagement.Properties {
                 return ((string)(this["KAmanagementConnectionString3"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HAN-L-3PFF7H2;Initial Catalog=KAmanagement;Integrated Security=True")]
+        public string KAmanagementConnectionString4 {
+            get {
+                return ((string)(this["KAmanagementConnectionString4"]));
+            }
+        }
     }
 }

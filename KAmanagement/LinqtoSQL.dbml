@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KAmanagement" Class="LinqtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-8D4F853\SQLEXPRESS;Initial Catalog=KAmanagement;Persist Security Info=True;User ID=sa" SettingsObjectName="KAmanagement.Properties.Settings" SettingsPropertyName="KAmanagementConnectionString3" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HAN-L-3PFF7H2;Initial Catalog=KAmanagement;Integrated Security=True" SettingsObjectName="KAmanagement.Properties.Settings" SettingsPropertyName="KAmanagementConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_autodataContract" Member="tbl_autodataContracts">
     <Type Name="tbl_autodataContract">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -352,12 +352,12 @@
       <Column Name="ExtNote" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="CombineItem" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CombineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Temp" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsdetailpayment" Member="tbl_kacontractsdetailpayments">
     <Type Name="tbl_kacontractsdetailpayment">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PayType" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SubID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -382,6 +382,7 @@
       <Column Name="BLOCKED" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="BeginSubID" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
+      <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsvolume" Member="tbl_kacontractsvolumes">
