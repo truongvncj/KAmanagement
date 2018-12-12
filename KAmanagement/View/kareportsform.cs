@@ -803,5 +803,53 @@ namespace KAmanagement.View
 
 
         }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            string connection_string = Utils.getConnectionstr();
+
+            LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+            string username = Utils.getusername();
+            var regioncode = (from tbl_Temp in dc.tbl_Temps
+                              where tbl_Temp.username == username
+                              select tbl_Temp.RegionCode).FirstOrDefault();
+
+            var liveandinregion = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                  where tbl_kacontractdata.Consts == "ALV"
+                                  && (from Tka_RegionRight in dc.Tka_RegionRights
+                                      where Tka_RegionRight.RegionCode == regioncode
+                                      select Tka_RegionRight.Region
+                              ).Contains(tbl_kacontractdata.SalesOrg)
+                                  select tbl_kacontractdata.ContractNo;
+
+
+
+            var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                             where  liveandinregion.Contains(tbl_kacontractsdetailpayment.ContractNo)
+                     //     && tbl_kacontractsdetailpayment.PayControl == "REQ"
+                          
+                             select new
+                             {
+                                 tbl_kacontractsdetailpayment.ContractNo,
+
+                                 tbl_kacontractsdetailpayment.BatchNo,
+                                 ContracName = tbl_kacontractsdetailpayment.ContracName.Trim(),
+                                 tbl_kacontractsdetailpayment.PayType,
+                                 tbl_kacontractsdetailpayment.PayID,
+                                 Description = tbl_kacontractsdetailpayment.Description.Trim(),
+                                 tbl_kacontractsdetailpayment.PaidRequestAmt,
+                                 tbl_kacontractsdetailpayment.PayControl,
+                                 tbl_kacontractsdetailpayment.PrintDate,
+                                 Remark = tbl_kacontractsdetailpayment.Remark.Trim(),
+
+                                 tbl_kacontractsdetailpayment.CRDDAT,
+                                 tbl_kacontractsdetailpayment.CRDUSR,
+                                 tbl_kacontractsdetailpayment.SubID,
+
+                             };
+            Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST ALL PAYMENT", 3);// view code 1 la can viet them lenh
+
+            viewtbl.Show();
+        }
     }
 }

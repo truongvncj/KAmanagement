@@ -44,11 +44,12 @@
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -108,12 +109,13 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.button11);
             this.groupBox6.Controls.Add(this.button14);
             this.groupBox6.Controls.Add(this.button15);
             this.groupBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox6.Location = new System.Drawing.Point(21, 404);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(190, 100);
+            this.groupBox6.Size = new System.Drawing.Size(190, 132);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Payment Reports";
@@ -178,7 +180,7 @@
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox3.Location = new System.Drawing.Point(20, 528);
+            this.groupBox3.Location = new System.Drawing.Point(20, 551);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(190, 100);
             this.groupBox3.TabIndex = 11;
@@ -233,6 +235,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contract";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 152);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(172, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Contacts  with Groupcode";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
             // button10
             // 
             this.button10.Location = new System.Drawing.Point(6, 123);
@@ -277,16 +290,16 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button3
+            // button11
             // 
-            this.button3.Location = new System.Drawing.Point(6, 152);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(172, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Contacts  with Groupcode";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.button11.Location = new System.Drawing.Point(7, 84);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(172, 23);
+            this.button11.TabIndex = 6;
+            this.button11.Text = "List all payment ";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
             // kareportsform
             // 
@@ -336,5 +349,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button11;
     }
 }
