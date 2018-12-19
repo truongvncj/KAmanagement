@@ -815,8 +815,7 @@ namespace KAmanagement.View
                               select tbl_Temp.RegionCode).FirstOrDefault();
 
             var liveandinregion = from tbl_kacontractdata in dc.tbl_kacontractdatas
-                                  where tbl_kacontractdata.Consts == "ALV"
-                                  && (from Tka_RegionRight in dc.Tka_RegionRights
+                                  where  (from Tka_RegionRight in dc.Tka_RegionRights
                                       where Tka_RegionRight.RegionCode == regioncode
                                       select Tka_RegionRight.Region
                               ).Contains(tbl_kacontractdata.SalesOrg)
@@ -825,13 +824,15 @@ namespace KAmanagement.View
 
 
             var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                             from tbl_kacontractdata in dc.tbl_kacontractdatas
                              where  liveandinregion.Contains(tbl_kacontractsdetailpayment.ContractNo)
-                     //     && tbl_kacontractsdetailpayment.PayControl == "REQ"
-                          
+                           && tbl_kacontractsdetailpayment.ContractNo == tbl_kacontractdata.ContractNo
+
                              select new
                              {
                                  tbl_kacontractsdetailpayment.ContractNo,
-
+                                 Contract_status =   tbl_kacontractdata.Consts,
+                                 Contract_Type  =   tbl_kacontractdata.ConType,
                                  tbl_kacontractsdetailpayment.BatchNo,
                                  ContracName = tbl_kacontractsdetailpayment.ContracName.Trim(),
                                  tbl_kacontractsdetailpayment.PayType,
