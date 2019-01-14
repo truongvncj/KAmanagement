@@ -400,6 +400,7 @@ namespace KAmanagement.Model
                 return;
             }
 
+            Boolean kiemtratype = true;
             for (int rowixd = 0; rowixd < sourceData.Rows.Count; rowixd++)
             {
 
@@ -421,6 +422,14 @@ namespace KAmanagement.Model
 
                     dr["SalesDistrict"] = sourceData.Rows[rowixd][SalesDistrictid].ToString().Trim();
                     dr["CondType"] = sourceData.Rows[rowixd][CondTypeid].ToString().Trim();
+
+                    if (sourceData.Rows[rowixd][CondTypeid].ToString().Trim() != "VPRS")
+                    {
+
+                        kiemtratype = false;
+
+
+                    }
 
                     dr["SalesDistrictdesc"] = sourceData.Rows[rowixd][SalesDistrictdescid].ToString().Trim();
                     if (sourceData.Rows[rowixd][KeyAccNrid].ToString() !="" && sourceData.Rows[rowixd][KeyAccNrid]!=null)
@@ -470,8 +479,12 @@ namespace KAmanagement.Model
             }// row
 
 
+            if (kiemtratype == false)
+            {
+                MessageBox.Show("Clease check, cond type must be: VPRS ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-        
 
             string destConnString = Utils.getConnectionstr();
 
@@ -605,7 +618,51 @@ namespace KAmanagement.Model
 
         }
 
-     
+        public void COGSinput()
+        {
+
+
+            //   CultureInfo provider = CultureInfo.InvariantCulture;
+
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Open Excel File COGS file excel";
+            theDialog.Filter = "Excel files|*.xlsx; *.xls";
+            theDialog.InitialDirectory = @"C:\";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                string filename = theDialog.FileName.ToString();
+
+                Thread t1 = new Thread(importsexcel2);
+                t1.IsBackground = true;
+                t1.Start(new datainportF() { filename = filename });
+
+                View.Caculating wat = new View.Caculating();
+                Thread t2 = new Thread(showwait);
+                t2.Start(new datashowwait() { wat = wat });
+
+
+                t1.Join();
+                if (t1.ThreadState != ThreadState.Running)
+                {
+
+                    // t2.Abort();
+
+                    wat.Invoke(wat.myDelegate);
+
+
+
+                }
+
+
+            }
+
+
+
+
+        }
+
+
 
 
     }
