@@ -16180,6 +16180,8 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _Litter;
 		
+		private System.Nullable<double> _Cogs;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -16234,6 +16236,8 @@ namespace KAmanagement
     partial void OnInvoice_DateChanged();
     partial void OnLitterChanging(System.Nullable<double> value);
     partial void OnLitterChanged();
+    partial void OnCogsChanging(System.Nullable<double> value);
+    partial void OnCogsChanged();
     #endregion
 		
 		public tbl_kasale()
@@ -16737,6 +16741,26 @@ namespace KAmanagement
 					this._Litter = value;
 					this.SendPropertyChanged("Litter");
 					this.OnLitterChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cogs", DbType="Float")]
+		public System.Nullable<double> Cogs
+		{
+			get
+			{
+				return this._Cogs;
+			}
+			set
+			{
+				if ((this._Cogs != value))
+				{
+					this.OnCogsChanging(value);
+					this.SendPropertyChanging();
+					this._Cogs = value;
+					this.SendPropertyChanged("Cogs");
+					this.OnCogsChanged();
 				}
 			}
 		}

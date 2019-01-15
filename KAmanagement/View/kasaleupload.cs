@@ -596,7 +596,7 @@ namespace KAmanagement.View
 
                     slmodel.COGSinput();
 
-                    #region // list  doc da post
+                    #region // list  doc da không thuộc kỳ hiện thời post
 
                     var rsdoc = from tbl_kasalesTemp in dc.tbl_kasalesTemps
                                 where tbl_kasalesTemp.Username == username &&
@@ -615,6 +615,30 @@ namespace KAmanagement.View
 
 
                     #endregion
+
+                    #region  các doc của cogs không có trong data base
+                    var rskhongcodoctrongsale = from qq in dc.tbl_kasalesTemps
+                                                where !(from pp in dc.tbl_kasales
+                                                        select pp.Invoice_Doc_Nr).Contains(qq.Invoice_Doc_Nr)
+                                                select qq;
+
+                    if (rskhongcodoctrongsale.Count() > 0)
+                    {
+                        Viewtable viewtbl2 = new Viewtable(rskhongcodoctrongsale, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOc COGS CHUA update SALes, please update SAle volume first", 3);// view code 1 la can viet them lenh
+
+                        viewtbl2.Show();
+                        viewtbl2.Focus();
+
+                        return;
+
+                    }
+
+
+
+
+
+                    #endregion
+
 
                     #region // productnew
 
@@ -756,7 +780,8 @@ namespace KAmanagement.View
 
                     #endregion
 
-                    #region// update pc, uc
+   
+                                     #region// update cogs value
 
                     SqlConnection conn2 = null;
                     SqlDataReader rdr1 = null;
@@ -798,7 +823,7 @@ namespace KAmanagement.View
                     #region  // view sales volume
 
                     var rs = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                             where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod && tbl_kasalesTemp.Username == username
+                             where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod
                              select new
                              {
                                  tbl_kasalesTemp.Priod,
@@ -819,7 +844,7 @@ namespace KAmanagement.View
 
                                  tbl_kasalesTemp.Key_Acc_Nr,
                                  tbl_kasalesTemp.Cond_Type,
-
+                             
                                  tbl_kasalesTemp.Mat_Group,
                                  tbl_kasalesTemp.Mat_Group_Text,
                                  tbl_kasalesTemp.Mat_Number,
@@ -830,15 +855,15 @@ namespace KAmanagement.View
 
                                  PCs = tbl_kasalesTemp.EC,
                                  tbl_kasalesTemp.UoM,
-                                 tbl_kasalesTemp.EmptyCountValue,
-                                 tbl_kasalesTemp.GSR,
-                                 tbl_kasalesTemp.Litter,
-                                 tbl_kasalesTemp.NETP,
-                                 tbl_kasalesTemp.NSR,
+                             //    tbl_kasalesTemp.EmptyCountValue,
+                             COGS =    tbl_kasalesTemp.GSR,
+                            //     tbl_kasalesTemp.Litter,
+                             //    tbl_kasalesTemp.NETP,
+                              //   tbl_kasalesTemp.NSR,
+                             //    tbl_kasalesTemp.
+                             //    EC = tbl_kasalesTemp.PC,
 
-                                 EC = tbl_kasalesTemp.PC,
-
-                                 tbl_kasalesTemp.UC,
+                            //     tbl_kasalesTemp.UC,
 
                                  tbl_kasalesTemp.Username,
                                  tbl_kasalesTemp.id,
@@ -853,7 +878,7 @@ namespace KAmanagement.View
 
                     if (rs.Count() > 0)
                     {
-                        Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 1);// view code 1 la can viet them lenh
+                        Viewtable viewtbl = new Viewtable(rs, dc, "COGS DATA PRIOD: " + priod, 1);// view code 1 la can viet them lenh
 
                         viewtbl.Show();
                         viewtbl.Focus();

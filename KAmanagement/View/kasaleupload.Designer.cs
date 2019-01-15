@@ -34,13 +34,13 @@
             this.btupdate = new System.Windows.Forms.Button();
             this.btdelete = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -96,25 +96,14 @@
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button1
+            // button2
             // 
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "UPLOAD  COGS DATA";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(7, 193);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(231, 49);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "COGS ";
+            this.button2.Location = new System.Drawing.Point(13, 241);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(219, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "VIEW COGS REPORTS ";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -128,14 +117,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "SALES";
             // 
-            // button2
+            // groupBox1
             // 
-            this.button2.Location = new System.Drawing.Point(13, 241);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(219, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "VIEW COGS REPORTS ";
-            this.button2.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(7, 193);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(231, 49);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "COGS ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(223, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "UPLOAD  COGS DATA";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Kasalesuploadandreports
             // 
@@ -154,8 +154,8 @@
             this.Load += new System.EventHandler(this.Kasalesuploadandreports_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

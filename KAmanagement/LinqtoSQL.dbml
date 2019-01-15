@@ -785,6 +785,7 @@
       <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="[Invoice Date]" Member="Invoice_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Cogs" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kasalesTemp" Member="tbl_kasalesTemps">
