@@ -324,7 +324,8 @@ namespace KAmanagement.View
 
                     var rs = from tbl_kasalesTemp in dc.tbl_kasalesTemps
                              where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod && tbl_kasalesTemp.Username == username
-                             select new {
+                             select new
+                             {
                                  tbl_kasalesTemp.Priod,
 
 
@@ -337,10 +338,10 @@ namespace KAmanagement.View
                                  tbl_kasalesTemp.Outbound_Delivery,
 
                                  tbl_kasalesTemp.Delivery_Date,
-                                
+
                                  tbl_kasalesTemp.Invoice_Doc_Nr,
                                  tbl_kasalesTemp.Invoice_Date,
-                                 
+
                                  tbl_kasalesTemp.Key_Acc_Nr,
                                  tbl_kasalesTemp.Cond_Type,
 
@@ -348,11 +349,11 @@ namespace KAmanagement.View
                                  tbl_kasalesTemp.Mat_Group_Text,
                                  tbl_kasalesTemp.Mat_Number,
                                  tbl_kasalesTemp.Mat_Text,
-                                 
+
                                  tbl_kasalesTemp.Currency,
 
 
-                                 PCs= tbl_kasalesTemp.EC,
+                                 PCs = tbl_kasalesTemp.EC,
                                  tbl_kasalesTemp.UoM,
                                  tbl_kasalesTemp.EmptyCountValue,
                                  tbl_kasalesTemp.GSR,
@@ -360,10 +361,10 @@ namespace KAmanagement.View
                                  tbl_kasalesTemp.NETP,
                                  tbl_kasalesTemp.NSR,
 
-                                 EC =tbl_kasalesTemp.PC,
-                                 
+                                 EC = tbl_kasalesTemp.PC,
+
                                  tbl_kasalesTemp.UC,
-                                 
+
                                  tbl_kasalesTemp.Username,
                                  tbl_kasalesTemp.id,
 
@@ -459,10 +460,10 @@ namespace KAmanagement.View
 
                              tbl_kasale.NSR,
 
-                          
 
-                       
-                   
+
+
+
                              tbl_kasale.Username,
                              tbl_kasale.id
 
@@ -780,8 +781,8 @@ namespace KAmanagement.View
 
                     #endregion
 
-   
-                                     #region// update cogs value
+
+                    #region// update cogs value
 
                     SqlConnection conn2 = null;
                     SqlDataReader rdr1 = null;
@@ -795,6 +796,8 @@ namespace KAmanagement.View
                         SqlCommand cmd1 = new SqlCommand("KAupdateCOGStemptable", conn2);
                         cmd1.CommandType = CommandType.StoredProcedure;
                         cmd1.Parameters.Add("@priod", SqlDbType.VarChar).Value = priod;
+                        cmd1.Parameters.Add("@Username", SqlDbType.VarChar).Value = username;
+
                         cmd1.CommandTimeout = 0;
                         rdr1 = cmd1.ExecuteReader();
 
@@ -844,7 +847,7 @@ namespace KAmanagement.View
 
                                  tbl_kasalesTemp.Key_Acc_Nr,
                                  tbl_kasalesTemp.Cond_Type,
-                             
+
                                  tbl_kasalesTemp.Mat_Group,
                                  tbl_kasalesTemp.Mat_Group_Text,
                                  tbl_kasalesTemp.Mat_Number,
@@ -855,15 +858,15 @@ namespace KAmanagement.View
 
                                  PCs = tbl_kasalesTemp.EC,
                                  tbl_kasalesTemp.UoM,
-                             //    tbl_kasalesTemp.EmptyCountValue,
-                             COGS =    tbl_kasalesTemp.GSR,
-                            //     tbl_kasalesTemp.Litter,
-                             //    tbl_kasalesTemp.NETP,
-                              //   tbl_kasalesTemp.NSR,
-                             //    tbl_kasalesTemp.
-                             //    EC = tbl_kasalesTemp.PC,
+                                 //    tbl_kasalesTemp.EmptyCountValue,
+                                 COGS = tbl_kasalesTemp.GSR,
+                                 //     tbl_kasalesTemp.Litter,
+                                 //    tbl_kasalesTemp.NETP,
+                                 //   tbl_kasalesTemp.NSR,
+                                 //    tbl_kasalesTemp.
+                                 //    EC = tbl_kasalesTemp.PC,
 
-                            //     tbl_kasalesTemp.UC,
+                                 //     tbl_kasalesTemp.UC,
 
                                  tbl_kasalesTemp.Username,
                                  tbl_kasalesTemp.id,
@@ -891,6 +894,112 @@ namespace KAmanagement.View
 
 
                 }
+
+
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+            FormCollection fc = System.Windows.Forms.Application.OpenForms;
+
+            bool kq = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == "kaPriodpicker")
+                {
+                    kq = true;
+                    frm.Focus();
+
+                }
+            }
+
+            if (!kq)
+            {
+                View.kaPriodpicker kaPriodpicker = new View.kaPriodpicker();
+
+                //   Datepick
+                kaPriodpicker.ShowDialog();
+                string priod = kaPriodpicker.priod;
+                DateTime fromdate = kaPriodpicker.fromdate;
+                DateTime todate = kaPriodpicker.todate;
+
+
+                string connection_string = Utils.getConnectionstr();
+                LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+
+                #region  // view sales volume
+
+                var rs = from tbl_kasale in dc.tbl_kasales
+                         where tbl_kasale.Priod == priod //&& tbl_kasalesTemp.Priod == priod
+                         select new
+                         {
+                             tbl_kasale.Priod,
+
+
+                             tbl_kasale.Sold_to,
+                             tbl_kasale.Sales_Org,
+                             tbl_kasale.Sales_District,
+                             tbl_kasale.Sales_District_desc,
+
+                             tbl_kasale.Cust_Name,
+                             tbl_kasale.Outbound_Delivery,
+
+                             tbl_kasale.Delivery_Date,
+
+                             tbl_kasale.Invoice_Doc_Nr,
+                             tbl_kasale.Invoice_Date,
+
+                             tbl_kasale.Key_Acc_Nr,
+                             ///tbl_kasale.c,
+
+                             tbl_kasale.Mat_Group,
+                             tbl_kasale.Mat_Group_Text,
+                             tbl_kasale.Mat_Number,
+                             tbl_kasale.Mat_Text,
+
+                             tbl_kasale.Currency,
+
+
+                             PCs = tbl_kasale.EC,
+                             tbl_kasale.UoM,
+                             //    tbl_kasalesTemp.EmptyCountValue,
+                             COGS = tbl_kasale.Cogs,
+                             //     tbl_kasalesTemp.Litter,
+                             //    tbl_kasalesTemp.NETP,
+                             //   tbl_kasalesTemp.NSR,
+                             //    tbl_kasalesTemp.
+                             //    EC = tbl_kasalesTemp.PC,
+
+                             //     tbl_kasalesTemp.UC,
+
+                             UserUpdate = tbl_kasale.Username,
+                             tbl_kasale.id,
+
+
+
+                         };
+
+
+
+
+
+                if (rs.Count() > 0)
+                {
+                    Viewtable viewtbl = new Viewtable(rs, dc, "COGS DATA PRIOD: " + priod, 22);// view code 22 la can viet cogs
+
+                    viewtbl.Show();
+                    viewtbl.Focus();
+
+
+                }
+
+                #endregion
+
+
+
 
 
             }

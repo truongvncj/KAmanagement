@@ -56,7 +56,7 @@
             // 
             // btsalesview
             // 
-            this.btsalesview.Location = new System.Drawing.Point(6, 61);
+            this.btsalesview.Location = new System.Drawing.Point(6, 48);
             this.btsalesview.Name = "btsalesview";
             this.btsalesview.Size = new System.Drawing.Size(219, 23);
             this.btsalesview.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             // btupdate
             // 
-            this.btupdate.Location = new System.Drawing.Point(6, 32);
+            this.btupdate.Location = new System.Drawing.Point(6, 19);
             this.btupdate.Name = "btupdate";
             this.btupdate.Size = new System.Drawing.Size(219, 23);
             this.btupdate.TabIndex = 2;
@@ -76,7 +76,7 @@
             // 
             // btdelete
             // 
-            this.btdelete.Location = new System.Drawing.Point(6, 99);
+            this.btdelete.Location = new System.Drawing.Point(6, 77);
             this.btdelete.Name = "btdelete";
             this.btdelete.Size = new System.Drawing.Size(219, 23);
             this.btdelete.TabIndex = 3;
@@ -86,24 +86,24 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(5, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(249, 286);
+            this.panel1.Size = new System.Drawing.Size(249, 247);
             this.panel1.TabIndex = 4;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(13, 241);
+            this.button2.Location = new System.Drawing.Point(6, 47);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(219, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "VIEW COGS REPORTS ";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // groupBox2
             // 
@@ -112,17 +112,18 @@
             this.groupBox2.Controls.Add(this.btupdate);
             this.groupBox2.Location = new System.Drawing.Point(7, 41);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(231, 146);
+            this.groupBox2.Size = new System.Drawing.Size(231, 112);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "SALES";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(7, 193);
+            this.groupBox1.Location = new System.Drawing.Point(7, 159);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(231, 49);
+            this.groupBox1.Size = new System.Drawing.Size(231, 76);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "COGS ";
@@ -131,7 +132,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(6, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(223, 23);
+            this.button1.Size = new System.Drawing.Size(219, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "UPLOAD  COGS DATA";
             this.button1.UseVisualStyleBackColor = true;
@@ -142,7 +143,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(260, 314);
+            this.ClientSize = new System.Drawing.Size(260, 257);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -400,7 +400,7 @@ namespace KAmanagement.Model
                 return;
             }
 
-            Boolean kiemtratype = true;
+        //    Boolean kiemtratype = true;
             for (int rowixd = 0; rowixd < sourceData.Rows.Count; rowixd++)
             {
 
@@ -426,9 +426,13 @@ namespace KAmanagement.Model
                     if (sourceData.Rows[rowixd][CondTypeid].ToString().Trim() != "VPRS")
                     {
 
-                        kiemtratype = false;
+                        //kiemtratype = false;
 
-
+                        //if (kiemtratype == false)
+                        //{
+                            MessageBox.Show("Cond type must be: VPRS , please check line: " + rowixd.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                     //   }
                     }
 
                     dr["SalesDistrictdesc"] = sourceData.Rows[rowixd][SalesDistrictdescid].ToString().Trim();
@@ -479,11 +483,7 @@ namespace KAmanagement.Model
             }// row
 
 
-            if (kiemtratype == false)
-            {
-                MessageBox.Show("Clease check, cond type must be: VPRS ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+         
 
 
             string destConnString = Utils.getConnectionstr();

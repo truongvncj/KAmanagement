@@ -92,7 +92,7 @@ namespace KAmanagement.View
             // btmasschangecontract
             // 
             this.btmasschangecontract.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btmasschangecontract.Location = new System.Drawing.Point(1108, 451);
+            this.btmasschangecontract.Location = new System.Drawing.Point(1066, 450);
             this.btmasschangecontract.Name = "btmasschangecontract";
             this.btmasschangecontract.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btmasschangecontract.Size = new System.Drawing.Size(127, 19);
@@ -185,10 +185,10 @@ namespace KAmanagement.View
             this.formlabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.formlabel.AutoSize = true;
             this.formlabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.formlabel.Font = new System.Drawing.Font("Microsoft MHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formlabel.Location = new System.Drawing.Point(492, 14);
             this.formlabel.Name = "formlabel";
-            this.formlabel.Size = new System.Drawing.Size(169, 21);
+            this.formlabel.Size = new System.Drawing.Size(205, 20);
             this.formlabel.TabIndex = 8;
             this.formlabel.Text = "VIEW TABLE REPORTS";
             // 

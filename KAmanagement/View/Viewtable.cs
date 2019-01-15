@@ -434,8 +434,15 @@ namespace KAmanagement.View
                                                                                                             //  this.lb_totalrecord.ForeColor = Color.Chocolate;
                                                                                                             //   this.Show();
             this.KeyPreview = true;
-
+            
             //      this.lb_seach
+
+               if (viewcode == 22)//nếu là updaload coge
+            {
+                this.bt_addtomaster.Visible = false;
+            }
+
+
             if (viewcode == 3)//nếu là massconffimr
             {
                 this.lb_seach.Visible = true;
