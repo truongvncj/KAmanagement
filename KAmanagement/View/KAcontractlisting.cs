@@ -523,7 +523,7 @@ namespace KAmanagement.View
                                            LitAched = tbl_kacontractsdatadetail.LitAched,
                                            FTNAched = tbl_kacontractsdatadetail.ECAched,
                                            NSRAched = tbl_kacontractsdatadetail.NSRAched,
-                                          tbl_kacontractsdatadetail.COGS_ached,
+                                           tbl_kacontractsdatadetail.COGS_ached,
                                            AccruedAmt = tbl_kacontractsdatadetail.AccruedAmt,
                                            BegindetailCotractAched = tbl_kacontractsdatadetail.BeginAchvmt,
 
@@ -679,7 +679,7 @@ namespace KAmanagement.View
 
                 System.Data.DataTable dt = new System.Data.DataTable();
 
-             //   string username = Utils.getusername();
+                //   string username = Utils.getusername();
 
                 var regioncode = (from tbl_Temp in db.tbl_Temps
                                   where tbl_Temp.username == username
@@ -1737,6 +1737,15 @@ namespace KAmanagement.View
 
 
             masscreateContract.ShowDialog();
+        }
+
+        private void dataGridView1_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (var c in dataGridView1.Columns)
+            {
+                DataGridViewColumn clm = (DataGridViewColumn)c;
+                clm.HeaderText = clm.HeaderText.Replace("_", " ");
+            }
         }
     }
 }

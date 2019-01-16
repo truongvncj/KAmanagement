@@ -989,6 +989,43 @@ namespace KAmanagement.View
 
             }
 
+
+            if (paycontrol == "C07")
+            {
+                #region
+                gruopCtractdate.Visible = true;
+                //paymentdatep.Value = DBNull.Value; //DBNull.Value;
+                paymentdatep.Visible = false;
+                lbdatepaid.Visible = false;
+                //DateTime t = d;
+                //paymentdatep.Value = null;
+
+                spercent.Enabled = false;
+                //      spercent.Text = "";
+
+
+                ucpcsponsor.Enabled = false;
+                //    ucpcsponsor.Text = "";
+
+                amountsponsor.Enabled = true;
+                //       amountsponsor.Text = "0";
+
+                sunit.Text = unitvalue;
+
+        //        tprcent.Enabled = true;
+                //    tprcent.Text = "";
+
+                tachive.Enabled = true;
+                //        tachive.Text = "";
+
+                //tunit.Enabled = false;
+                tunit.Text = "NSR";
+                tunit.Enabled = false;
+                sunit.Enabled = false;
+
+                #endregion
+
+            }
             if (paycontrol == "D01")
             {
                 #region
