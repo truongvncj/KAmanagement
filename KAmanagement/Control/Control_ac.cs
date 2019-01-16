@@ -2019,6 +2019,8 @@ namespace KAmanagement.Control
                          FullCommitment = tbl_kacontractdata.TotSponsoredcommit,
                          tbl_kacontractdata.PCVolAched,
                          tbl_kacontractdata.NSRAched,
+                         tbl_kacontractdata.COGS_ached,
+                        
                          tbl_kacontractdata.UCVolAched,
                          tbl_kacontractdata.Revenue,
 

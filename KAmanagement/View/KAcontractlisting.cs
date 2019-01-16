@@ -523,6 +523,7 @@ namespace KAmanagement.View
                                            LitAched = tbl_kacontractsdatadetail.LitAched,
                                            FTNAched = tbl_kacontractsdatadetail.ECAched,
                                            NSRAched = tbl_kacontractsdatadetail.NSRAched,
+                                          tbl_kacontractsdatadetail.COGS_ached,
                                            AccruedAmt = tbl_kacontractsdatadetail.AccruedAmt,
                                            BegindetailCotractAched = tbl_kacontractsdatadetail.BeginAchvmt,
 
