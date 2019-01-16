@@ -279,6 +279,7 @@
       <Column Name="TotSponsoredcommit" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ListCodeinGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="COGS_ached" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsdatadetail" Member="tbl_kacontractsdatadetails">
@@ -353,6 +354,7 @@
       <Column Name="CombineItem" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CombineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Temp" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="COGS_ached" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsdetailpayment" Member="tbl_kacontractsdetailpayments">
@@ -396,6 +398,7 @@
       <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="COGS" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsvolumePrductGRP" Member="tbl_kacontractsvolumePrductGRPs">
@@ -410,6 +413,7 @@
       <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="COGS" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontracttype" Member="tbl_kacontracttypes">

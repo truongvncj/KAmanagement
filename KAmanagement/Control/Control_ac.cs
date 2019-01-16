@@ -2744,6 +2744,13 @@ namespace KAmanagement.Control
             datatable1 = ul.ToDataTable(db, IQuery);
 
 
+            foreach (var c in datatable1.Columns)
+            {
+                DataColumn clm = (DataColumn)c;
+                clm.ColumnName = clm.ColumnName.Replace("_", " ");
+            }
+
+
             //  this.dataGridView2.DataSource =  dataGridView1.DataSource;
             //
             #region // connect to excel

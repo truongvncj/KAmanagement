@@ -427,6 +427,7 @@ namespace KAmanagement.View
 
 
                 kaPriodpicker.ShowDialog();
+
                 string priod = kaPriodpicker.priod;
 
                 var rs = from tbl_kasale in dc.tbl_kasales
@@ -472,8 +473,8 @@ namespace KAmanagement.View
 
                 Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 2);// view code 1 la can viet them lenh
 
-                viewtbl.Show();
-                viewtbl.Focus();
+                viewtbl.ShowDialog();
+             //   viewtbl.Focus();
             }
 
 
@@ -932,7 +933,7 @@ namespace KAmanagement.View
 
                 #region  // view sales volume
 
-                var rs = from tbl_kasale in dc.tbl_kasales
+                var rs33 = from tbl_kasale in dc.tbl_kasales
                          where tbl_kasale.Priod == priod //&& tbl_kasalesTemp.Priod == priod
                          select new
                          {
@@ -986,15 +987,15 @@ namespace KAmanagement.View
 
 
 
-                if (rs.Count() > 0)
-                {
-                    Viewtable viewtbl = new Viewtable(rs, dc, "COGS DATA PRIOD: " + priod, 22);// view code 22 la can viet cogs
+             //   if (rs33.Count() >= 0)
+          //      {
+                    Viewtable viewtbl = new Viewtable(rs33, dc, "COGS DATA PRIOD: " + priod, 22);// view code 22 la can viet cogs
 
-                    viewtbl.Show();
-                    viewtbl.Focus();
+                    viewtbl.ShowDialog();
+                //    viewtbl.Focus();
 
 
-                }
+             //   }
 
                 #endregion
 
