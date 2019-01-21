@@ -997,9 +997,7 @@ namespace KAmanagement.View
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
-                //DateTime t = d;
-                //paymentdatep.Value = null;
-
+              
                 spercent.Enabled = false;
                 //      spercent.Text = "";
 

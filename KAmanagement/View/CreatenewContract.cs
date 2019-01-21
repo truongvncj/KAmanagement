@@ -6585,16 +6585,25 @@ namespace KAmanagement.View
                 dc.tbl_kacontractsdatadetails.InsertAllOnSubmit(tbl_kacontractsdatadetaillist);
                 dc.SubmitChanges();
                 //  newdetailContract.
+
+
+                //
+
+
+
+
+
+
                 dc.tbl_kacontractdatas.InsertOnSubmit(newcontract);
                 dc.SubmitChanges();
 
                 tbl_kacontractCustcode cust = new tbl_kacontractCustcode();
-                cust.ContractNo = this.tb_contractno.Text.Trim();
+                cust.ContractNo = tb_contractno.Text.Trim();
 
-                //  if (cb_customerka.Text.Trim() != "")
-                //  {
-                cust.CustomerCode = newcontract.Customer;
-                // }
+                if (cb_customerka.Text != "")
+                {
+                    cust.CustomerCode = double.Parse(cb_customerka.Text.Trim()); //newcontract.Customer;
+                }
 
 
                 dc.tbl_kacontractCustcodes.InsertOnSubmit(cust);
