@@ -655,10 +655,23 @@ namespace KAmanagement.Model
 
             for (int rowid = 0; rowid < 6; rowid++)
             {
-                // headindex = 1;
+
+                if (rowid < sourceData.Rows.Count)
+                {
+                    
+
+                #region
+
+
+
+
                 for (int columid = 0; columid < sourceData.Columns.Count; columid++)
                 {
 
+
+                    #region
+
+                 
                     string value = sourceData.Rows[rowid][columid].ToString();
                     //            MessageBox.Show(value +":"+ rowid);
 
@@ -793,14 +806,20 @@ namespace KAmanagement.Model
 
                     }
 
+                    #endregion
+
+
 
                 }// colum
 
 
+                    #endregion
+
+                }
 
             }// roww off heatder
 
-            #endregion
+        #endregion
             if (Soldtoid == -1)
             {
                 MessageBox.Show("Please check Sold-to colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
