@@ -75,17 +75,23 @@ namespace KAmanagement
             String current = System.IO.Directory.GetCurrentDirectory();
 
             string fileName = current + "\\Connectstring.txt";
-            const Int32 BufferSize = 128;
+     //       const Int32 BufferSize = 128;
 
-            using (var fileStream = File.OpenRead(fileName))
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
-            {
+            //using (var fileStream = File.OpenRead(fileName))
+            //using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
+            //{
                 string line;
                 string st4;
-                while ((line = streamReader.ReadLine()) != null)
+                //while ((line = streamReader.ReadLine()) != null)
 
-                {
-                    string[] parts = line.Split(';');
+                //{
+
+                    Model.SercurityFucntion bm2 = new Model.SercurityFucntion();
+                    line = bm2.Readtextfromfile(fileName);
+                    string line2 = bm2.Decryption(line);
+
+
+                    string[] parts = line2.Split(';');
                     if (parts.Count() >= 4)
                     {
                         st4 = parts[3].Trim();
@@ -104,11 +110,11 @@ namespace KAmanagement
 
 
 
-                }
+              //  }
 
-                return "";
+          //      return "";
 
-            }
+           // }
 
         }
 
@@ -144,16 +150,25 @@ namespace KAmanagement
 
             string fileName = current + "\\Connectstring.txt";
             string connection_string = "";
-            const Int32 BufferSize = 128;
+      //      const Int32 BufferSize = 128;
 
-            using (var fileStream = File.OpenRead(fileName))
-            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
-            {
+            //using (var fileStream = File.OpenRead(fileName))
+            //using (var streamReader = new StreamReader(fileStream, Encoding.UTF8, true, BufferSize))
+            //{
                 string line;
-                while ((line = streamReader.ReadLine()) != null)
+                //while ((line = streamReader.ReadLine()) != null)
 
-                {
-                    string[] parts = line.Split(';');
+                //{
+
+
+
+                    Model.SercurityFucntion bm2 = new Model.SercurityFucntion();
+                    line = bm2.Readtextfromfile(fileName);
+                    string line2 = bm2.Decryption(line);
+
+
+
+                    string[] parts = line2.Split(';');
 
                     string st1 = parts[0].Trim();
                     string st2 = parts[1].Trim();
@@ -165,12 +180,12 @@ namespace KAmanagement
 
 
 
-                }
+            //    }
 
-                return "";
+            //    return "";
 
 
-            }
+            //}
 
         }
 

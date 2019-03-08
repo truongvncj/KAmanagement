@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-
+using KAmanagement.Model;
 
 
 namespace KAmanagement.View
@@ -47,7 +47,19 @@ namespace KAmanagement.View
                 while ((line = streamReader.ReadLine()) != null)
 
                 {
-                    string[] parts = line.Split(';');
+
+
+
+
+
+                    Model.SercurityFucntion bm2 = new Model.SercurityFucntion();
+                     line = bm2.Readtextfromfile(fileName);
+                    string line2 = bm2.Decryption(line);
+
+
+
+
+                    string[] parts = line2.Split(';');
 
                      st1 = parts[0].Trim();
                      st2 = parts[1].Trim();
@@ -92,27 +104,49 @@ namespace KAmanagement.View
                     if (result > 0)
                     {
 
+                        //#region ghi vao data pass, user, connectstring
+
+
+                        //string s1 = st1 + ";" + st2 + ";" + st3 + ";" + textBox1.Text;
+
+                        //using (StreamWriter sw = new StreamWriter(fileName))
+                        //{
+
+                        //    try
+                        //    {
+                        //        sw.WriteLine(s1);
+                        //    }
+                        //    catch (Exception)
+                        //    {
+
+                        //        //  MessageBox.Show("Không ghi được, file server lost !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //    }
+
+
+                        //}
+                        //#endregion
+
+
                         #region ghi vao data pass, user, connectstring
 
 
                         string s1 = st1 + ";" + st2 + ";" + st3 + ";" + textBox1.Text;
 
-                        using (StreamWriter sw = new StreamWriter(fileName))
-                        {
+                     //   string s1 = st1 + ";" + st2 + ";" + st3 + ";" + st4 + ";" + textBox1.Text;
 
-                            try
-                            {
-                                sw.WriteLine(s1);
-                            }
-                            catch (Exception)
-                            {
+                        Model.SercurityFucntion bm = new Model.SercurityFucntion();
+                        string s2 = bm.Encryption(s1);
 
-                                //  MessageBox.Show("Không ghi được, file server lost !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                        bm.WritestringtoFile(fileName, s2);
 
-
-                        }
                         #endregion
+
+
+
+
+
+
+
 
 
 
