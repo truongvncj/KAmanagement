@@ -6858,13 +6858,11 @@ namespace KAmanagement
 		
 		private string _ExtNote;
 		
-		private System.Nullable<int> _CombineItem;
-		
-		private string _CombineType;
-		
 		private System.Nullable<double> _Temp;
 		
 		private System.Nullable<double> _COGS_ached;
+		
+		private System.Nullable<double> _SponsoredLimited;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -7004,14 +7002,12 @@ namespace KAmanagement
     partial void OnAddressChanged();
     partial void OnExtNoteChanging(string value);
     partial void OnExtNoteChanged();
-    partial void OnCombineItemChanging(System.Nullable<int> value);
-    partial void OnCombineItemChanged();
-    partial void OnCombineTypeChanging(string value);
-    partial void OnCombineTypeChanged();
     partial void OnTempChanging(System.Nullable<double> value);
     partial void OnTempChanged();
     partial void OnCOGS_achedChanging(System.Nullable<double> value);
     partial void OnCOGS_achedChanged();
+    partial void OnSponsoredLimitedChanging(System.Nullable<double> value);
+    partial void OnSponsoredLimitedChanged();
     #endregion
 		
 		public tbl_kacontractsdatadetail()
@@ -8359,46 +8355,6 @@ namespace KAmanagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CombineItem", DbType="Int")]
-		public System.Nullable<int> CombineItem
-		{
-			get
-			{
-				return this._CombineItem;
-			}
-			set
-			{
-				if ((this._CombineItem != value))
-				{
-					this.OnCombineItemChanging(value);
-					this.SendPropertyChanging();
-					this._CombineItem = value;
-					this.SendPropertyChanged("CombineItem");
-					this.OnCombineItemChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CombineType", DbType="NVarChar(50)")]
-		public string CombineType
-		{
-			get
-			{
-				return this._CombineType;
-			}
-			set
-			{
-				if ((this._CombineType != value))
-				{
-					this.OnCombineTypeChanging(value);
-					this.SendPropertyChanging();
-					this._CombineType = value;
-					this.SendPropertyChanged("CombineType");
-					this.OnCombineTypeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Temp", DbType="Float")]
 		public System.Nullable<double> Temp
 		{
@@ -8435,6 +8391,26 @@ namespace KAmanagement
 					this._COGS_ached = value;
 					this.SendPropertyChanged("COGS_ached");
 					this.OnCOGS_achedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SponsoredLimited", DbType="Float")]
+		public System.Nullable<double> SponsoredLimited
+		{
+			get
+			{
+				return this._SponsoredLimited;
+			}
+			set
+			{
+				if ((this._SponsoredLimited != value))
+				{
+					this.OnSponsoredLimitedChanging(value);
+					this.SendPropertyChanging();
+					this._SponsoredLimited = value;
+					this.SendPropertyChanged("SponsoredLimited");
+					this.OnSponsoredLimitedChanged();
 				}
 			}
 		}

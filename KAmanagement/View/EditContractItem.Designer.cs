@@ -34,11 +34,6 @@
             this.deletebt = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btproductchange = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cobinetype = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.combineitem = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.exConditionCbox = new System.Windows.Forms.CheckBox();
             this.extnote = new System.Windows.Forms.ComboBox();
@@ -87,9 +82,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.formlabelED = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.sponsorlimited = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gruopCtractdate.SuspendLayout();
@@ -133,7 +129,6 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btproductchange);
-            this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.groupBox2);
             this.groupBox4.Controls.Add(this.status);
             this.groupBox4.Controls.Add(this.label17);
@@ -175,62 +170,6 @@
             this.btproductchange.Text = "Covert Product Rate";
             this.btproductchange.UseVisualStyleBackColor = false;
             this.btproductchange.Click += new System.EventHandler(this.btproductchange_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cobinetype);
-            this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Controls.Add(this.combineitem);
-            this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Location = new System.Drawing.Point(390, 348);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(287, 71);
-            this.groupBox5.TabIndex = 112;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Combine Contract Item Term";
-            // 
-            // cobinetype
-            // 
-            this.cobinetype.FormattingEnabled = true;
-            this.cobinetype.Items.AddRange(new object[] {
-            "MAX",
-            "MIN"});
-            this.cobinetype.Location = new System.Drawing.Point(101, 40);
-            this.cobinetype.Name = "cobinetype";
-            this.cobinetype.Size = new System.Drawing.Size(89, 21);
-            this.cobinetype.TabIndex = 110;
-            // 
-            // label18
-            // 
-            this.label18.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label18.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(6, 42);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 19);
-            this.label18.TabIndex = 109;
-            this.label18.Text = "Combine Type";
-            // 
-            // combineitem
-            // 
-            this.combineitem.FormattingEnabled = true;
-            this.combineitem.Location = new System.Drawing.Point(101, 16);
-            this.combineitem.Name = "combineitem";
-            this.combineitem.Size = new System.Drawing.Size(89, 21);
-            this.combineitem.TabIndex = 108;
-            // 
-            // label15
-            // 
-            this.label15.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(6, 18);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(89, 19);
-            this.label15.TabIndex = 107;
-            this.label15.Text = "Combine Item";
             // 
             // groupBox2
             // 
@@ -327,7 +266,7 @@
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.tprcent);
             this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Location = new System.Drawing.Point(6, 347);
+            this.groupBox3.Location = new System.Drawing.Point(6, 370);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(287, 108);
             this.groupBox3.TabIndex = 99;
@@ -466,6 +405,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.sponsorlimited);
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.sunit);
             this.groupBox1.Controls.Add(this.amountsponsor);
             this.groupBox1.Controls.Add(this.label10);
@@ -476,7 +417,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(5, 197);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(284, 126);
+            this.groupBox1.Size = new System.Drawing.Size(284, 167);
             this.groupBox1.TabIndex = 97;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sponsor";
@@ -485,7 +426,7 @@
             // 
             this.sunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.sunit.FormattingEnabled = true;
-            this.sunit.Location = new System.Drawing.Point(95, 92);
+            this.sunit.Location = new System.Drawing.Point(97, 117);
             this.sunit.Name = "sunit";
             this.sunit.Size = new System.Drawing.Size(58, 21);
             this.sunit.TabIndex = 100;
@@ -505,7 +446,7 @@
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label10.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(4, 94);
+            this.label10.Location = new System.Drawing.Point(6, 119);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(84, 19);
             this.label10.TabIndex = 99;
@@ -761,10 +702,10 @@
             // 
             this.formlabelED.AutoSize = true;
             this.formlabelED.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.formlabelED.Font = new System.Drawing.Font("Microsoft MHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlabelED.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formlabelED.Location = new System.Drawing.Point(105, 23);
             this.formlabelED.Name = "formlabelED";
-            this.formlabelED.Size = new System.Drawing.Size(44, 17);
+            this.formlabelED.Size = new System.Drawing.Size(54, 16);
             this.formlabelED.TabIndex = 87;
             this.formlabelED.Text = "LABEL";
             // 
@@ -776,6 +717,27 @@
             this.label12.Size = new System.Drawing.Size(67, 13);
             this.label12.TabIndex = 88;
             this.label12.Text = "Contract No.";
+            // 
+            // sponsorlimited
+            // 
+            this.sponsorlimited.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.sponsorlimited.FormattingEnabled = true;
+            this.sponsorlimited.Location = new System.Drawing.Point(95, 92);
+            this.sponsorlimited.Name = "sponsorlimited";
+            this.sponsorlimited.Size = new System.Drawing.Size(171, 21);
+            this.sponsorlimited.TabIndex = 102;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(5, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(85, 19);
+            this.label15.TabIndex = 101;
+            this.label15.Text = "Sponsor Limited";
             // 
             // EditContractItem
             // 
@@ -799,7 +761,6 @@
             this.panel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -862,13 +823,10 @@
         private System.Windows.Forms.Button deletebt;
         private System.Windows.Forms.ComboBox extnote;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox cobinetype;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox combineitem;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox exConditionCbox;
         private System.Windows.Forms.Button btproductchange;
+        private System.Windows.Forms.ComboBox sponsorlimited;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -676,8 +676,8 @@ namespace KAmanagement.View
                                               ExtCondition = tbl_kacontractsdatadetail.ExtCondition,
                                               tbl_kacontractsdatadetail.ExtNote,
                                               Print = tbl_kacontractsdatadetail.PrintChk,
-                                              tbl_kacontractsdatadetail.CombineItem,
-                                              tbl_kacontractsdatadetail.CombineType,
+                                              tbl_kacontractsdatadetail.SponsoredLimited,
+                                        //      tbl_kacontractsdatadetail.CombineType,
 
 
                                               Done_On = tbl_kacontractsdatadetail.DoneOn
@@ -702,6 +702,9 @@ namespace KAmanagement.View
             this.dataGridProgramdetail.Columns["PaidRequest"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
             this.dataGridProgramdetail.Columns["Paid_Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
             this.dataGridProgramdetail.Columns["SponsorAmount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
+            this.dataGridProgramdetail.Columns["SponsoredLimited"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
+
+            
             this.dataGridProgramdetail.Columns["Achivement"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
                                                                                                                                    //   this.dataGridProgramdetail.Columns["Taget_Percentage"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
 
@@ -6736,6 +6739,322 @@ namespace KAmanagement.View
 
                 #endregion
 
+
+
+                #region dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04"
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    //newdetailContract.SponsoredAmtperPC
+                    newdetailContract.FundPercentage = (double)dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value;
+                    if (newdetailContract.FundPercentage > 100 || newdetailContract.FundPercentage <= 0)
+                    {
+                        MessageBox.Show("Please check  % Sponsor must between 0% to 100%  line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        checkcontract = false;
+                        return;
+
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Fund_Percent line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+                //---
+
+
+
+                //if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P02")
+                //{
+
+                //    newdetailContract.SponsoredAmt = (double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value;
+
+                //}
+                //if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P02")
+                //{
+                //    MessageBox.Show("Please check SponsoredAmt line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return;
+
+
+
+                //}
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+
+                    if ((double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value > 0)
+                    {
+                        newdetailContract.TagetAchivement = (double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value;
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Please check Taget_Achivement must be greater than 0 line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        checkcontract = false;
+                        return;
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Taget_Achivement line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+            //    SponsoredLimited
+
+           //     if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P02")
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+
+                    if ((double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value > 0)
+                    {
+                        newdetailContract.SponsoredLimited = (double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value;
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Please check Sponsored_Limited must be greater than 0 line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        checkcontract = false;
+                        return;
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Sponsored_Limited line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+
+
+
+                //---
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+
+                    newdetailContract.EffFrm = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value;
+
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Effect_From line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+
+                //--
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+
+                    newdetailContract.EffTo = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value;
+
+                }
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Effect_To line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+
+
+                //     newdetailContract.TargetUnit = (string)dataGridProgramdetail.Rows[idrow].Cells["TargetUnit"].Value;
+
+
+
+                #endregion
+
+
+                #region dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05"
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+                    //newdetailContract.SponsoredAmtperPC
+                    newdetailContract.FundPercentage = (double)dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value;
+                    if (newdetailContract.FundPercentage > 100 || newdetailContract.FundPercentage <= 0)
+                    {
+                        MessageBox.Show("Please check  % Sponsor must between 0% to 100%  line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        return;
+
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Fund_Percent"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+                    MessageBox.Show("Please check Fund_Percent line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    return;
+
+                }
+                //---
+
+                //    SponsoredLimited
+
+                //     if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P02")
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+
+                    if ((double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value > 0)
+                    {
+                        newdetailContract.SponsoredLimited = (double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value;
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Please check Sponsored_Limited must be greater than 0 line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        checkcontract = false;
+                        return;
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Limited"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P04")
+                {
+                    MessageBox.Show("Please check Sponsored_Limited line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+
+
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+
+                    if ((double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value > 0)
+                    {
+                        newdetailContract.TagetAchivement = (double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value;
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Please check Taget_Achivement must be greater than 0 line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        tbl_kacontractsdatadetaillist = null;
+                        newcontract = null;
+                        checkcontract = false;
+                        return;
+
+                    }
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Achivement"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+                    MessageBox.Show("Please check Taget_Achivement line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+
+
+                }
+
+
+                //if  zxczxc123*    (dataGridProgramdetail.Rows[idrow].Cells["Taget_Percentage"].Value.ToString() != "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P03")
+                //{
+                //    if ((double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Percentage"].Value >= 0 && (double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Percentage"].Value <= 100)
+                //    {
+                //        newdetailContract.TagetPercentage = (double)dataGridProgramdetail.Rows[idrow].Cells["Taget_Percentage"].Value;
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Taget Percentage must between 100 %, please check line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //        return;
+
+                //    }
+
+                //}
+
+                //if (dataGridProgramdetail.Rows[idrow].Cells["Taget_Percentage"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P03")
+                //{
+                //    MessageBox.Show("Please check Taget_Percentage line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return;
+
+
+
+                //}
+
+
+
+                //---
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+
+                    newdetailContract.EffFrm = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value;
+
+                }
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_From"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+                    MessageBox.Show("Please check Effect_From line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+
+                //--
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value != null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+
+                    newdetailContract.EffTo = (DateTime)dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value;
+
+                }
+
+                if (dataGridProgramdetail.Rows[idrow].Cells["Effect_To"].Value == null && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "P05")
+                {
+                    MessageBox.Show("Please check Effect_To line: " + (idrow + 1), "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    tbl_kacontractsdatadetaillist = null;
+                    newcontract = null;
+                    checkcontract = false;
+                    return;
+
+                }
+
+
+                //     newdetailContract.TargetUnit = (string)dataGridProgramdetail.Rows[idrow].Cells["TargetUnit"].Value;
+
+
+
+                #endregion
 
 
 

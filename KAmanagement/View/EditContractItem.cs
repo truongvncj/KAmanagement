@@ -241,6 +241,8 @@ namespace KAmanagement.View
 
 
                         }
+
+
                         if (item.FundPercentage != null)
                         {
                             spercent.Text = item.FundPercentage.ToString();
@@ -276,6 +278,17 @@ namespace KAmanagement.View
                         {
                             sunit.Enabled = false;
                         }
+
+
+                        if (item.SponsoredLimited != null)
+                        {
+                            sunit.Text = item.SponsoredLimited.ToString();
+                        }
+                        else
+                        {
+                            sunit.Enabled = false;
+                        }
+
 
                         if (item.TagetPercentage != null)
                         {
@@ -324,21 +337,8 @@ namespace KAmanagement.View
                             extnote.Text = "";
                         }
 
-                        if (item.CombineType != null)
-                        {
+                     
 
-
-                            cobinetype.SelectedText = item.CombineType;
-
-                        }
-
-                        if (item.CombineItem != null)
-                        {
-
-
-                            combineitem.SelectedText = item.CombineItem.ToString();
-
-                        }
 
 
 
@@ -1286,7 +1286,84 @@ namespace KAmanagement.View
 
             }
 
+            if (paycontrol == "P04")
+            {
+                #region
+                gruopCtractdate.Visible = true;
+                //paymentdatep.Value = DBNull.Value; //DBNull.Value;
+                paymentdatep.Visible = false;
+                lbdatepaid.Visible = false;
+                //DateTime t = d;
+                //paymentdatep.Value = null;
 
+                spercent.Enabled = true;
+                //   spercent.Text = "";
+
+
+                ucpcsponsor.Enabled = false;
+                //   ucpcsponsor.Text = "";
+
+                amountsponsor.Enabled = false;
+                //   amountsponsor.Text = "0";
+
+                sunit.Text = "%";
+
+                tprcent.Text = "";
+                tprcent.Enabled = false;
+
+
+                tachive.Enabled = true;
+                //    tachive.Text = "";
+
+                //      tunit.Enabled = false;
+                //tunit.Text = "";
+                tunit.Text = "VND";
+                tunit.Enabled = false;
+                sunit.Enabled = false;
+                sponsorlimited.Enabled = true;
+
+                #endregion
+
+            }
+
+            if (paycontrol == "P05")
+            {
+                #region
+                gruopCtractdate.Visible = true;
+                //paymentdatep.Value = DBNull.Value; //DBNull.Value;
+                paymentdatep.Visible = false;
+                lbdatepaid.Visible = false;
+                //DateTime t = d;
+                //paymentdatep.Value = null;
+
+                spercent.Enabled = true;
+                //   spercent.Text = "";
+
+
+                ucpcsponsor.Enabled = false;
+                //   ucpcsponsor.Text = "";
+
+                amountsponsor.Enabled = false;
+                //   amountsponsor.Text = "0";
+
+                sunit.Text = "%";
+
+                tprcent.Enabled = false;
+                //    tprcent.Text = "";
+
+                tachive.Enabled = true;
+                //    tachive.Text = "";
+
+                //      tunit.Enabled = false;
+                tunit.Text = "PC";
+                tunit.Enabled = false;
+                sunit.Enabled = false;
+
+                sponsorlimited.Enabled = true;
+
+                #endregion
+
+            }
 
 
 
@@ -1574,40 +1651,7 @@ namespace KAmanagement.View
                 }
 
 
-                if (combineitem.SelectedValue != null)
-                {
-
-                    if ((combineitem.SelectedItem as ComboboxItem).Value.ToString() != "")
-                    {
-
-
-
-                        item.CombineItem = int.Parse((combineitem.SelectedItem as ComboboxItem).Value.ToString());
-
-
-
-                        if (cobinetype.SelectedItem != null)
-                        {
-                            item.CombineType = (cobinetype.SelectedItem as ComboboxItem).Value.ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Please select a cobinetype", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            item = null;
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        item.CombineItem = 0;
-                        item.CombineType = "";
-
-
-
-                    }
-
-
-                }
+              
                 //else
                 //{
                 //    //MessageBox.Show("Please select a combineitemItem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
