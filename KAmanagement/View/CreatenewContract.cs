@@ -392,6 +392,8 @@ namespace KAmanagement.View
             dt.Columns.Add(new DataColumn("Fund_Percent", typeof(double)));
             dt.Columns.Add(new DataColumn("Amount_Per_Pc_Lit_FTN", typeof(double)));
             dt.Columns.Add(new DataColumn("Sponsored_Amount", typeof(double)));
+            dt.Columns.Add(new DataColumn("Sponsored_Limited", typeof(double)));
+
             dt.Columns.Add(new DataColumn("SponsortUnit", typeof(string)));
 
             //Threahold
@@ -545,21 +547,28 @@ namespace KAmanagement.View
             this.dataGridProgramdetail.Columns["Sponsored_Amount"].DefaultCellStyle.Format = "N0";
             this.dataGridProgramdetail.Columns["Sponsored_Amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
+
+
+            dataGridProgramdetail.Columns["Sponsored_Limited"].DisplayIndex = 9;
+            this.dataGridProgramdetail.Columns["Sponsored_Limited"].HeaderText = "Sponsored \nLimited";
+            this.dataGridProgramdetail.Columns["Sponsored_Limited"].DefaultCellStyle.Format = "N0";
+            this.dataGridProgramdetail.Columns["Sponsored_Limited"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
             //     dt.Columns.Add(new DataColumn("SponsortUnit", typeof(string)));
 
-            dataGridProgramdetail.Columns["SponsortUnit"].DisplayIndex = 9;
+            dataGridProgramdetail.Columns["SponsortUnit"].DisplayIndex = 10;
             this.dataGridProgramdetail.Columns["SponsortUnit"].HeaderText = "Sponsor \nUnit";
             this.dataGridProgramdetail.Columns["SponsortUnit"].DefaultCellStyle.Format = "N0";
             this.dataGridProgramdetail.Columns["SponsortUnit"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //this.dataGridProgramdetail.Columns["Taget_Percentage"].DefaultCellStyle.Format = "N0";
-            dataGridProgramdetail.Columns["Taget_Percentage"].DisplayIndex = 10;
+            dataGridProgramdetail.Columns["Taget_Percentage"].DisplayIndex = 11;
             this.dataGridProgramdetail.Columns["Taget_Percentage"].DefaultCellStyle.Format = "N0";
             this.dataGridProgramdetail.Columns["Taget_Percentage"].HeaderText = "Target \nPercentage";
             this.dataGridProgramdetail.Columns["Taget_Percentage"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
-            dataGridProgramdetail.Columns["Taget_Achivement"].DisplayIndex = 11;
+            dataGridProgramdetail.Columns["Taget_Achivement"].DisplayIndex = 12;
             dataGridProgramdetail.Columns["Taget_Achivement"].HeaderText = "Target Achivement";
             this.dataGridProgramdetail.Columns["Taget_Achivement"].DefaultCellStyle.Format = "N0";
             dataGridProgramdetail.Columns["Taget_Achivement"].Width = 80;
@@ -568,7 +577,7 @@ namespace KAmanagement.View
 
 
 
-            dataGridProgramdetail.Columns["TargetUnit"].DisplayIndex = 12;
+            dataGridProgramdetail.Columns["TargetUnit"].DisplayIndex = 13;
             dataGridProgramdetail.Columns["TargetUnit"].HeaderText = "Target Unit";
             this.dataGridProgramdetail.Columns["TargetUnit"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridProgramdetail.Columns["TargetUnit"].Width = 80;
@@ -576,17 +585,17 @@ namespace KAmanagement.View
             //     this.dataGridViewtotal.Columns["TargetUnit"].DefaultCellStyle.Format = "N0";
 
 
-            dataGridProgramdetail.Columns["Payment_Commit_Date"].DisplayIndex = 13;
+            dataGridProgramdetail.Columns["Payment_Commit_Date"].DisplayIndex = 14;
             dataGridProgramdetail.Columns["Payment_Commit_Date"].HeaderText = "Payment \nCommitment Date";
             this.dataGridProgramdetail.Columns["Payment_Commit_Date"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
 
 
-            dataGridProgramdetail.Columns["Effect_From"].DisplayIndex = 14;
+            dataGridProgramdetail.Columns["Effect_From"].DisplayIndex = 15;
             dataGridProgramdetail.Columns["Effect_From"].HeaderText = "From Date";
             this.dataGridProgramdetail.Columns["Effect_From"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            dataGridProgramdetail.Columns["Effect_To"].DisplayIndex = 15;
+            dataGridProgramdetail.Columns["Effect_To"].DisplayIndex = 16;
             dataGridProgramdetail.Columns["Effect_To"].HeaderText = "To Date";
             this.dataGridProgramdetail.Columns["Effect_To"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
@@ -1233,7 +1242,7 @@ namespace KAmanagement.View
 
                     }
 
-              
+
 
 
                     this.txt_term.Enabled = false;
@@ -1251,7 +1260,7 @@ namespace KAmanagement.View
 
                     NSRcommit.Enabled = false;
 
-                 
+
                     this.Nsaperyear.Enabled = false;
 
                     AchievdVolPCs.Enabled = false;
@@ -1293,8 +1302,8 @@ namespace KAmanagement.View
 
                     if (rs.AnnualVolume != null)
                     {
-                           this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
-                       // this.txt_annualvolume.Text = ((double)(rs.VolComm/rs.ConTerm)).ToString("#,#", CultureInfo.InvariantCulture);
+                        this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
+                        // this.txt_annualvolume.Text = ((double)(rs.VolComm/rs.ConTerm)).ToString("#,#", CultureInfo.InvariantCulture);
 
                     }
 
@@ -1993,6 +2002,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2072,6 +2086,10 @@ namespace KAmanagement.View
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.DarkGray;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.DarkGray;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = true;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = dateTimePicker2.Value;
@@ -2117,6 +2135,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2160,10 +2183,14 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
 
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
@@ -2307,6 +2334,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = true;
 
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
@@ -2416,6 +2447,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
 
@@ -2452,6 +2487,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
@@ -2535,6 +2575,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2545,6 +2590,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
 
@@ -2662,6 +2711,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2703,6 +2757,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
@@ -2788,6 +2847,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2848,6 +2912,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
@@ -2915,6 +2984,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -2961,6 +3035,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
@@ -3044,6 +3123,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -3092,6 +3176,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
@@ -3172,6 +3261,11 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
@@ -3209,6 +3303,11 @@ namespace KAmanagement.View
 
                         #endregion nomale all
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
+
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
@@ -3245,7 +3344,7 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
                                                                                                                                     //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "VND";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
-                                                                                                                                                                                                               //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
+                                                                                                                                                                                                             //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Value = "VND";
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.DarkGray;
@@ -3320,6 +3419,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
@@ -3346,6 +3449,10 @@ namespace KAmanagement.View
 
                         #endregion nomale all
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
@@ -3459,6 +3566,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
@@ -3486,6 +3597,10 @@ namespace KAmanagement.View
                         #endregion nomale all
 
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
@@ -3584,6 +3699,12 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
 
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
+
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = false;
@@ -3620,6 +3741,10 @@ namespace KAmanagement.View
 
                         #endregion nomale all
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
@@ -3730,6 +3855,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
 
@@ -3756,6 +3885,11 @@ namespace KAmanagement.View
 
 
                         #endregion nomale all
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
@@ -3858,6 +3992,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.White;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
 
@@ -3885,6 +4023,11 @@ namespace KAmanagement.View
 
 
                         #endregion nomale all
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
@@ -3990,6 +4133,10 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
 
@@ -4017,6 +4164,11 @@ namespace KAmanagement.View
 
                         #endregion nomale all
 
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
 
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
                         //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
@@ -4123,6 +4275,289 @@ namespace KAmanagement.View
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
                         dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = false;
+
+                        //       dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = false;
+
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].ReadOnly = false;
+
+
+                        #endregion nomale all
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = true;
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.DarkGray;
+                        ////dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
+
+                        string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
+                                                                                                                                    //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
+                                                                                                                                                                                                               //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Value = "PC";
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = dateTimePicker1.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = dateTimePicker2.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.DarkGray;
+
+
+
+                    }
+                    #endregion
+
+
+
+                    #region payment type  P04  - tra %nsr neu dat NSR la bao nhieu with limited
+
+
+                    if (paymentcontrol == "P04")
+                    {
+
+
+                        #region nomal all
+                        //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = false;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = false;
+
+                        //     dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
+
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = false;
+
+                        //       dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = false;
+
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].ReadOnly = false;
+
+
+                        #endregion nomale all
+
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
+
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.DarkGray;
+                        ////dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
+
+                        string txtvaluevolumecommit = (txt_volumecomit.Text.Replace(",", "")).Replace(".", "");
+                        if (!Utils.IsValidnumber(txtvaluevolumecommit))
+                        {
+                            txtvaluevolumecommit = "0";
+                        }
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(txtvaluevolumecommit);//System.DBNull.Value;
+                                                                                                                                    //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";                                                                                                          //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
+                                                                                                                                                                                                               //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Value = "VND";
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.DarkGray;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = true;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = dateTimePicker1.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.DarkGray;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = true;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = dateTimePicker2.Value;
+                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.DarkGray;
+
+
+
+                    }
+                    #endregion
+
+
+                    #region payment type  P05  - dat bao nhieu phan tram doanh so tra thepo % NSR with limnited
+
+
+                    if (paymentcontrol == "P05")
+                    {
+
+
+                        #region nomal all
+                        //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = false;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = false;
+
+                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = false;
+
+
+                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
+
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = false;
+
+                        //     dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = System.DBNull.Value;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
+
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.BackColor = Color.White;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].Style.ForeColor = Color.Blue;
+                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Limited"].ReadOnly = false;
+
 
 
 
@@ -4213,140 +4648,9 @@ namespace KAmanagement.View
                     #endregion
 
 
-                    #region payment type  P04  - dat bao nhieu phan tram NSR commit tra thepo % NSR
-
-
-                    if (paymentcontrol == "P04")
-                    {
-
-
-                        #region nomal all
-                        //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = false;
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = false;
-
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = false;
-
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = false;
-
-
-                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = false;
-
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = false;
-
-                        //     dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = false;
 
 
 
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = false;
-
-                        //       dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = false;
-
-
-                        //        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = false;
-
-
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.White;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].ReadOnly = false;
-
-
-                        #endregion nomale all
-
-
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Value = System.DBNull.Value;
-                        //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.BackColor = Color.DarkGray;
-                        //     dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].Style.ForeColor = Color.DarkGray;
-                        //      dataGridProgramdetail.Rows[e.RowIndex].Cells["Fund_Percent"].ReadOnly = true;
-
-                        // dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Value = System.DBNull.Value;
-                        // dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.BackColor = Color.DarkGray;
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].Style.ForeColor = Color.DarkGray;
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Percentage"].ReadOnly = true;
-
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Value = System.DBNull.Value;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.BackColor = Color.DarkGray;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].Style.ForeColor = Color.DarkGray;
-                        ////dataGridProgramdetail.Rows[e.RowIndex].Cells["ExtCondition"].ReadOnly = true;
-
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].Style.ForeColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Sponsored_Amount"].ReadOnly = true;
-
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].Style.ForeColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Amount_Per_Pc_Lit_FTN"].ReadOnly = true;
-                        // NSRcommit.Text
-                        string NSRcommitvol = (NSRcommit.Text.Replace(",", "")).Replace(".", "");
-                        if (!Utils.IsValidnumber(NSRcommitvol))
-                        {
-                            NSRcommitvol = "0";
-                        }
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Value = double.Parse(NSRcommitvol);//System.DBNull.Value;
-                                                                                                                            //    dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = "% NSR";
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].ReadOnly = true;
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].Style.ForeColor = Color.DarkGray;
-                        //   dataGridProgramdetail.Rows[e.RowIndex].Cells["SponsortUnit"].Value = cb_curency.Text;                                                                                                   //dataGridProgramdetail.Rows[e.RowIndex].Cells["Taget_Achivement"].ReadOnly = true;
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Value = "% NSR";
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].Style.ForeColor = Color.Blue;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["TargetUnit"].ReadOnly = true;
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Value = System.DBNull.Value;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.BackColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].Style.ForeColor = Color.DarkGray;
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Payment_Commit_Date"].ReadOnly = true;
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Value = dateTimePicker1.Value;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.BackColor = Color.DarkGray;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].Style.ForeColor = Color.DarkGray;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_From"].ReadOnly = true;
-
-
-                        dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Value = dateTimePicker2.Value;
-                        //dataGridProgramdetail.Rows[e.RowIndex].Cells["Effect_To"].Style.BackColor = Color.DarkGray;
-
-
-
-                    }
-                    #endregion
 
 
                 }
