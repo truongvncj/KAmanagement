@@ -252,6 +252,17 @@ namespace KAmanagement.View
                             spercent.Enabled = false;
                         }
 
+                        if (item.SponsoredLimited != null)
+                        {
+
+                            sponsorlimited.Text = item.SponsoredLimited.ToString();
+
+                        }
+                        else
+                        {
+                            spercent.Enabled = false;
+                        }
+
                         if (item.SponsoredAmtperPC != null)
                         {
                             ucpcsponsor.Text = item.SponsoredAmtperPC.ToString();
@@ -337,7 +348,7 @@ namespace KAmanagement.View
                             extnote.Text = "";
                         }
 
-                     
+
 
 
 
@@ -686,7 +697,7 @@ namespace KAmanagement.View
                 }
 
                 //cb_program.Text = "DIS";
-
+                sponsorlimited.Enabled = false;
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
@@ -736,7 +747,7 @@ namespace KAmanagement.View
                 //todatep.Enabled = false;
 
                 gruopCtractdate.Visible = false;
-
+                sponsorlimited.Enabled = false;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
@@ -779,7 +790,7 @@ namespace KAmanagement.View
 
                 paymentdatep.Visible = true;
                 lbdatepaid.Visible = true;
-                //DateTime t = d;
+                sponsorlimited.Enabled = false;
                 //paymentdatep.Value = null;
                 //fromdatep.Enabled = false;
                 //todatep.Enabled = false;
@@ -818,7 +829,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //  spercent.Text = "";
@@ -853,7 +864,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //      spercent.Text = "";
@@ -889,7 +900,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //     spercent.Text = "";
@@ -924,7 +935,7 @@ namespace KAmanagement.View
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
-                //DateTime t = d;
+                sponsorlimited.Enabled = false;
                 //paymentdatep.Value = null;
 
                 spercent.Enabled = false;
@@ -960,7 +971,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //      spercent.Text = "";
@@ -997,9 +1008,9 @@ namespace KAmanagement.View
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
-              
+
                 spercent.Enabled = false;
-                //      spercent.Text = "";
+                sponsorlimited.Enabled = false;
 
 
                 ucpcsponsor.Enabled = false;
@@ -1010,7 +1021,7 @@ namespace KAmanagement.View
 
                 sunit.Text = unitvalue;
 
-        //        tprcent.Enabled = true;
+                //        tprcent.Enabled = true;
                 //    tprcent.Text = "";
 
                 tachive.Enabled = true;
@@ -1032,7 +1043,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //  spercent.Text = "";
@@ -1068,7 +1079,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //      spercent.Text = "";
@@ -1103,7 +1114,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = true;
                 lbdatepaid.Visible = true;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 // spercent.Text = "";
@@ -1139,7 +1150,7 @@ namespace KAmanagement.View
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
-                //DateTime t = d;
+                sponsorlimited.Enabled = false;
                 //paymentdatep.Value = null;
 
                 spercent.Enabled = true;
@@ -1177,7 +1188,7 @@ namespace KAmanagement.View
                 paymentdatep.Visible = true;
                 lbdatepaid.Visible = true;
                 //DateTime t = d;
-                //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = true;
                 //   spercent.Text = "";
@@ -1214,7 +1225,7 @@ namespace KAmanagement.View
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
                 paymentdatep.Visible = false;
                 lbdatepaid.Visible = false;
-                //DateTime t = d;
+                sponsorlimited.Enabled = false;
                 //paymentdatep.Value = null;
 
                 spercent.Enabled = true;
@@ -1231,7 +1242,7 @@ namespace KAmanagement.View
 
                 tprcent.Text = "";
                 tprcent.Enabled = false;
-                 
+
 
                 tachive.Enabled = true;
                 //    tachive.Text = "";
@@ -1304,7 +1315,7 @@ namespace KAmanagement.View
                 //   ucpcsponsor.Text = "";
 
                 amountsponsor.Enabled = false;
-                //   amountsponsor.Text = "0";
+                sponsorlimited.Enabled = true;
 
                 sunit.Text = "%";
 
@@ -1344,6 +1355,7 @@ namespace KAmanagement.View
                 //   ucpcsponsor.Text = "";
 
                 amountsponsor.Enabled = false;
+                sponsorlimited.Enabled = true;
                 //   amountsponsor.Text = "0";
 
                 sunit.Text = "%";
@@ -1377,6 +1389,7 @@ namespace KAmanagement.View
                 lbdatepaid.Visible = false;
                 //DateTime t = d;
                 //paymentdatep.Value = null;
+                sponsorlimited.Enabled = false;
 
                 spercent.Enabled = false;
                 //   spercent.Text = "";
@@ -1651,7 +1664,7 @@ namespace KAmanagement.View
                 }
 
 
-              
+
                 //else
                 //{
                 //    //MessageBox.Show("Please select a combineitemItem", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1806,6 +1819,37 @@ namespace KAmanagement.View
                         else
                         {
                             MessageBox.Show("Please check amountsponsor must be geater or equal 0 !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                            item = null;
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check Amount sponsor date !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        item = null;
+                        return;
+                    }
+                else
+                {
+                    item.SponsoredAmt = null;
+                }
+
+                #endregion
+
+                #region so[ponsor limint
+
+                if (sponsorlimited.Enabled == true)
+                    if (sponsorlimited != null && Utils.IsValidnumber(sponsorlimited.Text) && sponsorlimited.Text != "")
+                    {
+                        if (double.Parse(sponsorlimited.Text.ToString()) >= 0)
+                        {
+                            item.SponsoredLimited = double.Parse(sponsorlimited.Text.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please check Sponsor limited must be geater or equal 0 !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                             item = null;
                             return;
@@ -2285,6 +2329,28 @@ namespace KAmanagement.View
 
                 #endregion
 
+                #region so[ponsor amount limint
+
+                if (sponsorlimited.Enabled == true)
+                {
+                    if (sponsorlimited != null && Utils.IsValidnumber(sponsorlimited.Text) && sponsorlimited.Text != "")
+                    {
+                        item.SponsoredLimited = double.Parse(sponsorlimited.Text.ToString());
+                    }
+                    else
+                    {
+                        item = null;
+                        MessageBox.Show("Please check Sponsor limited!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+                        return;
+                    }
+                }
+                else
+                {
+                    item.SponsoredAmt = null;
+                }
+
+                #endregion
 
                 //   amountsponsor.Text = "0";
 
