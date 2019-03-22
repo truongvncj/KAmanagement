@@ -517,6 +517,7 @@ namespace KAmanagement.View
             #region  //Sai PayControl 
             List<string> payctrlist = new List<string>();
             payctrlist.Add("C00");
+            payctrlist.Add("C01");
             //     listprogr.Add("DASANI");
 
             var mlist15 = from p in dc.tbl_tempcontractsdatadetails
@@ -526,7 +527,7 @@ namespace KAmanagement.View
             {
                 foreach (var item in mlist15)
                 {
-                    item.StatusNote = "PayControl sai ! hiện có C00 ";
+                    item.StatusNote = "PayControl sai ! hiện chỉ support loại C00 và C01 ";
                     dc.SubmitChanges();
                 }
                 checkberore = false;
@@ -635,6 +636,27 @@ namespace KAmanagement.View
             }
 
             #endregion
+
+            #region    // udate nếu thiếu detail date của điều khoản C01
+            var dlist201 = from p in dc.tbl_tempcontractsdatadetails
+                          where p.Username == username
+                          && p.PayControl=="C01"
+                          && p.Paydate == null
+                         
+                          select p;
+            if (dlist201.Count() > 0)
+            {
+                foreach (var item in dlist201)
+                {
+                    item.StatusNote = "Paydate must bu update, please check  !";
+                    dc.SubmitChanges();
+                }
+                checkberore = false;
+
+            }
+
+            #endregion
+
 
             #region    // nếu thiếu code fs thì tạo code mới
 
@@ -812,6 +834,7 @@ namespace KAmanagement.View
                                                                                            where p.Code == item2.PayControl
                                                                                                           select p.Description.Trim()).FirstOrDefault() ; //Description pay control
                                 newdetailContract.PayControl = item2.PayControl;
+                                newdetailContract.CommittedDate = item2.Paydate;
 
                                 newdetailContract.Remark = item2.Description; // Description contract
 

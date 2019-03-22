@@ -791,6 +791,9 @@ namespace KAmanagement.Model
             batable.Columns.Add("Remark", typeof(string));
             batable.Columns.Add("EffFrom", typeof(DateTime));
             batable.Columns.Add("EffTo", typeof(DateTime));
+            batable.Columns.Add("Paydate", typeof(DateTime));
+
+            
             batable.Columns.Add("Username", typeof(string));
 
          
@@ -806,7 +809,7 @@ namespace KAmanagement.Model
 
 
 
-
+            int Paydateid = -1;
             int ContractNoid = -1;
             int Programeid = -1;
             int PayControlid = -1;
@@ -848,6 +851,11 @@ namespace KAmanagement.Model
                             //  headindex = rowid;
                         }
 
+                        if (value.Trim() == "Paydate")
+                        {
+                            Paydateid = columid;
+                            //  headindex = rowid;
+                        }
                         if (value.Trim() == ("Programe"))
                         {
 
@@ -971,7 +979,14 @@ namespace KAmanagement.Model
                 MessageBox.Show("Please check Eff To  colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-        
+            // Paydateid
+            if (Paydateid == -1)
+            {
+                MessageBox.Show("Please check Paydate To  colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
 
             for (int rowixd = 1; rowixd < sourceData.Rows.Count; rowixd++)
             {
@@ -999,6 +1014,8 @@ namespace KAmanagement.Model
                     dr["Remark"] = sourceData.Rows[rowixd][Remarkid].ToString().Trim();
                     dr["EffFrom"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][EffFromid].ToString().Trim());
                     dr["EffTo"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][EffToid].ToString().Trim());
+                    dr["Paydate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][Paydateid].ToString().Trim());
+
 
 
 
@@ -1037,10 +1054,11 @@ namespace KAmanagement.Model
                 bulkCopy.ColumnMappings.Add("Remark", "[Remark]");
                 bulkCopy.ColumnMappings.Add("EffFrom", "[EffFrom]");
                 bulkCopy.ColumnMappings.Add("EffTo", "[EffTo]");
+                bulkCopy.ColumnMappings.Add("Paydate", "Paydate");
 
                 bulkCopy.ColumnMappings.Add("Username", "[Username]");
 
-
+           //     Paydate
                 try
                 {
                     bulkCopy.WriteToServer(batable);

@@ -19108,6 +19108,8 @@ namespace KAmanagement
 		
 		private string _Username;
 		
+		private System.Nullable<System.DateTime> _Paydate;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -19136,6 +19138,8 @@ namespace KAmanagement
     partial void OnidChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
+    partial void OnPaydateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPaydateChanged();
     #endregion
 		
 		public tbl_tempcontractsdatadetail()
@@ -19379,6 +19383,26 @@ namespace KAmanagement
 					this._Username = value;
 					this.SendPropertyChanged("Username");
 					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paydate", DbType="Date")]
+		public System.Nullable<System.DateTime> Paydate
+		{
+			get
+			{
+				return this._Paydate;
+			}
+			set
+			{
+				if ((this._Paydate != value))
+				{
+					this.OnPaydateChanging(value);
+					this.SendPropertyChanging();
+					this._Paydate = value;
+					this.SendPropertyChanged("Paydate");
+					this.OnPaydateChanged();
 				}
 			}
 		}
