@@ -620,8 +620,11 @@ namespace KAmanagement.View
 
                     #region  các doc của cogs không có trong data base
                     var rskhongcodoctrongsale = from qq in dc.tbl_kasalesTemps
-                                                where !(from pp in dc.tbl_kasales
+                                                where
+                                                  qq.Username == username &&
+                                                !(from pp in dc.tbl_kasales
                                                         select pp.Invoice_Doc_Nr).Contains(qq.Invoice_Doc_Nr)
+                                               
                                                 select qq;
 
                     if (rskhongcodoctrongsale.Count() > 0)
