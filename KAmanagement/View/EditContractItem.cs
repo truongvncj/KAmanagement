@@ -1806,37 +1806,59 @@ namespace KAmanagement.View
                 //  ucpcsponsor.Text = "";
 
                 //   amountsponsor.Enabled = true;
+                //       amountsponsor
 
-                #region so[ponsor amount
-
+                #region so[ponsor amount  amountsponsor
                 if (amountsponsor.Enabled == true)
-                    if (amountsponsor != null && Utils.IsValidnumber(amountsponsor.Text) && amountsponsor.Text != "")
+                {
+
+           
+
+                    if (Utils.IsValidnumber(amountsponsor.Text) && amountsponsor.Text != "")
                     {
+
+
                         if (double.Parse(amountsponsor.Text.ToString()) >= 0)
                         {
+
                             item.SponsoredAmt = double.Parse(amountsponsor.Text.ToString());
+                         //   MessageBox.Show("!!!!!!!!22", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                         }
                         else
                         {
-                            MessageBox.Show("Please check amountsponsor must be geater or equal 0 !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            MessageBox.Show("Please check amountsponsor must be greater thanh from 0 !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                             item = null;
+                         //   MessageBox.Show("!!!!!!!!32", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                             return;
                         }
 
                     }
                     else
                     {
-                        MessageBox.Show("Please check Amount sponsor date !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show("Please check amountsponsor must be a number !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                         item = null;
                         return;
                     }
+
+
+
+                }
                 else
                 {
+                    amountsponsor.Enabled = false;
                     item.SponsoredAmt = null;
+                  //  MessageBox.Show("!!!!!!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                 }
 
+
                 #endregion
+
+
 
                 #region so[ponsor limint
 
@@ -1864,7 +1886,7 @@ namespace KAmanagement.View
                     }
                 else
                 {
-                    item.SponsoredAmt = null;
+                    item.SponsoredLimited = null;
                 }
 
                 #endregion
@@ -2347,7 +2369,7 @@ namespace KAmanagement.View
                 }
                 else
                 {
-                    item.SponsoredAmt = null;
+                    item.SponsoredLimited = null;
                 }
 
                 #endregion
