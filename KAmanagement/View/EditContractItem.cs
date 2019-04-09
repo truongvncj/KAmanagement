@@ -260,7 +260,7 @@ namespace KAmanagement.View
                         }
                         else
                         {
-                            spercent.Enabled = false;
+                            sponsorlimited.Enabled = false;
                         }
 
                         if (item.SponsoredAmtperPC != null)
