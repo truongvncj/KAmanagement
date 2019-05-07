@@ -271,7 +271,7 @@ namespace KAmanagement.View
 
             #region   //Channel sai channel
             var mlist5 = from p in dc.tbl_tempmastercontractmasscreates
-                         where p.Channel!="" && p.Username == username// && ! (from dp in dc.tbl_kaChannels //tbl_kaChannel
+                         where p.Channel != "" && p.Username == username// && ! (from dp in dc.tbl_kaChannels //tbl_kaChannel
                          && !channellist.Contains(p.Channel.Trim())
                          //     select dp.Channel.Trim().ToUpper()).Contains(p.Channel.Trim().ToUpper())
                          select p;
@@ -604,6 +604,87 @@ namespace KAmanagement.View
             #endregion
 
 
+
+            #region    // check c00 > 20 trieu
+            var dlist133 = from p in dc.tbl_tempcontractsdatadetails
+                           where p.Username == username
+                           && p.PayControl == "C00"
+                           && p.Sponsored_Amount >= 20000000
+                           select p;
+            if (dlist133.Count() > 0)
+            {
+                foreach (var item in dlist133)
+                {
+
+
+                    #region check
+
+
+
+
+                    //if (newdetailContract.SponsoredAmt >= 20000000 && this.cb_contracttype.SelectedItem.ToString() == "ASMPQ")
+                    //{
+
+                    DialogResult surekq = MessageBox.Show("Bạn có chắc tài trợ tiền mặt lớn hơn 20 000 000 VNĐ ? ", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                    switch (surekq)
+                    {
+
+                        case DialogResult.None:
+                            break;
+                        case DialogResult.Yes:
+
+
+                            break;
+                        case DialogResult.Cancel:
+                            break;
+                        case DialogResult.Abort:
+                            break;
+                        case DialogResult.Retry:
+                            break;
+                        case DialogResult.Ignore:
+                            break;
+                        case DialogResult.OK:
+                            break;
+                        case DialogResult.No:
+
+                            //    tbl_kacontractsdatadetaillist = null;
+                            //    newcontract = null;
+                            //    checkcontract = false;
+                            //  return;
+
+                            item.StatusNote = "C00 trả lớn hơn 20 triệu chưa chắc chắn !";
+                            dc.SubmitChanges();
+
+                            checkberore = false;
+
+
+
+
+                            break;
+                        default:
+                            break;
+                    }
+
+
+
+
+                    //     }
+                    #endregion check
+
+
+
+
+                }
+
+
+            }
+
+            #endregion
+
+
+
             #region    // udate nếu thiếu detail date
             var dlist20 = from p in dc.tbl_tempcontractsdatadetails
                           where p.Username == username
@@ -639,11 +720,11 @@ namespace KAmanagement.View
 
             #region    // udate nếu thiếu detail date của điều khoản C01
             var dlist201 = from p in dc.tbl_tempcontractsdatadetails
-                          where p.Username == username
-                          && p.PayControl=="C01"
-                          && p.Paydate == null
-                         
-                          select p;
+                           where p.Username == username
+                           && p.PayControl == "C01"
+                           && p.Paydate == null
+
+                           select p;
             if (dlist201.Count() > 0)
             {
                 foreach (var item in dlist201)
@@ -810,17 +891,17 @@ namespace KAmanagement.View
                         newcontract.EftDate = item.EftoDate;// this.dateTimePicker2.Value;
                         newcontract.ExtDate = item.ExtendDate; // this.dateTimePicker3.Value;
                         newcontract.SALORG_CTR = Utils.getfirstusersalescontrolregion();
-                        
+
                         dc.tbl_kacontractdatas.InsertOnSubmit(newcontract);
                         dc.SubmitChanges();
-                       
+
 
                         var listdetail = from p in dc.tbl_tempcontractsdatadetails
-                                          where p.Username == username
-                                          && p.ContractNo  == item.ContractNo
-                                          select p;
+                                         where p.Username == username
+                                         && p.ContractNo == item.ContractNo
+                                         select p;
 
-                        if (listdetail.Count() >0)
+                        if (listdetail.Count() > 0)
                         {
                             List<tbl_kacontractsdatadetail> tbl_kacontractsdatadetaillist = new List<tbl_kacontractsdatadetail>();
                             foreach (var item2 in listdetail)
@@ -830,9 +911,9 @@ namespace KAmanagement.View
                                 newdetailContract.Customercode = item.Customer;
                                 newdetailContract.PayType = item2.Programe;
                                 newdetailContract.CustomerType = "SFA";
-                                newdetailContract.Description = item2.PayControl.Trim() +" : "+ ( from p in dc.tbl_Kafuctionlists
-                                                                                           where p.Code == item2.PayControl
-                                                                                                          select p.Description.Trim()).FirstOrDefault() ; //Description pay control
+                                newdetailContract.Description = item2.PayControl.Trim() + " : " + (from p in dc.tbl_Kafuctionlists
+                                                                                                   where p.Code == item2.PayControl
+                                                                                                   select p.Description.Trim()).FirstOrDefault(); //Description pay control
                                 newdetailContract.PayControl = item2.PayControl;
                                 newdetailContract.CommittedDate = item2.Paydate;
 
@@ -863,16 +944,16 @@ namespace KAmanagement.View
 
 
                             }
-                                   dc.tbl_kacontractsdatadetails.InsertAllOnSubmit(tbl_kacontractsdatadetaillist);
-                                   dc.SubmitChanges();
-                           
+                            dc.tbl_kacontractsdatadetails.InsertAllOnSubmit(tbl_kacontractsdatadetaillist);
+                            dc.SubmitChanges();
+
                         }
 
 
 
 
 
-                        
+
                     }
 
                 }

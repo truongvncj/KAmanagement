@@ -5486,6 +5486,55 @@ namespace KAmanagement.View
 
                     newdetailContract.SponsoredAmt = (double)dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value;
 
+                  
+                    if (newdetailContract.SponsoredAmt >= 20000000 && this.cb_contracttype.SelectedItem.ToString() == "ASMPQ")
+                    {
+
+                        DialogResult surekq = MessageBox.Show("Bạn có chắc tài trợ tiền mặt lớn hơn 20 000 000 VNĐ ? ", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                        switch (surekq)
+                        {
+
+                            case DialogResult.None:
+                                break;
+                            case DialogResult.Yes:
+                           
+
+                                break;
+                            case DialogResult.Cancel:
+                                break;
+                            case DialogResult.Abort:
+                                break;
+                            case DialogResult.Retry:
+                                break;
+                            case DialogResult.Ignore:
+                                break;
+                            case DialogResult.OK:
+                                break;
+                            case DialogResult.No:
+
+                                tbl_kacontractsdatadetaillist = null;
+                                newcontract = null;
+                                checkcontract = false;
+                                return;
+
+
+
+
+
+
+                               // break;
+                            default:
+                                break;
+                        }
+
+
+
+
+                    }
+
+
                 }
                 if (dataGridProgramdetail.Rows[idrow].Cells["Sponsored_Amount"].Value.ToString() == "" && dataGridProgramdetail.Rows[idrow].Cells["Payment_Control"].Value.ToString() == "C00")
                 {
@@ -5498,6 +5547,11 @@ namespace KAmanagement.View
 
 
                 }
+
+
+
+
+
 
 
 
