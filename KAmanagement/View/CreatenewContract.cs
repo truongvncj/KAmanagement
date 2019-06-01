@@ -153,134 +153,186 @@ namespace KAmanagement.View
         public void loadtotaldContractView(string ContractNoin)
         {
 
-            #region load total
+          //  #region load total
 
-            #region  create temtoatalcontract
-
-            #region delete  tbl_KaCreatCrtracttemp
+            //#region delete  tbl_KaCreatCrtracttemp  -- đã cho vào newcreatetemp total
 
 
             string username = Utils.getusername();
             string connection_string = Utils.getConnectionstr();
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-            string sqltext = "DELETE FROM tbl_KaCreatCrtracttemp WHERE tbl_KaCreatCrtracttemp.Username = '" + username + "'";
-            dc.ExecuteCommand(sqltext);
-            dc.SubmitChanges();
+            //string sqltext = "DELETE FROM tbl_KaCreatCrtracttemp WHERE tbl_KaCreatCrtracttemp.Username = '" + username + "'";
+            //dc.ExecuteCommand(sqltext);
+            //dc.SubmitChanges();
 
 
-            #endregion
+            //#endregion
+
+            #region newcraete temptolat in sql
 
 
-            //      float totalcommit = 0;
+        
+            SqlConnection conn2 = null;
+            SqlDataReader rdr1 = null;
 
-            tbl_KaCreatCrtracttemp temptotal2 = new tbl_KaCreatCrtracttemp();  // hàng tổng kết
-            temptotal2.CommitmentAmount = 0;
-            temptotal2.CommitmentPerPC = 0;
-            temptotal2.CommitmentPercentage = 0;
-            temptotal2.Total_Achived = 0;
-            temptotal2.Total_Paid = 0;
-            temptotal2.Balance = 0;
-
-
-            var rss1 = from tbl_kaprogramlist in dc.tbl_kaprogramlists
-                       where tbl_kaprogramlist.Code != "DIS"
-                       select tbl_kaprogramlist;
-
-            foreach (var item in rss1)
+            string destConnString = Utils.getConnectionstr();
+            try
             {
-                tbl_KaCreatCrtracttemp temptotal = new tbl_KaCreatCrtracttemp();  // các hàng chi tiết
 
-                string filter = "";
-                string statusview = (from tbl_kacontractdata in dc.tbl_kacontractdatas
-                                     where tbl_kacontractdata.ContractNo.Equals(ContractNoin)
-                                     select tbl_kacontractdata.Consts).FirstOrDefault();
-
-                if (statusview != null)
-                {
-                    if (statusview == "ALV")
-                    {
-                        filter = "ALV";
-                    }
-                    else
-                    {
-                        filter = "";
-                    }
-                }
-                else
-                {
-                    filter = "";
-                }
+                conn2 = new SqlConnection(destConnString);
+                conn2.Open();
+                SqlCommand cmd1 = new SqlCommand("createtemtoatalcontract", conn2);
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@Contractno", SqlDbType.NVarChar).Value = ContractNoin;
+                cmd1.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
+                cmd1.CommandTimeout = 0;
+                rdr1 = cmd1.ExecuteReader();
 
 
-                temptotal.Programe = item.Name;
-                //  totalcommit = totalcommit + item.c
-                //   temptotal.Analyses = item.Name + "/CS";
-                var totaldetailrs = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
-                                     where tbl_kacontractsdatadetail.PayType == item.Code && tbl_kacontractsdatadetail.ContractNo.Equals(ContractNoin)
-                                     && tbl_kacontractsdatadetail.Constatus.Contains(filter)
-                                     group tbl_kacontractsdatadetail by tbl_kacontractsdatadetail.PayType into g
-                                     select new
-                                     {
-                                         CommitPercentage = g.Sum(gg => gg.FundPercentage).GetValueOrDefault(0),
-                                         Commitment = g.Sum(gg => gg.SponsoredAmt).GetValueOrDefault(0),
-                                         Commitment_cs = g.Sum(gg => gg.SponsoredAmtperPC).GetValueOrDefault(0),
 
-                                         Total_Achived = g.Sum(gg => gg.SponsoredTotal).GetValueOrDefault(0), // ConfAmt lấy confirm amount làm tinh tong tien 
-                                                                                                              //   Balance = g.Sum(gg => gg.Balance).GetValueOrDefault(0)
-
-                                     }).FirstOrDefault();
-
-                if (totaldetailrs != null)
-                {
-                    temptotal.CommitmentAmount = totaldetailrs.Commitment;
-                    temptotal.Total_Achived = totaldetailrs.Total_Achived;
-                    temptotal.CommitmentPerPC = totaldetailrs.Commitment_cs;
-                    temptotal.CommitmentPercentage = totaldetailrs.CommitPercentage;
-                    temptotal.Total_Paid = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
-                                            where tbl_kacontractsdetailpayment.PayType == item.Code && tbl_kacontractsdetailpayment.ContractNo.Equals(ContractNoin)
-                                            select tbl_kacontractsdetailpayment.PaidAmt).Sum().GetValueOrDefault(0);
-                    temptotal.Balance = totaldetailrs.Total_Achived - temptotal.Total_Paid;
-                }
-                else
-                {
-                    temptotal.CommitmentAmount = 0;
-                    temptotal.CommitmentPerPC = 0;
-                    temptotal.CommitmentPercentage = 0;
-                    temptotal.Total_Achived = 0;
-                    temptotal.Total_Paid = 0;
-                    temptotal.Balance = 0;
-                }
-
-                //  paid = g.Sum(gg => gg.PaidAmt).GetValueOrDefault(0),
-
-
-                temptotal2.CommitmentAmount = temptotal2.CommitmentAmount + temptotal.CommitmentAmount;
-                temptotal2.CommitmentPerPC = temptotal2.CommitmentPerPC + temptotal.CommitmentPerPC;
-                temptotal2.CommitmentPercentage = temptotal2.CommitmentPercentage + temptotal2.CommitmentPercentage;
-                temptotal2.Total_Achived = temptotal2.Total_Achived + temptotal.Total_Achived;
-                temptotal2.Total_Paid = temptotal2.Total_Paid + temptotal.Total_Paid;
-                temptotal2.Balance = temptotal2.Balance + temptotal.Balance;
-
-
-                temptotal.Username = username;
-                dc.CommandTimeout = 0;
-                dc.tbl_KaCreatCrtracttemps.InsertOnSubmit(temptotal);
-                dc.SubmitChanges();
+                //       rdr1 = cmd1.ExecuteReader();
 
             }
+            finally
+            {
+                if (conn2 != null)
+                {
+                    conn2.Close();
+                }
+                if (rdr1 != null)
+                {
+                    rdr1.Close();
+                }
+            }
+            //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+      
 
 
-            temptotal2.Programe = "Total";
-
-            temptotal2.Username = username;
-            // temptotal2.Analyses = "Total";
 
 
-            dc.tbl_KaCreatCrtracttemps.InsertOnSubmit(temptotal2);
-            dc.SubmitChanges();
+          //  x
+
+            #region   newcraete temptolat in sql
+
+            //#region  createtemtoatalcontract
+
+
+            ////      float totalcommit = 0;
+
+            //tbl_KaCreatCrtracttemp temptotal2 = new tbl_KaCreatCrtracttemp();  // hàng tổng kết
+            //temptotal2.CommitmentAmount = 0;
+            //temptotal2.CommitmentPerPC = 0;
+            //temptotal2.CommitmentPercentage = 0;
+            //temptotal2.Total_Achived = 0;
+            //temptotal2.Total_Paid = 0;
+            //temptotal2.Balance = 0;
+
+
+            //var rss1 = from tbl_kaprogramlist in dc.tbl_kaprogramlists
+            //           where tbl_kaprogramlist.Code != "DIS"
+            //           select tbl_kaprogramlist;
+
+            //foreach (var item in rss1)
+            //{
+            //    tbl_KaCreatCrtracttemp temptotal = new tbl_KaCreatCrtracttemp();  // các hàng chi tiết
+
+            //    string filter = "";
+            //    string statusview = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+            //                         where tbl_kacontractdata.ContractNo.Equals(ContractNoin)
+            //                         select tbl_kacontractdata.Consts).FirstOrDefault();
+
+            //    if (statusview != null)
+            //    {
+            //        if (statusview == "ALV")
+            //        {
+            //            filter = "ALV";
+            //        }
+            //        else
+            //        {
+            //            filter = "";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        filter = "";
+            //    }
+
+
+            //    temptotal.Programe = item.Name;
+            //    //  totalcommit = totalcommit + item.c
+            //    //   temptotal.Analyses = item.Name + "/CS";
+            //    var totaldetailrs = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+            //                         where tbl_kacontractsdatadetail.PayType == item.Code && tbl_kacontractsdatadetail.ContractNo.Equals(ContractNoin)
+            //                         && tbl_kacontractsdatadetail.Constatus.Contains(filter)
+            //                         group tbl_kacontractsdatadetail by tbl_kacontractsdatadetail.PayType into g
+            //                         select new
+            //                         {
+            //                             CommitPercentage = g.Sum(gg => gg.FundPercentage).GetValueOrDefault(0),
+            //                             Commitment = g.Sum(gg => gg.SponsoredAmt).GetValueOrDefault(0),
+            //                             Commitment_cs = g.Sum(gg => gg.SponsoredAmtperPC).GetValueOrDefault(0),
+
+            //                             Total_Achived = g.Sum(gg => gg.SponsoredTotal).GetValueOrDefault(0), // ConfAmt lấy confirm amount làm tinh tong tien 
+            //                                                                                                  //   Balance = g.Sum(gg => gg.Balance).GetValueOrDefault(0)
+
+            //                         }).FirstOrDefault();
+
+            //    if (totaldetailrs != null)
+            //    {
+            //        temptotal.CommitmentAmount = totaldetailrs.Commitment;
+            //        temptotal.Total_Achived = totaldetailrs.Total_Achived;
+            //        temptotal.CommitmentPerPC = totaldetailrs.Commitment_cs;
+            //        temptotal.CommitmentPercentage = totaldetailrs.CommitPercentage;
+            //        temptotal.Total_Paid = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+            //                                where tbl_kacontractsdetailpayment.PayType == item.Code && tbl_kacontractsdetailpayment.ContractNo.Equals(ContractNoin)
+            //                                select tbl_kacontractsdetailpayment.PaidAmt).Sum().GetValueOrDefault(0);
+            //        temptotal.Balance = totaldetailrs.Total_Achived - temptotal.Total_Paid;
+            //    }
+            //    else
+            //    {
+            //        temptotal.CommitmentAmount = 0;
+            //        temptotal.CommitmentPerPC = 0;
+            //        temptotal.CommitmentPercentage = 0;
+            //        temptotal.Total_Achived = 0;
+            //        temptotal.Total_Paid = 0;
+            //        temptotal.Balance = 0;
+            //    }
+
+            //    //  paid = g.Sum(gg => gg.PaidAmt).GetValueOrDefault(0),
+
+
+            //    temptotal2.CommitmentAmount = temptotal2.CommitmentAmount + temptotal.CommitmentAmount;
+            //    temptotal2.CommitmentPerPC = temptotal2.CommitmentPerPC + temptotal.CommitmentPerPC;
+            //    temptotal2.CommitmentPercentage = temptotal2.CommitmentPercentage + temptotal2.CommitmentPercentage;
+            //    temptotal2.Total_Achived = temptotal2.Total_Achived + temptotal.Total_Achived;
+            //    temptotal2.Total_Paid = temptotal2.Total_Paid + temptotal.Total_Paid;
+            //    temptotal2.Balance = temptotal2.Balance + temptotal.Balance;
+
+
+            //    temptotal.Username = username;
+            //    dc.CommandTimeout = 0;
+            //    dc.tbl_KaCreatCrtracttemps.InsertOnSubmit(temptotal);
+            //    dc.SubmitChanges();
+
+            //}
+
+
+            //temptotal2.Programe = "Total";
+
+            //temptotal2.Username = username;
+            //// temptotal2.Analyses = "Total";
+
+
+            //dc.tbl_KaCreatCrtracttemps.InsertOnSubmit(temptotal2);
+            //dc.SubmitChanges();
 
 
             #endregion
+
+
+
+
+
 
             #region load teamtotal
 
