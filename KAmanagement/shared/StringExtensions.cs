@@ -19,7 +19,22 @@ namespace KAmanagement.shared
 
 
             }
-      
 
+        public static string Truncate(this string source, int length)
+        {
+            if (source != null)
+            {
+                if (source.Length > length)
+                {
+                    return source.Substring(0, length);
+                }
+                return source;
+            }
+            else
+            {
+                return " ";
+            }
+
+        }
     }
 }

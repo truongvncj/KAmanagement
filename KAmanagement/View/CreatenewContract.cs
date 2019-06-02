@@ -10,6 +10,7 @@ using KAmanagement.Control;
 using System.Globalization;
 using System.Threading;
 using System.Data.SqlClient;
+using KAmanagement.shared;
 
 namespace KAmanagement.View
 {
@@ -658,6 +659,77 @@ namespace KAmanagement.View
 
         }
 
+
+        public void loadDetailContractViewpayment(string ContractNoin)
+        {
+
+            #region dataGridView7  detail pay ment
+            string connection_string = Utils.getConnectionstr();
+            //  string username = Utils.getusername();
+
+            LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+
+
+            var dataGridProgramdetailrs7 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                                           where tbl_kacontractsdetailpayment.ContractNo == ContractNoin
+                                           && tbl_kacontractsdetailpayment.BatchNo != 0  // && tbl_kacontractsdetailpayment.PayControl == "PAY"
+                                           select new
+                                           {
+
+                                               Programe = tbl_kacontractsdetailpayment.PayType.Trim(),
+                                               PayControlID = tbl_kacontractsdetailpayment.PayControl.Trim(),
+                                               Paid_Note = tbl_kacontractsdetailpayment.PaidNote,
+                                               Description = tbl_kacontractsdetailpayment.Remark.Trim(),
+
+                                               Paid_Amount = tbl_kacontractsdetailpayment.PaidAmt,
+                                               tbl_kacontractsdetailpayment.PaidRequestAmt,
+
+                                               //    PaidNote = tbl_kacontractsdetailpayment.PaidNote,
+                                               PaymentDoc = tbl_kacontractsdetailpayment.PaymentDoc,
+                                               tbl_kacontractsdetailpayment.DoneOn,
+
+                                               tbl_kacontractsdetailpayment.PrintChk,
+                                               tbl_kacontractsdetailpayment.Reprint,
+                                               tbl_kacontractsdetailpayment.PrintDate,
+                                               //     Remarks = tbl_kacontractsdetailpayment.Remark.Trim(),
+                                               tbl_kacontractsdetailpayment.BatchNo,
+                                               tbl_kacontractsdetailpayment.CRDDAT,
+                                               tbl_kacontractsdetailpayment.CRDUSR,
+                                               //   tbl_kacontractsdetailpayment.DoneOn,
+
+
+                                               tbl_kacontractsdetailpayment.UPDDAT,
+                                               tbl_kacontractsdetailpayment.UPDUSR,
+
+                                               PayID = tbl_kacontractsdetailpayment.PayID,
+                                               SubID = tbl_kacontractsdetailpayment.SubID,
+
+
+                                           };
+
+            //   dataGridView7.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dataGridView7.DataSource = dataGridProgramdetailrs7;
+
+            if (dataGridProgramdetailrs7.Count() > 0)
+            {
+
+                this.dataGridView7.Columns["Paid_Amount"].DefaultCellStyle.Format = "N0";
+                this.dataGridView7.Columns["PaidRequestAmt"].DefaultCellStyle.Format = "N0";
+
+
+
+                this.dataGridView7.Columns["Paid_Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
+                this.dataGridView7.Columns["PaidRequestAmt"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
+
+            }
+
+            #endregion
+
+
+        }
+
         public void loadDetailContractView(string ContractNoin)
         {
 
@@ -766,64 +838,7 @@ namespace KAmanagement.View
 
             #endregion
 
-            #region dataGridView7  detail pay ment
-
-            var dataGridProgramdetailrs7 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
-                                           where tbl_kacontractsdetailpayment.ContractNo == ContractNoin
-                                           && tbl_kacontractsdetailpayment.BatchNo != 0  // && tbl_kacontractsdetailpayment.PayControl == "PAY"
-                                           select new
-                                           {
-
-                                               Programe = tbl_kacontractsdetailpayment.PayType.Trim(),
-                                               PayControlID = tbl_kacontractsdetailpayment.PayControl.Trim(),
-                                               Paid_Note = tbl_kacontractsdetailpayment.PaidNote,
-                                               Description = tbl_kacontractsdetailpayment.Remark.Trim(),
-
-                                               Paid_Amount = tbl_kacontractsdetailpayment.PaidAmt,
-                                               tbl_kacontractsdetailpayment.PaidRequestAmt,
-
-                                               //    PaidNote = tbl_kacontractsdetailpayment.PaidNote,
-                                               PaymentDoc = tbl_kacontractsdetailpayment.PaymentDoc,
-                                               tbl_kacontractsdetailpayment.DoneOn,
-
-                                               tbl_kacontractsdetailpayment.PrintChk,
-                                               tbl_kacontractsdetailpayment.Reprint,
-                                               tbl_kacontractsdetailpayment.PrintDate,
-                                               //     Remarks = tbl_kacontractsdetailpayment.Remark.Trim(),
-                                               tbl_kacontractsdetailpayment.BatchNo,
-                                               tbl_kacontractsdetailpayment.CRDDAT,
-                                               tbl_kacontractsdetailpayment.CRDUSR,
-                                               //   tbl_kacontractsdetailpayment.DoneOn,
-
-
-                                               tbl_kacontractsdetailpayment.UPDDAT,
-                                               tbl_kacontractsdetailpayment.UPDUSR,
-
-                                               PayID = tbl_kacontractsdetailpayment.PayID,
-                                               SubID = tbl_kacontractsdetailpayment.SubID,
-
-
-                                           };
-
-            //   dataGridView7.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            dataGridView7.DataSource = dataGridProgramdetailrs7;
-
-            if (dataGridProgramdetailrs7.Count() > 0)
-            {
-
-                this.dataGridView7.Columns["Paid_Amount"].DefaultCellStyle.Format = "N0";
-                this.dataGridView7.Columns["PaidRequestAmt"].DefaultCellStyle.Format = "N0";
-
-
-
-                this.dataGridView7.Columns["Paid_Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
-                this.dataGridView7.Columns["PaidRequestAmt"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
-
-            }
-
-            #endregion
-
+        
 
 
 
@@ -873,6 +888,7 @@ namespace KAmanagement.View
 
 
             this.contractdata = contractdata;
+
             tb_contractno.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             tb_contractno.AutoCompleteSource = AutoCompleteSource.CustomSource;
             tb_contractno.AutoCompleteCustomSource = contractdata;
@@ -1083,44 +1099,6 @@ namespace KAmanagement.View
                 this.cb_customerka.DropDownStyle = ComboBoxStyle.Simple;
                 this.cb_delivery.DropDownStyle = ComboBoxStyle.Simple;
                 this.txtfindsacode.DropDownStyle = ComboBoxStyle.Simple;
-
-
-                //#region load cobcusstomer data
-
-
-                //List<ComboboxItem> CombomCollection = new List<ComboboxItem>();
-                //var rscustomer = from tbl_KaCustomer in dc.tbl_KaCustomers
-                //                     //   group tbl_Comboundtemp by tbl_Comboundtemp.Region into grthis2
-                //                 select tbl_KaCustomer;
-                //foreach (var item in rscustomer)
-                //{
-                //    ComboboxItem cb = new ComboboxItem();
-                //    cb.Value = item.Customer;
-                //    cb.Text = item.Customer + ": " + item.FullNameN;
-                //    this.cb_customerka.Items.Add(cb); // CombomCollection.Add(cb);
-                //    this.cb_delivery.Items.Add(cb);
-                //}
-
-
-                //this.cb_customerka.DropDownWidth = 350;
-                //this.cb_delivery.DropDownWidth = 300;
-
-
-                ////drowdownshow = "";
-
-                ////foreach (var item in rscustomer)
-                ////{
-                ////    drowdownshow = item.Customer.;
-                ////    this.cb_channel.Items.Add(drowdownshow);
-
-
-                ////}
-
-                //#endregion
-
-
-
-
 
 
                 #region  loadttal datagridview temp
@@ -4749,10 +4727,10 @@ namespace KAmanagement.View
                                   select tbl_Temp.RegionCode).FirstOrDefault();
 
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
-                             where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && tbl_KaCustomer.SapCode == true
-                             && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                               ).Contains(tbl_KaCustomer.SalesOrg)
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
+                              where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && tbl_KaCustomer.SapCode == true
+                              && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
+                                ).Contains(tbl_KaCustomer.SalesOrg)
                              select new
                              {
                                  tbl_KaCustomer.Region,
@@ -4760,7 +4738,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.SapCode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -4812,7 +4790,7 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.Customer.ToString().Contains(valueinput) && (tbl_KaCustomer.SapCode == true)
                              && (from Tka_RegionRight in dc.Tka_RegionRights
                                  select Tka_RegionRight.Region).Contains(tbl_KaCustomer.SalesOrg)
@@ -4824,7 +4802,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.SapCode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -5101,7 +5079,7 @@ namespace KAmanagement.View
 
             if (this.txt_represennt.Text != "")
             {
-                newcontract.Representative = this.txt_represennt.Text;
+                newcontract.Representative = this.txt_represennt.Text.Truncate(255);
             }
             else
             {
@@ -5118,7 +5096,7 @@ namespace KAmanagement.View
 
             if (this.txt_chananame.Text != "")
             {
-                newcontract.Fullname = this.txt_chananame.Text;
+                newcontract.Fullname = this.txt_chananame.Text.Truncate(255);
             }
             else
             {
@@ -5299,7 +5277,7 @@ namespace KAmanagement.View
 
             if (this.txt_district.Text != "")
             {
-                newcontract.District = this.txt_district.Text;//.ToString();
+                newcontract.District = this.txt_district.Text.Truncate(255);//.ToString();
             }
             else
             {
@@ -5312,7 +5290,7 @@ namespace KAmanagement.View
 
             if (this.txt_provicen.Text != "")
             {
-                newcontract.Province = this.txt_provicen.Text;//.ToString();
+                newcontract.Province = this.txt_provicen.Text.Truncate(255);//.ToString();
             }
             else
             {
@@ -5325,7 +5303,7 @@ namespace KAmanagement.View
 
             if (this.txt_houseno.Text != "")
             {
-                newcontract.HouseNo = this.txt_houseno.Text;//.ToString();
+                newcontract.HouseNo = this.txt_houseno.Text.Truncate(255);//.ToString();
             }
             else
             {
@@ -7185,10 +7163,10 @@ namespace KAmanagement.View
                 newdetailContract.SALORG_CTR = Utils.getfirstusersalescontrolregion();
                 newdetailContract.SalesOrg = this.cb_salesogr.SelectedItem.ToString();
                 newdetailContract.Constatus = "CRT";
-                newdetailContract.Fullname = this.txt_chananame.Text;
+                newdetailContract.Fullname = this.txt_chananame.Text.Truncate(255);
                 newdetailContract.ConType = this.cb_contracttype.SelectedItem.ToString().Trim();
                 newdetailContract.CustomerType = newcontract.CustomerType;
-                newdetailContract.Address = this.txt_houseno.Text.Trim() + " " + txt_district.Text.Trim() + " " + txt_provicen.Text.Trim();
+                newdetailContract.Address = (this.txt_houseno.Text.Trim() + " " + txt_district.Text.Trim() + " " + txt_provicen.Text.Trim()).Truncate(255);
 
 
                 if (dataGridProgramdetail.Rows[idrow].Cells["SponsortUnit"].Value != null)
@@ -7207,7 +7185,7 @@ namespace KAmanagement.View
                 {
                     newdetailContract.ExtCondition = true;
 
-                    newdetailContract.ExtNote = (string)dataGridProgramdetail.Rows[idrow].Cells["ExtNote"].Value.ToString().Trim();
+                    newdetailContract.ExtNote = (string)dataGridProgramdetail.Rows[idrow].Cells["ExtNote"].Value.ToString().Trim().Truncate(255);
                 }
                 else
                 {
@@ -7268,7 +7246,7 @@ namespace KAmanagement.View
 
 
                 //   double contractno = double.Parse(this.tb_contractno.Text.Trim());
-                newcontract.VATregistrationNo = txtVATno.Text.Trim();
+                newcontract.VATregistrationNo = txtVATno.Text.Trim().Truncate(50);
                 newcontract.CRDUSR = usrname;
                 newcontract.SignOn = dateTimePicker1.Value;
                 newcontract.CRDDAT = DateTime.Today;
@@ -8792,7 +8770,7 @@ namespace KAmanagement.View
 
 
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.FullNameN.Contains(valueinput) && tbl_KaCustomer.indirectCode == true // || tbl_KaCustomer.SapCode ==true)
                                  && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
                                   ).Contains(tbl_KaCustomer.SalesOrg)
@@ -8803,7 +8781,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.SapCode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -8857,7 +8835,7 @@ namespace KAmanagement.View
 
 
 
-            var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+            var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                          where tbl_KaCustomer.FullNameN.ToString().Contains(valueinput) && (tbl_KaCustomer.SFAcode == true)
                                      && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
                            ).Contains(tbl_KaCustomer.SalesOrg)
@@ -8868,7 +8846,7 @@ namespace KAmanagement.View
                              tbl_KaCustomer.FullNameN,
                              tbl_KaCustomer.SFAcode,
 
-                         };
+                         }).Take(50);
 
 
 
@@ -8942,7 +8920,7 @@ namespace KAmanagement.View
 
 
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.FullNameN.ToString().Contains(valueinput) && (tbl_KaCustomer.Grpcode == true)
                                 && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
                                   ).Contains(tbl_KaCustomer.SalesOrg)
@@ -8953,7 +8931,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.Grpcode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -9355,7 +9333,7 @@ namespace KAmanagement.View
 
 
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                              where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && (tbl_KaCustomer.SFAcode == true)
                               && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
                                   ).Contains(tbl_KaCustomer.SalesOrg)
@@ -9367,7 +9345,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.SFAcode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -9428,7 +9406,7 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
+                var rscode = (from tbl_KaCustomer in dc.tbl_KaCustomers
                              where tbl_KaCustomer.FullNameN.ToString().Contains(valueinput) && (tbl_KaCustomer.SapCode == true)
                              select new
                              {
@@ -9437,7 +9415,7 @@ namespace KAmanagement.View
                                  tbl_KaCustomer.FullNameN,
                                  tbl_KaCustomer.SapCode,
 
-                             };
+                             }).Take(50);
 
 
 
@@ -9482,79 +9460,7 @@ namespace KAmanagement.View
 
         }
 
-        //private void txtcustgroup_TextChanged(object sender, EventArgs e)
-        //{
-
-        //    // string selectedcode = (cb_customerka.SelectedItem as ComboboxItem).Value.ToString();
-        //    string selectedcode = txtcustgroup.Text;
-        //    if (Utils.IsValidnumber(selectedcode))
-        //    {
-
-
-        //        string connection_string = Utils.getConnectionstr();
-
-        //        LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-        //    //    string connection_string = Utils.getConnectionstr();
-        //      //  LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-        //        string username = Utils.getusername();
-
-        //        var regioncode = (from tbl_Temp in dc.tbl_Temps
-        //                          where tbl_Temp.username == username
-        //                          select tbl_Temp.RegionCode).FirstOrDefault();
-
-
-        //                       //         && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-        //                       //).Contains(tbl_KaCustomer.SALORG_CTR)
-
-
-
-
-        //        //  CombomCollection = null;
-        //        //    List<ComboboxItem> CombomCollection = new List<ComboboxItem>();
-        //        var rs = (from tbl_KaCustomer in dc.tbl_KaCustomers
-        //                  where tbl_KaCustomer.Customer == double.Parse(selectedcode) && tbl_KaCustomer.Grpcode == true
-        //                                  && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-        //                       ).Contains(tbl_KaCustomer.SALORG_CTR)
-        //                  select tbl_KaCustomer).FirstOrDefault();
-
-        //        if (rs != null)
-        //        {
-
-
-        //            //       txt_vendor.Text = rs.BU;
-        //            //     cb_channel.Text = rs.CHN;
-        //            txt_chananame.Text = rs.FullNameN;
-        //            txt_houseno.Text = rs.Street;
-        //            txt_district.Text = rs.District;
-        //            txt_provicen.Text = rs.City;
-        //            txt_represennt.Text = rs.Representative;
-
-        //            txtVATno.Text = rs.VATregistrationNo;
-        //            cbocindirect.Checked = false;
-        //            cbgroup.Checked = true;
-
-        //        }
-        //        else
-        //        {
-        //            txt_chananame.Text = "";
-        //            txt_houseno.Text = "";
-        //            txt_district.Text = "";
-        //            txt_provicen.Text = "";
-        //            txt_represennt.Text = "";
-
-
-        //            cbocindirect.Checked = false;
-        //            cbgroup.Checked = false;
-        //        }
-
-
-
-
-        //    }
-
-        //}
-
+     
         private void txtfindsacode_TextChanged(object sender, EventArgs e)
         {
             // string selectedcode = (cb_customerka.SelectedItem as ComboboxItem).Value.ToString();
@@ -9576,16 +9482,7 @@ namespace KAmanagement.View
                                   select tbl_Temp.RegionCode).FirstOrDefault();
 
 
-                //         && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-                //).Contains(tbl_KaCustomer.SALORG_CTR)
-
-
-
-
-
-
-                //  CombomCollection = null;
-                //    List<ComboboxItem> CombomCollection = new List<ComboboxItem>();
+           
                 var rs = (from tbl_KaCustomer in dc.tbl_KaCustomers
                           where tbl_KaCustomer.Customer == double.Parse(selectedcode) && tbl_KaCustomer.SFAcode == true
                                    && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
@@ -10435,376 +10332,7 @@ namespace KAmanagement.View
         private void button1_Click_3(object sender, EventArgs e)
         {
 
-            //string ContractNoin = tb_contractno.Text;
-            //Control.Control_ac.VolumeupdateperContract(ContractNoin);
-            //Control.Control_ac.VolumeupdateperContractbyPRdgrp(ContractNoin);
-
-            //string connection_string = Utils.getConnectionstr();
-
-            //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-
-            //#region loaddata 
-
-
-            //var rs = (from tbl_kacontractdata in dc.tbl_kacontractdatas
-            //          where tbl_kacontractdata.ContractNo == ContractNoin
-            //          select tbl_kacontractdata).FirstOrDefault();
-
-
-            //if (rs != null)
-            //{
-
-            //    #region delete  tbl_KaCreatCrtracttemp
-
-
-            //    string username = Utils.getusername();
-            //    // LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-            //    string sqltext = "DELETE FROM tbl_KaCreatCrtracttemp WHERE tbl_KaCreatCrtracttemp.Username = '" + username + "'";
-            //    dc.ExecuteCommand(sqltext);
-            //    dc.SubmitChanges();
-
-
-            //    #endregion
-
-
-            //    #region load data master contrac
-
-            //    bt_creatnewCust.Visible = false;
-            //    bt_creatnewcontract.Visible = false;
-            //    //   but_releaseprint.Visible = false;
-
-            //    this.tb_contractno.Text = rs.ContractNo;
-            //    this.tb_contractno.Enabled = false;
-
-            //    this.dateTimePicker1.Value = rs.EffDate.Value;
-            //    this.dateTimePicker1.Enabled = false;
-
-
-            //    this.dateTimePicker2.Value = rs.EftDate.Value;
-            //    this.dateTimePicker2.Enabled = false;
-
-            //    this.dateTimePicker3.Value = rs.ExtDate.Value;
-            //    this.dateTimePicker3.Enabled = false;
-
-
-            //    // ToString("#,#", CultureInfo.InvariantCulture);
-            //    this.txt_term.Text = rs.ConTerm.ToString();// (this.dateTimePicker2.Value.Year - this.dateTimePicker1.Value.Year + 1).ToString();
-
-            //    if (rs.ConTerm == null)
-            //    {
-            //        int varyear = int.Parse(Math.Round((double)((this.dateTimePicker2.Value.Date - this.dateTimePicker1.Value.Date).TotalDays / 365)).ToString());
-            //        this.txt_term.Text = varyear.ToString();
-            //    }
-
-
-
-            //    this.txt_term.Enabled = false;
-            //    if (rs.NSRComm != null)
-            //    {
-            //        NSRcommit.Text = ((double)rs.NSRComm).ToString("#,#", CultureInfo.InvariantCulture);
-
-            //    }
-            //    NSRcommit.Enabled = false;
-            //    if (rs.ConTerm != null && rs.ConTerm != 0 && rs.NSRComm != null)
-            //    {
-            //        Nsaperyear.Text = ((double)(rs.NSRComm / rs.ConTerm)).ToString("#,#", CultureInfo.InvariantCulture);
-
-            //    }
-            //    else
-            //    {
-            //        Nsaperyear.Text = "0";
-            //    }
-
-            //    this.Nsaperyear.Enabled = false;
-
-            //    Achivedvol.Enabled = false;
-            //    if (rs.PCVolAched != null)
-            //    {
-            //        Achivedvol.Text = double.Parse(rs.PCVolAched.ToString()).ToString("#,#", CultureInfo.InvariantCulture);
-            //    }
-
-            //    if (rs.Revenue != null)
-            //    {
-            //        RevenueAched.Text = double.Parse(rs.Revenue.ToString()).ToString("#,#", CultureInfo.InvariantCulture);
-            //    }
-            //    RevenueAched.Enabled = false;
-
-            //    if (rs.ECAched != null)
-            //    {
-            //        AchievdVolPCs.Text = double.Parse(rs.ECAched.ToString()).ToString("#,#", CultureInfo.InvariantCulture);
-
-            //    }
-            //    AchievdVolPCs.Enabled = false;
-
-
-            //    Funpercentage.Enabled = false;
-            //    if (rs.VolComm > 0)
-            //    {
-
-            //        Funpercentage.Text = Math.Round((double)((rs.PCVolAched.GetValueOrDefault(0) / rs.VolComm) * 100)).ToString("#,#", CultureInfo.InvariantCulture);
-
-            //    }
-
-            //    Costpercase.Enabled = false;
-            //    if (rs.ECAched > 0)
-            //    {
-
-            //        Costpercase.Text = ((double)(rs.TotDeal.GetValueOrDefault(0) / rs.ECAched)).ToString("#,#", CultureInfo.InvariantCulture);
-
-            //    }
-
-            //    if (rs.VolComm != null)
-            //    {
-            //        this.txt_volumecomit.Text = ((double)rs.VolComm).ToString("#,#", CultureInfo.InvariantCulture);
-            //    }
-
-            //    this.txt_volumecomit.Enabled = false;
-
-            //    if (rs.AnnualVolume != null)
-            //    {
-            //        this.txt_annualvolume.Text = ((double)rs.AnnualVolume).ToString("#,#", CultureInfo.InvariantCulture);
-            //    }
-
-            //    this.txt_annualvolume.Enabled = false;
-
-            //    this.Nsaperyear.Enabled = false;
-            //    if (rs.NSRPer != null)
-            //    {
-            //        this.Nsaperyear.Text = ((double)rs.NSRPer).ToString("#,#", CultureInfo.InvariantCulture);
-            //    }
-
-
-
-
-            //    txtfindsacode.Enabled = false;
-
-
-            //    if (rs.NSRPer != null)
-            //    {
-            //        this.tb_creditlimit.Text = ((double)rs.CreditLimit).ToString("#,#", CultureInfo.InvariantCulture);
-            //        //     this.tb_creditlimit.Text = rs.CreditLimit.ToString();
-            //    }
-
-            //    this.tb_creditlimit.Enabled = false;
-
-
-            //    this.cb_customerka.DropDownStyle = ComboBoxStyle.Simple;// = false;
-
-            //    if (rs.CustomerType.Trim() == "SAP" || rs.CustomerType == null)
-            //    {
-            //        this.cb_customerka.Text = rs.Customer.ToString();
-            //        cbcust.Checked = true;
-            //    }
-            //    if (rs.CustomerType.Trim() == "GRP")
-            //    {
-            //        this.txtcustgroup.Text = rs.Customer.ToString();
-            //        cbgroup.Checked = true;
-            //    }
-            //    if (rs.CustomerType.Trim() == "SFA")
-            //    {
-            //        this.txtfindsacode.Text = rs.Customer.ToString();
-            //        cbsfa.Checked = true;
-            //        cbocindirect.Checked = true;
-            //    }
-
-
-
-
-            //    this.cb_customerka.Enabled = false;
-
-
-            //    this.cb_contracttype.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_contracttype.Text = rs.ConType;
-            //    this.cb_contracttype.Enabled = false;
-
-            //    this.cb_salesogr.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_salesogr.Text = rs.SalesOrg;
-            //    this.cb_salesogr.Enabled = false;
-
-
-
-            //    this.cb_channel.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_channel.Text = rs.Channel;
-            //    this.cb_channel.Enabled = false;
-
-
-
-            //    //this.cb_channel.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    //this.cb_channel.Text = rs.Channel;
-            //    //this.cb_channel.Enabled = false;
-
-
-            //    this.cb_paymentterm.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_paymentterm.Text = rs.CreditTerm;
-            //    this.cb_paymentterm.Enabled = false;
-
-
-            //    this.cb_curency.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_curency.Text = rs.Currency;
-            //    this.cb_curency.Enabled = false;
-
-            //    this.cb_delivery.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //    this.cb_delivery.Text = rs.DeliveredBy;
-            //    this.cb_delivery.Enabled = false;
-
-
-            //    this.txt_represennt.Text = rs.Representative;
-            //    this.txt_represennt.Enabled = false;
-
-
-            //    this.txt_chananame.Text = rs.Fullname;
-            //    this.txt_chananame.Enabled = false;
-
-            //    this.txt_houseno.Text = rs.HouseNo;
-            //    this.txt_houseno.Enabled = false;
-
-            //    this.txt_provicen.Text = rs.Province;
-            //    this.txt_provicen.Enabled = false;
-
-
-            //    this.txt_district.Text = rs.District;
-            //    this.txt_district.Enabled = false;
-
-
-            //    //this.Achivedvol.Enabled = false;
-            //    //this.Achivedvol.Text = rs.VolAched.ToString();
-
-
-            //    //this.RevenueAched.Enabled = false;
-            //    //this.RevenueAched.Text = rs.Revenue.ToString();
-
-
-            //    //this.AchievdVolPCs.Enabled = false;
-            //    //this.AchievdVolPCs.Text = rs.VolAched_S.ToString();
-
-
-            //    //this.Funpercentage.Enabled = false;
-            //    //this.Funpercentage.Text = ((rs.Tot_paid*100) / rs.TotDeal).ToString();
-
-
-
-
-            //    //this.Costpercase.Enabled = false;
-            //    //this.Costpercase.Text = (rs.TotDeal/rs.VolAched).ToString();
-
-
-
-            //    this.txt_remarkstt.Text = rs.Remarks;
-            //    this.txt_remarkstt.Enabled = false;
-
-
-
-            //    txtinfor.Visible = true;
-            //    //          MessageBox.Show("Are you sure to change status of contract ?", "Thông báo" ,MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-            //    txtinfor.Text = "Create by: " + rs.CRDUSR + ", Update by: " + rs.UPDUSR;
-
-            //    Model.Username used = new Model.Username();
-
-            //    if (formlabel == "ENTRY SCREEN DISPLAY CONTRACT")
-            //    {
-            //        //   this.cb_contractstatus.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //        this.cb_contractstatus.Text = rs.Consts;
-            //        //  this.cb_contractstatus.Enabled = false;
-            //        this.bt_etcontract.Visible = true;
-
-
-
-            //        if (used.inputcontractfinalcontrol == true)
-            //        {
-
-
-            //            undogroup.Visible = true;
-
-            //            undogroup.Enabled = true;
-            //            // bt_fin.Visible = true;
-            //            bt_finundo.Visible = true;
-            //            bt_cancel.Visible = true;
-            //            bt_close.Visible = true;
-            //            bt_undoclose.Visible = true;
-            //            bt_undocancel.Visible = true;
-
-
-
-            //        }
-            //        else
-            //        {
-            //            undogroup.Visible = false;
-            //        }
-            //        // undogroup
-
-            //    }
-            //    else
-            //    {
-            //        this.cb_contractstatus.DropDownStyle = ComboBoxStyle.Simple;// = false;
-            //        this.cb_contractstatus.Text = rs.Consts;
-            //        this.cb_contractstatus.Enabled = false;
-            //        this.bt_etcontract.Visible = false;
-            //    }
-
-            //    //     MessageBox.Show(this.Text);
-
-            //    // txt_term
-            //    //  MessageBox.Show(rs.ConType);
-
-
-            //    #endregion
-
-
-
-
-            //    loadtotaldContractView(ContractNoin);
-
-            //    loadDetailContractView(ContractNoin);
-
-
-
-
-
-
-            //    undogroup.Visible = true;
-
-            //    //           Model.Username used = new Model.Username();
-            //    if (used.inputcontractfinalcontrol == true)
-            //    {
-
-
-            //        undogroup.Visible = true;
-
-            //        undogroup.Enabled = true;
-            //        // bt_fin.Visible = true;
-            //        bt_finundo.Visible = true;
-            //        bt_cancel.Visible = true;
-            //        bt_close.Visible = true;
-            //        bt_undoclose.Visible = true;
-            //        bt_undocancel.Visible = true;
-
-
-            //    }
-            //    else
-            //    {
-            //        undogroup.Enabled = false;
-            //    }
-            //    //    undogroup
-            //    if (cb_contractstatus.Text == "CRT")
-            //    {
-
-            //        bt_fin.Visible = true;
-            //        btdelete.Enabled = true;
-            //        //bt_finundo.Visible = false;
-            //        //bt_cancel.Visible = false;
-            //        //bt_close.Visible = false;
-            //        //bt_undoclose.Visible = false;
-            //        //bt_undocancel.Visible = false;
-            //    }
-            //}
-            //#endregion view
-
-
-
-
-
+           
 
 
 
@@ -10919,14 +10447,7 @@ namespace KAmanagement.View
 
         private void button1_Click_4(object sender, EventArgs e)
         {
-            //String ContractNoin = tb_contractno.Text.Trim();
-
-            //Control.Control_ac.VolumeupdateperContract(ContractNoin);
-            //Control.Control_ac.VolumeupdateperContractbyPRdgrp(ContractNoin);
-
-            //loadDetailContractView(ContractNoin);
-            //loadtotaldContractView(ContractNoin);
-
+           
 
 
 
@@ -10964,9 +10485,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11012,9 +10533,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11053,9 +10574,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11104,9 +10625,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11155,9 +10676,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11251,9 +10772,9 @@ namespace KAmanagement.View
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                     select tbl_kacontractdata;
+                                     select tbl_kacontractdata).Take(1);
 
                 if (contractremark.Count() == 1)
                 {
@@ -11440,9 +10961,9 @@ namespace KAmanagement.View
                     string connection_string = Utils.getConnectionstr();
                     LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-                    var contractremark = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                    var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                          where tbl_kacontractdata.ContractNo == tb_contractno.Text
-                                         select tbl_kacontractdata;
+                                         select tbl_kacontractdata).Take(1);
 
                     if (contractremark.Count() == 1)
                     {
@@ -11787,80 +11308,7 @@ namespace KAmanagement.View
 
             inputval.ShowDialog();
 
-            //bool chon = inputval.kq;
-            //string valueinput = inputval.valuetext;
-            //if (valueinput == null)
-            //{
-            //    valueinput = "";
-            //}
-            //if (chon)
-            //{
-
-
-
-            //    string connection_string = Utils.getConnectionstr();
-            //    LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-            //    string username = Utils.getusername();
-
-            //    var regioncode = (from tbl_Temp in dc.tbl_Temps
-            //                      where tbl_Temp.username == username
-            //                      select tbl_Temp.RegionCode).FirstOrDefault();
-
-            //    //&& (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-            //    //               ).Contains(tbl_KaCustomer.SALORG_CTR)
-            //    //var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
-            //    //             where ((int)tbl_KaCustomer.Customer).ToString().Contains(valueinput) && (tbl_KaCustomer.SFAcode == true)
-
-
-
-            //    var rscode = from tbl_KaCustomer in dc.tbl_KaCustomers
-            //                 where tbl_KaCustomer.FullNameN.Contains(valueinput) //&& tbl_KaCustomer.SapCode == true // || tbl_KaCustomer.SapCode ==true)
-            //                     && (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-            //                      ).Contains(tbl_KaCustomer.SALORG_CTR)
-            //                 select new
-            //                 {
-            //                     tbl_KaCustomer.Region,
-            //                     tbl_KaCustomer.Customer,
-            //                     tbl_KaCustomer.FullNameN,
-            //                     tbl_KaCustomer.SapCode,
-
-            //                 };
-
-
-
-
-            //    Utils ut = new Utils();
-            //    var tblcustomer = ut.ToDataTable(dc, rscode);
-
-            //    Viewdatatable viewtb = new Viewdatatable(tblcustomer, "Please, Choose one code !");
-            //    viewtb.ShowDialog();
-            //    string codetemp = viewtb.valuecode;
-            //    if (codetemp != "0" && chon == true && codetemp != null)
-            //    {
-
-            //        tbl_kacontractCustcode cust = new tbl_kacontractCustcode();
-            //        cust.ContractNo = contractNo;
-            //        cust.CustomerCode = double.Parse(codetemp);
-            //        cust.Addedby = username;
-
-            //        dc.tbl_kacontractCustcodes.InsertOnSubmit(cust);
-            //        dc.SubmitChanges();
-            //        MessageBox.Show("Code :" + codetemp + " add to Groupcode done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-            //        //  cb_customerka.Text = codetempcodetemp
-            //        //    cb_customerka.Enabled = false;
-            //        //   cbcust.Checked = true;
-
-            //    }
-            //    // else
-            //    //{
-            //    //  cb_customerka.Text = "";
-            //    //  cb_customerka.Enabled = true;
-            //    //   cbcust.Checked = false;
-
-            //    // }
-            //     }
+         
         }
 
         private void bteditCusgroup_Click(object sender, EventArgs e)
@@ -11877,13 +11325,7 @@ namespace KAmanagement.View
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
             string username = Utils.getusername();
 
-            //  var regioncode = (from tbl_Temp in dc.tbl_Temps
-            //                 where tbl_Temp.username == username
-            //           select tbl_Temp.RegionCode).FirstOrDefault();
-
-            //&& (from Tka_RegionRight in dc.Tka_RegionRights where Tka_RegionRight.RegionCode == regioncode select Tka_RegionRight.Region
-            //               ).Contains(tbl_KaCustomer.SALORG_CTR)
-
+          
 
 
             string contractcode = (from tbl_kacontractdata in dc.tbl_kacontractdatas
@@ -12367,144 +11809,7 @@ namespace KAmanagement.View
 
 
         }
-        //   class datasalesinput2
-        //   {
-        //       //  public System.Data.DataTable dataGrid1 { get; set; }
-        //       //    public string filename { get; set; }
-        //       public DateTime fromdate { get; set; }
-        //       public DateTime todate { get; set; }
-
-
-        //       public string ContractNo { get; set; }
-        ////       public CreatenewContract Creatcontract { get; set; }
-        //       // CreatenewContract. lbcaculating.text lbcaculating { get;  set}
-        //   }
-
-
-        //  public static void reportsale2(object objextoE)
-        //  {
-
-        //      string connection_string = Utils.getConnectionstr();
-
-        //      LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-        //      datasalesinput2 dat = (datasalesinput2)objextoE;
-        //      //    string Priod = dat.Priod;
-        //      DateTime fromdate = dat.fromdate;
-        //      string ContractNo = dat.ContractNo;
-        //      DateTime todate = dat.todate;
-        //      //     CreatenewContract Creatcontract = dat.Creatcontract;
-
-        //      string username = Utils.getusername();
-
-        //      #region convert PaymentinforContract begin to 
-        //      SqlConnection conn2 = null;
-        //      SqlDataReader rdr1 = null;
-
-        //      string destConnString = Utils.getConnectionstr();
-        //      try
-        //      {
-
-        //          conn2 = new SqlConnection(destConnString);
-        //          conn2.Open();
-        //          SqlCommand cmd1 = new SqlCommand("KAtempSalesContractfromto", conn2);
-        //          cmd1.CommandType = CommandType.StoredProcedure;
-        //          cmd1.Parameters.Add("@username", SqlDbType.VarChar).Value = username;
-        //          cmd1.Parameters.Add("@fromdate", SqlDbType.DateTime).Value = fromdate;
-        //          cmd1.Parameters.Add("@todate", SqlDbType.DateTime).Value = todate;
-        //          cmd1.Parameters.Add("@ContractNo", SqlDbType.VarChar).Value = ContractNo;
-        //          cmd1.CommandTimeout = 0;
-        //          rdr1 = cmd1.ExecuteReader();
-
-
-
-        //          //       rdr1 = cmd1.ExecuteReader();
-
-        //      }
-        //      finally
-        //      {
-        //          if (conn2 != null)
-        //          {
-        //              conn2.Close();
-        //          }
-        //          if (rdr1 != null)
-        //          {
-        //              rdr1.Close();
-        //          }
-        //      }
-        //      //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //      #endregion
-
-
-
-        //      var sales = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-        //                  where tbl_kasalesTemp.Username == username
-        //                  select new
-        //                  {
-        //                      tbl_kasalesTemp.Priod,
-        //                      tbl_kasalesTemp.Sales_District,
-        //                      tbl_kasalesTemp.Sales_District_desc,
-        //                      tbl_kasalesTemp.Sales_Org,
-        //                      tbl_kasalesTemp.Sold_to,
-        //                      tbl_kasalesTemp.Cust_Name,
-        //                      tbl_kasalesTemp.Outbound_Delivery,
-        //                      tbl_kasalesTemp.Key_Acc_Nr,
-        //                      tbl_kasalesTemp.Delivery_Date,
-        //                      tbl_kasalesTemp.Invoice_Doc_Nr,
-        //                      tbl_kasalesTemp.Invoice_Date,
-        //                      tbl_kasalesTemp.Currency,
-        //                      tbl_kasalesTemp.Mat_Group,
-        //                      tbl_kasalesTemp.Mat_Group_Text,
-        //                      tbl_kasalesTemp.Mat_Number,
-        //                      tbl_kasalesTemp.Mat_Text,
-
-        //                      PCs = tbl_kasalesTemp.EC,
-        //                      tbl_kasalesTemp.UoM,
-        //                      EC = tbl_kasalesTemp.PC,
-
-        //                      tbl_kasalesTemp.UC,
-        //                      tbl_kasalesTemp.Litter,
-        //                      tbl_kasalesTemp.GSR,
-
-        //                      tbl_kasalesTemp.NSR,
-
-
-
-
-
-        //                      tbl_kasalesTemp.Username,
-        //                      tbl_kasalesTemp.id
-
-
-        //                  };
-
-        //      Viewtable viewtbl = new Viewtable(sales, dc, "SALES REPORTS OF CONTRACT : " + ContractNo, 100);// view code 1 la can viet them lenh
-
-
-        //      //  viewtbl.BringToFront();
-        //    //  viewtbl.TopMost = true;
-        //      viewtbl.ShowDialog();
-        //     viewtbl.Focus();
-        ////    MessageBox.Show("OK: " + ContractNo + "---" + fromdate + "  " + todate, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-        //      //   Creatcontract.ReloadKASeachcontract("");
-
-
-
-        //  }
-
-
-
-        //private void showwait()
-        //{
-        //    View.Caculating wat = new View.Caculating();
-        //    wat.ShowDialog();
-
-
-        //}
-
+        
 
         private void button1_Click_8(object sender, EventArgs e)
         {
@@ -12539,31 +11844,7 @@ namespace KAmanagement.View
                 {
 
 
-                    //  this.lbcaculating
-                    // this.lbcaculating.Text = "Caculating ...";
-                    //       ReloadKASeachcontract("Caculating ...");
-                    //-----------
-
-                    //Thread t1 = new Thread(reportsale2);
-                    //t1.IsBackground = true;
-
-                    ////   t1.STAThreadAttribute = true;
-                    ////  t1.se
-                    //t1.SetApartmentState(ApartmentState.STA);
-                    //t1.Start(new datasalesinput2() { fromdate = fromdate, todate = todate, ContractNo = ContractNo});
-                    ////Thread t2 = new Thread(showwait);
-                    //t2.Start();
-                    //////   autoEvent.WaitOne(); //join
-                    //t1.Join();
-                    //if (t1.ThreadState != ThreadState.Running)
-                    //{
-
-
-
-                    //    Thread.Sleep(1991);
-                    //    t2.Abort();
-                    //}
-
+               
                     string connection_string = Utils.getConnectionstr();
 
                     LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
