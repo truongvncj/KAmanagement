@@ -556,6 +556,13 @@ namespace KAmanagement.View
             dc.SubmitChanges();
 
 
+
+
+
+
+
+
+
             FormCollection fc = System.Windows.Forms.Application.OpenForms;
 
             bool kq = false;
@@ -645,145 +652,143 @@ namespace KAmanagement.View
                     #endregion
 
 
-                    #region // productnew
+                    //#region // productnew
 
 
-                    var da = new LinqtoSQLDataContext(connection_string);
-                    da.ExecuteCommand("DELETE FROM tbl_kaProductlistemp where tbl_kaProductlistemp.Username ='" + username + "'");
-                    da.SubmitChanges();
+                    //var da = new LinqtoSQLDataContext(connection_string);
+                    //da.ExecuteCommand("DELETE FROM tbl_kaProductlistemp where tbl_kaProductlistemp.Username ='" + username + "'");
+                    //da.SubmitChanges();
 
-                    var rscustemp = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                    where !(from tbl_kaProductlist in dc.tbl_kaProductlists
-                                            select tbl_kaProductlist.MatNumber).Contains(tbl_kasalesTemp.Mat_Number) && tbl_kasalesTemp.Mat_Number != null
-                                    group tbl_kasalesTemp by tbl_kasalesTemp.Mat_Number into g
+                    //var rscustemp = from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                    //                where !(from tbl_kaProductlist in dc.tbl_kaProductlists
+                    //                        select tbl_kaProductlist.MatNumber).Contains(tbl_kasalesTemp.Mat_Number) && tbl_kasalesTemp.Mat_Number != null
+                    //                group tbl_kasalesTemp by tbl_kasalesTemp.Mat_Number into g
 
-                                    select new
-                                    {
-                                        MatNumber = g.Key,
-                                        MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
-                                        UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
-                                        Pcrate = 0,
-                                        Ucrate = 0
-                                    };
-
-
-                    if (rscustemp.Count() > 0)
-                    {
-
-                        //      var db = new LinqtoSQLDataContext(connection_string);
-                        foreach (var item in rscustemp)
-                        {
-                            tbl_kaProductlistemp prduct = new tbl_kaProductlistemp();
-                            prduct.MatNumber = item.MatNumber;
-                            prduct.MatText = item.MatText;
-                            prduct.UoM = item.UoM;
-                            prduct.Pcrate = 0;
-                            prduct.Ucrate = 0;
-                            prduct.Username = username;
-                            if (prduct.MatNumber != null)
-                            {
-                                da.tbl_kaProductlistemps.InsertOnSubmit(prduct);
-                                da.SubmitChanges();
-
-                            }
-
-                        }
-
-                        var typeffmain = typeof(tbl_kaProductlist);
-                        var typeffsub = typeof(tbl_kaProductlistemp);
-
-                        VInputchange inputcdata = new VInputchange("PRODUCT LIST", "LIST PRODUCT NOT IN MASTER DATAPRODUCT", dc, "tbl_kaProductlist", "tbl_kaProductlistemp", typeffmain, typeffsub, "id", "id", username);
-                        inputcdata.Show();
-                        inputcdata.Focus();
-                        return;
+                    //                select new
+                    //                {
+                    //                    MatNumber = g.Key,
+                    //                    MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
+                    //                    UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
+                    //                    Pcrate = 0,
+                    //                    Ucrate = 0
+                    //                };
 
 
-                    }
+                    //if (rscustemp.Count() > 0)
+                    //{
+
+                    //    //      var db = new LinqtoSQLDataContext(connection_string);
+                    //    foreach (var item in rscustemp)
+                    //    {
+                    //        tbl_kaProductlistemp prduct = new tbl_kaProductlistemp();
+                    //        prduct.MatNumber = item.MatNumber;
+                    //        prduct.MatText = item.MatText;
+                    //        prduct.UoM = item.UoM;
+                    //        prduct.Pcrate = 0;
+                    //        prduct.Ucrate = 0;
+                    //        prduct.Username = username;
+                    //        if (prduct.MatNumber != null)
+                    //        {
+                    //            da.tbl_kaProductlistemps.InsertOnSubmit(prduct);
+                    //            da.SubmitChanges();
+
+                    //        }
+
+                    //    }
+
+                    //    var typeffmain = typeof(tbl_kaProductlist);
+                    //    var typeffsub = typeof(tbl_kaProductlistemp);
+
+                    //    VInputchange inputcdata = new VInputchange("PRODUCT LIST", "LIST PRODUCT NOT IN MASTER DATAPRODUCT", dc, "tbl_kaProductlist", "tbl_kaProductlistemp", typeffmain, typeffsub, "id", "id", username);
+                    //    inputcdata.Show();
+                    //    inputcdata.Focus();
+                    //    return;
 
 
-                    #endregion product new  //--------------------
-                    //  var db = new LinqtoSQLDataContext(connection_string);
-
-                    //           dc.CommandTimeout = 0;
-                    #region // customer new
-
-                    var rscustemp2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                     where !(from tbl_KaCustomer in dc.tbl_KaCustomers
-                                             select tbl_KaCustomer.Customer).Contains(tbl_kasalesTemp.Sold_to)
-                                     group tbl_kasalesTemp by tbl_kasalesTemp.Sold_to into g
-
-                                     select new
-                                     {
-                                         Customer = g.Key,
-                                         //         District = g.Select(gg => gg.Sales_District_desc).FirstOrDefault(),
-                                         FullNameN = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                                         //     KAGROUP = g.Select(gg => gg.).FirstOrDefault(),
-                                         //       KANAME = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                                         KeyAcc = g.Select(gg => gg.Key_Acc_Nr).FirstOrDefault(),
-                                         // PaymentTerms = g.Select(gg => gg.PA).FirstOrDefault(),
-                                         //    PriceList =
-                                         //  ReconciliationAcct = g.Select(gg => gg.ACC).FirstOrDefault(),
-                                         Region = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
-                                         // SalesDistrict = g.Select(gg => gg.Sales_District).FirstOrDefault(),
-                                         SalesOrg = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
-                                         SapCode = Boolean.TrueString,
-                                         // Street = g.Select(gg => gg.STR).FirstOrDefault(),
-                                         //     Telephone1
-                                         //   UPDDAT 
-                                         //    VATregistrationNo
-                                         //MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
-                                         //UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
-                                         //Pcrate = 0,
-                                         //Ucrate = 0
-                                     };
-
-                    //       tbl_KaCustomer t = new tbl_KaCustomer();
+                    //}
 
 
-                    //       dc.CommandTimeout = 0;
+                    //#endregion product new  //--------------------
+              
+                    //#region // customer new
+
+                    //var rscustemp2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                    //                 where !(from tbl_KaCustomer in dc.tbl_KaCustomers
+                    //                         select tbl_KaCustomer.Customer).Contains(tbl_kasalesTemp.Sold_to)
+                    //                 group tbl_kasalesTemp by tbl_kasalesTemp.Sold_to into g
+
+                    //                 select new
+                    //                 {
+                    //                     Customer = g.Key,
+                    //                     //         District = g.Select(gg => gg.Sales_District_desc).FirstOrDefault(),
+                    //                     FullNameN = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
+                    //                     //     KAGROUP = g.Select(gg => gg.).FirstOrDefault(),
+                    //                     //       KANAME = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
+                    //                     KeyAcc = g.Select(gg => gg.Key_Acc_Nr).FirstOrDefault(),
+                    //                     // PaymentTerms = g.Select(gg => gg.PA).FirstOrDefault(),
+                    //                     //    PriceList =
+                    //                     //  ReconciliationAcct = g.Select(gg => gg.ACC).FirstOrDefault(),
+                    //                     Region = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
+                    //                     // SalesDistrict = g.Select(gg => gg.Sales_District).FirstOrDefault(),
+                    //                     SalesOrg = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
+                    //                     SapCode = Boolean.TrueString,
+                    //                     // Street = g.Select(gg => gg.STR).FirstOrDefault(),
+                    //                     //     Telephone1
+                    //                     //   UPDDAT 
+                    //                     //    VATregistrationNo
+                    //                     //MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
+                    //                     //UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
+                    //                     //Pcrate = 0,
+                    //                     //Ucrate = 0
+                    //                 };
+
+                    ////       tbl_KaCustomer t = new tbl_KaCustomer();
 
 
-                    if (rscustemp2.Count() > 0)
-                    {
+                    ////       dc.CommandTimeout = 0;
 
 
-                        foreach (var item in rscustemp2)
-                        {
-                            tbl_KaCustomertemp cust = new tbl_KaCustomertemp();
-                            cust.Customer = item.Customer;
-                            cust.FullNameN = item.FullNameN;
+                    //if (rscustemp2.Count() > 0)
+                    //{
 
-                            // cust.District = item.District;
 
-                            //      cust.KAGROUP = item.KAGROUP.ToString();
-                            cust.KeyAcc = item.KeyAcc.ToString();
-                            cust.Region = item.Region;
-                            //   cust.SalesDistrict = item.SalesDistrict;
-                            cust.SalesOrg = item.SalesOrg;
-                            //   cust.PriceList = item.p
+                    //    foreach (var item in rscustemp2)
+                    //    {
+                    //        tbl_KaCustomertemp cust = new tbl_KaCustomertemp();
+                    //        cust.Customer = item.Customer;
+                    //        cust.FullNameN = item.FullNameN;
+
+                    //        // cust.District = item.District;
+
+                    //        //      cust.KAGROUP = item.KAGROUP.ToString();
+                    //        cust.KeyAcc = item.KeyAcc.ToString();
+                    //        cust.Region = item.Region;
+                    //        //   cust.SalesDistrict = item.SalesDistrict;
+                    //        cust.SalesOrg = item.SalesOrg;
+                    //        //   cust.PriceList = item.p
 
 
 
 
 
-                            cust.Username = username;
-                            dc.CommandTimeout = 0;
-                            dc.tbl_KaCustomertemps.InsertOnSubmit(cust);
-                            dc.SubmitChanges();
+                    //        cust.Username = username;
+                    //        dc.CommandTimeout = 0;
+                    //        dc.tbl_KaCustomertemps.InsertOnSubmit(cust);
+                    //        dc.SubmitChanges();
 
-                        }
+                    //    }
 
-                        var typeffmain = typeof(tbl_KaCustomer);
-                        var typeffsub = typeof(tbl_KaCustomertemp);
+                    //    var typeffmain = typeof(tbl_KaCustomer);
+                    //    var typeffsub = typeof(tbl_KaCustomertemp);
 
-                        VInputchange inputcdata = new VInputchange("CUSTOMER LIST", "LIST CUSTOMER NOT IN MASTER DATA CUSTOMER", dc, "tbl_KaCustomer", "tbl_KaCustomertemp", typeffmain, typeffsub, "id", "id", username);
-                        inputcdata.Show();
-                        inputcdata.Focus();
-                        return;
+                    //    VInputchange inputcdata = new VInputchange("CUSTOMER LIST", "LIST CUSTOMER NOT IN MASTER DATA CUSTOMER", dc, "tbl_KaCustomer", "tbl_KaCustomertemp", typeffmain, typeffsub, "id", "id", username);
+                    //    inputcdata.Show();
+                    //    inputcdata.Focus();
+                    //    return;
 
-                    }
+                    //}
 
-                    #endregion
+                    //#endregion
 
 
                     #region// update cogs value
