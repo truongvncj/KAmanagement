@@ -9994,6 +9994,8 @@ namespace KAmanagement
 		
 		private int _id;
 		
+		private string _PayType;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -10016,6 +10018,8 @@ namespace KAmanagement
     partial void OnUsernameChanged();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnPayTypeChanging(string value);
+    partial void OnPayTypeChanged();
     #endregion
 		
 		public tbl_KaCreatCrtracttemp()
@@ -10199,6 +10203,26 @@ namespace KAmanagement
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="NVarChar(50)")]
+		public string PayType
+		{
+			get
+			{
+				return this._PayType;
+			}
+			set
+			{
+				if ((this._PayType != value))
+				{
+					this.OnPayTypeChanging(value);
+					this.SendPropertyChanging();
+					this._PayType = value;
+					this.SendPropertyChanged("PayType");
+					this.OnPayTypeChanged();
 				}
 			}
 		}
@@ -16920,6 +16944,8 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _NETP;
 		
+		private bool _failurecheck;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -16980,6 +17006,8 @@ namespace KAmanagement
     partial void OnEmptyCountValueChanged();
     partial void OnNETPChanging(System.Nullable<double> value);
     partial void OnNETPChanged();
+    partial void OnfailurecheckChanging(bool value);
+    partial void OnfailurecheckChanged();
     #endregion
 		
 		public tbl_kasalesTemp()
@@ -17543,6 +17571,26 @@ namespace KAmanagement
 					this._NETP = value;
 					this.SendPropertyChanged("NETP");
 					this.OnNETPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_failurecheck", DbType="Bit NOT NULL")]
+		public bool failurecheck
+		{
+			get
+			{
+				return this._failurecheck;
+			}
+			set
+			{
+				if ((this._failurecheck != value))
+				{
+					this.OnfailurecheckChanging(value);
+					this.SendPropertyChanging();
+					this._failurecheck = value;
+					this.SendPropertyChanged("failurecheck");
+					this.OnfailurecheckChanged();
 				}
 			}
 		}

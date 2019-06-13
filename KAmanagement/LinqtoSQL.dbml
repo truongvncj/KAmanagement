@@ -443,6 +443,7 @@
       <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacurrency" Member="tbl_kacurrencies">
@@ -821,6 +822,7 @@
       <Column Name="[Cond Type]" Member="Cond_Type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="EmptyCountValue" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NETP" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="failurecheck" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_MassConfirmTemp" Member="tbl_MassConfirmTemps">
