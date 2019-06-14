@@ -418,7 +418,18 @@ namespace KAmanagement.Model
                     dr["SalesOrg"] = sourceData.Rows[rowixd][SalesOrgid].ToString().Trim();
                     dr["InvoiceDocNr"] = double.Parse(sourceData.Rows[rowixd][InvoiceDocNrid].ToString().Trim());
                     dr["OutboundDelivery"] = double.Parse(sourceData.Rows[rowixd][OutboundDeliveryid].ToString().Trim());
-                    dr["DeliveryDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim());
+                
+                    if (Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim()) == new DateTime(00001, 01, 01))
+                    {
+                        MessageBox.Show("Định dạng ngày tháng của dòng  " + rowixd.ToString() + " cột " + DeliveryDateid.ToString() + " sai, must be dd.MM.yyyy", "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        dr["DeliveryDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim());
+
+                    }
+
 
                     dr["SalesDistrict"] = sourceData.Rows[rowixd][SalesDistrictid].ToString().Trim();
                     dr["CondType"] = sourceData.Rows[rowixd][CondTypeid].ToString().Trim();
@@ -426,13 +437,10 @@ namespace KAmanagement.Model
                     if (sourceData.Rows[rowixd][CondTypeid].ToString().Trim() != "VPRS")
                     {
 
-                        //kiemtratype = false;
-
-                        //if (kiemtratype == false)
-                        //{
+                     
                             MessageBox.Show("Cond type must be: VPRS , please check line: " + rowixd.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
-                     //   }
+                    
                     }
 
                     dr["SalesDistrictdesc"] = sourceData.Rows[rowixd][SalesDistrictdescid].ToString().Trim();
@@ -464,7 +472,18 @@ namespace KAmanagement.Model
                         return;
                     }
 
-                    dr["InvoiceDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString());// Utils.GetValueOfCellInExcel(worksheet, rowid, columValid_to);
+                    if (Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString()) == new DateTime(00001, 01, 01))
+                    {
+                        MessageBox.Show("Định dạng ngày tháng của dòng  " +rowixd.ToString() + " cột "+ InvoiceDateid.ToString() +" sai, must be dd.MM.yyyy" , "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        dr["InvoiceDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString());// Utils.GetValueOfCellInExcel(worksheet, rowid, columValid_to);
+
+                    }
+
+
                     dr["UoM"] = sourceData.Rows[rowixd][UoMid].ToString().Trim();
 
                     
@@ -936,7 +955,19 @@ namespace KAmanagement.Model
                     dr["SalesOrg"] = sourceData.Rows[rowixd][SalesOrgid].ToString().Trim();
                     dr["InvoiceDocNr"] = double.Parse(sourceData.Rows[rowixd][InvoiceDocNrid].ToString().Trim());
                     dr["OutboundDelivery"] = double.Parse(sourceData.Rows[rowixd][OutboundDeliveryid].ToString().Trim());
-                    dr["DeliveryDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim());
+                 
+                    if (Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim()) == new DateTime(00001, 01, 01))
+                    {
+                        MessageBox.Show("Định dạng ngày tháng của dòng  " + rowixd.ToString() + " cột " + DeliveryDateid.ToString() + " sai, must be dd.MM.yyyy", "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        dr["DeliveryDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][DeliveryDateid].ToString().Trim());
+
+                    }
+
+
 
                     dr["SalesDistrict"] = sourceData.Rows[rowixd][SalesDistrictid].ToString().Trim();
                     dr["CondType"] = sourceData.Rows[rowixd][CondTypeid].ToString().Trim();
@@ -962,8 +993,18 @@ namespace KAmanagement.Model
 
                     dr["CondValue"] = double.Parse(sourceData.Rows[rowixd][CondValueid].ToString().Trim());
 
+                    if (Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString()) == new DateTime(00001, 01, 01))
+                    {
+                        MessageBox.Show("Định dạng ngày tháng của dòng  " + rowixd.ToString() + " cột " + InvoiceDateid.ToString() + " sai, must be dd.MM.yyyy", "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
 
-                    dr["InvoiceDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString());// Utils.GetValueOfCellInExcel(worksheet, rowid, columValid_to);
+                        dr["InvoiceDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][InvoiceDateid].ToString());// Utils.GetValueOfCellInExcel(worksheet, rowid, columValid_to);
+
+                    }
+
                     dr["UoM"] = sourceData.Rows[rowixd][UoMid].ToString().Trim();
 
 

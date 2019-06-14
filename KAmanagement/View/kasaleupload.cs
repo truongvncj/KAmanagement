@@ -595,13 +595,7 @@ namespace KAmanagement.View
                 {
 
                     Model.Salesinput_ctrl slmodel = new Model.Salesinput_ctrl();
-                    //   slmodel.deleteedlp();
-
-                    //    string connection_string = Utils.getConnectionstr();
-                    //    var db = new LinqtoSQLDataContext(connection_string);
-                    //   string username = Utils.getusername();
-                    //  var rs = from tblEDLP in db.tblEDLPs
-
+                 
 
                     slmodel.COGSinput();
 
