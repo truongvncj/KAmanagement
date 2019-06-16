@@ -463,50 +463,11 @@ namespace KAmanagement.View
 
             //dt.Columns.Add(new DataColumn("Start-Date", typeof(DateTime)));
 
-            //dt.Columns.Add(new DataColumn("Start-Date", typeof(DateTime)));
-
-            //  dataGridView1.DataSource = dt;
-
-
-            //    tb.Remark
-            //   tb.Amount_Per_Pc_Lit_FTN
-            //   tb.To_Date
-            //          tb.From_Date
-            //    tb.Ditributor__s_Amount
-            //   tb.ExtCondition 
-            //  tb.Achivement;
-            //  tb.Amount_Per_Pc;
-            //  tb.Balance;
-            //  tb.Date;
-            //  tb.Done_On;
-            //  tb.Percent;
-            //  tb.id;
-            //  tb.Paid_Amount;
-            //  tb.Payment_Control;
-            //  tb.Payment_Description;
-            //  tb.Prepered_On;
-            //  tb.Print;
-            //  tb.Product_Group;
-            //  tb.Program;
-            //  tb.Ref_No;
-            //  tb.Sponsored_Amount;
-            //  tb.Tracking_id;
-            //  tb.Unit;
-            //  tb.Username;
-            //   tb.dis
+            
 
             //    dt.Columns["Program"].
             this.dataGridProgramdetail.DataSource = dt;
             // this.dataGridProgramdetail.DataSource = detailprogarmers;
-
-
-
-            //this.dataGridProgramdetail.Columns["id"].Visible = false;
-            //this.dataGridProgramdetail.Columns["Username"].Visible = false;
-
-
-
-
 
             #endregion
 
@@ -8100,7 +8061,19 @@ namespace KAmanagement.View
 
             if (tabControl1.SelectedIndex == 2)  // nuew la volume
             {
+                //string ContractNo = Contractno.Trim();
+                //string connection_string = Utils.getConnectionstr();
 
+                //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                dc.CommandTimeout = 0;
+
+                #region    //   xoa datavolume conytrac
+                dc.ExecuteCommand("DELETE FROM tbl_kacontractsvolume Where  tbl_kacontractsvolume.ContractNo = '" + contractno + "'");
+
+                //    dc.tblFBL5Nnewthisperiods.DeleteAllOnSubmit(rsthisperiod);
+                dc.SubmitChanges();
+
+                #endregion//   xoa datavolume conytrac
                 Control.Control_ac.VolumeupdateperContract(contractno);
 
 
