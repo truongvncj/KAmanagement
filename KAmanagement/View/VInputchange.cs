@@ -829,6 +829,12 @@ namespace KAmanagement.View
 
                                     valueid = "'" + valueid + "'";
                                 }
+                                
+                                if (IDType.ToString().Contains("bool"))
+                                {
+
+                                    valueid = "'" + valueid + "'";
+                                }
 
                                 if (stringvalue != "")
                                 {
