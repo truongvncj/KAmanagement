@@ -1,6 +1,6 @@
 ﻿namespace KAmanagement.View
 {
-    partial class kaPriodpicker
+    partial class kaPriodandcustomerpicker
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(kaPriodpicker));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(kaPriodandcustomerpicker));
             this.bt_thuchien = new System.Windows.Forms.Button();
             this.bl_priod = new System.Windows.Forms.Label();
             this.cb_priod = new System.Windows.Forms.ComboBox();
@@ -38,11 +38,13 @@
             this.lbtodates = new System.Windows.Forms.Label();
             this.lb_fromdates = new System.Windows.Forms.Label();
             this.lb_priods = new System.Windows.Forms.Label();
+            this.cbcustomer = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bt_thuchien
             // 
-            this.bt_thuchien.Location = new System.Drawing.Point(105, 130);
+            this.bt_thuchien.Location = new System.Drawing.Point(113, 238);
             this.bt_thuchien.Name = "bt_thuchien";
             this.bt_thuchien.Size = new System.Drawing.Size(93, 29);
             this.bt_thuchien.TabIndex = 3;
@@ -54,7 +56,7 @@
             // 
             this.bl_priod.AutoSize = true;
             this.bl_priod.ForeColor = System.Drawing.Color.Teal;
-            this.bl_priod.Location = new System.Drawing.Point(32, 47);
+            this.bl_priod.Location = new System.Drawing.Point(71, 132);
             this.bl_priod.Name = "bl_priod";
             this.bl_priod.Size = new System.Drawing.Size(36, 15);
             this.bl_priod.TabIndex = 4;
@@ -65,7 +67,7 @@
             // 
             this.cb_priod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_priod.FormattingEnabled = true;
-            this.cb_priod.Location = new System.Drawing.Point(95, 7);
+            this.cb_priod.Location = new System.Drawing.Point(113, 10);
             this.cb_priod.Name = "cb_priod";
             this.cb_priod.Size = new System.Drawing.Size(122, 23);
             this.cb_priod.TabIndex = 10;
@@ -87,7 +89,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Teal;
-            this.label2.Location = new System.Drawing.Point(31, 74);
+            this.label2.Location = new System.Drawing.Point(70, 159);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 15);
             this.label2.TabIndex = 12;
@@ -97,7 +99,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Teal;
-            this.label4.Location = new System.Drawing.Point(31, 99);
+            this.label4.Location = new System.Drawing.Point(70, 184);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 15);
             this.label4.TabIndex = 13;
@@ -107,7 +109,7 @@
             // 
             this.lbtodates.AutoSize = true;
             this.lbtodates.ForeColor = System.Drawing.Color.Red;
-            this.lbtodates.Location = new System.Drawing.Point(125, 99);
+            this.lbtodates.Location = new System.Drawing.Point(164, 184);
             this.lbtodates.Name = "lbtodates";
             this.lbtodates.Size = new System.Drawing.Size(69, 15);
             this.lbtodates.TabIndex = 16;
@@ -117,7 +119,7 @@
             // 
             this.lb_fromdates.AutoSize = true;
             this.lb_fromdates.ForeColor = System.Drawing.Color.Red;
-            this.lb_fromdates.Location = new System.Drawing.Point(123, 74);
+            this.lb_fromdates.Location = new System.Drawing.Point(162, 159);
             this.lb_fromdates.Name = "lb_fromdates";
             this.lb_fromdates.Size = new System.Drawing.Size(69, 15);
             this.lb_fromdates.TabIndex = 15;
@@ -127,17 +129,38 @@
             // 
             this.lb_priods.AutoSize = true;
             this.lb_priods.ForeColor = System.Drawing.Color.Red;
-            this.lb_priods.Location = new System.Drawing.Point(141, 50);
+            this.lb_priods.Location = new System.Drawing.Point(180, 135);
             this.lb_priods.Name = "lb_priods";
             this.lb_priods.Size = new System.Drawing.Size(49, 15);
             this.lb_priods.TabIndex = 14;
             this.lb_priods.Text = "122015";
             // 
-            // kaPriodpicker
+            // cbcustomer
+            // 
+            this.cbcustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cbcustomer.FormattingEnabled = true;
+            this.cbcustomer.Location = new System.Drawing.Point(113, 56);
+            this.cbcustomer.Name = "cbcustomer";
+            this.cbcustomer.Size = new System.Drawing.Size(177, 23);
+            this.cbcustomer.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(4, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 17);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Customer code";
+            // 
+            // kaPriodandcustomerpicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(243, 181);
+            this.ClientSize = new System.Drawing.Size(305, 279);
+            this.Controls.Add(this.cbcustomer);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbtodates);
             this.Controls.Add(this.lb_fromdates);
             this.Controls.Add(this.lb_priods);
@@ -151,9 +174,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "kaPriodpicker";
+            this.Name = "kaPriodandcustomerpicker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "kaPriodpicker";
+            this.Text = "kaPriod and Customer code picker";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,5 +192,7 @@
         private System.Windows.Forms.Label lbtodates;
         private System.Windows.Forms.Label lb_fromdates;
         private System.Windows.Forms.Label lb_priods;
+        private System.Windows.Forms.ComboBox cbcustomer;
+        private System.Windows.Forms.Label label1;
     }
 }

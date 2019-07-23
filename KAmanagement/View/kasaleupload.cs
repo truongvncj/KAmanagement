@@ -102,297 +102,210 @@ namespace KAmanagement.View
                 DateTime fromdate = kaPriodpicker.fromdate;
                 DateTime todate = kaPriodpicker.todate;
 
-                //string connection_string = Utils.getConnectionstr();
-                //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-                //string username = Utils.getusername();
-
-                if (priod != "" && fromdate != todate && priod != null)
+                bool chon = kaPriodpicker.kq;
+                if (chon)
                 {
 
-                    Model.Salesinput_ctrl slmodel = new Model.Salesinput_ctrl();
-                    //   slmodel.deleteedlp();
 
-                    //    string connection_string = Utils.getConnectionstr();
-                    //    var db = new LinqtoSQLDataContext(connection_string);
-                    //   string username = Utils.getusername();
-                    //  var rs = from tblEDLP in db.tblEDLPs
-
-
-                    slmodel.edlpinput();
-
-                    #region // list  doc da post
-
-                    var rsdoc = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                where tbl_kasalesTemp.Username == username &&
-                                ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
-                                select tbl_kasalesTemp;
-                    if (rsdoc.Count() > 0)
-                    {
-                        Viewtable viewtbl2 = new Viewtable(rsdoc, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC SAU DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
-
-                        viewtbl2.Show();
-                        viewtbl2.Focus();
-
-                        return;
-
-                    }
-
-
-                    #endregion
-
-                    #region // productnew
-
-
-                    var da = new LinqtoSQLDataContext(connection_string);
-                    da.ExecuteCommand("DELETE FROM tbl_kaProductlistemp where tbl_kaProductlistemp.Username ='" + username + "'");
-                    da.SubmitChanges();
-
-                    var rscustemp = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                    where !(from tbl_kaProductlist in dc.tbl_kaProductlists
-                                            select tbl_kaProductlist.MatNumber).Contains(tbl_kasalesTemp.Mat_Number) && tbl_kasalesTemp.Mat_Number != null
-                                    group tbl_kasalesTemp by tbl_kasalesTemp.Mat_Number into g
-
-                                    select new
-                                    {
-                                        MatNumber = g.Key,
-                                        MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
-                                        UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
-                                        Pcrate = 0,
-                                        Ucrate = 0
-                                    };
-
-
-                    if (rscustemp.Count() > 0)
+                    if (priod != "" && fromdate != todate && priod != null)
                     {
 
-                        //      var db = new LinqtoSQLDataContext(connection_string);
-                        foreach (var item in rscustemp)
+                        Model.Salesinput_ctrl slmodel = new Model.Salesinput_ctrl();
+
+
+                        slmodel.edlpinput();
+
+                        #region // list  doc da post
+
+                        var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                                     where tbl_kasalesTemp.Username == username &&
+                                     ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
+                                     select tbl_kasalesTemp).Take(10);
+                        if (rsdoc.Count() > 0)
                         {
-                            tbl_kaProductlistemp prduct = new tbl_kaProductlistemp();
-                            prduct.MatNumber = item.MatNumber;
-                            prduct.MatText = item.MatText;
-                            prduct.UoM = item.UoM;
-                            prduct.Pcrate = 0;
-                            prduct.Ucrate = 0;
-                            prduct.Username = username;
-                            if (prduct.MatNumber != null)
+                            Viewtable viewtbl2 = new Viewtable(rsdoc, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
+
+                            viewtbl2.Show();
+                            viewtbl2.Focus();
+
+                            return;
+
+                        }
+
+
+                        #endregion
+
+                        #region // productnew
+
+
+                        var da = new LinqtoSQLDataContext(connection_string);
+                        da.ExecuteCommand("DELETE FROM tbl_kaProductlistemp where tbl_kaProductlistemp.Username ='" + username + "'");
+                        da.SubmitChanges();
+
+                        var rscustemp = from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                                        where !(from tbl_kaProductlist in dc.tbl_kaProductlists
+                                                select tbl_kaProductlist.MatNumber).Contains(tbl_kasalesTemp.Mat_Number) && tbl_kasalesTemp.Mat_Number != null
+                                        group tbl_kasalesTemp by tbl_kasalesTemp.Mat_Number into g
+
+                                        select new
+                                        {
+                                            MatNumber = g.Key,
+                                            MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
+                                            UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
+                                            Pcrate = 0,
+                                            Ucrate = 0
+                                        };
+
+
+                        if (rscustemp.Count() > 0)
+                        {
+
+                            //      var db = new LinqtoSQLDataContext(connection_string);
+                            foreach (var item in rscustemp)
                             {
-                                da.tbl_kaProductlistemps.InsertOnSubmit(prduct);
-                                da.SubmitChanges();
+                                tbl_kaProductlistemp prduct = new tbl_kaProductlistemp();
+                                prduct.MatNumber = item.MatNumber;
+                                prduct.MatText = item.MatText;
+                                prduct.UoM = item.UoM;
+                                prduct.Pcrate = 0;
+                                prduct.Ucrate = 0;
+                                prduct.Username = username;
+                                if (prduct.MatNumber != null)
+                                {
+                                    da.tbl_kaProductlistemps.InsertOnSubmit(prduct);
+                                    da.SubmitChanges();
+
+                                }
 
                             }
 
+                            var typeffmain = typeof(tbl_kaProductlist);
+                            var typeffsub = typeof(tbl_kaProductlistemp);
+
+                            VInputchange inputcdata = new VInputchange("PRODUCT LIST", "LIST PRODUCT NOT IN MASTER DATAPRODUCT", dc, "tbl_kaProductlist", "tbl_kaProductlistemp", typeffmain, typeffsub, "id", "id", username);
+                            inputcdata.Show();
+                            inputcdata.Focus();
+                            return;
+
+
                         }
 
-                        var typeffmain = typeof(tbl_kaProductlist);
-                        var typeffsub = typeof(tbl_kaProductlistemp);
 
-                        VInputchange inputcdata = new VInputchange("PRODUCT LIST", "LIST PRODUCT NOT IN MASTER DATAPRODUCT", dc, "tbl_kaProductlist", "tbl_kaProductlistemp", typeffmain, typeffsub, "id", "id", username);
-                        inputcdata.Show();
-                        inputcdata.Focus();
-                        return;
+                        #endregion product new  //--------------------
 
 
-                    }
+                        #region// update pc, uc
 
+                        SqlConnection conn2 = null;
+                        SqlDataReader rdr1 = null;
 
-                    #endregion product new  //--------------------
-                    //  var db = new LinqtoSQLDataContext(connection_string);
-
-                    //           dc.CommandTimeout = 0;
-                    #region // customer new
-
-                    var rscustemp2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                     where !(from tbl_KaCustomer in dc.tbl_KaCustomers
-                                             select tbl_KaCustomer.Customer).Contains(tbl_kasalesTemp.Sold_to)
-                                     group tbl_kasalesTemp by tbl_kasalesTemp.Sold_to into g
-
-                                     select new
-                                     {
-                                         Customer = g.Key,
-                                         //         District = g.Select(gg => gg.Sales_District_desc).FirstOrDefault(),
-                                         FullNameN = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                                         //     KAGROUP = g.Select(gg => gg.).FirstOrDefault(),
-                                         //       KANAME = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                                         KeyAcc = g.Select(gg => gg.Key_Acc_Nr).FirstOrDefault(),
-                                         // PaymentTerms = g.Select(gg => gg.PA).FirstOrDefault(),
-                                         //    PriceList =
-                                         //  ReconciliationAcct = g.Select(gg => gg.ACC).FirstOrDefault(),
-                                         Region = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
-                                         // SalesDistrict = g.Select(gg => gg.Sales_District).FirstOrDefault(),
-                                         SalesOrg = g.Select(gg => gg.Sales_Org).FirstOrDefault(),
-                                         SapCode = Boolean.TrueString,
-                                         // Street = g.Select(gg => gg.STR).FirstOrDefault(),
-                                         //     Telephone1
-                                         //   UPDDAT 
-                                         //    VATregistrationNo
-                                         //MatText = g.Select(gg => gg.Mat_Text).FirstOrDefault(),
-                                         //UoM = g.Select(gg => gg.UoM).FirstOrDefault(),
-                                         //Pcrate = 0,
-                                         //Ucrate = 0
-                                     };
-
-                    //       tbl_KaCustomer t = new tbl_KaCustomer();
-
-
-                    //       dc.CommandTimeout = 0;
-
-
-                    if (rscustemp2.Count() > 0)
-                    {
-
-
-                        foreach (var item in rscustemp2)
+                        string destConnString = Utils.getConnectionstr();
+                        try
                         {
-                            tbl_KaCustomertemp cust = new tbl_KaCustomertemp();
-                            cust.Customer = item.Customer;
-                            cust.FullNameN = item.FullNameN;
 
-                            // cust.District = item.District;
-
-                            //      cust.KAGROUP = item.KAGROUP.ToString();
-                            cust.KeyAcc = item.KeyAcc.ToString();
-                            cust.Region = item.Region;
-                            //   cust.SalesDistrict = item.SalesDistrict;
-                            cust.SalesOrg = item.SalesOrg;
-                            //   cust.PriceList = item.p
+                            conn2 = new SqlConnection(destConnString);
+                            conn2.Open();
+                            SqlCommand cmd1 = new SqlCommand("KAupdateSalePC_UCtemptable", conn2);
+                            cmd1.CommandType = CommandType.StoredProcedure;
+                            cmd1.Parameters.Add("@priod", SqlDbType.VarChar).Value = priod;
+                            cmd1.CommandTimeout = 0;
+                            rdr1 = cmd1.ExecuteReader();
 
 
 
-
-
-                            cust.Username = username;
-                            dc.CommandTimeout = 0;
-                            dc.tbl_KaCustomertemps.InsertOnSubmit(cust);
-                            dc.SubmitChanges();
+                            //       rdr1 = cmd1.ExecuteReader();
 
                         }
-
-                        var typeffmain = typeof(tbl_KaCustomer);
-                        var typeffsub = typeof(tbl_KaCustomertemp);
-
-                        VInputchange inputcdata = new VInputchange("CUSTOMER LIST", "LIST CUSTOMER NOT IN MASTER DATA CUSTOMER", dc, "tbl_KaCustomer", "tbl_KaCustomertemp", typeffmain, typeffsub, "id", "id", username);
-                        inputcdata.Show();
-                        inputcdata.Focus();
-                        return;
-
-                    }
-
-                    #endregion
-
-                    #region// update pc, uc
-
-                    SqlConnection conn2 = null;
-                    SqlDataReader rdr1 = null;
-
-                    string destConnString = Utils.getConnectionstr();
-                    try
-                    {
-
-                        conn2 = new SqlConnection(destConnString);
-                        conn2.Open();
-                        SqlCommand cmd1 = new SqlCommand("KAupdateSalePC_UCtemptable", conn2);
-                        cmd1.CommandType = CommandType.StoredProcedure;
-                        cmd1.Parameters.Add("@priod", SqlDbType.VarChar).Value = priod;
-                        cmd1.CommandTimeout = 0;
-                        rdr1 = cmd1.ExecuteReader();
-
-
-
-                        //       rdr1 = cmd1.ExecuteReader();
-
-                    }
-                    finally
-                    {
-                        if (conn2 != null)
+                        finally
                         {
-                            conn2.Close();
+                            if (conn2 != null)
+                            {
+                                conn2.Close();
+                            }
+                            if (rdr1 != null)
+                            {
+                                rdr1.Close();
+                            }
                         }
-                        if (rdr1 != null)
+                        //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+                        #endregion update pc, uc
+
+                        #region  // view sales volume
+
+                        var rs = from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                                 where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod //&& tbl_kasalesTemp.Username == username
+                                 select new
+                                 {
+                                     tbl_kasalesTemp.Priod,
+
+
+                                     tbl_kasalesTemp.Sold_to,
+                                     tbl_kasalesTemp.Sales_Org,
+                                     tbl_kasalesTemp.Sales_District,
+                                     tbl_kasalesTemp.Sales_District_desc,
+
+                                     tbl_kasalesTemp.Cust_Name,
+                                     tbl_kasalesTemp.Outbound_Delivery,
+
+                                     tbl_kasalesTemp.Delivery_Date,
+
+                                     tbl_kasalesTemp.Invoice_Doc_Nr,
+                                     tbl_kasalesTemp.Invoice_Date,
+
+                                     tbl_kasalesTemp.Key_Acc_Nr,
+                                     tbl_kasalesTemp.Cond_Type,
+
+                                     tbl_kasalesTemp.Mat_Group,
+                                     tbl_kasalesTemp.Mat_Group_Text,
+                                     tbl_kasalesTemp.Mat_Number,
+                                     tbl_kasalesTemp.Mat_Text,
+
+                                     tbl_kasalesTemp.Currency,
+
+
+                                     PCs = tbl_kasalesTemp.EC,
+                                     tbl_kasalesTemp.UoM,
+                                     tbl_kasalesTemp.EmptyCountValue,
+                                     tbl_kasalesTemp.GSR,
+                                     tbl_kasalesTemp.Litter,
+                                     tbl_kasalesTemp.NETP,
+                                     tbl_kasalesTemp.NSR,
+
+                                     EC = tbl_kasalesTemp.PC,
+
+                                     tbl_kasalesTemp.UC,
+
+                                     tbl_kasalesTemp.Username,
+                                     tbl_kasalesTemp.id,
+
+
+
+                                 };
+
+
+
+
+
+                        if (rs.Count() > 0)
                         {
-                            rdr1.Close();
+                            Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 1);// view code 1 la can viet them lenh
+
+                            viewtbl.Show();
+                            viewtbl.Focus();
+
+
                         }
-                    }
-                    //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        #endregion
 
-
-                    #endregion update pc, uc
-
-                    #region  // view sales volume
-
-                    var rs = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                             where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod && tbl_kasalesTemp.Username == username
-                             select new
-                             {
-                                 tbl_kasalesTemp.Priod,
-
-
-                                 tbl_kasalesTemp.Sold_to,
-                                 tbl_kasalesTemp.Sales_Org,
-                                 tbl_kasalesTemp.Sales_District,
-                                 tbl_kasalesTemp.Sales_District_desc,
-
-                                 tbl_kasalesTemp.Cust_Name,
-                                 tbl_kasalesTemp.Outbound_Delivery,
-
-                                 tbl_kasalesTemp.Delivery_Date,
-
-                                 tbl_kasalesTemp.Invoice_Doc_Nr,
-                                 tbl_kasalesTemp.Invoice_Date,
-
-                                 tbl_kasalesTemp.Key_Acc_Nr,
-                                 tbl_kasalesTemp.Cond_Type,
-
-                                 tbl_kasalesTemp.Mat_Group,
-                                 tbl_kasalesTemp.Mat_Group_Text,
-                                 tbl_kasalesTemp.Mat_Number,
-                                 tbl_kasalesTemp.Mat_Text,
-
-                                 tbl_kasalesTemp.Currency,
-
-
-                                 PCs = tbl_kasalesTemp.EC,
-                                 tbl_kasalesTemp.UoM,
-                                 tbl_kasalesTemp.EmptyCountValue,
-                                 tbl_kasalesTemp.GSR,
-                                 tbl_kasalesTemp.Litter,
-                                 tbl_kasalesTemp.NETP,
-                                 tbl_kasalesTemp.NSR,
-
-                                 EC = tbl_kasalesTemp.PC,
-
-                                 tbl_kasalesTemp.UC,
-
-                                 tbl_kasalesTemp.Username,
-                                 tbl_kasalesTemp.id,
-
-
-
-                             };
-
-
-
-
-
-                    if (rs.Count() > 0)
-                    {
-                        Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 1);// view code 1 la can viet them lenh
-
-                        viewtbl.Show();
-                        viewtbl.Focus();
 
 
                     }
-
-                    #endregion
-
-
 
                 }
-
-
             }
 
 
@@ -429,52 +342,64 @@ namespace KAmanagement.View
                 kaPriodpicker.ShowDialog();
 
                 string priod = kaPriodpicker.priod;
-
-                var rs = from tbl_kasale in dc.tbl_kasales
-                         where tbl_kasale.Priod == priod
-                         select new
-                         {
-                             tbl_kasale.Priod,
-                             tbl_kasale.Sales_District,
-                             tbl_kasale.Sales_District_desc,
-                             tbl_kasale.Sales_Org,
-                             tbl_kasale.Sold_to,
-                             tbl_kasale.Cust_Name,
-                             tbl_kasale.Outbound_Delivery,
-                             tbl_kasale.Key_Acc_Nr,
-                             tbl_kasale.Delivery_Date,
-                             tbl_kasale.Invoice_Doc_Nr,
-                             tbl_kasale.Invoice_Date,
-                             tbl_kasale.Currency,
-                             tbl_kasale.Mat_Group,
-                             tbl_kasale.Mat_Group_Text,
-                             tbl_kasale.Mat_Number,
-                             tbl_kasale.Mat_Text,
-
-                             PCs = tbl_kasale.EC,
-                             tbl_kasale.UoM,
-                             EC = tbl_kasale.PC,
-
-                             tbl_kasale.UC,
-                             tbl_kasale.Litter,
-                             tbl_kasale.GSR,
-
-                             tbl_kasale.NSR,
+                bool chon = kaPriodpicker.kq;
 
 
+                if (chon)
+                {
+                    #region view
+
+
+                    var rs = from tbl_kasale in dc.tbl_kasales
+                             where tbl_kasale.Priod == priod
+                             select new
+                             {
+                                 tbl_kasale.Priod,
+                                 tbl_kasale.Sales_District,
+                                 tbl_kasale.Sales_District_desc,
+                                 tbl_kasale.Sales_Org,
+                                 tbl_kasale.Sold_to,
+                                 tbl_kasale.Cust_Name,
+                                 tbl_kasale.Outbound_Delivery,
+                                 tbl_kasale.Key_Acc_Nr,
+                                 tbl_kasale.Delivery_Date,
+                                 tbl_kasale.Invoice_Doc_Nr,
+                                 tbl_kasale.Invoice_Date,
+                                 tbl_kasale.Currency,
+                                 tbl_kasale.Mat_Group,
+                                 tbl_kasale.Mat_Group_Text,
+                                 tbl_kasale.Mat_Number,
+                                 tbl_kasale.Mat_Text,
+
+                                 PCs = tbl_kasale.EC,
+                                 tbl_kasale.UoM,
+                                 EC = tbl_kasale.PC,
+
+                                 tbl_kasale.UC,
+                                 tbl_kasale.Litter,
+                                 tbl_kasale.GSR,
+
+                                 tbl_kasale.NSR,
 
 
 
-                             tbl_kasale.Username,
-                             tbl_kasale.id
 
 
-                         };
+                                 tbl_kasale.Username,
+                                 tbl_kasale.id
 
-                Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 2);// view code 1 la can viet them lenh
 
-                viewtbl.ShowDialog();
-             //   viewtbl.Focus();
+                             };
+
+                    Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 55);// view code 1 la can viet them lenh
+
+                    viewtbl.ShowDialog();
+                    #endregion
+
+                }
+
+
+
             }
 
 
@@ -505,20 +430,24 @@ namespace KAmanagement.View
 
                 kaPriodpicker.ShowDialog();
                 string priod = kaPriodpicker.priod;
-                if (priod != "")
+                bool chon = kaPriodpicker.kq;
+                if (chon)
                 {
-                    string connection_string = Utils.getConnectionstr();
+                    
+                    if (priod != "")
+                    {
+                        string connection_string = Utils.getConnectionstr();
 
-                    LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+                        LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
 
-                    db.ExecuteCommand("DELETE FROM tbl_kasales where tbl_kasales.Priod = '" + priod + "'");
-                    db.SubmitChanges();
+                        db.ExecuteCommand("DELETE FROM tbl_kasales where tbl_kasales.Priod = '" + priod + "'");
+                        db.SubmitChanges();
 
-                    MessageBox.Show("Delete Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Delete sales data of priod "+ priod+"  Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
 
                 }
-
-
 
             }
 
@@ -595,16 +524,16 @@ namespace KAmanagement.View
                 {
 
                     Model.Salesinput_ctrl slmodel = new Model.Salesinput_ctrl();
-                 
+
 
                     slmodel.COGSinput();
 
                     #region // list  doc da không thuộc kỳ hiện thời post
 
                     var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                where tbl_kasalesTemp.Username == username &&
-                                ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
-                                select tbl_kasalesTemp).Take(100);
+                                 where tbl_kasalesTemp.Username == username &&
+                                 ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
+                                 select tbl_kasalesTemp).Take(5);
                     if (rsdoc.Count() > 0)
                     {
                         Viewtable viewtbl2 = new Viewtable(rsdoc, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC VÍ DỤ NHƯ CÁC DOC SAU DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
@@ -619,7 +548,7 @@ namespace KAmanagement.View
 
                     #endregion
 
-         
+
 
                     #region// update cogs value, ĐỒNG THỜI ĐÁNH DAU CÁC DOC KO UP ĐUOCWJ
 
@@ -656,7 +585,7 @@ namespace KAmanagement.View
                             rdr1.Close();
                         }
                     }
-                    //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Upload done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
 
@@ -665,72 +594,72 @@ namespace KAmanagement.View
 
 
 
-                    #region  // view sales volume
-
-                  
-
-                    var rs2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                             where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod
-                           && tbl_kasalesTemp.failurecheck == true
-                             select new
-                             {
-                                 tbl_kasalesTemp.Priod,
-
-
-                                 tbl_kasalesTemp.Sold_to,
-                                 tbl_kasalesTemp.Sales_Org,
-                                 tbl_kasalesTemp.Sales_District,
-                                 tbl_kasalesTemp.Sales_District_desc,
-
-                                 tbl_kasalesTemp.Cust_Name,
-                                 tbl_kasalesTemp.Outbound_Delivery,
-
-                                 tbl_kasalesTemp.Delivery_Date,
-
-                                 tbl_kasalesTemp.Invoice_Doc_Nr,
-                                 tbl_kasalesTemp.Invoice_Date,
-
-                                 tbl_kasalesTemp.Key_Acc_Nr,
-                                 tbl_kasalesTemp.Cond_Type,
-
-                                 tbl_kasalesTemp.Mat_Group,
-                                 tbl_kasalesTemp.Mat_Group_Text,
-                                 tbl_kasalesTemp.Mat_Number,
-                                 tbl_kasalesTemp.Mat_Text,
-
-                                 tbl_kasalesTemp.Currency,
-
-
-                                 PCs = tbl_kasalesTemp.EC,
-                                 tbl_kasalesTemp.UoM,
-                                 //    tbl_kasalesTemp.EmptyCountValue,
-                                 COGS = tbl_kasalesTemp.GSR,
-                                 //     tbl_kasalesTemp.Litter,
-                                 //    tbl_kasalesTemp.NETP,
-                                 //   tbl_kasalesTemp.NSR,
-                                 //    tbl_kasalesTemp.
-                                 //    EC = tbl_kasalesTemp.PC,
-
-                                 //     tbl_kasalesTemp.UC,
-
-                                 tbl_kasalesTemp.Username,
-                                 tbl_kasalesTemp.id,
+                    //#region  // view sales volume
 
 
 
-                             };
-
-                    if (rs2.Count() > 0)
-                    {
-                        Viewtable viewtbl = new Viewtable(rs2, dc, "Upload successfully ! but There are some doc below can not upload by there are no doc of sales: " + priod, 1);// view code 1 la can viet them lenh
-
-                        viewtbl.Show();
-                        viewtbl.Focus();
+                    //var rs2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                    //         where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod
+                    //       && tbl_kasalesTemp.failurecheck == true
+                    //         select new
+                    //         {
+                    //             tbl_kasalesTemp.Priod,
 
 
-                    }
+                    //             tbl_kasalesTemp.Sold_to,
+                    //             tbl_kasalesTemp.Sales_Org,
+                    //             tbl_kasalesTemp.Sales_District,
+                    //             tbl_kasalesTemp.Sales_District_desc,
 
-                    #endregion
+                    //             tbl_kasalesTemp.Cust_Name,
+                    //             tbl_kasalesTemp.Outbound_Delivery,
+
+                    //             tbl_kasalesTemp.Delivery_Date,
+
+                    //             tbl_kasalesTemp.Invoice_Doc_Nr,
+                    //             tbl_kasalesTemp.Invoice_Date,
+
+                    //             tbl_kasalesTemp.Key_Acc_Nr,
+                    //             tbl_kasalesTemp.Cond_Type,
+
+                    //             tbl_kasalesTemp.Mat_Group,
+                    //             tbl_kasalesTemp.Mat_Group_Text,
+                    //             tbl_kasalesTemp.Mat_Number,
+                    //             tbl_kasalesTemp.Mat_Text,
+
+                    //             tbl_kasalesTemp.Currency,
+
+
+                    //             PCs = tbl_kasalesTemp.EC,
+                    //             tbl_kasalesTemp.UoM,
+                    //             //    tbl_kasalesTemp.EmptyCountValue,
+                    //             COGS = tbl_kasalesTemp.GSR,
+                    //             //     tbl_kasalesTemp.Litter,
+                    //             //    tbl_kasalesTemp.NETP,
+                    //             //   tbl_kasalesTemp.NSR,
+                    //             //    tbl_kasalesTemp.
+                    //             //    EC = tbl_kasalesTemp.PC,
+
+                    //             //     tbl_kasalesTemp.UC,
+
+                    //             tbl_kasalesTemp.Username,
+                    //             tbl_kasalesTemp.id,
+
+
+
+                    //         };
+
+                    //if (rs2.Count() > 0)
+                    //{
+                    //    Viewtable viewtbl = new Viewtable(rs2, dc, "Upload successfully ! but There are some doc below can not upload by there are no doc of sales: " + priod, 1);// view code 1 la can viet them lenh
+
+                    //    viewtbl.Show();
+                    //    viewtbl.Focus();
+
+
+                    //}
+
+                    //#endregion
 
 
 
@@ -765,83 +694,352 @@ namespace KAmanagement.View
                 string priod = kaPriodpicker.priod;
                 DateTime fromdate = kaPriodpicker.fromdate;
                 DateTime todate = kaPriodpicker.todate;
+                bool chon = kaPriodpicker.kq;
 
+
+                if (chon)
+                {
+                    string connection_string = Utils.getConnectionstr();
+                    LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+
+                    #region  // view sales volume
+
+                    var rs33 = from tbl_kasale in dc.tbl_kasales
+                               where tbl_kasale.Priod == priod //&& tbl_kasalesTemp.Priod == priod
+                               select new
+                               {
+                                   tbl_kasale.Priod,
+
+
+                                   tbl_kasale.Sold_to,
+                                   tbl_kasale.Sales_Org,
+                                   tbl_kasale.Sales_District,
+                                   tbl_kasale.Sales_District_desc,
+
+                                   tbl_kasale.Cust_Name,
+                                   tbl_kasale.Outbound_Delivery,
+
+                                   tbl_kasale.Delivery_Date,
+
+                                   tbl_kasale.Invoice_Doc_Nr,
+                                   tbl_kasale.Invoice_Date,
+
+                                   tbl_kasale.Key_Acc_Nr,
+                                   ///tbl_kasale.c,
+
+                                   tbl_kasale.Mat_Group,
+                                   tbl_kasale.Mat_Group_Text,
+                                   tbl_kasale.Mat_Number,
+                                   tbl_kasale.Mat_Text,
+
+                                   tbl_kasale.Currency,
+
+
+                                   PCs = tbl_kasale.EC,
+                                   tbl_kasale.UoM,
+                                   //    tbl_kasalesTemp.EmptyCountValue,
+                                   COGS = tbl_kasale.Cogs,
+                                   //     tbl_kasalesTemp.Litter,
+                                   //    tbl_kasalesTemp.NETP,
+                                   //   tbl_kasalesTemp.NSR,
+                                   //    tbl_kasalesTemp.
+                                   //    EC = tbl_kasalesTemp.PC,
+
+                                   //     tbl_kasalesTemp.UC,
+
+                                   UserUpdate = tbl_kasale.Username,
+                                   tbl_kasale.id,
+
+
+
+                               };
+
+
+
+
+
+                    if (rs33.Count() >= 0)
+                    {
+                        Viewtable viewtbl = new Viewtable(rs33, dc, "COGS DATA PRIOD: " + priod, 22);// view code 22 la can viet cogs
+
+                        viewtbl.ShowDialog();
+                        //    viewtbl.Focus();
+
+
+                    }
+
+                    #endregion
+
+                }
+
+
+
+
+
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            //     kaPriodandcustomerpicker
+            // XmlReadMode
+
+
+
+            FormCollection fc = System.Windows.Forms.Application.OpenForms;
+
+            bool kq = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == "kaPriod and Customer code picker")
+                {
+                    kq = true;
+                    frm.Focus();
+
+                }
+            }
+
+            if (!kq)
+            {
 
                 string connection_string = Utils.getConnectionstr();
+
                 LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+                dc.CommandTimeout = 0;
+
+                View.kaPriodandcustomerpicker kaPriodpicker = new View.kaPriodandcustomerpicker();
 
 
-                #region  // view sales volume
+                kaPriodpicker.ShowDialog();
 
-                var rs33 = from tbl_kasale in dc.tbl_kasales
-                         where tbl_kasale.Priod == priod //&& tbl_kasalesTemp.Priod == priod
-                         select new
-                         {
-                             tbl_kasale.Priod,
-
-
-                             tbl_kasale.Sold_to,
-                             tbl_kasale.Sales_Org,
-                             tbl_kasale.Sales_District,
-                             tbl_kasale.Sales_District_desc,
-
-                             tbl_kasale.Cust_Name,
-                             tbl_kasale.Outbound_Delivery,
-
-                             tbl_kasale.Delivery_Date,
-
-                             tbl_kasale.Invoice_Doc_Nr,
-                             tbl_kasale.Invoice_Date,
-
-                             tbl_kasale.Key_Acc_Nr,
-                             ///tbl_kasale.c,
-
-                             tbl_kasale.Mat_Group,
-                             tbl_kasale.Mat_Group_Text,
-                             tbl_kasale.Mat_Number,
-                             tbl_kasale.Mat_Text,
-
-                             tbl_kasale.Currency,
-
-
-                             PCs = tbl_kasale.EC,
-                             tbl_kasale.UoM,
-                             //    tbl_kasalesTemp.EmptyCountValue,
-                             COGS = tbl_kasale.Cogs,
-                             //     tbl_kasalesTemp.Litter,
-                             //    tbl_kasalesTemp.NETP,
-                             //   tbl_kasalesTemp.NSR,
-                             //    tbl_kasalesTemp.
-                             //    EC = tbl_kasalesTemp.PC,
-
-                             //     tbl_kasalesTemp.UC,
-
-                             UserUpdate = tbl_kasale.Username,
-                             tbl_kasale.id,
+                string priod = kaPriodpicker.priod;
+                string customercode = kaPriodpicker.customercode;
+                bool chon = kaPriodpicker.kq;
+                if (chon)
+                {
+                    #region show so da chon
 
 
 
-                         };
+                    var rs = from tbl_kasale in dc.tbl_kasales
+                             where tbl_kasale.Priod == priod
+                             && tbl_kasale.Sold_to == double.Parse(customercode)
+
+                             select new
+                             {
+                                 tbl_kasale.Priod,
+                                 tbl_kasale.Sales_District,
+                                 tbl_kasale.Sales_District_desc,
+                                 tbl_kasale.Sales_Org,
+                                 tbl_kasale.Sold_to,
+                                 tbl_kasale.Cust_Name,
+                                 tbl_kasale.Outbound_Delivery,
+                                 tbl_kasale.Key_Acc_Nr,
+                                 tbl_kasale.Delivery_Date,
+                                 tbl_kasale.Invoice_Doc_Nr,
+                                 tbl_kasale.Invoice_Date,
+                                 tbl_kasale.Currency,
+                                 tbl_kasale.Mat_Group,
+                                 tbl_kasale.Mat_Group_Text,
+                                 tbl_kasale.Mat_Number,
+                                 tbl_kasale.Mat_Text,
+
+                                 PCs = tbl_kasale.EC,
+                                 tbl_kasale.UoM,
+                                 EC = tbl_kasale.PC,
+
+                                 tbl_kasale.UC,
+                                 tbl_kasale.Litter,
+                                 tbl_kasale.GSR,
+
+                                 tbl_kasale.NSR,
 
 
 
 
 
-             //   if (rs33.Count() >= 0)
-          //      {
-                    Viewtable viewtbl = new Viewtable(rs33, dc, "COGS DATA PRIOD: " + priod, 22);// view code 22 la can viet cogs
+                                 tbl_kasale.Username,
+                                 tbl_kasale.id
+
+
+                             };
+
+                    Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod + " OF CUSTOMER " + customercode, 55);// view code 1 la can viet them lenh
 
                     viewtbl.ShowDialog();
-                //    viewtbl.Focus();
+                    #endregion
 
-
-             //   }
-
-                #endregion
+                }
 
 
 
 
+
+            }
+
+
+
+
+
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FormCollection fc = System.Windows.Forms.Application.OpenForms;
+
+            bool kq = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == "kaPriod and Customer code picker")
+                {
+                    kq = true;
+                    frm.Focus();
+
+                }
+            }
+
+            if (!kq)
+            {
+                View.kaPriodandcustomerpicker kaPriodpicker = new View.kaPriodandcustomerpicker();
+
+                //   Datepick
+                kaPriodpicker.ShowDialog();
+                string priod = kaPriodpicker.priod;
+                string customercode = kaPriodpicker.customercode;
+
+                DateTime fromdate = kaPriodpicker.fromdate;
+                DateTime todate = kaPriodpicker.todate;
+                bool chon = kaPriodpicker.kq;
+
+
+                if (chon)
+                {
+                    string connection_string = Utils.getConnectionstr();
+                    LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+
+                    #region  // view sales volume
+
+                    var rs33 = from tbl_kasale in dc.tbl_kasales
+                               where tbl_kasale.Priod == priod 
+                               && tbl_kasale.Sold_to == double.Parse(customercode)
+                               select new
+                               {
+                                   tbl_kasale.Priod,
+
+
+                                   tbl_kasale.Sold_to,
+                                   tbl_kasale.Sales_Org,
+                                   tbl_kasale.Sales_District,
+                                   tbl_kasale.Sales_District_desc,
+
+                                   tbl_kasale.Cust_Name,
+                                   tbl_kasale.Outbound_Delivery,
+
+                                   tbl_kasale.Delivery_Date,
+
+                                   tbl_kasale.Invoice_Doc_Nr,
+                                   tbl_kasale.Invoice_Date,
+
+                                   tbl_kasale.Key_Acc_Nr,
+                                   ///tbl_kasale.c,
+
+                                   tbl_kasale.Mat_Group,
+                                   tbl_kasale.Mat_Group_Text,
+                                   tbl_kasale.Mat_Number,
+                                   tbl_kasale.Mat_Text,
+
+                                   tbl_kasale.Currency,
+
+
+                                   PCs = tbl_kasale.EC,
+                                   tbl_kasale.UoM,
+                                   //    tbl_kasalesTemp.EmptyCountValue,
+                                   COGS = tbl_kasale.Cogs,
+                                   //     tbl_kasalesTemp.Litter,
+                                   //    tbl_kasalesTemp.NETP,
+                                   //   tbl_kasalesTemp.NSR,
+                                   //    tbl_kasalesTemp.
+                                   //    EC = tbl_kasalesTemp.PC,
+
+                                   //     tbl_kasalesTemp.UC,
+
+                                   UserUpdate = tbl_kasale.Username,
+                                   tbl_kasale.id,
+
+
+
+                               };
+
+
+
+
+
+                    if (rs33.Count() >= 0)
+                    {
+                        Viewtable viewtbl = new Viewtable(rs33, dc, "COGS DATA PRIOD: " + priod + " OF CUSTOMER CODE " + customercode, 00);// view code 22 la can viet cogs
+
+                        viewtbl.ShowDialog();
+                        //    viewtbl.Focus();
+
+
+                    }
+
+                    #endregion
+
+                }
+
+
+
+
+
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            FormCollection fc = System.Windows.Forms.Application.OpenForms;
+
+            bool kq = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == "kaPriodpicker")
+                {
+                    kq = true;
+                    frm.Focus();
+
+                }
+            }
+
+            if (!kq)
+            {
+
+
+                View.kaPriodpicker kaPriodpicker = new View.kaPriodpicker();
+
+                kaPriodpicker.ShowDialog();
+                string priod = kaPriodpicker.priod;
+                bool chon = kaPriodpicker.kq;
+                if (chon)
+                {
+
+                    if (priod != "")
+                    {
+                        string connection_string = Utils.getConnectionstr();
+
+                        LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+
+                        db.ExecuteCommand("update  tbl_kasales  SET Cogs = 0 where tbl_kasales.Priod = '" + priod + "'");
+                        db.SubmitChanges();
+
+                        MessageBox.Show("Delete Cogs of Priod " +priod +" Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+
+                }
 
             }
         }

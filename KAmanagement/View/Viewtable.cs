@@ -406,7 +406,7 @@ namespace KAmanagement.View
             //    this.dataGridView1.DataSource = rs;
             InitializeComponent();
 
-
+         //   Pl_endview
             dc.CommandTimeout = 0;
             this.KeyPreview = true;
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(Control_KeyPress);
@@ -743,184 +743,184 @@ namespace KAmanagement.View
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (viewcode == 2)// nuew la bàng salsetemp update
-            {
-                #region VIEW CODE == 2 nuew la bàng salsetemp update
+            //if (viewcode == 2)// nuew la bàng salsetemp update
+            //{
+            //    #region VIEW CODE == 2 nuew la bàng salsetemp update
 
 
-                // string connection_string = Utils.getConnectionstr();
+            //    // string connection_string = Utils.getConnectionstr();
 
-                //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
-
-
-                //  this.Text = "iNPUT DEPOSIT AMOUNTT !";
-                string colheadertext = "";
-                try
-                {
-                    colheadertext = this.dataGridView1.Columns[this.dataGridView1.CurrentCell.ColumnIndex].HeaderText;
-
-                }
-                catch (Exception)
-                {
-
-                    colheadertext = "";
-                }
+            //    //LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
 
+            //    //  this.Text = "iNPUT DEPOSIT AMOUNTT !";
+            //    string colheadertext = "";
+            //    try
+            //    {
+            //        colheadertext = this.dataGridView1.Columns[this.dataGridView1.CurrentCell.ColumnIndex].HeaderText;
 
-                dc.CommandTimeout = 0;
-                if (colheadertext == "Sold_to")
-                {
+            //    }
+            //    catch (Exception)
+            //    {
 
-                    double customer = (double)this.dataGridView1.CurrentRow.Cells["Sold_to"].Value;
-                    string Priod = this.dataGridView1.CurrentRow.Cells["Priod"].Value.ToString();
-                    var rs = from tbl_kasale in dc.tbl_kasales
-                             where tbl_kasale.Priod == Priod && tbl_kasale.Sold_to == customer
-                             select new
-                             {
-
-
-                                 tbl_kasale.Priod,
-                                 tbl_kasale.Sales_District,
-                                 tbl_kasale.Sales_District_desc,
-                                 tbl_kasale.Sales_Org,
-                                 tbl_kasale.Sold_to,
-                                 tbl_kasale.Cust_Name,
-                                 tbl_kasale.Outbound_Delivery,
-                                 tbl_kasale.Key_Acc_Nr,
-                                 tbl_kasale.Delivery_Date,
-                                 tbl_kasale.Invoice_Doc_Nr,
-                                 tbl_kasale.Invoice_Date,
-                                 tbl_kasale.Currency,
-                                 tbl_kasale.Mat_Group,
-                                 tbl_kasale.Mat_Group_Text,
-                                 tbl_kasale.Mat_Number,
-                                 tbl_kasale.Mat_Text,
-
-                                 PCs = tbl_kasale.EC,
-                                 tbl_kasale.UoM,
-                                 EC = tbl_kasale.PC,
-
-                                 tbl_kasale.UC,
-                                 tbl_kasale.Litter,
-                                 tbl_kasale.GSR,
-
-                                 tbl_kasale.NSR,
+            //        colheadertext = "";
+            //    }
 
 
 
+            //    dc.CommandTimeout = 0;
+            //    if (colheadertext == "Sold_to")
+            //    {
+
+            //        double customer = (double)this.dataGridView1.CurrentRow.Cells["Sold_to"].Value;
+            //        string Priod = this.dataGridView1.CurrentRow.Cells["Priod"].Value.ToString();
+            //        var rs = from tbl_kasale in dc.tbl_kasales
+            //                 where tbl_kasale.Priod == Priod && tbl_kasale.Sold_to == customer
+            //                 select new
+            //                 {
 
 
-                                 tbl_kasale.Username,
-                                 tbl_kasale.id
+            //                     tbl_kasale.Priod,
+            //                     tbl_kasale.Sales_District,
+            //                     tbl_kasale.Sales_District_desc,
+            //                     tbl_kasale.Sales_Org,
+            //                     tbl_kasale.Sold_to,
+            //                     tbl_kasale.Cust_Name,
+            //                     tbl_kasale.Outbound_Delivery,
+            //                     tbl_kasale.Key_Acc_Nr,
+            //                     tbl_kasale.Delivery_Date,
+            //                     tbl_kasale.Invoice_Doc_Nr,
+            //                     tbl_kasale.Invoice_Date,
+            //                     tbl_kasale.Currency,
+            //                     tbl_kasale.Mat_Group,
+            //                     tbl_kasale.Mat_Group_Text,
+            //                     tbl_kasale.Mat_Number,
+            //                     tbl_kasale.Mat_Text,
 
+            //                     PCs = tbl_kasale.EC,
+            //                     tbl_kasale.UoM,
+            //                     EC = tbl_kasale.PC,
 
+            //                     tbl_kasale.UC,
+            //                     tbl_kasale.Litter,
+            //                     tbl_kasale.GSR,
 
-                             };
-
-
-                    this.dataGridView1.DataSource = rs;
-                    this.Dtgridview = dataGridView1;
-
-                    this.db = dc;
-                    //    this.viewcode = viewcode;
-                    this.rs = rs;
-                    this.dataGridView1.Columns["PCs"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["GSR"].DefaultCellStyle.Format = "N0";
-
-                    this.dataGridView1.Columns["Litter"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["NSR"].DefaultCellStyle.Format = "N0";
-
-
-                    this.dataGridView1.Columns["EC"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["UC"].DefaultCellStyle.Format = "N0";
-
-
-                    this.Status.Text = "Caculating ...";
-
-                    System.Data.DataTable dt = new System.Data.DataTable();
-                    Utils ut = new Utils();
-                    dt = ut.ToDataTable(db, rs);
-
-
-                    Thread tt1 = new Thread(sumtitleGrid);
-
-                    tt1.IsBackground = true;
-                    tt1.Start(new datatoExport() { datatble = dt });
-
-
-                }
-
-                if (colheadertext == "Priod")
-                {
-
-                    //  double customer = (double)this.dataGridView1.CurrentRow.Cells["Sold_to"].Value;
-                    string Priod = this.dataGridView1.CurrentRow.Cells["Priod"].Value.ToString();
-                    dc.CommandTimeout = 0;
-
-                    var rs = from tbl_kasale in dc.tbl_kasales
-                             where tbl_kasale.Priod == Priod
-                             group tbl_kasale by new
-                             {
-                                 tbl_kasale.Sold_to,
-                                 tbl_kasale.Sales_Org
-
-                             }
-                              into g
-                             select new
-                             {
-                                 Priod = g.Select(gg => gg.Priod).FirstOrDefault(),
-                                 Region = g.Key.Sales_Org,
-                                 Sold_to = g.Key.Sold_to,
-                                 Name = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                                 PCs = g.Sum(gg => gg.EC).GetValueOrDefault(0),
-                                 EC = Math.Ceiling(g.Sum(gg => gg.PC).GetValueOrDefault(0)),
-                                 UC = Math.Ceiling(g.Sum(gg => gg.UC).GetValueOrDefault(0)),
-                                 Litter = Math.Ceiling(g.Sum(gg => gg.Litter).GetValueOrDefault(0)),
-                                 NSR = Math.Ceiling(g.Sum(gg => gg.NSR).GetValueOrDefault(0)),
-                                 GSR = Math.Ceiling(g.Sum(gg => gg.GSR).GetValueOrDefault(0)),
-
-
-
-                             };
-                    this.dataGridView1.DataSource = rs;
-                    this.Dtgridview = dataGridView1;
-
-                    this.db = dc;
-                    //    this.viewcode = viewcode;
-                    this.rs = rs;
-
-                    this.dataGridView1.Columns["PCs"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["GSR"].DefaultCellStyle.Format = "N0";
-
-                    this.dataGridView1.Columns["Litter"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["NSR"].DefaultCellStyle.Format = "N0";
-
-
-                    this.dataGridView1.Columns["EC"].DefaultCellStyle.Format = "N0";
-                    this.dataGridView1.Columns["UC"].DefaultCellStyle.Format = "N0";
-
-                    this.Status.Text = "Caculating ...";
-
-                    System.Data.DataTable dt = new System.Data.DataTable();
-                    Utils ut = new Utils();
-                    dt = ut.ToDataTable(db, rs);
-
-
-                    Thread tt1 = new Thread(sumtitleGrid);
-
-                    tt1.IsBackground = true;
-                    tt1.Start(new datatoExport() { datatble = dt });
-
-                }
+            //                     tbl_kasale.NSR,
 
 
 
 
 
-                #endregion  VIEW CODE == 2 nuew la bàng salsetemp update
+            //                     tbl_kasale.Username,
+            //                     tbl_kasale.id
 
-            }
+
+
+            //                 };
+
+
+            //        this.dataGridView1.DataSource = rs;
+            //        this.Dtgridview = dataGridView1;
+
+            //        this.db = dc;
+            //        //    this.viewcode = viewcode;
+            //        this.rs = rs;
+            //        this.dataGridView1.Columns["PCs"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["GSR"].DefaultCellStyle.Format = "N0";
+
+            //        this.dataGridView1.Columns["Litter"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["NSR"].DefaultCellStyle.Format = "N0";
+
+
+            //        this.dataGridView1.Columns["EC"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["UC"].DefaultCellStyle.Format = "N0";
+
+
+            //        this.Status.Text = "Caculating ...";
+
+            //        System.Data.DataTable dt = new System.Data.DataTable();
+            //        Utils ut = new Utils();
+            //        dt = ut.ToDataTable(db, rs);
+
+
+            //        Thread tt1 = new Thread(sumtitleGrid);
+
+            //        tt1.IsBackground = true;
+            //        tt1.Start(new datatoExport() { datatble = dt });
+
+
+            //    }
+
+            //    if (colheadertext == "Priod")
+            //    {
+
+            //        //  double customer = (double)this.dataGridView1.CurrentRow.Cells["Sold_to"].Value;
+            //        string Priod = this.dataGridView1.CurrentRow.Cells["Priod"].Value.ToString();
+            //        dc.CommandTimeout = 0;
+
+            //        var rs = from tbl_kasale in dc.tbl_kasales
+            //                 where tbl_kasale.Priod == Priod
+            //                 group tbl_kasale by new
+            //                 {
+            //                     tbl_kasale.Sold_to,
+            //                     tbl_kasale.Sales_Org
+
+            //                 }
+            //                  into g
+            //                 select new
+            //                 {
+            //                     Priod = g.Select(gg => gg.Priod).FirstOrDefault(),
+            //                     Region = g.Key.Sales_Org,
+            //                     Sold_to = g.Key.Sold_to,
+            //                     Name = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
+            //                     PCs = g.Sum(gg => gg.EC).GetValueOrDefault(0),
+            //                     EC = Math.Ceiling(g.Sum(gg => gg.PC).GetValueOrDefault(0)),
+            //                     UC = Math.Ceiling(g.Sum(gg => gg.UC).GetValueOrDefault(0)),
+            //                     Litter = Math.Ceiling(g.Sum(gg => gg.Litter).GetValueOrDefault(0)),
+            //                     NSR = Math.Ceiling(g.Sum(gg => gg.NSR).GetValueOrDefault(0)),
+            //                     GSR = Math.Ceiling(g.Sum(gg => gg.GSR).GetValueOrDefault(0)),
+
+
+
+            //                 };
+            //        this.dataGridView1.DataSource = rs;
+            //        this.Dtgridview = dataGridView1;
+
+            //        this.db = dc;
+            //        //    this.viewcode = viewcode;
+            //        this.rs = rs;
+
+            //        this.dataGridView1.Columns["PCs"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["GSR"].DefaultCellStyle.Format = "N0";
+
+            //        this.dataGridView1.Columns["Litter"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["NSR"].DefaultCellStyle.Format = "N0";
+
+
+            //        this.dataGridView1.Columns["EC"].DefaultCellStyle.Format = "N0";
+            //        this.dataGridView1.Columns["UC"].DefaultCellStyle.Format = "N0";
+
+            //        this.Status.Text = "Caculating ...";
+
+            //        System.Data.DataTable dt = new System.Data.DataTable();
+            //        Utils ut = new Utils();
+            //        dt = ut.ToDataTable(db, rs);
+
+
+            //        Thread tt1 = new Thread(sumtitleGrid);
+
+            //        tt1.IsBackground = true;
+            //        tt1.Start(new datatoExport() { datatble = dt });
+
+            //    }
+
+
+
+
+
+            //    #endregion  VIEW CODE == 2 nuew la bàng salsetemp update
+
+            //}
 
 
 

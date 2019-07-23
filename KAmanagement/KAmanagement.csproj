@@ -140,6 +140,12 @@
     <Compile Include="View\CreatnewCust.Designer.cs">
       <DependentUpon>CreatnewCust.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\kaPriodandcustomerpicker .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\kaPriodandcustomerpicker .Designer.cs">
+      <DependentUpon>kaPriodandcustomerpicker .cs</DependentUpon>
+    </Compile>
     <Compile Include="View\KASeachaddcode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CreatnewCust.resx">
       <DependentUpon>CreatnewCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\kaPriodandcustomerpicker .resx">
+      <DependentUpon>kaPriodandcustomerpicker .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\KASeachaddcode.resx">
       <DependentUpon>KASeachaddcode.cs</DependentUpon>
