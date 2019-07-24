@@ -115,15 +115,38 @@ namespace KAmanagement.View
 
                         slmodel.edlpinput();
 
-                        #region // list  doc da post
+                        #region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
 
                         var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
                                      where tbl_kasalesTemp.Username == username &&
-                                     ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
+                                   ( tbl_kasalesTemp.Cond_Type != "YPR0" ||
+                                       tbl_kasalesTemp.Cond_Type != "YPRD" ||
+                                          tbl_kasalesTemp.Cond_Type != "NETP" )
                                      select tbl_kasalesTemp).Take(10);
                         if (rsdoc.Count() > 0)
                         {
-                            Viewtable viewtbl2 = new Viewtable(rsdoc, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
+                            Viewtable viewtbl2 = new Viewtable(rsdoc, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC TYPE KHÔNG ĐÚNG KIỂU : YPR0, YPRD, NETP ", 3);// view code 1 la can viet them lenh
+
+                            viewtbl2.Show();
+                            viewtbl2.Focus();
+
+                            return;
+
+                        }
+
+
+                        #endregion
+
+
+                        #region // list  doc da post
+
+                        var rsdoc3 = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                                     where tbl_kasalesTemp.Username == username &&
+                                     ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
+                                     select tbl_kasalesTemp).Take(10);
+                        if (rsdoc3.Count() > 0)
+                        {
+                            Viewtable viewtbl2 = new Viewtable(rsdoc3, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
 
                             viewtbl2.Show();
                             viewtbl2.Focus();
@@ -528,6 +551,28 @@ namespace KAmanagement.View
 
                     slmodel.COGSinput();
 
+                    #region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
+
+                    var rsdoc1 = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                                 where tbl_kasalesTemp.Username == username &&
+                               (tbl_kasalesTemp.Cond_Type != "VPRS")
+                                 
+                                 select tbl_kasalesTemp).Take(10);
+                    if (rsdoc1.Count() > 0)
+                    {
+                        Viewtable viewtbl2 = new Viewtable(rsdoc1, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC TYPE KHÔNG ĐÚNG KIỂU : VPRS ", 3);// view code 1 la can viet them lenh
+
+                        viewtbl2.Show();
+                        viewtbl2.Focus();
+
+                        return;
+
+                    }
+
+
+                    #endregion
+
+
                     #region // list  doc da không thuộc kỳ hiện thời post
 
                     var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
@@ -594,74 +639,7 @@ namespace KAmanagement.View
 
 
 
-                    //#region  // view sales volume
-
-
-
-                    //var rs2 = from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                    //         where tbl_kasalesTemp.Username == username && tbl_kasalesTemp.Priod == priod
-                    //       && tbl_kasalesTemp.failurecheck == true
-                    //         select new
-                    //         {
-                    //             tbl_kasalesTemp.Priod,
-
-
-                    //             tbl_kasalesTemp.Sold_to,
-                    //             tbl_kasalesTemp.Sales_Org,
-                    //             tbl_kasalesTemp.Sales_District,
-                    //             tbl_kasalesTemp.Sales_District_desc,
-
-                    //             tbl_kasalesTemp.Cust_Name,
-                    //             tbl_kasalesTemp.Outbound_Delivery,
-
-                    //             tbl_kasalesTemp.Delivery_Date,
-
-                    //             tbl_kasalesTemp.Invoice_Doc_Nr,
-                    //             tbl_kasalesTemp.Invoice_Date,
-
-                    //             tbl_kasalesTemp.Key_Acc_Nr,
-                    //             tbl_kasalesTemp.Cond_Type,
-
-                    //             tbl_kasalesTemp.Mat_Group,
-                    //             tbl_kasalesTemp.Mat_Group_Text,
-                    //             tbl_kasalesTemp.Mat_Number,
-                    //             tbl_kasalesTemp.Mat_Text,
-
-                    //             tbl_kasalesTemp.Currency,
-
-
-                    //             PCs = tbl_kasalesTemp.EC,
-                    //             tbl_kasalesTemp.UoM,
-                    //             //    tbl_kasalesTemp.EmptyCountValue,
-                    //             COGS = tbl_kasalesTemp.GSR,
-                    //             //     tbl_kasalesTemp.Litter,
-                    //             //    tbl_kasalesTemp.NETP,
-                    //             //   tbl_kasalesTemp.NSR,
-                    //             //    tbl_kasalesTemp.
-                    //             //    EC = tbl_kasalesTemp.PC,
-
-                    //             //     tbl_kasalesTemp.UC,
-
-                    //             tbl_kasalesTemp.Username,
-                    //             tbl_kasalesTemp.id,
-
-
-
-                    //         };
-
-                    //if (rs2.Count() > 0)
-                    //{
-                    //    Viewtable viewtbl = new Viewtable(rs2, dc, "Upload successfully ! but There are some doc below can not upload by there are no doc of sales: " + priod, 1);// view code 1 la can viet them lenh
-
-                    //    viewtbl.Show();
-                    //    viewtbl.Focus();
-
-
-                    //}
-
-                    //#endregion
-
-
+               
 
                 }
 
