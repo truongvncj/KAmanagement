@@ -115,13 +115,17 @@ namespace KAmanagement.View
 
                         slmodel.edlpinput();
 
+                        List<string> condtypelist = new List<string>();
+                        condtypelist.Add("YPR0");
+                        condtypelist.Add("YPRD");
+                        condtypelist.Add("NETP");
+                        
+
                         #region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
 
                         var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                     where tbl_kasalesTemp.Username == username &&
-                                   ( tbl_kasalesTemp.Cond_Type != "YPR0" ||
-                                       tbl_kasalesTemp.Cond_Type != "YPRD" ||
-                                          tbl_kasalesTemp.Cond_Type != "NETP" )
+                                     where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
+                                 
                                      select tbl_kasalesTemp).Take(10);
                         if (rsdoc.Count() > 0)
                         {
@@ -553,11 +557,23 @@ namespace KAmanagement.View
 
                     #region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
 
+                    List<string> condtypelist = new List<string>();
+                    condtypelist.Add("VPRS");
+              
+                    //#region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
+
+                    //var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
+                    //             where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
+
+
+
+
+
                     var rsdoc1 = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                 where tbl_kasalesTemp.Username == username &&
-                               (tbl_kasalesTemp.Cond_Type != "VPRS")
-                                 
-                                 select tbl_kasalesTemp).Take(10);
+                                 where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
+
+
+                                  select tbl_kasalesTemp).Take(10);
                     if (rsdoc1.Count() > 0)
                     {
                         Viewtable viewtbl2 = new Viewtable(rsdoc1, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC TYPE KHÔNG ĐÚNG KIỂU : VPRS ", 3);// view code 1 la can viet them lenh
