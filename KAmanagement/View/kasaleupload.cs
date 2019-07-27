@@ -700,7 +700,8 @@ namespace KAmanagement.View
                     #region  // view sales volume
 
                     var rs33 = from tbl_kasale in dc.tbl_kasales
-                               where tbl_kasale.Priod == priod //&& tbl_kasalesTemp.Priod == priod
+                               where tbl_kasale.Priod == priod 
+                               && tbl_kasale.Cogs != null
                                select new
                                {
                                    tbl_kasale.Priod,
@@ -919,6 +920,7 @@ namespace KAmanagement.View
                     var rs33 = from tbl_kasale in dc.tbl_kasales
                                where tbl_kasale.Priod == priod 
                                && tbl_kasale.Sold_to == double.Parse(customercode)
+                                   && tbl_kasale.Cogs != null
                                select new
                                {
                                    tbl_kasale.Priod,
@@ -1026,7 +1028,7 @@ namespace KAmanagement.View
 
                         LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
 
-                        db.ExecuteCommand("update  tbl_kasales  SET Cogs = 0 where tbl_kasales.Priod = '" + priod + "'");
+                        db.ExecuteCommand("update  tbl_kasales  SET Cogs = null where tbl_kasales.Priod = '" + priod + "'");
                         db.SubmitChanges();
 
                         MessageBox.Show("Delete Cogs of Priod " +priod +" Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
