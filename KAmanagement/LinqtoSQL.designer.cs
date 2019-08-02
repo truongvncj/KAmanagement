@@ -16946,6 +16946,8 @@ namespace KAmanagement
 		
 		private bool _failurecheck;
 		
+		private System.Nullable<double> _Cogs;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -17008,6 +17010,8 @@ namespace KAmanagement
     partial void OnNETPChanged();
     partial void OnfailurecheckChanging(bool value);
     partial void OnfailurecheckChanged();
+    partial void OnCogsChanging(System.Nullable<double> value);
+    partial void OnCogsChanged();
     #endregion
 		
 		public tbl_kasalesTemp()
@@ -17591,6 +17595,26 @@ namespace KAmanagement
 					this._failurecheck = value;
 					this.SendPropertyChanged("failurecheck");
 					this.OnfailurecheckChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cogs", DbType="Float")]
+		public System.Nullable<double> Cogs
+		{
+			get
+			{
+				return this._Cogs;
+			}
+			set
+			{
+				if ((this._Cogs != value))
+				{
+					this.OnCogsChanging(value);
+					this.SendPropertyChanging();
+					this._Cogs = value;
+					this.SendPropertyChanged("Cogs");
+					this.OnCogsChanged();
 				}
 			}
 		}

@@ -8001,7 +8001,7 @@ namespace KAmanagement.View
                               tbl_kacontractsvolume.Litter,
                               //     tbl_kacontractsvolume.Net_value,
                               NSR = tbl_kacontractsvolume.NSR,
-
+                              COGS = tbl_kacontractsvolume.COGS,
 
 
 
@@ -8017,6 +8017,7 @@ namespace KAmanagement.View
                 this.dtg_volumeachived.Columns["Litter"].DefaultCellStyle.Format = "N0";
                 //     this.dtg_volumeachived.Columns["Net_value"].DefaultCellStyle.Format = "N0";
                 this.dtg_volumeachived.Columns["NSR"].DefaultCellStyle.Format = "N0";
+                this.dtg_volumeachived.Columns["COGS"].DefaultCellStyle.Format = "N0";
 
                 //this.dataGridView7.Columns["Paid_Amount"].DefaultCellStyle.Format = "N0";
                 //this.dataGridView7.Columns["PaidRequestAmt"].DefaultCellStyle.Format = "N0";
@@ -8029,6 +8030,7 @@ namespace KAmanagement.View
                 this.dtg_volumeachived.Columns["UC"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
                 this.dtg_volumeachived.Columns["Litter"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
                 this.dtg_volumeachived.Columns["NSR"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
+                this.dtg_volumeachived.Columns["COGS"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
 
 
 
@@ -11670,7 +11672,7 @@ namespace KAmanagement.View
                                 tbl_kasalesTemp.GSR,
 
                                 tbl_kasalesTemp.NSR,
-
+                                tbl_kasalesTemp.Cogs,
 
 
 

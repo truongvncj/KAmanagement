@@ -823,6 +823,7 @@
       <Column Name="EmptyCountValue" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NETP" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="failurecheck" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Cogs" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_MassConfirmTemp" Member="tbl_MassConfirmTemps">
