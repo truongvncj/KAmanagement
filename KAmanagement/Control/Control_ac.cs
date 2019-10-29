@@ -631,7 +631,7 @@ namespace KAmanagement.Control
 
                 conn2 = new SqlConnection(destConnString);
                 conn2.Open();
-                SqlCommand cmd1 = new SqlCommand("CaculationALLContractinSQLbySQL", conn2);
+                SqlCommand cmd1 = new SqlCommand("CaculationALLContractinSQLbySQL2", conn2);
                 cmd1.CommandType = CommandType.StoredProcedure;
                 //  cmd1.Parameters.Add("@Contractno", SqlDbType.VarChar).Value = Contractno;
                 cmd1.CommandTimeout = 0;
