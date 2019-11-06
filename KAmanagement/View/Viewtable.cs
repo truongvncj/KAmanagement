@@ -1633,16 +1633,18 @@ namespace KAmanagement.View
                             string contractno = item.ContractNo.Trim();
                             string status = item.Consts.Trim();
 
-                            var statusrs = (from tbl_kacontractdata in db.tbl_kacontractdatas
+                            var statusrs = (from tbl_kacontractdata in dc.tbl_kacontractdatas
                                             where tbl_kacontractdata.ContractNo.Equals(contractno)
                                             select tbl_kacontractdata).FirstOrDefault();
 
                             if (statusrs != null)
                             {
-                                statusrs.Consts = status;
+                             
                                 item.status = true;
                                 db.SubmitChanges();
 
+                                statusrs.Consts = status;
+                                dc.SubmitChanges();
 
 
                                 var detail = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails

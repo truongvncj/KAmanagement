@@ -560,29 +560,6 @@ namespace KAmanagement.View
 
 
 
-                    ////ContractNo = tbl_kacontractsdatadetail.ContractNo,
-                    //dataGridView1.Columns["ContractNo"].DisplayIndex = 0;
-                    ////Region = tbl_kacontractsdatadetail.SalesOrg,
-                    //dataGridView1.Columns["Region"].DisplayIndex = 1;
-                    ////Constatus = tbl_kacontractsdatadetail.Constatus,
-                    //dataGridView1.Columns["Constatus"].DisplayIndex = 2;
-                    ////Contracttype = tbl_kacontractsdatadetail.ConType,
-                    //dataGridView1.Columns["Contracttype"].DisplayIndex = 3;
-                    ////EffFrm = tbl_kacontractsdatadetail.EffFrm,
-                    //dataGridView1.Columns["EffFrm"].DisplayIndex = 4;
-                    ////EffTo = tbl_kacontractsdatadetail.EffTo,
-                    //dataGridView1.Columns["EffTo"].DisplayIndex = 5;
-                    ////CustomerCode = tbl_kacontractsdatadetail.Customercode,
-                    //dataGridView1.Columns["CustomerCode"].DisplayIndex = 6;
-
-                    ////    CustomerName = tbl_kacontractsdatadetail.Fullname,
-                    //dataGridView1.Columns["CustomerName"].DisplayIndex = 7;
-
-                    ////EftNoOfMonth = tbl_kacontractsdatadetail.EftNoOfMonth,
-                    //dataGridView1.Columns["EftNoOfMonth"].DisplayIndex = 8;
-                    ////CurrentMonth = tbl_kacontractsdatadetail.CurrentMonth,
-                    //dataGridView1.Columns["CurrentMonth"].DisplayIndex = 9;
-                    //PCVolAched = tbl_kacontractsdatadetail.PCVolAched,
                     this.dataGridView1.Columns["PCVolAched"].DefaultCellStyle.Format = "N0";
                     //     dataGridView1.Columns["PCVolAched"].DisplayIndex = 10;
                     this.dataGridView1.Columns["PCVolAched"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
@@ -617,24 +594,10 @@ namespace KAmanagement.View
 
 
 
-                    //PayControl = tbl_kacontractsdatadetail.PayControl,
-                    //    dataGridView1.Columns["PayControl"].DisplayIndex = 16;
-
-                    //Description = tbl_kacontractsdatadetail.Description,
-                    //    dataGridView1.Columns["Description"].DisplayIndex = 17;
-                    //PrdGrp = tbl_kacontractsdatadetail.PrdGrp,
-                    //    dataGridView1.Columns["PrdGrp"].DisplayIndex = 18;
-                    //FundPercentage = tbl_kacontractsdatadetail.FundPercentage,
-                    //   dataGridView1.Columns["FundPercentage"].DisplayIndex = 19;
-                    //SponsoredAmtperPC = tbl_kacontractsdatadetail.SponsoredAmtperPC,
-                    //  dataGridView1.Columns["SponsoredAmtperPC"].DisplayIndex = 20;
+              
                     this.dataGridView1.Columns["SponsoredAmtperPC"].DefaultCellStyle.Format = "N0";
                     this.dataGridView1.Columns["SponsoredAmtperPC"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
 
-                    //AccruedDate = tbl_kacontractsdatadetail.AccruedDate,
-                    //      dataGridView1.Columns["AccruedDate"].DisplayIndex = 21;
-                    //FullCommitment = tbl_kacontractsdatadetail.SponsoredAmt,
-                    //     dataGridView1.Columns["FullCommitment"].DisplayIndex = 22;
                     this.dataGridView1.Columns["FullCommitment"].DefaultCellStyle.Format = "N0";
                     this.dataGridView1.Columns["FullCommitment"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;// = "N0";
 
