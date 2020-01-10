@@ -119,13 +119,13 @@ namespace KAmanagement.View
                         condtypelist.Add("YPR0");
                         condtypelist.Add("YPRD");
                         condtypelist.Add("NETP");
-                        
+
 
                         #region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
 
                         var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
                                      where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
-                                 
+
                                      select tbl_kasalesTemp).Take(10);
                         if (rsdoc.Count() > 0)
                         {
@@ -145,9 +145,9 @@ namespace KAmanagement.View
                         #region // list  doc da post
 
                         var rsdoc3 = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                     where tbl_kasalesTemp.Username == username &&
-                                     ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
-                                     select tbl_kasalesTemp).Take(10);
+                                      where tbl_kasalesTemp.Username == username &&
+                                      ((tbl_kasalesTemp.Invoice_Date < fromdate || tbl_kasalesTemp.Invoice_Date > todate))
+                                      select tbl_kasalesTemp).Take(10);
                         if (rsdoc3.Count() > 0)
                         {
                             Viewtable viewtbl2 = new Viewtable(rsdoc3, dc, "kHÔNG UPLOAD ĐƯỢC, CÓ CÁC DOC DATE KHÔNG THUỘC PRIOD: " + priod, 3);// view code 1 la can viet them lenh
@@ -460,7 +460,7 @@ namespace KAmanagement.View
                 bool chon = kaPriodpicker.kq;
                 if (chon)
                 {
-                    
+
                     if (priod != "")
                     {
                         string connection_string = Utils.getConnectionstr();
@@ -470,7 +470,7 @@ namespace KAmanagement.View
                         db.ExecuteCommand("DELETE FROM tbl_kasales where tbl_kasales.Priod = '" + priod + "'");
                         db.SubmitChanges();
 
-                        MessageBox.Show("Delete sales data of priod "+ priod+"  Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Delete sales data of priod " + priod + "  Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
 
@@ -559,7 +559,7 @@ namespace KAmanagement.View
 
                     List<string> condtypelist = new List<string>();
                     condtypelist.Add("VPRS");
-              
+
                     //#region // giới hạn doc type  chỉ chấp nhận 3 loại YPR0,YPRD,NETP 
 
                     //var rsdoc = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
@@ -570,7 +570,7 @@ namespace KAmanagement.View
 
 
                     var rsdoc1 = (from tbl_kasalesTemp in dc.tbl_kasalesTemps
-                                 where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
+                                  where tbl_kasalesTemp.Username == username && !condtypelist.Contains(tbl_kasalesTemp.Cond_Type)
 
 
                                   select tbl_kasalesTemp).Take(10);
@@ -655,7 +655,7 @@ namespace KAmanagement.View
 
 
 
-               
+
 
                 }
 
@@ -700,7 +700,7 @@ namespace KAmanagement.View
                     #region  // view sales volume
 
                     var rs33 = from tbl_kasale in dc.tbl_kasales
-                               where tbl_kasale.Priod == priod 
+                               where tbl_kasale.Priod == priod
                                && tbl_kasale.Cogs != null
                                select new
                                {
@@ -810,8 +810,15 @@ namespace KAmanagement.View
 
                 string priod = kaPriodpicker.priod;
                 string customercode = kaPriodpicker.customercode;
+                string fromcode = kaPriodpicker.fromcode;
+                string tocode = kaPriodpicker.tocode;
+                bool onlycust = kaPriodpicker.onlycust;
+                bool fromcodeto = kaPriodpicker.fromcodeto;
+
+
+
                 bool chon = kaPriodpicker.kq;
-                if (chon)
+                if (chon & onlycust == true)
                 {
                     #region show so da chon
 
@@ -867,6 +874,62 @@ namespace KAmanagement.View
 
                 }
 
+                if (chon & fromcodeto == true)
+                {
+                    #region show so da chon
+
+
+
+                    var rs = from tbl_kasale in dc.tbl_kasales
+                             where tbl_kasale.Priod == priod
+                             && tbl_kasale.Sold_to >= double.Parse(fromcode)
+                               && tbl_kasale.Sold_to <= double.Parse(tocode)
+
+                             select new
+                             {
+                                 tbl_kasale.Priod,
+                                 tbl_kasale.Sales_District,
+                                 tbl_kasale.Sales_District_desc,
+                                 tbl_kasale.Sales_Org,
+                                 tbl_kasale.Sold_to,
+                                 tbl_kasale.Cust_Name,
+                                 tbl_kasale.Outbound_Delivery,
+                                 tbl_kasale.Key_Acc_Nr,
+                                 tbl_kasale.Delivery_Date,
+                                 tbl_kasale.Invoice_Doc_Nr,
+                                 tbl_kasale.Invoice_Date,
+                                 tbl_kasale.Currency,
+                                 tbl_kasale.Mat_Group,
+                                 tbl_kasale.Mat_Group_Text,
+                                 tbl_kasale.Mat_Number,
+                                 tbl_kasale.Mat_Text,
+
+                                 PCs = tbl_kasale.EC,
+                                 tbl_kasale.UoM,
+                                 EC = tbl_kasale.PC,
+
+                                 tbl_kasale.UC,
+                                 tbl_kasale.Litter,
+                                 tbl_kasale.GSR,
+
+                                 tbl_kasale.NSR,
+
+
+
+
+
+                                 tbl_kasale.Username,
+                                 tbl_kasale.id
+
+
+                             };
+
+                    Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod + " FROM CODE " + fromcode + " TO CODE " + tocode, 55);// view code 1 la can viet them lenh
+
+                    viewtbl.ShowDialog();
+                    #endregion
+
+                }
 
 
 
@@ -918,7 +981,7 @@ namespace KAmanagement.View
                     #region  // view sales volume
 
                     var rs33 = from tbl_kasale in dc.tbl_kasales
-                               where tbl_kasale.Priod == priod 
+                               where tbl_kasale.Priod == priod
                                && tbl_kasale.Sold_to == double.Parse(customercode)
                                    && tbl_kasale.Cogs != null
                                select new
@@ -1031,7 +1094,7 @@ namespace KAmanagement.View
                         db.ExecuteCommand("update  tbl_kasales  SET Cogs = null where tbl_kasales.Priod = '" + priod + "'");
                         db.SubmitChanges();
 
-                        MessageBox.Show("Delete Cogs of Priod " +priod +" Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Delete Cogs of Priod " + priod + " Done !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
 
