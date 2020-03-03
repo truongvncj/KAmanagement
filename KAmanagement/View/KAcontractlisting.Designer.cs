@@ -43,6 +43,7 @@
             this.Bt_Adddata = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tbmasspayment = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.tbmasspayment);
             this.panel1.Controls.Add(this.tbmasscreatecontract);
             this.panel1.Controls.Add(this.btmassconfirm);
             this.panel1.Controls.Add(this.btmasschange);
@@ -76,11 +78,11 @@
             this.tbmasscreatecontract.BackColor = System.Drawing.SystemColors.Control;
             this.tbmasscreatecontract.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.tbmasscreatecontract.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tbmasscreatecontract.Location = new System.Drawing.Point(383, 28);
+            this.tbmasscreatecontract.Location = new System.Drawing.Point(432, 28);
             this.tbmasscreatecontract.Name = "tbmasscreatecontract";
-            this.tbmasscreatecontract.Size = new System.Drawing.Size(192, 20);
+            this.tbmasscreatecontract.Size = new System.Drawing.Size(184, 20);
             this.tbmasscreatecontract.TabIndex = 50;
-            this.tbmasscreatecontract.Text = "Dasani && ASMPQ MASS CREATE";
+            this.tbmasscreatecontract.Text = "DSN && ASMPQ MASS CREATE";
             this.tbmasscreatecontract.UseVisualStyleBackColor = false;
             this.tbmasscreatecontract.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -90,9 +92,9 @@
             this.btmassconfirm.BackColor = System.Drawing.SystemColors.Control;
             this.btmassconfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btmassconfirm.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btmassconfirm.Location = new System.Drawing.Point(581, 27);
+            this.btmassconfirm.Location = new System.Drawing.Point(622, 27);
             this.btmassconfirm.Name = "btmassconfirm";
-            this.btmassconfirm.Size = new System.Drawing.Size(113, 21);
+            this.btmassconfirm.Size = new System.Drawing.Size(89, 21);
             this.btmassconfirm.TabIndex = 49;
             this.btmassconfirm.Text = " Mass Confirm";
             this.btmassconfirm.UseVisualStyleBackColor = false;
@@ -104,9 +106,9 @@
             this.btmasschange.BackColor = System.Drawing.SystemColors.Control;
             this.btmasschange.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btmasschange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btmasschange.Location = new System.Drawing.Point(700, 27);
+            this.btmasschange.Location = new System.Drawing.Point(717, 27);
             this.btmasschange.Name = "btmasschange";
-            this.btmasschange.Size = new System.Drawing.Size(113, 21);
+            this.btmasschange.Size = new System.Drawing.Size(96, 21);
             this.btmasschange.TabIndex = 48;
             this.btmasschange.Text = " Mass Change";
             this.btmasschange.UseVisualStyleBackColor = false;
@@ -139,7 +141,7 @@
             this.statusview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.statusview.AutoSize = true;
             this.statusview.ForeColor = System.Drawing.Color.Blue;
-            this.statusview.Location = new System.Drawing.Point(990, 48);
+            this.statusview.Location = new System.Drawing.Point(988, 52);
             this.statusview.Name = "statusview";
             this.statusview.Size = new System.Drawing.Size(39, 13);
             this.statusview.TabIndex = 43;
@@ -163,7 +165,7 @@
             // 
             this.formname.AutoSize = true;
             this.formname.ForeColor = System.Drawing.Color.Blue;
-            this.formname.Location = new System.Drawing.Point(9, 48);
+            this.formname.Location = new System.Drawing.Point(22, 50);
             this.formname.Name = "formname";
             this.formname.Size = new System.Drawing.Size(74, 13);
             this.formname.TabIndex = 41;
@@ -175,7 +177,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(9, 23);
+            this.button2.Location = new System.Drawing.Point(9, 25);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(97, 22);
             this.button2.TabIndex = 40;
@@ -188,7 +190,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(255, 48);
+            this.label1.Location = new System.Drawing.Point(254, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(415, 13);
             this.label1.TabIndex = 39;
@@ -229,14 +231,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 64);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 72);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1043, 428);
+            this.dataGridView1.Size = new System.Drawing.Size(1043, 420);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridView1_Paint);
+            // 
+            // tbmasspayment
+            // 
+            this.tbmasspayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbmasspayment.BackColor = System.Drawing.SystemColors.Control;
+            this.tbmasspayment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.tbmasspayment.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tbmasspayment.Location = new System.Drawing.Point(337, 28);
+            this.tbmasspayment.Name = "tbmasspayment";
+            this.tbmasspayment.Size = new System.Drawing.Size(89, 21);
+            this.tbmasspayment.TabIndex = 51;
+            this.tbmasspayment.Text = " Mass Payment";
+            this.tbmasspayment.UseVisualStyleBackColor = false;
+            this.tbmasspayment.Click += new System.EventHandler(this.tbmasspayment_Click);
             // 
             // KAcontractlisting
             // 
@@ -272,5 +288,6 @@
         private System.Windows.Forms.Button btmasschange;
         private System.Windows.Forms.Button btmassconfirm;
         private System.Windows.Forms.Button tbmasscreatecontract;
+        private System.Windows.Forms.Button tbmasspayment;
     }
 }

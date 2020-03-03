@@ -918,6 +918,19 @@
       <Column Name="Paydate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_tempmasspayment" Member="tbl_tempmasspayments">
+    <Type Name="tbl_tempmasspayment">
+      <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaymentRequest" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Budget" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BatchNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_tempmastercontractmasscreate" Member="tbl_tempmastercontractmasscreates">
     <Type Name="tbl_tempmastercontractmasscreate">
       <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />

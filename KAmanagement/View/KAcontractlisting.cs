@@ -1710,5 +1710,13 @@ namespace KAmanagement.View
                 clm.HeaderText = clm.HeaderText.Replace("_", " ");
             }
         }
+
+        private void tbmasspayment_Click(object sender, EventArgs e)
+        {
+            View.Kamasspament Kamasspament = new View.Kamasspament();
+
+
+            Kamasspament.ShowDialog();
+        }
     }
 }

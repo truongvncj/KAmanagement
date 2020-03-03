@@ -91,6 +91,61 @@ namespace KAmanagement.Model
 
         }
 
+        public void inputempmasspayment()
+        {
+
+
+            //      BackgroundWorker backgroundWorker1;
+            //   CultureInfo provider = CultureInfo.InvariantCulture;
+            //     backgroundWorker1 = new BackgroundWorker();
+
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Open Excel File Masspayment excel";
+            theDialog.Filter = "Excel files|*.xlsx; *.xls";
+            theDialog.InitialDirectory = @"C:\";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = theDialog.FileName.ToString();
+
+
+                Thread t1 = new Thread(importempmaspayment);
+                t1.IsBackground = true;
+                t1.Start(new datainportF() { filename = filename });
+
+
+                View.Caculating wat = new View.Caculating();
+                Thread t2 = new Thread(showwait);
+                t2.Start(new datashowwait() { wat = wat });
+
+
+                t1.Join();
+                if (t1.ThreadState != ThreadState.Running)
+                {
+
+                    // t2.Abort();
+
+                    wat.Invoke(wat.myDelegate);
+
+
+
+                }
+
+
+
+
+
+            }
+
+
+            // MessageBox.Show(theDialog.FileName.ToString());
+            //    return true;
+
+            //    
+
+
+        }
+
+
         public void inputempmastercontract()
         {
 
@@ -246,6 +301,271 @@ namespace KAmanagement.Model
             //    return true;
 
             //    
+
+
+        }
+        private void importempmaspayment(object obj)
+        {
+            string connection_string = Utils.getConnectionstr();
+            LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+            string username = Utils.getusername();
+
+
+          
+
+            db.ExecuteCommand("DELETE FROM tbl_tempmasspayment where Username = '" + username + "'");
+            //    dc.tblFBL5Nnewthisperiods.DeleteAllOnSubmit(rsthisperiod);
+            db.SubmitChanges();
+
+            datainportF inf = (datainportF)obj;
+            string filename = inf.filename;
+
+            string connectionString = "";
+            if (filename.Contains(".xlsx") || filename.Contains(".XLSX"))
+            {
+                connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + ";" + "Extended Properties=Excel 12.0;";
+            }
+            else
+            {
+                connectionString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source= " + filename + ";" + "Extended Properties=Excel 8.0;";
+            }
+
+            //------
+            //---------------fill data
+
+
+            ExcelProvider ExcelProvide = new ExcelProvider();
+            //#endregion
+            System.Data.DataTable sourceData = ExcelProvide.GetDataFromExcel(filename);
+            //        Sales Group Sales Group desc Sales Off Sales Office Desc
+       //     No Contract PayID Payment Note
+
+            System.Data.DataTable batable = new System.Data.DataTable();
+            batable.Columns.Add("ContractNo", typeof(string));
+            batable.Columns.Add("PayID", typeof(int));
+            batable.Columns.Add("PaymentRequest", typeof(double));
+            batable.Columns.Add("Budget", typeof(double));
+            batable.Columns.Add("Note", typeof(string));
+
+            batable.Columns.Add("Username", typeof(string));
+
+            #region setcolum
+
+
+
+
+
+
+
+            int ContractNoid = -1;
+            int PayIDid = -1;
+            int PaymentRequestid = -1;
+            int Budgetid = -1;
+            int Usernameid = -1;
+            int Noteid = -1;
+            
+            for (int rowid = 0; rowid < 3; rowid++)
+            {
+                // headindex = 1;
+                for (int columid = 0; columid < sourceData.Columns.Count; columid++)
+                {
+                    string value;
+                    try
+                    {
+                        value = sourceData.Rows[rowid][columid].ToString();
+                    }
+                    catch (Exception)
+                    {
+
+                        value = null;
+                    }
+
+
+                    //            MessageBox.Show(value +":"+ rowid);
+
+                    if (value != null)
+                    {
+
+                        #region setcolum
+                        if (value.Trim() == "No Contract")
+                        {
+                            ContractNoid = columid;
+                            //  headindex = rowid;
+                        }
+
+                        if (value.Trim() == ("PayID"))
+                        {
+
+                            PayIDid = columid;
+                            //   headindex = rowid;
+
+                        }
+
+
+                        if (value.Trim() == ("Payment"))
+                        {
+
+                            PaymentRequestid = columid;
+                            //  headindex = rowid;
+
+
+
+                        }
+
+
+                        if (value.Trim() == ("Note"))
+                        {
+
+                            Noteid = columid;
+                            //  headindex = rowid;
+
+
+
+                        }
+
+
+                     
+
+
+                        #endregion
+
+                    }
+
+
+                }// colum
+
+
+
+            }// roww off heatder
+
+            #endregion
+
+
+            if (ContractNoid == -1)
+            {
+                MessageBox.Show("Please check ContractNo colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            if (PayIDid == -1)
+            {
+                MessageBox.Show("Please check Payid", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (PaymentRequestid == -1)
+            {
+                MessageBox.Show("Please check Payment Request", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+          
+
+
+
+
+            for (int rowixd = 0; rowixd < sourceData.Rows.Count; rowixd++)
+            {
+
+                #region setvalue of pricelist
+                //   string valuepricelist = Utils.GetValueOfCellInExcel(worksheet, rowid, columpricelist);
+                // && Utils.IsValidateddmm(sourceData.Rows[rowixd][EfFromDateid].ToString()
+                string ContractNo = sourceData.Rows[rowixd][ContractNoid].ToString();
+
+                if (ContractNo != "" && rowixd > 0)
+                {
+
+                    //dr["ExtendDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][ExtendDateid].ToString().Trim());
+
+                    //dr["EftoDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][EftoDateid].ToString().Trim());
+                    //dr["EfFromDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][EfFromDateid].ToString().Trim());
+                    //dr["Representative"] = sourceData.Rows[rowixd][Representativeid].ToString().Trim();
+
+                    DataRow dr = batable.NewRow();
+                    dr["ContractNo"] = sourceData.Rows[rowixd][ContractNoid].ToString();
+
+                    if (sourceData.Rows[rowixd][PayIDid].ToString() != "")
+                    {
+                        if (Utils.IsValidnumber(sourceData.Rows[rowixd][PayIDid].ToString()))
+                        {
+                            dr["PayID"] = int.Parse(sourceData.Rows[rowixd][PayIDid].ToString().Trim());
+
+                        }
+
+                    }
+
+                    if (sourceData.Rows[rowixd][PaymentRequestid].ToString() !="")
+                    {
+                        if (Utils.IsValidnumber(sourceData.Rows[rowixd][PaymentRequestid].ToString()))
+                        {
+                            dr["PaymentRequest"] = double.Parse(sourceData.Rows[rowixd][PaymentRequestid].ToString().Trim());
+                        }
+                    }
+
+                    dr["Note"] = sourceData.Rows[rowixd][Noteid].ToString().Trim();
+                  
+                    dr["Budget"] = 0;
+                   
+                    dr["Username"] = username;
+
+                    batable.Rows.Add(dr);
+
+
+                }
+
+
+
+                #endregion
+
+            }// row
+
+
+
+
+
+            string destConnString = Utils.getConnectionstr();
+
+            //---------------fill data
+
+
+            using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destConnString))
+            {
+
+                //batable.Columns.Add("ContractNo", typeof(string));
+                //batable.Columns.Add("PayID", typeof(int));
+                //batable.Columns.Add("PaymentRequest", typeof(double));
+                //batable.Columns.Add("Budget", typeof(double));
+                //batable.Columns.Add("Note", typeof(string));
+
+                //batable.Columns.Add("Username", typeof(string));
+
+                bulkCopy.BulkCopyTimeout = 0;
+                bulkCopy.DestinationTableName = "tbl_tempmasspayment";
+                // Write from the source to the destination.
+                bulkCopy.ColumnMappings.Add("ContractNo", "[ContractNo]");
+                bulkCopy.ColumnMappings.Add("PayID", "[PayID]");
+                bulkCopy.ColumnMappings.Add("Note", "[Note]");
+
+                bulkCopy.ColumnMappings.Add("PaymentRequest", "[PaymentRequest]");
+                bulkCopy.ColumnMappings.Add("Budget", "[Budget]");
+                bulkCopy.ColumnMappings.Add("Username", "[Username]");
+              
+
+                try
+                {
+                    bulkCopy.WriteToServer(batable);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.ToString(), "Thông báo lỗi Bulk Copy !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Thread.CurrentThread.Abort();
+                }
+
+            }
+
+            //  ExcelProvide.releaseObject();
+            //   ExcelProvide.releaseObject();
 
 
         }
