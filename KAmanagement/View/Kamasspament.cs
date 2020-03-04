@@ -25,7 +25,7 @@ namespace KAmanagement.View
             }
         }
 
-        public Boolean beforecheck { get; set; }
+        public Boolean kqcheck { get; set; }
 
 
 
@@ -50,7 +50,7 @@ namespace KAmanagement.View
             this.KeyPreview = true;
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(Control_KeyPress);
 
-
+            this.kqcheck = false;
 
 
 
@@ -127,7 +127,8 @@ namespace KAmanagement.View
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            // inputempmastercontract
+            this.kqcheck = false;
+
             Model.Contract ctrtemp = new Model.Contract();
 
             ctrtemp.inputempmasspayment();
@@ -141,26 +142,53 @@ namespace KAmanagement.View
                              where p.Username == username
                              select p;
 
-        
+
             gridviewmasspayment.DataSource = masterlist;
 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Model.Contract ctrtemp = new Model.Contract();
 
-            ctrtemp.inputempdetailcontract();
+            this.kqcheck = false;
+
             string connection_string = Utils.getConnectionstr();
             string username = Utils.getusername();
 
+          
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-            var detaillist = from p in dc.tbl_tempcontractsdatadetails
-                             where p.Username == username
-                             select p;
+            var listbeffore = from p in dc.tbl_tempmasspayments
+                                  where p.Username == username
+                         //    && p.StatusNote != ""
+                                  select p;
 
-            GridViewdetail.DataSource = detaillist;
+            foreach (var item in listbeffore)
+            {
+                item.StatusNote = "";
+                dc.SubmitChanges();
+            }
+
+            #region  kiểm tra hợp đồng đã đúng chưa 
+            Control.Control_ac util = new Control_ac();
+            bool kq =      util.checkmasspayment();
+
+            #endregion
+            if (kq == false)
+            {
+                var detaillisterror = from p in dc.tbl_tempmasspayments
+                                      where p.Username == username
+                             //    && p.StatusNote != ""
+                                      select p;
+
+
+                GridViewdetail.DataSource = detaillisterror;
+            }
+            else
+            {
+                this.kqcheck = true;
+
+            }
         }
 
         private void button3_Click_3(object sender, EventArgs e)

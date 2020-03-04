@@ -1088,10 +1088,11 @@ namespace KAmanagement.View
                 btfindsfa.Enabled = false;
                 this.cb_contractstatus.Enabled = false;
 
-                Control_ac.CaculationContract(ContractNoin); // tinhs toasn contract truo c khi view
-
                 Control.Control_ac.CaculationContractinSQLmaster(ContractNoin);
 
+                Control_ac.CaculationContract(ContractNoin); // tinhs toasn contract truo c khi view
+
+           
 
 
 

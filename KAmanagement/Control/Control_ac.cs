@@ -21,7 +21,7 @@ namespace KAmanagement.Control
     {
 
 
-  
+
         public static void showwait()
         {
             View.Caculating wat = new View.Caculating();
@@ -43,7 +43,7 @@ namespace KAmanagement.Control
             //#region    //   xoa datavolume conytrac
             //dc.ExecuteCommand("DELETE FROM tbl_kacontractsvolume Where  tbl_kacontractsvolume.ContractNo = '" + ContractNo + "'");
 
-        
+
             //dc.SubmitChanges();
 
             //#endregion//   xoa datavolume conytrac
@@ -170,9 +170,123 @@ namespace KAmanagement.Control
                 #endregion
             }
 
-         
+
             #endregion example
 
+
+
+
+
+        }
+
+        public bool checkmasspayment()
+        {
+
+
+            string connection_string = Utils.getConnectionstr();
+            string userName = Utils.getusername();
+            LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+            dc.CommandTimeout = 0;
+
+
+            #region Kiểm tra tten hop dong
+
+            var q1 = from tempayment in dc.tbl_tempmasspayments
+                     where tempayment.Username == userName && !(from kadata in dc.tbl_kacontractdatas
+                                                                select kadata.ContractNo
+                                       ).Contains(tempayment.ContractNo)
+
+                     select tempayment;
+
+
+            if (q1.Count() != 0)
+            {
+                foreach (var item in q1)
+                {
+                    item.StatusNote = "Contract no sai, không có !";
+                    dc.SubmitChanges();
+                }
+
+                return false;
+            }
+
+            #endregion List các document có trong tblEDLP không có trong VAT
+
+
+            #region Kiểm tra payid
+
+            var q2 = from tempayment in dc.tbl_tempmasspayments
+                     where tempayment.Username == userName && !(from kadata in dc.tbl_kacontractsdatadetails
+                                                                select kadata.PayID
+                                       ).Contains(tempayment.PayID)
+
+                     select tempayment;
+
+
+            if (q2.Count() != 0)
+            {
+
+                foreach (var item in q2)
+                {
+                    item.StatusNote = "Payment Id không có !";
+                    dc.SubmitChanges();
+                }
+                return false;
+            }
+
+            #endregion List các document có trong tblEDLP không có trong VAT
+
+
+            #region Kiểm tra payment có con tracn no mà payid thiếu hay thiếu số tiền reques
+
+            var q3 = from tempayment in dc.tbl_tempmasspayments
+                     where tempayment.Username == userName && 
+                     (tempayment.PaymentRequest == null || tempayment.PayID == null )
+                     select tempayment;
+
+
+            if (q3.Count() != 0)
+            {
+
+                foreach (var item in q3)
+                {
+                    item.StatusNote = "Payment request thiếu thông tin!";
+                    dc.SubmitChanges();
+                }
+                return false;
+            }
+
+            #endregion update hợp đồng về trạng thái mới nhất trước khi tính payment
+
+            #region tính toán hợp đồng
+
+            var q4 = (from tempayment in dc.tbl_tempmasspayments
+                      where tempayment.Username == userName
+
+
+                      select tempayment.ContractNo).Distinct();
+
+            foreach (var item in q4)
+            {
+
+                Control.Control_ac.CaculationContractinSQLmaster(item);
+
+                Control_ac.CaculationContract(item); // tinhs toasn contract truo c khi view
+
+
+
+
+
+            }
+
+
+
+
+
+
+            return true;
+
+            #endregion
 
 
 
@@ -187,7 +301,7 @@ namespace KAmanagement.Control
 
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
             dc.CommandTimeout = 0;
-          
+
 
 
         }
