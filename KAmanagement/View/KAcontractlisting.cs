@@ -47,7 +47,7 @@ namespace KAmanagement.View
 
             this.KeyPreview = true;
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(Control_KeyPress);
-
+            tbmasspayment.Visible = false;
             filterlabel.Visible = false;
             cbcontracttypefil.Visible = false;
             this.db = db;
@@ -57,7 +57,7 @@ namespace KAmanagement.View
 
             if (fornname == "Payment Input")
             {
-
+                tbmasspayment.Visible = true;
                 tbmasscreatecontract.Visible = false;
                 btmassconfirm.Visible = false;
                 btmasschange.Visible = false;
