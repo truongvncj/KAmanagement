@@ -4893,6 +4893,10 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _COGS_ached;
 		
+		private System.Nullable<System.DateTime> _caculationdate;
+		
+		private System.Nullable<bool> _caculationResult;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5061,6 +5065,10 @@ namespace KAmanagement
     partial void OnListCodeinGroupChanged();
     partial void OnCOGS_achedChanging(System.Nullable<double> value);
     partial void OnCOGS_achedChanged();
+    partial void OncaculationdateChanging(System.Nullable<System.DateTime> value);
+    partial void OncaculationdateChanged();
+    partial void OncaculationResultChanging(System.Nullable<bool> value);
+    partial void OncaculationResultChanged();
     #endregion
 		
 		public tbl_kacontractdata()
@@ -6704,6 +6712,46 @@ namespace KAmanagement
 					this._COGS_ached = value;
 					this.SendPropertyChanged("COGS_ached");
 					this.OnCOGS_achedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_caculationdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> caculationdate
+		{
+			get
+			{
+				return this._caculationdate;
+			}
+			set
+			{
+				if ((this._caculationdate != value))
+				{
+					this.OncaculationdateChanging(value);
+					this.SendPropertyChanging();
+					this._caculationdate = value;
+					this.SendPropertyChanged("caculationdate");
+					this.OncaculationdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_caculationResult", DbType="Bit")]
+		public System.Nullable<bool> caculationResult
+		{
+			get
+			{
+				return this._caculationResult;
+			}
+			set
+			{
+				if ((this._caculationResult != value))
+				{
+					this.OncaculationResultChanging(value);
+					this.SendPropertyChanging();
+					this._caculationResult = value;
+					this.SendPropertyChanged("caculationResult");
+					this.OncaculationResultChanged();
 				}
 			}
 		}

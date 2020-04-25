@@ -222,6 +222,9 @@ namespace KAmanagement.Control
 
                      select new
                      {
+                         tbl_kacontractdata.caculationdate,
+                         tbl_kacontractdata.caculationResult,
+
                          tbl_kacontractdata.ContractNo,
                          tbl_kacontractdata.SalesOrg,
                          tbl_kacontractdata.ConType,//contract type

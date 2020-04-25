@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KAcontractlisting));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tbmasspayment = new System.Windows.Forms.Button();
             this.tbmasscreatecontract = new System.Windows.Forms.Button();
             this.btmassconfirm = new System.Windows.Forms.Button();
             this.btmasschange = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.Bt_Adddata = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tbmasspayment = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +71,21 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1071, 502);
             this.panel1.TabIndex = 0;
+            // 
+            // tbmasspayment
+            // 
+            this.tbmasspayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbmasspayment.BackColor = System.Drawing.SystemColors.Control;
+            this.tbmasspayment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.tbmasspayment.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tbmasspayment.Location = new System.Drawing.Point(337, 28);
+            this.tbmasspayment.Name = "tbmasspayment";
+            this.tbmasspayment.Size = new System.Drawing.Size(89, 21);
+            this.tbmasspayment.TabIndex = 51;
+            this.tbmasspayment.Text = " Mass Payment";
+            this.tbmasspayment.UseVisualStyleBackColor = false;
+            this.tbmasspayment.Visible = false;
+            this.tbmasspayment.Click += new System.EventHandler(this.tbmasspayment_Click);
             // 
             // tbmasscreatecontract
             // 
@@ -239,20 +254,6 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.Paint += new System.Windows.Forms.PaintEventHandler(this.dataGridView1_Paint);
-            // 
-            // tbmasspayment
-            // 
-            this.tbmasspayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbmasspayment.BackColor = System.Drawing.SystemColors.Control;
-            this.tbmasspayment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.tbmasspayment.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.tbmasspayment.Location = new System.Drawing.Point(337, 28);
-            this.tbmasspayment.Name = "tbmasspayment";
-            this.tbmasspayment.Size = new System.Drawing.Size(89, 21);
-            this.tbmasspayment.TabIndex = 51;
-            this.tbmasspayment.Text = " Mass Payment";
-            this.tbmasspayment.UseVisualStyleBackColor = false;
-            this.tbmasspayment.Click += new System.EventHandler(this.tbmasspayment_Click);
             // 
             // KAcontractlisting
             // 

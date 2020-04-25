@@ -693,6 +693,9 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.Representative,
 
                                        tbl_kacontractdata.VATregistrationNo,
+                                       tbl_kacontractdata.caculationdate,
+                                       tbl_kacontractdata.caculationResult,
+
                                    };
 
 
@@ -889,6 +892,8 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.VATregistrationNo,
                                        tbl_kacontractdata.CRDDAT,
                                        tbl_kacontractdata.CRDUSR,
+                                       tbl_kacontractdata.caculationdate,
+                                       tbl_kacontractdata.caculationResult,
                                        //      tbl_kacontractdata.VolComm,
 
 
@@ -1176,6 +1181,8 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.VATregistrationNo,
                                        tbl_kacontractdata.CRDDAT,
                                        tbl_kacontractdata.CRDUSR,
+                                       tbl_kacontractdata.caculationdate,
+                                       tbl_kacontractdata.caculationResult,
 
 
 
