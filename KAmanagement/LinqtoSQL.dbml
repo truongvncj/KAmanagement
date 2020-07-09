@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KAmanagement" Class="LinqtoSQLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=HAN-L-3PFF7H2;Initial Catalog=KAmanagement;Integrated Security=True" SettingsObjectName="KAmanagement.Properties.Settings" SettingsPropertyName="KAmanagementConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-UVMCLH1;Initial Catalog=KAmanagement;Integrated Security=True" SettingsObjectName="KAmanagement.Properties.Settings" SettingsPropertyName="KAmanagementConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_autodataContract" Member="tbl_autodataContracts">
     <Type Name="tbl_autodataContract">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -279,9 +279,6 @@
       <Column Name="TotSponsoredcommit" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ListCodeinGroup" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="COGS_ached" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="caculationdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="caculationResult" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsdatadetail" Member="tbl_kacontractsdatadetails">
@@ -353,14 +350,14 @@
       <Column Name="VATregistrationNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ExtNote" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Temp" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="COGS_ached" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="SponsoredLimited" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CombineItem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CombineType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsdetailpayment" Member="tbl_kacontractsdetailpayments">
     <Type Name="tbl_kacontractsdetailpayment">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PayType" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SubID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -385,7 +382,6 @@
       <Column Name="BLOCKED" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="BeginSubID" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
-      <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsvolume" Member="tbl_kacontractsvolumes">
@@ -399,7 +395,6 @@
       <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="COGS" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsvolumePrductGRP" Member="tbl_kacontractsvolumePrductGRPs">
@@ -414,7 +409,6 @@
       <Column Name="GSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NSR" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="COGS" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontracttype" Member="tbl_kacontracttypes">
@@ -445,7 +439,6 @@
       <Column Name="Balance" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PayType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacurrency" Member="tbl_kacurrencies">
@@ -791,7 +784,6 @@
       <Column Name="UC" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="[Invoice Date]" Member="Invoice_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Litter" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Cogs" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kasalesTemp" Member="tbl_kasalesTemps">
@@ -824,8 +816,6 @@
       <Column Name="[Cond Type]" Member="Cond_Type" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="EmptyCountValue" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NETP" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="failurecheck" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="Cogs" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_MassConfirmTemp" Member="tbl_MassConfirmTemps">
@@ -917,20 +907,6 @@
       <Column Name="EffTo" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Paydate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_tempmasspayment" Member="tbl_tempmasspayments">
-    <Type Name="tbl_tempmasspayment">
-      <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PayID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PaymentRequest" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Budget" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="BatchNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Note" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_tempmastercontractmasscreate" Member="tbl_tempmastercontractmasscreates">
