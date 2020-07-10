@@ -252,16 +252,16 @@ namespace KAmanagement.View
                             spercent.Enabled = false;
                         }
 
-                        if (item.SponsoredLimited != null)
-                        {
+                        //if (item.SponsoredLimited != null)
+                        //{
 
-                            sponsorlimited.Text = item.SponsoredLimited.ToString();
+                        //    sponsorlimited.Text = item.SponsoredLimited.ToString();
 
-                        }
-                        else
-                        {
-                            sponsorlimited.Enabled = false;
-                        }
+                        //}
+                        //else
+                        //{
+                        //    sponsorlimited.Enabled = false;
+                        //}
 
                         if (item.SponsoredAmtperPC != null)
                         {
@@ -291,14 +291,14 @@ namespace KAmanagement.View
                         }
 
 
-                        if (item.SponsoredLimited != null)
-                        {
-                            sunit.Text = item.SponsoredLimited.ToString();
-                        }
-                        else
-                        {
-                            sunit.Enabled = false;
-                        }
+                        //if (item.SponsoredLimited != null)
+                        //{
+                        //    sunit.Text = item.SponsoredLimited.ToString();
+                        //}
+                        //else
+                        //{
+                        //    sunit.Enabled = false;
+                        //}
 
 
                         if (item.TagetPercentage != null)

@@ -191,6 +191,10 @@ namespace KAmanagement.View
 
         void Control_KeyPress(object sender, KeyEventArgs e)
         {
+            string connection_string = Utils.getConnectionstr();
+            LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+
+
 
             #region seach input contract
 
@@ -236,18 +240,9 @@ namespace KAmanagement.View
                 newcontrac.ShowDialog();
                 //  newcontrac.BringToFront();
                 newcontrac.Focus();
-                string connection_string = Utils.getConnectionstr();
-                LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+            
 
-
-
-                //string username = Utils.getusername();
-
-
-
-                //var regioncode = (from tbl_Temp in db.tbl_Temps
-                //                  where tbl_Temp.username == username
-                //                  select tbl_Temp.RegionCode).FirstOrDefault();
+             
 
                 var rs = Control.Control_ac.getViewcontractMaster(db);
 
@@ -280,11 +275,14 @@ namespace KAmanagement.View
             //  }
 
             string username = Utils.getusername();
+       //     string connection_string = Utils.getConnectionstr();
+            //LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
 
 
-            var typecontract = from Tka_RightContracttypeview in db.Tka_RightContracttypeviews
-                               where Tka_RightContracttypeview.UserName == username
-                               select Tka_RightContracttypeview.Contracttype;
+
+            var typecontract = from p in db.Tka_RightContracttypeviews
+                               where p.UserName == username
+                               select p.Contracttype;
 
 
 
@@ -1720,10 +1718,7 @@ namespace KAmanagement.View
 
         private void tbmasspayment_Click(object sender, EventArgs e)
         {
-            View.Kamasspament Kamasspament = new View.Kamasspament();
-
-
-            Kamasspament.ShowDialog();
+          
         }
     }
 }

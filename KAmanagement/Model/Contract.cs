@@ -360,8 +360,8 @@ namespace KAmanagement.Model
             int ContractNoid = -1;
             int PayIDid = -1;
             int PaymentRequestid = -1;
-            int Budgetid = -1;
-            int Usernameid = -1;
+        //    int Budgetid = -1;
+          //  int Usernameid = -1;
             int Noteid = -1;
             
             for (int rowid = 0; rowid < 3; rowid++)

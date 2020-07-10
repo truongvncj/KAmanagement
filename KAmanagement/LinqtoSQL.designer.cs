@@ -4880,6 +4880,12 @@ namespace KAmanagement
 		
 		private string _ListCodeinGroup;
 		
+		private System.Nullable<System.DateTime> _caculationdate;
+		
+		private System.Nullable<bool> _caculationResult;
+		
+		private System.Nullable<double> _COGS_ached;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5046,6 +5052,12 @@ namespace KAmanagement
     partial void OnVATregistrationNoChanged();
     partial void OnListCodeinGroupChanging(string value);
     partial void OnListCodeinGroupChanged();
+    partial void OncaculationdateChanging(System.Nullable<System.DateTime> value);
+    partial void OncaculationdateChanged();
+    partial void OncaculationResultChanging(System.Nullable<bool> value);
+    partial void OncaculationResultChanged();
+    partial void OnCOGS_achedChanging(System.Nullable<double> value);
+    partial void OnCOGS_achedChanged();
     #endregion
 		
 		public tbl_kacontractdata()
@@ -6673,6 +6685,66 @@ namespace KAmanagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_caculationdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> caculationdate
+		{
+			get
+			{
+				return this._caculationdate;
+			}
+			set
+			{
+				if ((this._caculationdate != value))
+				{
+					this.OncaculationdateChanging(value);
+					this.SendPropertyChanging();
+					this._caculationdate = value;
+					this.SendPropertyChanged("caculationdate");
+					this.OncaculationdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_caculationResult", DbType="Bit")]
+		public System.Nullable<bool> caculationResult
+		{
+			get
+			{
+				return this._caculationResult;
+			}
+			set
+			{
+				if ((this._caculationResult != value))
+				{
+					this.OncaculationResultChanging(value);
+					this.SendPropertyChanging();
+					this._caculationResult = value;
+					this.SendPropertyChanged("caculationResult");
+					this.OncaculationResultChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COGS_ached", DbType="Float")]
+		public System.Nullable<double> COGS_ached
+		{
+			get
+			{
+				return this._COGS_ached;
+			}
+			set
+			{
+				if ((this._COGS_ached != value))
+				{
+					this.OnCOGS_achedChanging(value);
+					this.SendPropertyChanging();
+					this._COGS_ached = value;
+					this.SendPropertyChanged("COGS_ached");
+					this.OnCOGS_achedChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -6838,6 +6910,10 @@ namespace KAmanagement
 		
 		private string _CombineType;
 		
+		private System.Nullable<double> _SponsoredLimited;
+		
+		private System.Nullable<double> _COGS_ached;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -6980,6 +7056,10 @@ namespace KAmanagement
     partial void OnCombineItemChanged();
     partial void OnCombineTypeChanging(string value);
     partial void OnCombineTypeChanged();
+    partial void OnSponsoredLimitedChanging(System.Nullable<double> value);
+    partial void OnSponsoredLimitedChanged();
+    partial void OnCOGS_achedChanging(System.Nullable<double> value);
+    partial void OnCOGS_achedChanged();
     #endregion
 		
 		public tbl_kacontractsdatadetail()
@@ -8367,6 +8447,46 @@ namespace KAmanagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SponsoredLimited", DbType="Float")]
+		public System.Nullable<double> SponsoredLimited
+		{
+			get
+			{
+				return this._SponsoredLimited;
+			}
+			set
+			{
+				if ((this._SponsoredLimited != value))
+				{
+					this.OnSponsoredLimitedChanging(value);
+					this.SendPropertyChanging();
+					this._SponsoredLimited = value;
+					this.SendPropertyChanged("SponsoredLimited");
+					this.OnSponsoredLimitedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COGS_ached", DbType="Float")]
+		public System.Nullable<double> COGS_ached
+		{
+			get
+			{
+				return this._COGS_ached;
+			}
+			set
+			{
+				if ((this._COGS_ached != value))
+				{
+					this.OnCOGS_achedChanging(value);
+					this.SendPropertyChanging();
+					this._COGS_ached = value;
+					this.SendPropertyChanged("COGS_ached");
+					this.OnCOGS_achedChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8395,8 +8515,6 @@ namespace KAmanagement
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _ContractNo;
-		
-		private string _ContracName;
 		
 		private string _PayType;
 		
@@ -8446,14 +8564,14 @@ namespace KAmanagement
 		
 		private string _BeginSubID;
 		
+		private string _ContracName;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnContractNoChanging(string value);
     partial void OnContractNoChanged();
-    partial void OnContracNameChanging(string value);
-    partial void OnContracNameChanged();
     partial void OnPayTypeChanging(string value);
     partial void OnPayTypeChanged();
     partial void OnPayIDChanging(System.Nullable<int> value);
@@ -8502,6 +8620,8 @@ namespace KAmanagement
     partial void OnSystemContChanged();
     partial void OnBeginSubIDChanging(string value);
     partial void OnBeginSubIDChanged();
+    partial void OnContracNameChanging(string value);
+    partial void OnContracNameChanged();
     #endregion
 		
 		public tbl_kacontractsdetailpayment()
@@ -8525,26 +8645,6 @@ namespace KAmanagement
 					this._ContractNo = value;
 					this.SendPropertyChanged("ContractNo");
 					this.OnContractNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContracName", DbType="NVarChar(255)")]
-		public string ContracName
-		{
-			get
-			{
-				return this._ContracName;
-			}
-			set
-			{
-				if ((this._ContracName != value))
-				{
-					this.OnContracNameChanging(value);
-					this.SendPropertyChanging();
-					this._ContracName = value;
-					this.SendPropertyChanged("ContracName");
-					this.OnContracNameChanged();
 				}
 			}
 		}
@@ -9029,6 +9129,26 @@ namespace KAmanagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContracName", DbType="NVarChar(255)")]
+		public string ContracName
+		{
+			get
+			{
+				return this._ContracName;
+			}
+			set
+			{
+				if ((this._ContracName != value))
+				{
+					this.OnContracNameChanging(value);
+					this.SendPropertyChanging();
+					this._ContracName = value;
+					this.SendPropertyChanged("ContracName");
+					this.OnContracNameChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -9074,6 +9194,8 @@ namespace KAmanagement
 		
 		private int _id;
 		
+		private System.Nullable<double> _COGS;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -9096,6 +9218,8 @@ namespace KAmanagement
     partial void OnNSRChanged();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnCOGSChanging(System.Nullable<double> value);
+    partial void OnCOGSChanged();
     #endregion
 		
 		public tbl_kacontractsvolume()
@@ -9279,6 +9403,26 @@ namespace KAmanagement
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COGS", DbType="Float")]
+		public System.Nullable<double> COGS
+		{
+			get
+			{
+				return this._COGS;
+			}
+			set
+			{
+				if ((this._COGS != value))
+				{
+					this.OnCOGSChanging(value);
+					this.SendPropertyChanging();
+					this._COGS = value;
+					this.SendPropertyChanged("COGS");
+					this.OnCOGSChanged();
 				}
 			}
 		}
@@ -16156,6 +16300,8 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _Litter;
 		
+		private System.Nullable<double> _Cogs;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -16210,6 +16356,8 @@ namespace KAmanagement
     partial void OnInvoice_DateChanged();
     partial void OnLitterChanging(System.Nullable<double> value);
     partial void OnLitterChanged();
+    partial void OnCogsChanging(System.Nullable<double> value);
+    partial void OnCogsChanged();
     #endregion
 		
 		public tbl_kasale()
@@ -16717,6 +16865,26 @@ namespace KAmanagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cogs", DbType="Float")]
+		public System.Nullable<double> Cogs
+		{
+			get
+			{
+				return this._Cogs;
+			}
+			set
+			{
+				if ((this._Cogs != value))
+				{
+					this.OnCogsChanging(value);
+					this.SendPropertyChanging();
+					this._Cogs = value;
+					this.SendPropertyChanged("Cogs");
+					this.OnCogsChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -16800,6 +16968,8 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _NETP;
 		
+		private System.Nullable<double> _Cogs;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -16860,6 +17030,8 @@ namespace KAmanagement
     partial void OnEmptyCountValueChanged();
     partial void OnNETPChanging(System.Nullable<double> value);
     partial void OnNETPChanged();
+    partial void OnCogsChanging(System.Nullable<double> value);
+    partial void OnCogsChanged();
     #endregion
 		
 		public tbl_kasalesTemp()
@@ -17423,6 +17595,26 @@ namespace KAmanagement
 					this._NETP = value;
 					this.SendPropertyChanged("NETP");
 					this.OnNETPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cogs", DbType="Float")]
+		public System.Nullable<double> Cogs
+		{
+			get
+			{
+				return this._Cogs;
+			}
+			set
+			{
+				if ((this._Cogs != value))
+				{
+					this.OnCogsChanging(value);
+					this.SendPropertyChanging();
+					this._Cogs = value;
+					this.SendPropertyChanged("Cogs");
+					this.OnCogsChanged();
 				}
 			}
 		}
@@ -18988,6 +19180,8 @@ namespace KAmanagement
 		
 		private string _Username;
 		
+		private System.Nullable<System.DateTime> _Paydate;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -19016,6 +19210,8 @@ namespace KAmanagement
     partial void OnidChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
+    partial void OnPaydateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPaydateChanged();
     #endregion
 		
 		public tbl_tempcontractsdatadetail()
@@ -19259,6 +19455,26 @@ namespace KAmanagement
 					this._Username = value;
 					this.SendPropertyChanged("Username");
 					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paydate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Paydate
+		{
+			get
+			{
+				return this._Paydate;
+			}
+			set
+			{
+				if ((this._Paydate != value))
+				{
+					this.OnPaydateChanging(value);
+					this.SendPropertyChanging();
+					this._Paydate = value;
+					this.SendPropertyChanged("Paydate");
+					this.OnPaydateChanged();
 				}
 			}
 		}
