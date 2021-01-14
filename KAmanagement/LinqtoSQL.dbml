@@ -387,6 +387,7 @@
       <Column Name="SystemCont" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="BeginSubID" Type="System.String" DbType="NChar(225)" CanBeNull="true" />
       <Column Name="ContracName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ControlType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kacontractsvolume" Member="tbl_kacontractsvolumes">

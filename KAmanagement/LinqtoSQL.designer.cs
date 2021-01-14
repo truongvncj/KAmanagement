@@ -8566,6 +8566,8 @@ namespace KAmanagement
 		
 		private string _ContracName;
 		
+		private string _ControlType;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -8622,6 +8624,8 @@ namespace KAmanagement
     partial void OnBeginSubIDChanged();
     partial void OnContracNameChanging(string value);
     partial void OnContracNameChanged();
+    partial void OnControlTypeChanging(string value);
+    partial void OnControlTypeChanged();
     #endregion
 		
 		public tbl_kacontractsdetailpayment()
@@ -9145,6 +9149,26 @@ namespace KAmanagement
 					this._ContracName = value;
 					this.SendPropertyChanged("ContracName");
 					this.OnContracNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ControlType", DbType="NVarChar(255)")]
+		public string ControlType
+		{
+			get
+			{
+				return this._ControlType;
+			}
+			set
+			{
+				if ((this._ControlType != value))
+				{
+					this.OnControlTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ControlType = value;
+					this.SendPropertyChanged("ControlType");
+					this.OnControlTypeChanged();
 				}
 			}
 		}

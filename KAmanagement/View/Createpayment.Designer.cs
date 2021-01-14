@@ -265,7 +265,7 @@
             this.button5.BackColor = System.Drawing.Color.Transparent;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.Red;
-            this.button5.Location = new System.Drawing.Point(241, 583);
+            this.button5.Location = new System.Drawing.Point(239, 585);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(95, 21);
             this.button5.TabIndex = 64;

@@ -34,6 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button11 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -49,7 +50,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -119,6 +119,17 @@
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Payment Reports";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(7, 84);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(172, 23);
+            this.button11.TabIndex = 6;
+            this.button11.Text = "List  payment ";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
             // button14
             // 
@@ -289,17 +300,6 @@
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(7, 84);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(172, 23);
-            this.button11.TabIndex = 6;
-            this.button11.Text = "List all payment ";
-            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
             // kareportsform
             // 
