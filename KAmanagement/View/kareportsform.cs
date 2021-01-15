@@ -57,23 +57,23 @@ namespace KAmanagement.View
                              tbl_kasale.Sales_Org
 
                          }
-                          into g
-                         select new
-                         {
-                             Priod = g.Select(gg => gg.Priod).FirstOrDefault(),
-                             Region = g.Key.Sales_Org,
-                             Sold_to = g.Key.Sold_to,
-                             Name = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
-                             PCs = g.Sum(gg => gg.EC).GetValueOrDefault(0),
-                             EC = Math.Ceiling(g.Sum(gg => gg.PC).GetValueOrDefault(0)),
-                             UC = Math.Ceiling(g.Sum(gg => gg.UC).GetValueOrDefault(0)),
-                             Litter = Math.Ceiling(g.Sum(gg => gg.Litter).GetValueOrDefault(0)),
-                             NSR = Math.Ceiling(g.Sum(gg => gg.NSR).GetValueOrDefault(0)),
-                             GSR = Math.Ceiling(g.Sum(gg => gg.GSR).GetValueOrDefault(0)),
+                             into g
+                             select new
+                             {
+                                 Priod = g.Select(gg => gg.Priod).FirstOrDefault(),
+                                 Region = g.Key.Sales_Org,
+                                 Sold_to = g.Key.Sold_to,
+                                 Name = g.Select(gg => gg.Cust_Name).FirstOrDefault(),
+                                 PCs = g.Sum(gg => gg.EC).GetValueOrDefault(0),
+                                 EC = Math.Ceiling(g.Sum(gg => gg.PC).GetValueOrDefault(0)),
+                                 UC = Math.Ceiling(g.Sum(gg => gg.UC).GetValueOrDefault(0)),
+                                 Litter = Math.Ceiling(g.Sum(gg => gg.Litter).GetValueOrDefault(0)),
+                                 NSR = Math.Ceiling(g.Sum(gg => gg.NSR).GetValueOrDefault(0)),
+                                 GSR = Math.Ceiling(g.Sum(gg => gg.GSR).GetValueOrDefault(0)),
 
 
 
-                         };
+                             };
 
                 Viewtable viewtbl = new Viewtable(rs, dc, "SALES DATA PRIOD: " + priod, 2);// view code 1 la can viet them lenh
 
@@ -809,48 +809,143 @@ namespace KAmanagement.View
             string connection_string = Utils.getConnectionstr();
 
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+
+            //    UpdateControlTypeforPaymentrpt
+
+
+            #region    ClearABbelanceZezoinFbl5n
+
+            SqlConnection conn2 = null;
+            SqlDataReader rdr1 = null;
+            string destConnString = Utils.getConnectionstr();
+            try
+            {
+
+                conn2 = new SqlConnection(destConnString);
+                conn2.Open();
+                SqlCommand cmd1 = new SqlCommand("UpdateControlTypeforPaymentrpt", conn2);
+                cmd1.CommandType = CommandType.StoredProcedure;
+                //  cmd1.Parameters.Add("@name", SqlDbType.VarChar).Value = userupdate;
+
+                rdr1 = cmd1.ExecuteReader();
+
+
+
+                //       rdr1 = cmd1.ExecuteReader();
+
+            }
+            finally
+            {
+                if (conn2 != null)
+                {
+                    conn2.Close();
+                }
+                if (rdr1 != null)
+                {
+                    rdr1.Close();
+                }
+            }
+            //     MessageBox.Show("ok", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+
+
+            #endregion
+
+
+
+
             string username = Utils.getusername();
-            var regioncode = (from tbl_Temp in dc.tbl_Temps
-                              where tbl_Temp.username == username
-                              select tbl_Temp.RegionCode).FirstOrDefault();
-
-            var liveandinregion = from tbl_kacontractdata in dc.tbl_kacontractdatas
-                                  where  (from Tka_RegionRight in dc.Tka_RegionRights
-                                      where Tka_RegionRight.RegionCode == regioncode
-                                      select Tka_RegionRight.Region
-                              ).Contains(tbl_kacontractdata.SalesOrg)
-                                  select tbl_kacontractdata.ContractNo;
 
 
+            FormCollection fc = System.Windows.Forms.Application.OpenForms;
 
-            var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
-                             from tbl_kacontractdata in dc.tbl_kacontractdatas
-                             where  liveandinregion.Contains(tbl_kacontractsdetailpayment.ContractNo)
-                           && tbl_kacontractsdetailpayment.ContractNo == tbl_kacontractdata.ContractNo
+            bool kq = false;
+            foreach (Form frm in fc)
+            {
+                if (frm.Text == "Fromdate to Date Select")
+                {
+                    kq = true;
+                    frm.Focus();
 
-                             select new
-                             {
-                                 tbl_kacontractsdetailpayment.ContractNo,
-                                 Contract_status =   tbl_kacontractdata.Consts,
-                                 Contract_Type  =   tbl_kacontractdata.ConType,
-                                 tbl_kacontractsdetailpayment.BatchNo,
-                                 ContracName = tbl_kacontractsdetailpayment.ContracName.Trim(),
-                                 tbl_kacontractsdetailpayment.PayType,
-                                 tbl_kacontractsdetailpayment.PayID,
-                                 Description = tbl_kacontractsdetailpayment.Description.Trim(),
-                                 tbl_kacontractsdetailpayment.PaidRequestAmt,
-                                 tbl_kacontractsdetailpayment.PayControl,
-                                 tbl_kacontractsdetailpayment.PrintDate,
-                                 Remark = tbl_kacontractsdetailpayment.Remark.Trim(),
+                }
+            }
 
-                                 tbl_kacontractsdetailpayment.CRDDAT,
-                                 tbl_kacontractsdetailpayment.CRDUSR,
-                                 tbl_kacontractsdetailpayment.SubID,
+            if (!kq)
+            {
 
-                             };
-            Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST ALL PAYMENT", 3);// view code 1 la can viet them lenh
 
-            viewtbl.Show();
+                View.KafromtoSelect kafromto = new View.KafromtoSelect();
+
+                kafromto.ShowDialog();
+                DateTime fromdate = kafromto.fromdate;
+                DateTime todate = kafromto.todate;
+
+
+
+
+                var regioncode = (from tbl_Temp in dc.tbl_Temps
+                                  where tbl_Temp.username == username
+                                  select tbl_Temp.RegionCode).FirstOrDefault();
+
+                var liveandinregion = from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                      where (from Tka_RegionRight in dc.Tka_RegionRights
+                                             where Tka_RegionRight.RegionCode == regioncode
+                                             select Tka_RegionRight.Region
+                                  ).Contains(tbl_kacontractdata.SalesOrg)
+                                      select tbl_kacontractdata.ContractNo;
+
+
+
+                var rscustemp2 = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                                 from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                 where liveandinregion.Contains(tbl_kacontractsdetailpayment.ContractNo)
+                               && tbl_kacontractsdetailpayment.ContractNo == tbl_kacontractdata.ContractNo
+                               && tbl_kacontractsdetailpayment.PaidOn >= fromdate
+                                   && tbl_kacontractsdetailpayment.PaidOn <= todate
+
+                                 select new
+                                 {
+                                     tbl_kacontractsdetailpayment.ContractNo,
+                                     Contract_status = tbl_kacontractdata.Consts,
+                                     Contract_Type = tbl_kacontractdata.ConType,
+                                     tbl_kacontractsdetailpayment.BatchNo,
+                                     ContracName = tbl_kacontractsdetailpayment.ContracName.Trim(),
+                                     tbl_kacontractsdetailpayment.PayType,
+                                     tbl_kacontractsdetailpayment.PayID,
+                                     Description = tbl_kacontractsdetailpayment.Description.Trim(),
+                                     tbl_kacontractsdetailpayment.PaidRequestAmt,
+                                     tbl_kacontractsdetailpayment.PayControl,
+                                     tbl_kacontractsdetailpayment.ControlType,
+
+                                     tbl_kacontractsdetailpayment.PrintDate,
+                                     Remark = tbl_kacontractsdetailpayment.Remark.Trim(),
+
+                                     tbl_kacontractsdetailpayment.CRDDAT,
+                                     tbl_kacontractsdetailpayment.CRDUSR,
+                                     tbl_kacontractsdetailpayment.SubID,
+
+                                 };
+                Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST ALL PAYMENT", 3);// view code 1 la can viet them lenh
+
+                viewtbl.Show();
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
