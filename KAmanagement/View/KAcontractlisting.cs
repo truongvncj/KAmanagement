@@ -277,7 +277,7 @@ namespace KAmanagement.View
             string username = Utils.getusername();
        //     string connection_string = Utils.getConnectionstr();
             //LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
-
+          
 
 
             var typecontract = from p in db.Tka_RightContracttypeviews
@@ -547,7 +547,7 @@ namespace KAmanagement.View
 
                     Utils ut = new Utils();
                     dt = ut.ToDataTable(db, rsthisperiod);
-                    //    this.db = db;
+                    this.db = db;
                     this.rs = rsthisperiod;
                     this.dataGridView1.DataSource = dt;
 
