@@ -281,6 +281,7 @@ namespace KAmanagement.Control
                          tbl_kacontractdata.VATregistrationNo,
                          tbl_kacontractdata.CRDDAT,
                          tbl_kacontractdata.CRDUSR,
+                  Tel =       tbl_kacontractdata.tel,
                          //      tbl_kacontractdata.VolComm,
 
 
