@@ -776,6 +776,7 @@ namespace KAmanagement.View
             cbcust.Enabled = false;
             cbsfa.Enabled = false;
             txtinfor.Visible = false;
+            txtCusttel.Enabled = false;
 
             btdelete.Enabled = false;
             bt_fin.Visible = false;
@@ -832,6 +833,8 @@ namespace KAmanagement.View
                 this.txt_term.Enabled = false;
                 txt_annualvolume.Text = "0";
                 Nsaperyear.Text = "0";
+                txtCusttel.Enabled = true;
+                txtCusttel.Text = "";
 
                 this.tb_creditlimit.Text = "0";
                 this.bt_etcontract.Visible = false;
@@ -1150,7 +1153,7 @@ namespace KAmanagement.View
                     }
 
 
-
+                    txtCusttel.Text = rs.tel;
 
                     this.txt_term.Enabled = false;
                     if (rs.NSRComm != null)
@@ -7124,6 +7127,7 @@ namespace KAmanagement.View
                 newcontract.CRDUSR = usrname;
                 newcontract.SignOn = dateTimePicker1.Value;
                 newcontract.CRDDAT = DateTime.Today;
+                newcontract.tel =  txtCusttel.Text.Truncate(100);
 
                 if (this.txt_remarkstt.Text.Length < 255)
                 {

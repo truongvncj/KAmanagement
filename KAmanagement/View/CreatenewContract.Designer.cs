@@ -81,9 +81,6 @@ namespace KAmanagement.View
             this.bt_fin = new System.Windows.Forms.Button();
             this.txtinfor = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btremoveCusgroup = new System.Windows.Forms.Button();
-            this.btviewcode = new System.Windows.Forms.Button();
-            this.btAddGroupcode = new System.Windows.Forms.Button();
             this.btrepresent = new System.Windows.Forms.Button();
             this.btvatchange = new System.Windows.Forms.Button();
             this.btchangeprovince = new System.Windows.Forms.Button();
@@ -112,6 +109,9 @@ namespace KAmanagement.View
             this.label21 = new System.Windows.Forms.Label();
             this.bt_creatnewCust = new System.Windows.Forms.Button();
             this.cb_customerka = new System.Windows.Forms.ComboBox();
+            this.btremoveCusgroup = new System.Windows.Forms.Button();
+            this.btviewcode = new System.Windows.Forms.Button();
+            this.btAddGroupcode = new System.Windows.Forms.Button();
             this.txt_remarkstt = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
             this.dataGridViewtotal = new System.Windows.Forms.DataGridView();
@@ -168,6 +168,8 @@ namespace KAmanagement.View
             this.label31 = new System.Windows.Forms.Label();
             this.NSRcommit = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txtCusttel = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.undogroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -197,10 +199,10 @@ namespace KAmanagement.View
             this.formlabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.formlabel.AutoSize = true;
             this.formlabel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.formlabel.Font = new System.Drawing.Font("Microsoft MHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.formlabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formlabel.Location = new System.Drawing.Point(470, 8);
             this.formlabel.Name = "formlabel";
-            this.formlabel.Size = new System.Drawing.Size(212, 21);
+            this.formlabel.Size = new System.Drawing.Size(244, 20);
             this.formlabel.TabIndex = 0;
             this.formlabel.Text = "CREATING NEW CONTRACT";
             // 
@@ -856,6 +858,8 @@ namespace KAmanagement.View
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label34);
+            this.groupBox2.Controls.Add(this.txtCusttel);
             this.groupBox2.Controls.Add(this.btrepresent);
             this.groupBox2.Controls.Add(this.btvatchange);
             this.groupBox2.Controls.Add(this.btchangeprovince);
@@ -890,54 +894,6 @@ namespace KAmanagement.View
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // btremoveCusgroup
-            // 
-            this.btremoveCusgroup.BackColor = System.Drawing.Color.Transparent;
-            this.btremoveCusgroup.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btremoveCusgroup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btremoveCusgroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btremoveCusgroup.ForeColor = System.Drawing.Color.Red;
-            this.btremoveCusgroup.Location = new System.Drawing.Point(808, 391);
-            this.btremoveCusgroup.Name = "btremoveCusgroup";
-            this.btremoveCusgroup.Size = new System.Drawing.Size(117, 20);
-            this.btremoveCusgroup.TabIndex = 72;
-            this.btremoveCusgroup.TabStop = false;
-            this.btremoveCusgroup.Text = "Remove GroupCode";
-            this.btremoveCusgroup.UseVisualStyleBackColor = false;
-            this.btremoveCusgroup.Visible = false;
-            this.btremoveCusgroup.Click += new System.EventHandler(this.bteditCusgroup_Click);
-            // 
-            // btviewcode
-            // 
-            this.btviewcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btviewcode.ForeColor = System.Drawing.Color.Red;
-            this.btviewcode.Location = new System.Drawing.Point(931, 391);
-            this.btviewcode.Name = "btviewcode";
-            this.btviewcode.Size = new System.Drawing.Size(130, 20);
-            this.btviewcode.TabIndex = 71;
-            this.btviewcode.TabStop = false;
-            this.btviewcode.Text = "View GroupCode";
-            this.btviewcode.UseVisualStyleBackColor = true;
-            this.btviewcode.Visible = false;
-            this.btviewcode.Click += new System.EventHandler(this.btviewcode_Click);
-            // 
-            // btAddGroupcode
-            // 
-            this.btAddGroupcode.BackColor = System.Drawing.Color.Transparent;
-            this.btAddGroupcode.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btAddGroupcode.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
-            this.btAddGroupcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btAddGroupcode.ForeColor = System.Drawing.Color.Red;
-            this.btAddGroupcode.Location = new System.Drawing.Point(708, 391);
-            this.btAddGroupcode.Name = "btAddGroupcode";
-            this.btAddGroupcode.Size = new System.Drawing.Size(94, 20);
-            this.btAddGroupcode.TabIndex = 70;
-            this.btAddGroupcode.TabStop = false;
-            this.btAddGroupcode.Text = "Add GroupCode";
-            this.btAddGroupcode.UseVisualStyleBackColor = false;
-            this.btAddGroupcode.Visible = false;
-            this.btAddGroupcode.Click += new System.EventHandler(this.btAddGroupcode_Click);
             // 
             // btrepresent
             // 
@@ -1307,6 +1263,54 @@ namespace KAmanagement.View
             this.cb_customerka.SelectedValueChanged += new System.EventHandler(this.cb_customerka_SelectedValueChanged);
             this.cb_customerka.TextChanged += new System.EventHandler(this.cb_customerka_TextChanged);
             this.cb_customerka.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cb_customerka_KeyPress);
+            // 
+            // btremoveCusgroup
+            // 
+            this.btremoveCusgroup.BackColor = System.Drawing.Color.Transparent;
+            this.btremoveCusgroup.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btremoveCusgroup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btremoveCusgroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btremoveCusgroup.ForeColor = System.Drawing.Color.Red;
+            this.btremoveCusgroup.Location = new System.Drawing.Point(808, 391);
+            this.btremoveCusgroup.Name = "btremoveCusgroup";
+            this.btremoveCusgroup.Size = new System.Drawing.Size(117, 20);
+            this.btremoveCusgroup.TabIndex = 72;
+            this.btremoveCusgroup.TabStop = false;
+            this.btremoveCusgroup.Text = "Remove GroupCode";
+            this.btremoveCusgroup.UseVisualStyleBackColor = false;
+            this.btremoveCusgroup.Visible = false;
+            this.btremoveCusgroup.Click += new System.EventHandler(this.bteditCusgroup_Click);
+            // 
+            // btviewcode
+            // 
+            this.btviewcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btviewcode.ForeColor = System.Drawing.Color.Red;
+            this.btviewcode.Location = new System.Drawing.Point(931, 391);
+            this.btviewcode.Name = "btviewcode";
+            this.btviewcode.Size = new System.Drawing.Size(130, 20);
+            this.btviewcode.TabIndex = 71;
+            this.btviewcode.TabStop = false;
+            this.btviewcode.Text = "View GroupCode";
+            this.btviewcode.UseVisualStyleBackColor = true;
+            this.btviewcode.Visible = false;
+            this.btviewcode.Click += new System.EventHandler(this.btviewcode_Click);
+            // 
+            // btAddGroupcode
+            // 
+            this.btAddGroupcode.BackColor = System.Drawing.Color.Transparent;
+            this.btAddGroupcode.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btAddGroupcode.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btAddGroupcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAddGroupcode.ForeColor = System.Drawing.Color.Red;
+            this.btAddGroupcode.Location = new System.Drawing.Point(708, 391);
+            this.btAddGroupcode.Name = "btAddGroupcode";
+            this.btAddGroupcode.Size = new System.Drawing.Size(94, 20);
+            this.btAddGroupcode.TabIndex = 70;
+            this.btAddGroupcode.TabStop = false;
+            this.btAddGroupcode.Text = "Add GroupCode";
+            this.btAddGroupcode.UseVisualStyleBackColor = false;
+            this.btAddGroupcode.Visible = false;
+            this.btAddGroupcode.Click += new System.EventHandler(this.btAddGroupcode_Click);
             // 
             // txt_remarkstt
             // 
@@ -2121,6 +2125,28 @@ namespace KAmanagement.View
             this.label30.TabIndex = 38;
             this.label30.Text = "NSRCommitted";
             // 
+            // label34
+            // 
+            this.label34.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label34.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.Black;
+            this.label34.Location = new System.Drawing.Point(7, 35);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(92, 18);
+            this.label34.TabIndex = 73;
+            this.label34.Text = "Customer Tel:";
+            // 
+            // txtCusttel
+            // 
+            this.txtCusttel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCusttel.ForeColor = System.Drawing.Color.Black;
+            this.txtCusttel.Location = new System.Drawing.Point(105, 33);
+            this.txtCusttel.Name = "txtCusttel";
+            this.txtCusttel.Size = new System.Drawing.Size(121, 20);
+            this.txtCusttel.TabIndex = 74;
+            // 
             // CreatenewContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2302,5 +2328,7 @@ namespace KAmanagement.View
         private System.Windows.Forms.Button btchangensrcomit;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbcaculating;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox txtCusttel;
     }
 }

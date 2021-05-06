@@ -4886,6 +4886,8 @@ namespace KAmanagement
 		
 		private System.Nullable<double> _COGS_ached;
 		
+		private string _tel;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5058,6 +5060,8 @@ namespace KAmanagement
     partial void OncaculationResultChanged();
     partial void OnCOGS_achedChanging(System.Nullable<double> value);
     partial void OnCOGS_achedChanged();
+    partial void OntelChanging(string value);
+    partial void OntelChanged();
     #endregion
 		
 		public tbl_kacontractdata()
@@ -6741,6 +6745,26 @@ namespace KAmanagement
 					this._COGS_ached = value;
 					this.SendPropertyChanged("COGS_ached");
 					this.OnCOGS_achedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tel", DbType="NVarChar(100)")]
+		public string tel
+		{
+			get
+			{
+				return this._tel;
+			}
+			set
+			{
+				if ((this._tel != value))
+				{
+					this.OntelChanging(value);
+					this.SendPropertyChanging();
+					this._tel = value;
+					this.SendPropertyChanged("tel");
+					this.OntelChanged();
 				}
 			}
 		}
@@ -10066,6 +10090,8 @@ namespace KAmanagement
 		
 		private int _id;
 		
+		private string _PayType;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -10088,6 +10114,8 @@ namespace KAmanagement
     partial void OnUsernameChanged();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnPayTypeChanging(string value);
+    partial void OnPayTypeChanged();
     #endregion
 		
 		public tbl_KaCreatCrtracttemp()
@@ -10271,6 +10299,26 @@ namespace KAmanagement
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="NVarChar(50)")]
+		public string PayType
+		{
+			get
+			{
+				return this._PayType;
+			}
+			set
+			{
+				if ((this._PayType != value))
+				{
+					this.OnPayTypeChanging(value);
+					this.SendPropertyChanging();
+					this._PayType = value;
+					this.SendPropertyChanged("PayType");
+					this.OnPayTypeChanged();
 				}
 			}
 		}
