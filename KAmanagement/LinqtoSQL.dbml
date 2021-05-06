@@ -948,6 +948,7 @@
       <Column Name="Remark" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tel" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Tka_RegionRight" Member="Tka_RegionRights">

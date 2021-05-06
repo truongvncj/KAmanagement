@@ -825,7 +825,7 @@ namespace KAmanagement.View
 
                 btaddnewItem.Visible = false;
 
-
+                bttel.Visible = false;
 
                 this.Nsaperyear.Enabled = false;
                 //   groupBox3.Enabled = false;
@@ -1064,6 +1064,7 @@ namespace KAmanagement.View
                 {
                     btchangecontractitem.Visible = true;
                     btremoveCusgroup.Visible = true;
+                    bttel.Visible = true;
 
                     btAddGroupcode.Visible = true;
                 }
@@ -11889,6 +11890,46 @@ namespace KAmanagement.View
 
         private void dataGridView6_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void bttel_Click(object sender, EventArgs e)
+        {
+
+            View.valueinput valueiput = new valueinput("Please input Tel", "");
+            valueiput.ShowDialog();
+
+
+            String newremark = valueiput.valuetext;
+
+
+            if (newremark != null)
+            {
+                string connection_string = Utils.getConnectionstr();
+                LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+                var contractremark = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                      where tbl_kacontractdata.ContractNo == tb_contractno.Text
+                                      select tbl_kacontractdata).Take(1);
+
+                if (contractremark.Count() == 1)
+                {
+                    foreach (var item in contractremark)
+                    {
+                        item.tel = newremark.Truncate(100);
+                    }
+
+                    txtCusttel.Text = newremark;
+
+                    dc.SubmitChanges();
+                }
+
+
+
+
+
+
+            }
 
         }
     }

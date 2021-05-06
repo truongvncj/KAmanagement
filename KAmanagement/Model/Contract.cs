@@ -628,6 +628,7 @@ namespace KAmanagement.Model
              batable.Columns.Add("VolCommitment", typeof(double));
                    batable.Columns.Add("Remark", typeof(string));
             batable.Columns.Add("Username", typeof(string));
+            batable.Columns.Add("tel", typeof(string));
 
             #region setcolum
 
@@ -636,6 +637,7 @@ namespace KAmanagement.Model
 
 
 
+            int telid = -1;
 
             int ContractNoid = -1;
             int SalesOrgid = -1;
@@ -695,7 +697,14 @@ namespace KAmanagement.Model
                             //   headindex = rowid;
 
                         }
+                        // telid
+                        if (value.Trim() == ("Tel"))
+                        {
 
+                            telid = columid;
+                            //   headindex = rowid;
+
+                        }
 
                         if (value.Trim() == ("Con Type"))
                         {
@@ -825,11 +834,17 @@ namespace KAmanagement.Model
             }// roww off heatder
 
             #endregion
-
+            
 
             if (ContractNoid == -1)
             {
                 MessageBox.Show("Please check ContractNo colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (telid == -1)
+            {
+                MessageBox.Show("Please check Tel colunm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -952,6 +967,8 @@ namespace KAmanagement.Model
                     dr["ContractNo"] = sourceData.Rows[rowixd][ContractNoid].ToString();
                     dr["SalesOrg"] = sourceData.Rows[rowixd][SalesOrgid].ToString().Trim();
                     dr["ConType"] = sourceData.Rows[rowixd][ConTypeid].ToString().Trim();
+                    dr["tel"] = sourceData.Rows[rowixd][telid].ToString().Trim();
+
 
                     dr["ExtendDate"] = Utils.chageExceldatetoData(sourceData.Rows[rowixd][ExtendDateid].ToString().Trim());
 
@@ -1037,6 +1054,7 @@ namespace KAmanagement.Model
                 bulkCopy.ColumnMappings.Add("VolCommitment", "VolCommitment");
                 bulkCopy.ColumnMappings.Add("Remark", "Remark");
                 bulkCopy.ColumnMappings.Add("Username", "Username");
+                bulkCopy.ColumnMappings.Add("tel", "tel");
                 
                 try
                 {

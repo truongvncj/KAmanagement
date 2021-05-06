@@ -19628,6 +19628,8 @@ namespace KAmanagement
 		
 		private int _id;
 		
+		private string _tel;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -19682,6 +19684,8 @@ namespace KAmanagement
     partial void OnUsernameChanged();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OntelChanging(string value);
+    partial void OntelChanged();
     #endregion
 		
 		public tbl_tempmastercontractmasscreate()
@@ -20185,6 +20189,26 @@ namespace KAmanagement
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tel", DbType="NVarChar(100)")]
+		public string tel
+		{
+			get
+			{
+				return this._tel;
+			}
+			set
+			{
+				if ((this._tel != value))
+				{
+					this.OntelChanging(value);
+					this.SendPropertyChanging();
+					this._tel = value;
+					this.SendPropertyChanged("tel");
+					this.OntelChanged();
 				}
 			}
 		}

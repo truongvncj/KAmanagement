@@ -81,6 +81,8 @@ namespace KAmanagement.View
             this.bt_fin = new System.Windows.Forms.Button();
             this.txtinfor = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.txtCusttel = new System.Windows.Forms.TextBox();
             this.btrepresent = new System.Windows.Forms.Button();
             this.btvatchange = new System.Windows.Forms.Button();
             this.btchangeprovince = new System.Windows.Forms.Button();
@@ -168,8 +170,7 @@ namespace KAmanagement.View
             this.label31 = new System.Windows.Forms.Label();
             this.NSRcommit = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.txtCusttel = new System.Windows.Forms.TextBox();
+            this.bttel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.undogroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -858,6 +859,7 @@ namespace KAmanagement.View
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.bttel);
             this.groupBox2.Controls.Add(this.label34);
             this.groupBox2.Controls.Add(this.txtCusttel);
             this.groupBox2.Controls.Add(this.btrepresent);
@@ -894,6 +896,28 @@ namespace KAmanagement.View
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // label34
+            // 
+            this.label34.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label34.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.Black;
+            this.label34.Location = new System.Drawing.Point(7, 35);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(92, 18);
+            this.label34.TabIndex = 73;
+            this.label34.Text = "Customer Tel:";
+            // 
+            // txtCusttel
+            // 
+            this.txtCusttel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCusttel.ForeColor = System.Drawing.Color.Black;
+            this.txtCusttel.Location = new System.Drawing.Point(105, 33);
+            this.txtCusttel.Name = "txtCusttel";
+            this.txtCusttel.Size = new System.Drawing.Size(121, 20);
+            this.txtCusttel.TabIndex = 74;
             // 
             // btrepresent
             // 
@@ -2125,27 +2149,18 @@ namespace KAmanagement.View
             this.label30.TabIndex = 38;
             this.label30.Text = "NSRCommitted";
             // 
-            // label34
+            // bttel
             // 
-            this.label34.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label34.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.Black;
-            this.label34.Location = new System.Drawing.Point(7, 35);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(92, 18);
-            this.label34.TabIndex = 73;
-            this.label34.Text = "Customer Tel:";
-            // 
-            // txtCusttel
-            // 
-            this.txtCusttel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCusttel.ForeColor = System.Drawing.Color.Black;
-            this.txtCusttel.Location = new System.Drawing.Point(105, 33);
-            this.txtCusttel.Name = "txtCusttel";
-            this.txtCusttel.Size = new System.Drawing.Size(121, 20);
-            this.txtCusttel.TabIndex = 74;
+            this.bttel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttel.ForeColor = System.Drawing.Color.Red;
+            this.bttel.Location = new System.Drawing.Point(231, 33);
+            this.bttel.Name = "bttel";
+            this.bttel.Size = new System.Drawing.Size(29, 20);
+            this.bttel.TabIndex = 75;
+            this.bttel.TabStop = false;
+            this.bttel.Text = "#";
+            this.bttel.UseVisualStyleBackColor = true;
+            this.bttel.Click += new System.EventHandler(this.bttel_Click);
             // 
             // CreatenewContract
             // 
@@ -2330,5 +2345,6 @@ namespace KAmanagement.View
         private System.Windows.Forms.Label lbcaculating;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox txtCusttel;
+        private System.Windows.Forms.Button bttel;
     }
 }

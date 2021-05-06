@@ -865,6 +865,7 @@ namespace KAmanagement.View
                         newcontract.Customer = (double)item.Customer;//
                         newcontract.CustomerType = "SFA";
                         newcontract.Channel = item.Channel;
+                        newcontract.tel = item.tel;
                         newcontract.Consts = "CRT";
                         newcontract.ContractNo = item.ContractNo;
                         newcontract.ConType = item.ConType;
