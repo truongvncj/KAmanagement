@@ -32,7 +32,7 @@ namespace KAmanagement.View
 
         public string unitvalue { get; set; }
 
-        public EditContractItem(View.CreatenewContract formcreatCtract, string contractno, string formtype, string programe, int payid)
+        public EditContractItem(View.CreatenewContract formcreatCtract, string contractno, string formtype, string programe, int payid, string VATregistrationNo, string Address, string CustomerType)
         {
 
             // contractno = contractno;
@@ -44,6 +44,13 @@ namespace KAmanagement.View
             lbcontractno.Text = contractno;
             this.contractno = contractno;
             formlabelED.Text = formtype;
+             lbVATno.Text = VATregistrationNo;
+            lbAdress.Text = Address;
+             lbcustomertype.Text = CustomerType;
+
+
+
+
 
             if (formtype == "EDIT ITEM TERM OF CONTRACT")  // edit loadcontract to edit
             {
@@ -1572,6 +1579,10 @@ namespace KAmanagement.View
                 item.PayID = payiD;
                 item.ContractNo = contractno;
                 item.Remark = cbDescristion.Text;
+                item.VATregistrationNo = lbVATno.Text;
+                item.Address = lbAdress.Text;
+                item.CustomerType = lbcustomertype.Text;
+
 
 
                 if (cb_program != null && cb_program.SelectedValue != null)  // update prograne -- cai nay 
@@ -2144,6 +2155,10 @@ namespace KAmanagement.View
 
                 item.ContractNo = contractno;
                 item.Remark = cbDescristion.Text;
+                item.VATregistrationNo = lbVATno.Text;
+                item.Address = lbAdress.Text;
+                item.CustomerType = lbcustomertype.Text;
+
 
                 if (cb_program != null && cb_program.SelectedValue != null)
                 {

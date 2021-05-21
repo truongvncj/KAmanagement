@@ -56,6 +56,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.sponsorlimited = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.sunit = new System.Windows.Forms.ComboBox();
             this.amountsponsor = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -82,8 +84,12 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.formlabelED = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.sponsorlimited = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lbAdress = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lbVATno = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lbcustomertype = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -104,9 +110,9 @@
             this.panel1.Controls.Add(this.btactive);
             this.panel1.Controls.Add(this.btchange);
             this.panel1.Controls.Add(this.btchangecontractitem);
-            this.panel1.Location = new System.Drawing.Point(2, 77);
+            this.panel1.Location = new System.Drawing.Point(2, 120);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(706, 570);
+            this.panel1.Size = new System.Drawing.Size(706, 527);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -118,7 +124,7 @@
             this.deletebt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.deletebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deletebt.ForeColor = System.Drawing.Color.Red;
-            this.deletebt.Location = new System.Drawing.Point(10, 530);
+            this.deletebt.Location = new System.Drawing.Point(10, 487);
             this.deletebt.Name = "deletebt";
             this.deletebt.Size = new System.Drawing.Size(78, 23);
             this.deletebt.TabIndex = 101;
@@ -422,6 +428,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sponsor";
             // 
+            // sponsorlimited
+            // 
+            this.sponsorlimited.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.sponsorlimited.FormattingEnabled = true;
+            this.sponsorlimited.Location = new System.Drawing.Point(95, 92);
+            this.sponsorlimited.Name = "sponsorlimited";
+            this.sponsorlimited.Size = new System.Drawing.Size(171, 21);
+            this.sponsorlimited.TabIndex = 102;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(5, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(85, 19);
+            this.label15.TabIndex = 101;
+            this.label15.Text = "Sponsor Limited";
+            // 
             // sunit
             // 
             this.sunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
@@ -619,7 +646,7 @@
             this.addnewitem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.addnewitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addnewitem.ForeColor = System.Drawing.Color.Red;
-            this.addnewitem.Location = new System.Drawing.Point(418, 530);
+            this.addnewitem.Location = new System.Drawing.Point(418, 487);
             this.addnewitem.Name = "addnewitem";
             this.addnewitem.Size = new System.Drawing.Size(80, 23);
             this.addnewitem.TabIndex = 65;
@@ -635,7 +662,7 @@
             this.btactive.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btactive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btactive.ForeColor = System.Drawing.Color.Red;
-            this.btactive.Location = new System.Drawing.Point(176, 530);
+            this.btactive.Location = new System.Drawing.Point(176, 487);
             this.btactive.Name = "btactive";
             this.btactive.Size = new System.Drawing.Size(78, 23);
             this.btactive.TabIndex = 64;
@@ -651,7 +678,7 @@
             this.btchange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btchange.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btchange.ForeColor = System.Drawing.Color.Red;
-            this.btchange.Location = new System.Drawing.Point(596, 530);
+            this.btchange.Location = new System.Drawing.Point(596, 487);
             this.btchange.Name = "btchange";
             this.btchange.Size = new System.Drawing.Size(94, 23);
             this.btchange.TabIndex = 63;
@@ -667,7 +694,7 @@
             this.btchangecontractitem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btchangecontractitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btchangecontractitem.ForeColor = System.Drawing.Color.Red;
-            this.btchangecontractitem.Location = new System.Drawing.Point(94, 530);
+            this.btchangecontractitem.Location = new System.Drawing.Point(94, 487);
             this.btchangecontractitem.Name = "btchangecontractitem";
             this.btchangecontractitem.Size = new System.Drawing.Size(78, 23);
             this.btchangecontractitem.TabIndex = 62;
@@ -679,7 +706,7 @@
             // 
             this.lbcontractno.AutoSize = true;
             this.lbcontractno.ForeColor = System.Drawing.Color.Red;
-            this.lbcontractno.Location = new System.Drawing.Point(179, 49);
+            this.lbcontractno.Location = new System.Drawing.Point(206, 39);
             this.lbcontractno.Name = "lbcontractno";
             this.lbcontractno.Size = new System.Drawing.Size(66, 13);
             this.lbcontractno.TabIndex = 85;
@@ -692,7 +719,7 @@
             this.pictureBox1.InitialImage = global::KAmanagement.Properties.Resources.coca_cola;
             this.pictureBox1.Location = new System.Drawing.Point(4, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(91, 76);
+            this.pictureBox1.Size = new System.Drawing.Size(118, 114);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 86;
             this.pictureBox1.TabStop = false;
@@ -703,7 +730,7 @@
             this.formlabelED.AutoSize = true;
             this.formlabelED.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.formlabelED.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formlabelED.Location = new System.Drawing.Point(105, 23);
+            this.formlabelED.Location = new System.Drawing.Point(130, 13);
             this.formlabelED.Name = "formlabelED";
             this.formlabelED.Size = new System.Drawing.Size(54, 16);
             this.formlabelED.TabIndex = 87;
@@ -712,38 +739,80 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(108, 49);
+            this.label12.Location = new System.Drawing.Point(133, 39);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(67, 13);
             this.label12.TabIndex = 88;
             this.label12.Text = "Contract No.";
             // 
-            // sponsorlimited
+            // label18
             // 
-            this.sponsorlimited.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.sponsorlimited.FormattingEnabled = true;
-            this.sponsorlimited.Location = new System.Drawing.Point(95, 92);
-            this.sponsorlimited.Name = "sponsorlimited";
-            this.sponsorlimited.Size = new System.Drawing.Size(171, 21);
-            this.sponsorlimited.TabIndex = 102;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(133, 56);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(45, 13);
+            this.label18.TabIndex = 90;
+            this.label18.Text = "Address";
             // 
-            // label15
+            // lbAdress
             // 
-            this.label15.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 92);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(85, 19);
-            this.label15.TabIndex = 101;
-            this.label15.Text = "Sponsor Limited";
+            this.lbAdress.AutoSize = true;
+            this.lbAdress.ForeColor = System.Drawing.Color.Red;
+            this.lbAdress.Location = new System.Drawing.Point(184, 56);
+            this.lbAdress.Name = "lbAdress";
+            this.lbAdress.Size = new System.Drawing.Size(47, 13);
+            this.lbAdress.TabIndex = 89;
+            this.lbAdress.Text = "lbAdress";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(133, 73);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 13);
+            this.label19.TabIndex = 92;
+            this.label19.Text = "VAT register";
+            // 
+            // lbVATno
+            // 
+            this.lbVATno.AutoSize = true;
+            this.lbVATno.ForeColor = System.Drawing.Color.Red;
+            this.lbVATno.Location = new System.Drawing.Point(204, 73);
+            this.lbVATno.Name = "lbVATno";
+            this.lbVATno.Size = new System.Drawing.Size(48, 13);
+            this.lbVATno.TabIndex = 91;
+            this.lbVATno.Text = "lbVATno";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(132, 89);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(74, 13);
+            this.label21.TabIndex = 94;
+            this.label21.Text = "Customer type";
+            // 
+            // lbcustomertype
+            // 
+            this.lbcustomertype.AutoSize = true;
+            this.lbcustomertype.ForeColor = System.Drawing.Color.Red;
+            this.lbcustomertype.Location = new System.Drawing.Point(212, 89);
+            this.lbcustomertype.Name = "lbcustomertype";
+            this.lbcustomertype.Size = new System.Drawing.Size(78, 13);
+            this.lbcustomertype.TabIndex = 93;
+            this.lbcustomertype.Text = "lbcustomertype";
             // 
             // EditContractItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 649);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.lbcustomertype);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.lbVATno);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.lbAdress);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.formlabelED);
             this.Controls.Add(this.panel1);
@@ -828,5 +897,11 @@
         private System.Windows.Forms.Button btproductchange;
         private System.Windows.Forms.ComboBox sponsorlimited;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lbAdress;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lbVATno;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lbcustomertype;
     }
 }

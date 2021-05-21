@@ -118,5 +118,10 @@ namespace KAmanagement.View
 
             }
         }
+
+        private void sendingcontract_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

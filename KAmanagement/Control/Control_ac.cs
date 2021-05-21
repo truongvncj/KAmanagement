@@ -236,7 +236,9 @@ namespace KAmanagement.Control
 
                          tbl_kacontractdata.Customer,
                          tbl_kacontractdata.Fullname,
+                         Tel = tbl_kacontractdata.tel,
                          Address = tbl_kacontractdata.HouseNo + " " + tbl_kacontractdata.District + " " + tbl_kacontractdata.Province,
+                     
                          tbl_kacontractdata.Province,
 
                          tbl_kacontractdata.Channel,
@@ -281,7 +283,7 @@ namespace KAmanagement.Control
                          tbl_kacontractdata.VATregistrationNo,
                          tbl_kacontractdata.CRDDAT,
                          tbl_kacontractdata.CRDUSR,
-                  Tel =       tbl_kacontractdata.tel,
+               
                          //      tbl_kacontractdata.VolComm,
 
 

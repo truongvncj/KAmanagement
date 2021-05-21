@@ -10266,10 +10266,17 @@ namespace KAmanagement.View
                 //int PayID = int.Parse(this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
                 int prgID = int.Parse(this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
                 Model.Username used = new Model.Username();
+                string VATregistrationNo =    txtVATno.Text.Truncate(50);
+                string Address = (txt_houseno.Text +"-"+ txt_district.Text +"-"+ txt_provicen.Text).Truncate(225);
+                string CustomerType = txtfindsacode.Text.Truncate(50);
+
 
                 if (used.changeitem)
                 {
-                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "EDIT ITEM TERM OF CONTRACT", Program, prgID);
+                    //   public EditContractItem(View.CreatenewContract formcreatCtract, string contractno, string formtype, string programe, int payid, string VATregistrationNo, string Address, string CustomerType)
+
+
+                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "EDIT ITEM TERM OF CONTRACT", Program, prgID, VATregistrationNo, Address, CustomerType);
 
 
 
@@ -10310,6 +10317,10 @@ namespace KAmanagement.View
                 //string ContractNo = (string)this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["ContractNo"].Value;
                 string ContractNo = tb_contractno.Text;
                 string Program = "CAS";
+                string VATregistrationNo = txtVATno.Text.Truncate(50);
+                string Address = (txt_houseno.Text + "-" + txt_district.Text + "-" + txt_provicen.Text).Truncate(225);
+                string CustomerType = txtfindsacode.Text.Truncate(50);
+
 
                 try
                 {
@@ -10326,8 +10337,9 @@ namespace KAmanagement.View
 
                 if (used.changeitem)
                 {
-                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "CREATE NEW ITEM TERM", Program, 0);
+                   // View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "CREATE NEW ITEM TERM", Program, 0);
 
+                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "EDIT ITEM TERM OF CONTRACT", Program, 0, VATregistrationNo, Address, CustomerType);
 
 
                     EditContractItem.ShowDialog();

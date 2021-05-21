@@ -66,6 +66,7 @@
             this.sendingcontract.Name = "sendingcontract";
             this.sendingcontract.Size = new System.Drawing.Size(215, 32);
             this.sendingcontract.TabIndex = 2;
+            this.sendingcontract.TextChanged += new System.EventHandler(this.sendingcontract_TextChanged);
             this.sendingcontract.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sendingcontract_KeyPress);
             // 
             // label2

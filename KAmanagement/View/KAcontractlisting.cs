@@ -672,6 +672,7 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.Customer,
                                        tbl_kacontractdata.Fullname,
                                        Address = tbl_kacontractdata.HouseNo + " " + tbl_kacontractdata.District + " " + tbl_kacontractdata.Province,
+                                       tbl_kacontractdata.tel,
                                        tbl_kacontractdata.Channel,
                                        FullCommitment = tbl_kacontractdata.TotSponsoredcommit,
                                        AchivedCommitment = tbl_kacontractdata.TotDeal,
@@ -852,6 +853,7 @@ namespace KAmanagement.View
                                        tbl_kacontractdata.Customer,
                                        tbl_kacontractdata.Fullname,
                                        Address = tbl_kacontractdata.HouseNo + " " + tbl_kacontractdata.District + " " + tbl_kacontractdata.Province,
+                                       tbl_kacontractdata.tel,
                                        tbl_kacontractdata.Province,
                                        tbl_kacontractdata.Channel,
                                        FullCommitment = tbl_kacontractdata.TotSponsoredcommit,
@@ -984,6 +986,7 @@ namespace KAmanagement.View
                                        tbl_kacontractsdatadetail.Remark,
                                        tbl_kacontractsdatadetail.UPDUSR,
                                        tbl_kacontractsdatadetail.UPDDAT,
+                                  
 
                                    };
 
