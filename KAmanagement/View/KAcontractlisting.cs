@@ -191,8 +191,8 @@ namespace KAmanagement.View
 
         void Control_KeyPress(object sender, KeyEventArgs e)
         {
-            string connection_string = Utils.getConnectionstr();
-            LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
+         //   string connection_string = Utils.getConnectionstr();
+            //LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
 
 
 
@@ -703,6 +703,8 @@ namespace KAmanagement.View
                 this.rs = rsthisperiod;
                 this.dataGridView1.DataSource = dt;
 
+
+             
                 //    tbl_kacontractdata t = new tbl_kacontractdata();
 
                 #region  format
