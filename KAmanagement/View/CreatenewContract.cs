@@ -10337,9 +10337,9 @@ namespace KAmanagement.View
 
                 if (used.changeitem)
                 {
-                   // View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "CREATE NEW ITEM TERM", Program, 0);
+                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "CREATE NEW ITEM TERM", Program, 0, VATregistrationNo, Address, CustomerType);
 
-                    View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "EDIT ITEM TERM OF CONTRACT", Program, 0, VATregistrationNo, Address, CustomerType);
+                 //   View.EditContractItem EditContractItem = new View.EditContractItem(this, ContractNo, "EDIT ITEM TERM OF CONTRACT", Program, 0, VATregistrationNo, Address, CustomerType);
 
 
                     EditContractItem.ShowDialog();
