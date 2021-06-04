@@ -114,11 +114,11 @@ namespace KAmanagement.View
             // 
             this.lbseachedit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbseachedit.AutoSize = true;
-            this.lbseachedit.Font = new System.Drawing.Font("Microsoft MHei", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbseachedit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbseachedit.ForeColor = System.Drawing.Color.Red;
             this.lbseachedit.Location = new System.Drawing.Point(224, 457);
             this.lbseachedit.Name = "lbseachedit";
-            this.lbseachedit.Size = new System.Drawing.Size(64, 17);
+            this.lbseachedit.Size = new System.Drawing.Size(77, 16);
             this.lbseachedit.TabIndex = 51;
             this.lbseachedit.Text = "F3 :Seach";
             // 
@@ -135,7 +135,7 @@ namespace KAmanagement.View
             // 
             // Bt_uploadbegin
             // 
-            this.Bt_uploadbegin.Location = new System.Drawing.Point(87, 451);
+            this.Bt_uploadbegin.Location = new System.Drawing.Point(48, 450);
             this.Bt_uploadbegin.Name = "Bt_uploadbegin";
             this.Bt_uploadbegin.Size = new System.Drawing.Size(131, 26);
             this.Bt_uploadbegin.TabIndex = 49;
@@ -167,7 +167,7 @@ namespace KAmanagement.View
             // bt_updatedata
             // 
             this.bt_updatedata.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bt_updatedata.Location = new System.Drawing.Point(301, 450);
+            this.bt_updatedata.Location = new System.Drawing.Point(301, 451);
             this.bt_updatedata.Name = "bt_updatedata";
             this.bt_updatedata.Size = new System.Drawing.Size(92, 27);
             this.bt_updatedata.TabIndex = 36;

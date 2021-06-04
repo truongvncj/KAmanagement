@@ -228,7 +228,9 @@ namespace KAmanagement.View
             List<string> listtypyeCtr = new List<string>();
             listtypyeCtr.Add("ASMPQ");
             listtypyeCtr.Add("DASANI");
+            listtypyeCtr.Add("ASMPQ-Canteen");
 
+            
             var mlist3 = from p in dc.tbl_tempmastercontractmasscreates
                          where p.Username == username && !listtypyeCtr.Contains(p.ConType)
                          select p;
@@ -236,7 +238,7 @@ namespace KAmanagement.View
             {
                 foreach (var item in mlist3)
                 {
-                    item.StatusNote = "Contract type sai ! hiện ASMPQ /DASANI ";
+                    item.StatusNote = "Contract type sai ! hiện ASMPQ /DASANI /ASMPQ-Canteen ";
                     dc.SubmitChanges();
                 }
                 checkberore = false;

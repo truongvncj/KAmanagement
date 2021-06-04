@@ -702,9 +702,12 @@ namespace KAmanagement.View
                                     db.ExecuteCommand(StrQuery);
                                     db.SubmitChanges();
                                 }
-                                catch (Exception )
+                                catch (Exception ex )
                                 {
-                                    MessageBox.Show(StrQuery);
+                                    MessageBox.Show(StrQuery );
+
+                                    MessageBox.Show(ex.ToString(), "Please Check !");
+                                 
                                     //this.dataGridView1.Rows[0].Cells["Status"].Value = ex.ToString();
                                 }
 
@@ -870,10 +873,11 @@ namespace KAmanagement.View
                             db.ExecuteCommand(StrQuery);
                             db.SubmitChanges();
                         }
-                        catch (Exception )
+                        catch (Exception ex )
                         {
-
                             MessageBox.Show(StrQuery);
+
+                            MessageBox.Show(ex.ToString(), "Please Check !");
                         }
 
 
