@@ -928,7 +928,7 @@ namespace KAmanagement.View
                                      tbl_kacontractsdetailpayment.SubID,
 
                                  };
-                Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST ALL PAYMENT", 3);// view code 1 la can viet them lenh
+                Viewtable viewtbl = new Viewtable(rscustemp2, dc, "LIST ALL PAYMENT FROM DATE TO DATE", 3);// view code 1 la can viet them lenh
 
                 viewtbl.Show();
 

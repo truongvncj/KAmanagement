@@ -100,7 +100,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::KAmanagement.Properties.Resources.file_dam_management;
-            this.pictureBox1.Location = new System.Drawing.Point(85, 667);
+            this.pictureBox1.Location = new System.Drawing.Point(85, 684);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(123, 34);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -115,7 +115,7 @@
             this.groupBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox6.Location = new System.Drawing.Point(21, 404);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(190, 132);
+            this.groupBox6.Size = new System.Drawing.Size(190, 168);
             this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Payment Reports";
@@ -126,7 +126,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(172, 23);
             this.button11.TabIndex = 6;
-            this.button11.Text = "List  payment ";
+            this.button11.Text = "List  payment from date to date";
             this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click_1);
@@ -191,7 +191,7 @@
             this.groupBox3.Controls.Add(this.button5);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox3.Location = new System.Drawing.Point(20, 551);
+            this.groupBox3.Location = new System.Drawing.Point(18, 578);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(190, 100);
             this.groupBox3.TabIndex = 11;
