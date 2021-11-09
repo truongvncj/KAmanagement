@@ -7925,12 +7925,15 @@ namespace KAmanagement.View
                 {
 
                     //              dataGriddiscountoninvoice.DataSource = dataGriddiscononinvocie;
-
+                    //    prgID = int.Parse(this.dataGriddiscountoninvoice.Rows[this.dataGriddiscountoninvoice.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+          
                     var dataGriddiscononinvocie = from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
                                                   where tbl_kacontractsdatadetail.ContractNo.Equals(contractno) && tbl_kacontractsdatadetail.PayControl == "DIS"
                                                   select new
                                                   {
                                                       Programe = tbl_kacontractsdatadetail.PayType.Trim(),
+                                                      PayID = tbl_kacontractsdatadetail.PayID,
+                                                    
                                                       Description = tbl_kacontractsdatadetail.Description.Trim(),
 
                                                       Product_Group = tbl_kacontractsdatadetail.PrdGrp,
@@ -10261,10 +10264,29 @@ namespace KAmanagement.View
             if (!kq && this.Text == "Input Contract" && formlabel.Text == "ENTRY SCREEN DISPLAY CONTRACT")  // pahir la pay ment requyet mowi sduoc tra tien 
             {
 
-                string Program = (string)this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Programe"].Value.ToString();
+                // dataGriddiscountoninvoice
+                 string Program =" " ;
+                 int prgID = 0;
+                // Discount On Invoice
+                 if (tabControl1.SelectedTab.Text == "Discount On Invoice")
+	            {
+		      
+
+                 Program = (string)this.dataGriddiscountoninvoice.Rows[this.dataGriddiscountoninvoice.CurrentCell.RowIndex].Cells["Programe"].Value.ToString();
+                 prgID = int.Parse(this.dataGriddiscountoninvoice.Rows[this.dataGriddiscountoninvoice.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+          
+	             }else
+	            {
+             // tabControl1.SelectedTab.Name = "Discount On Invoice"
+
+                 Program = (string)this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["Programe"].Value.ToString();
+                  prgID = int.Parse(this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
+          
+	            }
+             
+                
                 string ContractNo = tb_contractno.Text;
                 //int PayID = int.Parse(this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
-                int prgID = int.Parse(this.dataGridProgramdetail.Rows[this.dataGridProgramdetail.CurrentCell.RowIndex].Cells["PayID"].Value.ToString());
                 Model.Username used = new Model.Username();
                 string VATregistrationNo =    txtVATno.Text.Truncate(50);
                 string Address = (txt_houseno.Text +"-"+ txt_district.Text +"-"+ txt_provicen.Text).Truncate(225);
