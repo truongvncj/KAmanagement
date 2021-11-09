@@ -138,7 +138,7 @@ namespace KAmanagement.View
                         //  CombomCollection = null;
                         List<ComboboxItem> CombomCollection3 = new List<ComboboxItem>();
                         var rs = from tbl_Kafuctionlist in db.tbl_Kafuctionlists
-                                 where tbl_Kafuctionlist.Code != "DIS"
+                               //  where tbl_Kafuctionlist.Code != "DIS"
                                  orderby tbl_Kafuctionlist.Code
                                  select tbl_Kafuctionlist;
                         foreach (var item2 in rs)
@@ -224,14 +224,24 @@ namespace KAmanagement.View
 
 
                         //       cbProductGR.Text = item.PrdGrp;
+
                         if (item.EffFrm != null)
                         {
                             fromdatep.Value = item.EffFrm.Value;
+                        }
+                        else
+                        {
+
+                            fromdatep.Value = DateTime.Today;
                         }
                         if (item.EffTo != null)
                         {
 
                             todatep.Value = item.EffTo.Value;
+                        }
+                        else
+                        {
+                            todatep.Value = DateTime.Today;
                         }
 
                         cbDescristion.Text = item.Remark;
@@ -402,7 +412,9 @@ namespace KAmanagement.View
 
                 string connection_string = Utils.getConnectionstr();
                 LinqtoSQLDataContext db = new LinqtoSQLDataContext(connection_string);
-                unitvalue = (from tbl_kacontractdata in db.tbl_kacontractdatas where tbl_kacontractdata.ContractNo == contractno select tbl_kacontractdata.Currency).FirstOrDefault();
+                tbl_kacontractdata hdedit = (from p in db.tbl_kacontractdatas where p.ContractNo == contractno select p).FirstOrDefault();
+                unitvalue = hdedit.Currency;
+
                 //  CombomCollection = null;
                 List<ComboboxItem> CombomCollection = new List<ComboboxItem>();
                 var rs = from tbl_Kafuctionlist in db.tbl_Kafuctionlists
@@ -484,6 +496,24 @@ namespace KAmanagement.View
 
 
 
+                if (hdedit.EffDate != null)
+                {
+                    fromdatep.Value = hdedit.EffDate.Value;
+                }
+                else
+                {
+
+                    fromdatep.Value = DateTime.Today;
+                }
+                if (hdedit.ExtDate != null)
+                {
+
+                    todatep.Value = hdedit.ExtDate.Value;
+                }
+                else
+                {
+                    todatep.Value = DateTime.Today;
+                }
 
 
 

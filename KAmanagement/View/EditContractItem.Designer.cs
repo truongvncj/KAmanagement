@@ -124,7 +124,7 @@
             this.deletebt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.deletebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deletebt.ForeColor = System.Drawing.Color.Red;
-            this.deletebt.Location = new System.Drawing.Point(10, 487);
+            this.deletebt.Location = new System.Drawing.Point(10, 494);
             this.deletebt.Name = "deletebt";
             this.deletebt.Size = new System.Drawing.Size(78, 23);
             this.deletebt.TabIndex = 101;
@@ -155,7 +155,7 @@
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Location = new System.Drawing.Point(5, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(695, 489);
+            this.groupBox4.Size = new System.Drawing.Size(695, 478);
             this.groupBox4.TabIndex = 100;
             this.groupBox4.TabStop = false;
             this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
@@ -169,7 +169,7 @@
             this.btproductchange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btproductchange.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btproductchange.ForeColor = System.Drawing.Color.Red;
-            this.btproductchange.Location = new System.Drawing.Point(390, 432);
+            this.btproductchange.Location = new System.Drawing.Point(390, 421);
             this.btproductchange.Name = "btproductchange";
             this.btproductchange.Size = new System.Drawing.Size(140, 23);
             this.btproductchange.TabIndex = 102;
@@ -359,9 +359,9 @@
             this.gruopCtractdate.Controls.Add(this.fromdatep);
             this.gruopCtractdate.Controls.Add(this.label7);
             this.gruopCtractdate.Controls.Add(this.label8);
-            this.gruopCtractdate.Location = new System.Drawing.Point(398, 68);
+            this.gruopCtractdate.Location = new System.Drawing.Point(398, 50);
             this.gruopCtractdate.Name = "gruopCtractdate";
-            this.gruopCtractdate.Size = new System.Drawing.Size(223, 73);
+            this.gruopCtractdate.Size = new System.Drawing.Size(223, 91);
             this.gruopCtractdate.TabIndex = 98;
             this.gruopCtractdate.TabStop = false;
             this.gruopCtractdate.Text = "Contract term frame";
@@ -646,7 +646,7 @@
             this.addnewitem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.addnewitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addnewitem.ForeColor = System.Drawing.Color.Red;
-            this.addnewitem.Location = new System.Drawing.Point(418, 487);
+            this.addnewitem.Location = new System.Drawing.Point(418, 494);
             this.addnewitem.Name = "addnewitem";
             this.addnewitem.Size = new System.Drawing.Size(80, 23);
             this.addnewitem.TabIndex = 65;
@@ -662,7 +662,7 @@
             this.btactive.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btactive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btactive.ForeColor = System.Drawing.Color.Red;
-            this.btactive.Location = new System.Drawing.Point(176, 487);
+            this.btactive.Location = new System.Drawing.Point(176, 494);
             this.btactive.Name = "btactive";
             this.btactive.Size = new System.Drawing.Size(78, 23);
             this.btactive.TabIndex = 64;
@@ -678,7 +678,7 @@
             this.btchange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btchange.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btchange.ForeColor = System.Drawing.Color.Red;
-            this.btchange.Location = new System.Drawing.Point(596, 487);
+            this.btchange.Location = new System.Drawing.Point(596, 494);
             this.btchange.Name = "btchange";
             this.btchange.Size = new System.Drawing.Size(94, 23);
             this.btchange.TabIndex = 63;
@@ -694,7 +694,7 @@
             this.btchangecontractitem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
             this.btchangecontractitem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btchangecontractitem.ForeColor = System.Drawing.Color.Red;
-            this.btchangecontractitem.Location = new System.Drawing.Point(94, 487);
+            this.btchangecontractitem.Location = new System.Drawing.Point(94, 494);
             this.btchangecontractitem.Name = "btchangecontractitem";
             this.btchangecontractitem.Size = new System.Drawing.Size(78, 23);
             this.btchangecontractitem.TabIndex = 62;
