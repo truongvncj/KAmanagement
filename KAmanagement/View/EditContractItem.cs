@@ -44,9 +44,9 @@ namespace KAmanagement.View
             lbcontractno.Text = contractno;
             this.contractno = contractno;
             formlabelED.Text = formtype;
-             lbVATno.Text = VATregistrationNo;
+            lbVATno.Text = VATregistrationNo;
             lbAdress.Text = Address;
-             lbcustomertype.Text = CustomerType;
+            lbcustomertype.Text = CustomerType;
 
 
 
@@ -91,7 +91,7 @@ namespace KAmanagement.View
                         //  CombomCollection = null;
                         List<ComboboxItem> CombomCollection1 = new List<ComboboxItem>();
                         var rs22 = from tbl_kaprogramlist in db.tbl_kaprogramlists
-                                       //  where tbl_Kafuctionlist.Code != "DIS"
+                                   //  where tbl_Kafuctionlist.Code != "DIS"
                                    orderby tbl_kaprogramlist.Code
                                    select tbl_kaprogramlist;
                         foreach (var item2 in rs22)
@@ -138,7 +138,7 @@ namespace KAmanagement.View
                         //  CombomCollection = null;
                         List<ComboboxItem> CombomCollection3 = new List<ComboboxItem>();
                         var rs = from tbl_Kafuctionlist in db.tbl_Kafuctionlists
-                               //  where tbl_Kafuctionlist.Code != "DIS"
+                                 //  where tbl_Kafuctionlist.Code != "DIS"
                                  orderby tbl_Kafuctionlist.Code
                                  select tbl_Kafuctionlist;
                         foreach (var item2 in rs)
@@ -418,7 +418,7 @@ namespace KAmanagement.View
                 //  CombomCollection = null;
                 List<ComboboxItem> CombomCollection = new List<ComboboxItem>();
                 var rs = from tbl_Kafuctionlist in db.tbl_Kafuctionlists
-                             //    where tbl_Kafuctionlist.Code != "DIS"
+                         //    where tbl_Kafuctionlist.Code != "DIS"
                          orderby tbl_Kafuctionlist.Code
                          select tbl_Kafuctionlist;
                 foreach (var item2 in rs)
@@ -744,11 +744,17 @@ namespace KAmanagement.View
                 spercent.Enabled = true;
                 spercent.Text = "0";
 
-
+                
                 ucpcsponsor.Enabled = true;
                 ucpcsponsor.Text = "0";
 
                 amountsponsor.Enabled = false;
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = false;
+
                 //    amountsponsor.Text = "0";
 
                 sunit.Text = "%";
@@ -812,6 +818,12 @@ namespace KAmanagement.View
                 sunit.Enabled = false;
                 tunit.Text = "";
 
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
+
                 #endregion
 
 
@@ -854,6 +866,12 @@ namespace KAmanagement.View
                 tunit.Enabled = false;
                 sunit.Enabled = false;
                 tunit.Text = "";
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
+
                 #endregion
 
             }
@@ -889,6 +907,11 @@ namespace KAmanagement.View
                 tunit.Text = "PC";
                 tunit.Enabled = false;
                 sunit.Enabled = false;
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
                 #endregion
 
             }
@@ -925,6 +948,11 @@ namespace KAmanagement.View
                 tunit.Text = "PC";
                 tunit.Enabled = false;
                 sunit.Enabled = false;
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
                 #endregion
 
             }
@@ -962,6 +990,12 @@ namespace KAmanagement.View
                 tunit.Enabled = false;
                 sunit.Enabled = false;
 
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
+
                 #endregion
 
             }
@@ -997,6 +1031,11 @@ namespace KAmanagement.View
                 tunit.Text = "";
                 tunit.Enabled = false;
                 sunit.Enabled = false;
+
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
                 #endregion
 
             }
@@ -1032,7 +1071,10 @@ namespace KAmanagement.View
                 tunit.Text = "PC";
                 tunit.Enabled = false;
                 sunit.Enabled = false;
-
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
                 #endregion
 
             }
@@ -1069,6 +1111,11 @@ namespace KAmanagement.View
                 tunit.Enabled = false;
                 sunit.Enabled = false;
 
+                txtbeginvol.Text = "0";
+                txtbeginvol.Enabled = false;
+                txtbeginamount.Text = "0";
+                txtbeginamount.Enabled = true;
+
                 #endregion
 
             }
@@ -1104,6 +1151,11 @@ namespace KAmanagement.View
                 tunit.Text = "PC";
                 tunit.Enabled = false;
                 sunit.Enabled = false;
+
+
+
+
+
                 #endregion
 
             }
@@ -1724,6 +1776,38 @@ namespace KAmanagement.View
                 item.EffFrm = fromdatep.Value;
                 item.EffTo = todatep.Value;
 
+                if (txtbeginvol.Enabled == true)
+                {
+
+
+
+                    if (Utils.IsValidnumber(txtbeginvol.Text) && txtbeginvol.Text != "")
+                    {
+                        item.BeginAchvmt = double.Parse(txtbeginvol.Text.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check Begin Volume must be a number  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        item = null;
+                        return;
+                    }
+                }
+
+                if (txtbeginamount.Enabled == true)
+                {
+
+                    if (Utils.IsValidnumber(txtbeginamount.Text) && txtbeginamount.Text != "")
+                    {
+                        item.BeginSponsoredAmt = double.Parse(txtbeginamount.Text.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check Begin Amount sponsor must be a number  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        item = null;
+                        return;
+                    }
+
+                }
                 #region  datepadi
                 // paymentdatep != null &&
 
@@ -1853,7 +1937,7 @@ namespace KAmanagement.View
                 if (amountsponsor.Enabled == true)
                 {
 
-           
+
 
                     if (Utils.IsValidnumber(amountsponsor.Text) && amountsponsor.Text != "")
                     {
@@ -1863,7 +1947,7 @@ namespace KAmanagement.View
                         {
 
                             item.SponsoredAmt = double.Parse(amountsponsor.Text.ToString());
-                         //   MessageBox.Show("!!!!!!!!22", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            //   MessageBox.Show("!!!!!!!!22", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                         }
                         else
@@ -1871,7 +1955,7 @@ namespace KAmanagement.View
                             MessageBox.Show("Please check amountsponsor must be greater thanh from 0 !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                             item = null;
-                         //   MessageBox.Show("!!!!!!!!32", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            //   MessageBox.Show("!!!!!!!!32", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                             return;
                         }
@@ -1892,7 +1976,7 @@ namespace KAmanagement.View
                 {
                     amountsponsor.Enabled = false;
                     item.SponsoredAmt = null;
-                  //  MessageBox.Show("!!!!!!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    //  MessageBox.Show("!!!!!!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 }
 
@@ -2290,6 +2374,41 @@ namespace KAmanagement.View
                 #endregion
 
 
+                if (txtbeginvol.Enabled == true)
+                {
+
+
+                    if (Utils.IsValidnumber(txtbeginvol.Text) && txtbeginvol.Text != "")
+                    {
+                        item.BeginAchvmt = double.Parse(txtbeginvol.Text.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check Begin Volume must be a number  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        item = null;
+                        return;
+                    }
+
+                }
+
+
+                if (txtbeginamount.Enabled == true)
+                {
+
+
+                    if (Utils.IsValidnumber(txtbeginamount.Text) && txtbeginamount.Text != "")
+                    {
+                        item.BeginSponsoredAmt = double.Parse(txtbeginamount.Text.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please check Begin Amount sponsor must be a number  !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        item = null;
+                        return;
+                    }
+
+                }
+
                 #region update value theo enable
 
                 //paymentdatep.Value = DBNull.Value; //DBNull.Value;
@@ -2673,6 +2792,11 @@ namespace KAmanagement.View
 
 
             detailproduct.ShowDialog();
+
+        }
+
+        private void cb_paycontrolchge_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Reports\dsCallogs.cs">
       <DependentUpon>dsCallogs.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\dsCallogs.Designer.cs">
       <AutoGen>True</AutoGen>

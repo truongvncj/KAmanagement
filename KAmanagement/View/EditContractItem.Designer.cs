@@ -90,6 +90,11 @@
             this.lbVATno = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.lbcustomertype = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.txtbeginamount = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtbeginvol = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +102,7 @@
             this.gruopCtractdate.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -134,6 +140,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.btproductchange);
             this.groupBox4.Controls.Add(this.groupBox2);
             this.groupBox4.Controls.Add(this.status);
@@ -602,6 +609,7 @@
             this.cb_paycontrolchge.Name = "cb_paycontrolchge";
             this.cb_paycontrolchge.Size = new System.Drawing.Size(273, 21);
             this.cb_paycontrolchge.TabIndex = 78;
+            this.cb_paycontrolchge.SelectedIndexChanged += new System.EventHandler(this.cb_paycontrolchge_SelectedIndexChanged);
             this.cb_paycontrolchge.SelectionChangeCommitted += new System.EventHandler(this.cb_paycontrol_SelectionChangeCommitted);
             this.cb_paycontrolchge.SelectedValueChanged += new System.EventHandler(this.cb_payid_SelectedValueChanged);
             this.cb_paycontrolchge.Leave += new System.EventHandler(this.cb_paycontrol_Leave);
@@ -802,6 +810,63 @@
             this.lbcustomertype.TabIndex = 93;
             this.lbcustomertype.Text = "lbcustomertype";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.txtbeginamount);
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.txtbeginvol);
+            this.groupBox5.Controls.Add(this.label23);
+            this.groupBox5.Location = new System.Drawing.Point(390, 289);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(287, 108);
+            this.groupBox5.TabIndex = 101;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Begin Achived";
+            // 
+            // txtbeginamount
+            // 
+            this.txtbeginamount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.txtbeginamount.FormattingEnabled = true;
+            this.txtbeginamount.Location = new System.Drawing.Point(101, 54);
+            this.txtbeginamount.Name = "txtbeginamount";
+            this.txtbeginamount.Size = new System.Drawing.Size(177, 21);
+            this.txtbeginamount.TabIndex = 94;
+            this.txtbeginamount.Text = "0";
+            // 
+            // label22
+            // 
+            this.label22.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label22.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(10, 54);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(88, 19);
+            this.label22.TabIndex = 93;
+            this.label22.Text = "Amount";
+            // 
+            // txtbeginvol
+            // 
+            this.txtbeginvol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.txtbeginvol.FormattingEnabled = true;
+            this.txtbeginvol.Location = new System.Drawing.Point(101, 28);
+            this.txtbeginvol.Name = "txtbeginvol";
+            this.txtbeginvol.Size = new System.Drawing.Size(177, 21);
+            this.txtbeginvol.TabIndex = 92;
+            this.txtbeginvol.Text = "0";
+            // 
+            // label23
+            // 
+            this.label23.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label23.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(10, 30);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(88, 19);
+            this.label23.TabIndex = 91;
+            this.label23.Text = "Vol";
+            // 
             // EditContractItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -836,6 +901,7 @@
             this.gruopCtractdate.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -903,5 +969,10 @@
         private System.Windows.Forms.Label lbVATno;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label lbcustomertype;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ComboBox txtbeginamount;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox txtbeginvol;
+        private System.Windows.Forms.Label label23;
     }
 }
