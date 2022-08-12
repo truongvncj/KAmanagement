@@ -495,6 +495,7 @@ namespace KAmanagement.View
 
             #region  //Sai Programe type
             List<string> listprogr = new List<string>();
+            listprogr.Add("MKT");
             listprogr.Add("FRE");
             listprogr.Add("POS");
             //     listprogr.Add("DASANI");
@@ -506,7 +507,7 @@ namespace KAmanagement.View
             {
                 foreach (var item in mlist14)
                 {
-                    item.StatusNote = "Contract type sai ! hiện chỉ có 2 loại FRE và POS ";
+                    item.StatusNote = "Contract type sai ! hiện chỉ có 3 loại FRE và POS và MKT";
                     dc.SubmitChanges();
                 }
                 checkberore = false;
