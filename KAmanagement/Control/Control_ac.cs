@@ -873,6 +873,9 @@ namespace KAmanagement.Control
 
             // Create the Excel Application object
             cExcel.ApplicationClass excelApp = new cExcel.ApplicationClass();
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
 
             // Create a new Excel Workbook
             cExcel.Workbook excelWorkbook = excelApp.Workbooks.Add(Type.Missing);

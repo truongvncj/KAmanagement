@@ -33,12 +33,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.GridViewdetail = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.gridviewmaster = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridViewdetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewmaster)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,11 +44,9 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.GridViewdetail);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.gridviewmaster);
             this.panel1.Location = new System.Drawing.Point(3, 5);
@@ -102,19 +97,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // GridViewdetail
-            // 
-            this.GridViewdetail.AllowUserToAddRows = false;
-            this.GridViewdetail.AllowUserToDeleteRows = false;
-            this.GridViewdetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.GridViewdetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.GridViewdetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridViewdetail.Location = new System.Drawing.Point(0, 326);
-            this.GridViewdetail.Name = "GridViewdetail";
-            this.GridViewdetail.ReadOnly = true;
-            this.GridViewdetail.Size = new System.Drawing.Size(842, 284);
-            this.GridViewdetail.TabIndex = 41;
-            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -138,20 +120,9 @@
             this.gridviewmaster.Location = new System.Drawing.Point(2, 65);
             this.gridviewmaster.Name = "gridviewmaster";
             this.gridviewmaster.ReadOnly = true;
-            this.gridviewmaster.Size = new System.Drawing.Size(840, 222);
+            this.gridviewmaster.Size = new System.Drawing.Size(840, 535);
             this.gridviewmaster.TabIndex = 0;
             this.gridviewmaster.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(3, 310);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 13);
-            this.label1.TabIndex = 48;
-            this.label1.Text = "Danh sách lỗi nếu có phía dưới !";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // kamasspaidcreated
             // 
@@ -166,8 +137,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mass create payment";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GridViewdetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridviewmaster)).EndInit();
             this.ResumeLayout(false);
 
@@ -179,9 +148,7 @@
         private System.Windows.Forms.DataGridView gridviewmaster;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView GridViewdetail;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
     }
 }

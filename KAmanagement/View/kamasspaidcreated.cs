@@ -818,18 +818,6 @@ namespace KAmanagement.View
 
 
 
-            var listupdate2 = from p in dc.tbl_tempcontractsdatadetails
-                              where p.Username == username
-                              select p;
-
-            GridViewdetail.DataSource = listupdate2;
-
-
-            var listupdate1 = from p in dc.tbl_tempmastercontractmasscreates
-                              where p.Username == username
-                              select p;
-
-            gridviewmaster.DataSource = listupdate1;
             #endregion
 
 
@@ -976,11 +964,11 @@ namespace KAmanagement.View
 
             LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
 
-            var listupdate1 = from p in dc.tbl_tempmastercontractmasscreates
+            var listupdate1 = from p in dc.tbl_tempmasscreatepayments
                               where p.Username == username
                               select p;
 
-            ctrex.exportExceldatagridtofile(listupdate1, dc, "DANH SÁCH HỢP ĐỒNG ");
+            ctrex.exportExceldatagridtofile(listupdate1, dc, "DANH SÁCH PAYMENT AUTO CREATE ");
         }
 
         private void label1_Click(object sender, EventArgs e)

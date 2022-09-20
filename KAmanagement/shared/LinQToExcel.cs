@@ -81,6 +81,15 @@ namespace KAmanagement
 
             //    cExcel.Worksheet xlWorkSheet = GetworksheetObject(filename);
             //================
+
+           
+            System.Globalization.CultureInfo oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+          //  System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+
+
+
             //    cExcel.Application ExcelObj = new cExcel.Application();
 
             cExcel.Workbook theWorkbook = null;
