@@ -55,13 +55,6 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_kaChannel" Member="tbl_kaChannels">
-    <Type Name="tbl_kaChannel">
-      <Column Name="Channel" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="Detail" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_kacontractbegindata" Member="tbl_kacontractbegindatas">
     <Type Name="tbl_kacontractbegindata">
       <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
@@ -421,8 +414,8 @@
   </Table>
   <Table Name="dbo.tbl_kacontracttype" Member="tbl_kacontracttypes">
     <Type Name="tbl_kacontracttype">
-      <Column Name="Contractype" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Contractype" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_kaConvertProductlist" Member="tbl_kaConvertProductlists">
@@ -529,6 +522,13 @@
       <Column Name="CHN" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="BU" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_kaChannel" Member="tbl_kaChannels">
+    <Type Name="tbl_kaChannel">
+      <Column Name="Channel" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Detail" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_KAdetailprogrRpt" Member="tbl_KAdetailprogrRpts">
@@ -919,6 +919,18 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Paydate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tempmasscreatepayment" Member="tbl_tempmasscreatepayments">
+    <Type Name="tbl_tempmasscreatepayment">
+      <Column Name="StatusNote" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContractNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Noteofpayment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PAYID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PaidRequestAmt" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BATCHNO" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_tempmastercontractmasscreate" Member="tbl_tempmastercontractmasscreates">

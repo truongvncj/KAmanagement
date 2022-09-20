@@ -1724,6 +1724,14 @@ namespace KAmanagement.View
         private void tbmasspayment_Click(object sender, EventArgs e)
         {
           
+
+          //  kamasspaidcreated
+
+            View.kamasspaidcreated kamasspaidcreated = new View.kamasspaidcreated();
+
+
+            kamasspaidcreated.ShowDialog();
+
         }
     }
 }

@@ -42,9 +42,6 @@ namespace KAmanagement
     partial void Inserttbl_KAbaseprice(tbl_KAbaseprice instance);
     partial void Updatetbl_KAbaseprice(tbl_KAbaseprice instance);
     partial void Deletetbl_KAbaseprice(tbl_KAbaseprice instance);
-    partial void Inserttbl_kaChannel(tbl_kaChannel instance);
-    partial void Updatetbl_kaChannel(tbl_kaChannel instance);
-    partial void Deletetbl_kaChannel(tbl_kaChannel instance);
     partial void Inserttbl_kacontractbegindata(tbl_kacontractbegindata instance);
     partial void Updatetbl_kacontractbegindata(tbl_kacontractbegindata instance);
     partial void Deletetbl_kacontractbegindata(tbl_kacontractbegindata instance);
@@ -90,6 +87,9 @@ namespace KAmanagement
     partial void Inserttbl_KaCustomertemp(tbl_KaCustomertemp instance);
     partial void Updatetbl_KaCustomertemp(tbl_KaCustomertemp instance);
     partial void Deletetbl_KaCustomertemp(tbl_KaCustomertemp instance);
+    partial void Inserttbl_kaChannel(tbl_kaChannel instance);
+    partial void Updatetbl_kaChannel(tbl_kaChannel instance);
+    partial void Deletetbl_kaChannel(tbl_kaChannel instance);
     partial void Inserttbl_KAdetailprogrRpt(tbl_KAdetailprogrRpt instance);
     partial void Updatetbl_KAdetailprogrRpt(tbl_KAdetailprogrRpt instance);
     partial void Deletetbl_KAdetailprogrRpt(tbl_KAdetailprogrRpt instance);
@@ -150,6 +150,9 @@ namespace KAmanagement
     partial void Inserttbl_tempcontractsdatadetail(tbl_tempcontractsdatadetail instance);
     partial void Updatetbl_tempcontractsdatadetail(tbl_tempcontractsdatadetail instance);
     partial void Deletetbl_tempcontractsdatadetail(tbl_tempcontractsdatadetail instance);
+    partial void Inserttbl_tempmasscreatepayment(tbl_tempmasscreatepayment instance);
+    partial void Updatetbl_tempmasscreatepayment(tbl_tempmasscreatepayment instance);
+    partial void Deletetbl_tempmasscreatepayment(tbl_tempmasscreatepayment instance);
     partial void Inserttbl_tempmastercontractmasscreate(tbl_tempmastercontractmasscreate instance);
     partial void Updatetbl_tempmastercontractmasscreate(tbl_tempmastercontractmasscreate instance);
     partial void Deletetbl_tempmastercontractmasscreate(tbl_tempmastercontractmasscreate instance);
@@ -225,14 +228,6 @@ namespace KAmanagement
 			get
 			{
 				return this.GetTable<tbl_KAbaseprice>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_kaChannel> tbl_kaChannels
-		{
-			get
-			{
-				return this.GetTable<tbl_kaChannel>();
 			}
 		}
 		
@@ -353,6 +348,14 @@ namespace KAmanagement
 			get
 			{
 				return this.GetTable<tbl_KaCustomertemp>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_kaChannel> tbl_kaChannels
+		{
+			get
+			{
+				return this.GetTable<tbl_kaChannel>();
 			}
 		}
 		
@@ -545,6 +548,14 @@ namespace KAmanagement
 			get
 			{
 				return this.GetTable<tbl_tempcontractsdatadetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_tempmasscreatepayment> tbl_tempmasscreatepayments
+		{
+			get
+			{
+				return this.GetTable<tbl_tempmasscreatepayment>();
 			}
 		}
 		
@@ -1515,116 +1526,6 @@ namespace KAmanagement
 					this._Amount = value;
 					this.SendPropertyChanged("Amount");
 					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_kaChannel")]
-	public partial class tbl_kaChannel : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Channel;
-		
-		private string _Detail;
-		
-		private int _id;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnChannelChanging(string value);
-    partial void OnChannelChanged();
-    partial void OnDetailChanging(string value);
-    partial void OnDetailChanged();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    #endregion
-		
-		public tbl_kaChannel()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Channel", DbType="NChar(10)")]
-		public string Channel
-		{
-			get
-			{
-				return this._Channel;
-			}
-			set
-			{
-				if ((this._Channel != value))
-				{
-					this.OnChannelChanging(value);
-					this.SendPropertyChanging();
-					this._Channel = value;
-					this.SendPropertyChanged("Channel");
-					this.OnChannelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Detail", DbType="NChar(50)")]
-		public string Detail
-		{
-			get
-			{
-				return this._Detail;
-			}
-			set
-			{
-				if ((this._Detail != value))
-				{
-					this.OnDetailChanging(value);
-					this.SendPropertyChanging();
-					this._Detail = value;
-					this.SendPropertyChanged("Detail");
-					this.OnDetailChanged();
 				}
 			}
 		}
@@ -9780,43 +9681,23 @@ namespace KAmanagement
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _Contractype;
-		
 		private int _id;
+		
+		private string _Contractype;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnContractypeChanging(string value);
-    partial void OnContractypeChanged();
     partial void OnidChanging(int value);
     partial void OnidChanged();
+    partial void OnContractypeChanging(string value);
+    partial void OnContractypeChanged();
     #endregion
 		
 		public tbl_kacontracttype()
 		{
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contractype", DbType="NChar(10)")]
-		public string Contractype
-		{
-			get
-			{
-				return this._Contractype;
-			}
-			set
-			{
-				if ((this._Contractype != value))
-				{
-					this.OnContractypeChanging(value);
-					this.SendPropertyChanging();
-					this._Contractype = value;
-					this.SendPropertyChanged("Contractype");
-					this.OnContractypeChanged();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
@@ -9835,6 +9716,26 @@ namespace KAmanagement
 					this._id = value;
 					this.SendPropertyChanged("id");
 					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contractype", DbType="NVarChar(20)")]
+		public string Contractype
+		{
+			get
+			{
+				return this._Contractype;
+			}
+			set
+			{
+				if ((this._Contractype != value))
+				{
+					this.OnContractypeChanging(value);
+					this.SendPropertyChanging();
+					this._Contractype = value;
+					this.SendPropertyChanged("Contractype");
+					this.OnContractypeChanged();
 				}
 			}
 		}
@@ -12031,6 +11932,116 @@ namespace KAmanagement
 					this._BU = value;
 					this.SendPropertyChanged("BU");
 					this.OnBUChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_kaChannel")]
+	public partial class tbl_kaChannel : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Channel;
+		
+		private string _Detail;
+		
+		private int _id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnChannelChanging(string value);
+    partial void OnChannelChanged();
+    partial void OnDetailChanging(string value);
+    partial void OnDetailChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
+		public tbl_kaChannel()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Channel", DbType="NChar(10)")]
+		public string Channel
+		{
+			get
+			{
+				return this._Channel;
+			}
+			set
+			{
+				if ((this._Channel != value))
+				{
+					this.OnChannelChanging(value);
+					this.SendPropertyChanging();
+					this._Channel = value;
+					this.SendPropertyChanged("Channel");
+					this.OnChannelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Detail", DbType="NChar(50)")]
+		public string Detail
+		{
+			get
+			{
+				return this._Detail;
+			}
+			set
+			{
+				if ((this._Detail != value))
+				{
+					this.OnDetailChanging(value);
+					this.SendPropertyChanging();
+					this._Detail = value;
+					this.SendPropertyChanged("Detail");
+					this.OnDetailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -19547,6 +19558,236 @@ namespace KAmanagement
 					this._Paydate = value;
 					this.SendPropertyChanged("Paydate");
 					this.OnPaydateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_tempmasscreatepayment")]
+	public partial class tbl_tempmasscreatepayment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _StatusNote;
+		
+		private string _ContractNo;
+		
+		private string _Noteofpayment;
+		
+		private System.Nullable<int> _PAYID;
+		
+		private System.Nullable<double> _PaidRequestAmt;
+		
+		private string _Username;
+		
+		private int _id;
+		
+		private string _BATCHNO;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStatusNoteChanging(string value);
+    partial void OnStatusNoteChanged();
+    partial void OnContractNoChanging(string value);
+    partial void OnContractNoChanged();
+    partial void OnNoteofpaymentChanging(string value);
+    partial void OnNoteofpaymentChanged();
+    partial void OnPAYIDChanging(System.Nullable<int> value);
+    partial void OnPAYIDChanged();
+    partial void OnPaidRequestAmtChanging(System.Nullable<double> value);
+    partial void OnPaidRequestAmtChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnBATCHNOChanging(string value);
+    partial void OnBATCHNOChanged();
+    #endregion
+		
+		public tbl_tempmasscreatepayment()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusNote", DbType="NVarChar(50)")]
+		public string StatusNote
+		{
+			get
+			{
+				return this._StatusNote;
+			}
+			set
+			{
+				if ((this._StatusNote != value))
+				{
+					this.OnStatusNoteChanging(value);
+					this.SendPropertyChanging();
+					this._StatusNote = value;
+					this.SendPropertyChanged("StatusNote");
+					this.OnStatusNoteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContractNo", DbType="NVarChar(255)")]
+		public string ContractNo
+		{
+			get
+			{
+				return this._ContractNo;
+			}
+			set
+			{
+				if ((this._ContractNo != value))
+				{
+					this.OnContractNoChanging(value);
+					this.SendPropertyChanging();
+					this._ContractNo = value;
+					this.SendPropertyChanged("ContractNo");
+					this.OnContractNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Noteofpayment", DbType="NVarChar(255)")]
+		public string Noteofpayment
+		{
+			get
+			{
+				return this._Noteofpayment;
+			}
+			set
+			{
+				if ((this._Noteofpayment != value))
+				{
+					this.OnNoteofpaymentChanging(value);
+					this.SendPropertyChanging();
+					this._Noteofpayment = value;
+					this.SendPropertyChanged("Noteofpayment");
+					this.OnNoteofpaymentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PAYID", DbType="Int")]
+		public System.Nullable<int> PAYID
+		{
+			get
+			{
+				return this._PAYID;
+			}
+			set
+			{
+				if ((this._PAYID != value))
+				{
+					this.OnPAYIDChanging(value);
+					this.SendPropertyChanging();
+					this._PAYID = value;
+					this.SendPropertyChanged("PAYID");
+					this.OnPAYIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidRequestAmt", DbType="Float")]
+		public System.Nullable<double> PaidRequestAmt
+		{
+			get
+			{
+				return this._PaidRequestAmt;
+			}
+			set
+			{
+				if ((this._PaidRequestAmt != value))
+				{
+					this.OnPaidRequestAmtChanging(value);
+					this.SendPropertyChanging();
+					this._PaidRequestAmt = value;
+					this.SendPropertyChanged("PaidRequestAmt");
+					this.OnPaidRequestAmtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(50)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BATCHNO", DbType="NVarChar(255)")]
+		public string BATCHNO
+		{
+			get
+			{
+				return this._BATCHNO;
+			}
+			set
+			{
+				if ((this._BATCHNO != value))
+				{
+					this.OnBATCHNOChanging(value);
+					this.SendPropertyChanging();
+					this._BATCHNO = value;
+					this.SendPropertyChanged("BATCHNO");
+					this.OnBATCHNOChanged();
 				}
 			}
 		}
