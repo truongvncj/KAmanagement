@@ -725,7 +725,7 @@ namespace KAmanagement.Model
                         {
 
                             PAYIDid = columid;
-                            //   headindex = rowid;
+                            //   headindex = rowid; PaidRequestAmt
 
                         }
 
@@ -838,6 +838,7 @@ namespace KAmanagement.Model
                 // Write from the source to the destination.
                 bulkCopy.ColumnMappings.Add("ContractNo", "ContractNo");
                 bulkCopy.ColumnMappings.Add("Noteofpayment", "Noteofpayment");
+                bulkCopy.ColumnMappings.Add("PaidRequestAmt", "PaidRequestAmt");
 
                 bulkCopy.ColumnMappings.Add("PAYID", "PAYID");
                 bulkCopy.ColumnMappings.Add("Username", "Username");
