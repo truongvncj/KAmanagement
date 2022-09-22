@@ -107,9 +107,9 @@
             this.btmassconfirm.BackColor = System.Drawing.SystemColors.Control;
             this.btmassconfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btmassconfirm.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btmassconfirm.Location = new System.Drawing.Point(622, 27);
+            this.btmassconfirm.Location = new System.Drawing.Point(622, 28);
             this.btmassconfirm.Name = "btmassconfirm";
-            this.btmassconfirm.Size = new System.Drawing.Size(89, 21);
+            this.btmassconfirm.Size = new System.Drawing.Size(89, 20);
             this.btmassconfirm.TabIndex = 49;
             this.btmassconfirm.Text = " Mass Confirm";
             this.btmassconfirm.UseVisualStyleBackColor = false;
@@ -121,9 +121,9 @@
             this.btmasschange.BackColor = System.Drawing.SystemColors.Control;
             this.btmasschange.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btmasschange.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btmasschange.Location = new System.Drawing.Point(717, 27);
+            this.btmasschange.Location = new System.Drawing.Point(717, 28);
             this.btmasschange.Name = "btmasschange";
-            this.btmasschange.Size = new System.Drawing.Size(96, 21);
+            this.btmasschange.Size = new System.Drawing.Size(96, 20);
             this.btmasschange.TabIndex = 48;
             this.btmasschange.Text = " Mass Change";
             this.btmasschange.UseVisualStyleBackColor = false;
@@ -168,7 +168,7 @@
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(112, 25);
+            this.button1.Location = new System.Drawing.Point(112, 28);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 20);
             this.button1.TabIndex = 42;
@@ -192,7 +192,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(9, 25);
+            this.button2.Location = new System.Drawing.Point(9, 27);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(97, 22);
             this.button2.TabIndex = 40;
@@ -215,7 +215,7 @@
             // Bt_Adddata
             // 
             this.Bt_Adddata.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.Bt_Adddata.Location = new System.Drawing.Point(222, 25);
+            this.Bt_Adddata.Location = new System.Drawing.Point(222, 27);
             this.Bt_Adddata.Name = "Bt_Adddata";
             this.Bt_Adddata.Size = new System.Drawing.Size(97, 21);
             this.Bt_Adddata.TabIndex = 36;

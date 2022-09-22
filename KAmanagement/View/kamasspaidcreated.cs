@@ -241,7 +241,7 @@ namespace KAmanagement.View
 
             #endregion
 
-               #region nếu lỗi thoát và refesh lại màn hình
+            #region nếu lỗi thoát và refesh lại màn hình
 
       //      string connection_string = Utils.getConnectionstr();
         //    string username = Utils.getusername();
@@ -261,139 +261,146 @@ namespace KAmanagement.View
             }
               #endregion
 
-            #region  // taok mới contract
+
+            if (checkberore == true)
+            {
+
+
+                // string connection_string = Utils.getConnectionstr();
+
+                //  LinqtoSQLDataContext dc = new LinqtoSQLDataContext(connection_string);
+
+                var listcontract = from p in dc.tbl_tempmasscreatepayments
+                                   where p.Username == username
+                                   select p;
+
+                foreach (var itemtempcontract in listcontract)
+                {
 
 
 
-            //if (checkberore == true)
-            //{
-              
+                    Control.Control_ac.CaculationContract(itemtempcontract.ContractNo);
 
-            //    // master
-            //    var dsmastercontract = from p in dc.tbl_tempmastercontractmasscreates
-            //                           where p.Username == username
-            //                           select p;
-
-            //    if (dsmastercontract.Count() > 0)
-            //    {
-
-            //        foreach (var item in dsmastercontract)
-            //        {
-            //            tbl_kacontractdata newcontract = new tbl_kacontractdata();
-
-            //            newcontract.Customer = (double)item.Customer;//
-            //            newcontract.CustomerType = "SFA";
-            //            newcontract.Channel = item.Channel;
-            //            newcontract.tel = item.tel;
-            //            newcontract.Consts = "CRT";
-            //            newcontract.ContractNo = item.ContractNo;
-            //            newcontract.ConType = item.ConType;
-            //            newcontract.Currency = "VND";
-            //            newcontract.Representative = item.Representative;
-            //            newcontract.Fullname = item.Fullname;
-            //            newcontract.CreditLimit = item.CreditLimit;
-            //            newcontract.CreditTerm = item.CreditTerm;
-            //            newcontract.DeliveredBy = item.DeliveredBy;
-            //            newcontract.SalesOrg = item.SalesOrg;
-            //            newcontract.VolComm = item.VolCommitment;
-            //            newcontract.NSRComm = item.NSRCommitment;
-            //            newcontract.ConTerm = (-item.EfFromDate.Value.Year + item.EftoDate.Value.Year + 1);
-            //            newcontract.AnnualVolume = item.VolCommitment / (-item.EfFromDate.Value.Year + item.EftoDate.Value.Year + 1);
-            //            newcontract.District = item.District;
-            //            newcontract.Province = item.Province;
-            //            newcontract.HouseNo = item.HouseNo;
-            //            newcontract.VATregistrationNo = item.VATregistrationNo;
-            //            newcontract.CRDUSR = username;
-            //            newcontract.SignOn = item.EfFromDate;
-            //            newcontract.CRDDAT = DateTime.Today;
-            //            newcontract.Remarks = item.Remark;
-            //            newcontract.EffDate = item.EfFromDate;//  this.dateTimePicker1.Value;
-            //            newcontract.EftDate = item.EftoDate;// this.dateTimePicker2.Value;
-            //            newcontract.ExtDate = item.ExtendDate; // this.dateTimePicker3.Value;
-            //            newcontract.SALORG_CTR = Utils.getfirstusersalescontrolregion();
-
-            //            dc.tbl_kacontractdatas.InsertOnSubmit(newcontract);
-            //            dc.SubmitChanges();
+                    double totalpairequest = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                                              where tbl_kacontractsdetailpayment.ContractNo == itemtempcontract.ContractNo
+                                              select tbl_kacontractsdetailpayment.PaidRequestAmt).Sum().GetValueOrDefault(0);
 
 
-            //            var listdetail = from p in dc.tbl_tempcontractsdatadetails
-            //                             where p.Username == username
-            //                             && p.ContractNo == item.ContractNo
-            //                             select p;
-
-            //            if (listdetail.Count() > 0)
-            //            {
-            //                List<tbl_kacontractsdatadetail> tbl_kacontractsdatadetaillist = new List<tbl_kacontractsdatadetail>();
-            //                foreach (var item2 in listdetail)
-            //                {
-            //                    tbl_kacontractsdatadetail newdetailContract = new tbl_kacontractsdatadetail();
-
-            //                    newdetailContract.Customercode = item.Customer;
-            //                    newdetailContract.PayType = item2.Programe;
-            //                    newdetailContract.CustomerType = "SFA";
-            //                    newdetailContract.Description = item2.PayControl.Trim() + " : " + (from p in dc.tbl_Kafuctionlists
-            //                                                                                       where p.Code == item2.PayControl
-            //                                                                                       select p.Description.Trim()).FirstOrDefault(); //Description pay control
-            //                    newdetailContract.PayControl = item2.PayControl;
-            //                    newdetailContract.CommittedDate = item2.Paydate;
-
-            //                    newdetailContract.Remark = item2.Description; // Description contract
-
-            //                    newdetailContract.PrdGrp = item2.PrdGrp;
-            //                    newdetailContract.ContractNo = item2.ContractNo;
-            //                    newdetailContract.VATregistrationNo = item.VATregistrationNo;
-            //                    newdetailContract.SponsoredAmt = item2.Sponsored_Amount;
-            //                    newdetailContract.EffFrm = item2.EffFrom;
-            //                    newdetailContract.EffTo = item2.EffTo;
-
-            //                    newdetailContract.SALORG_CTR = Utils.getfirstusersalescontrolregion();
-            //                    newdetailContract.SalesOrg = item.SalesOrg;
-            //                    newdetailContract.Constatus = "CRT";
-            //                    newdetailContract.Fullname = item.Fullname;
-            //                    newdetailContract.ConType = item.ConType;
-            //                    newdetailContract.Address = item.HouseNo.Trim() + " " + item.District.Trim() + " " + item.Province.Trim();
-
-
-            //                    newdetailContract.CRDDAT = DateTime.Today;
-            //                    newdetailContract.CRDUSR = Utils.getusername();
-
-            //                    tbl_kacontractsdatadetaillist.Add(newdetailContract);
-
-
-
-
-
-            //                }
-            //                dc.tbl_kacontractsdatadetails.InsertAllOnSubmit(tbl_kacontractsdatadetaillist);
-            //                dc.SubmitChanges();
-
-            //            }
+                    double totalachived = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                           where tbl_kacontractsdatadetail.ContractNo == itemtempcontract.ContractNo
+                                           select tbl_kacontractsdatadetail.SponsoredTotal).Sum().GetValueOrDefault(0);
 
 
 
 
 
 
-            //        }
+                    if (totalachived < totalpairequest + itemtempcontract.PaidRequestAmt)
+                    {
 
-            //    }
+                        #region -- nếu vượt ngân sách thì note
+                        itemtempcontract.StatusNote = "PaidRequestAmt phải nhỏ hơn totalachived";
+                        dc.SubmitChanges();
+
+                        #endregion
+
+                    }
+                    else
+                    {
+                        #region -- nếu không vượt thì tạo payment
+                        var maxbatcno = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+
+                                         select tbl_kacontractsdetailpayment.BatchNo).Max();
+
+                        //var newrequestpaymentRS = from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                        //                          where tbl_kacontractsdetailpayment.ContractNo == itemtempcontract.ContractNo && tbl_kacontractsdetailpayment.PayControl == "REQ" && tbl_kacontractsdetailpayment.BatchNo == 0 && tbl_kacontractsdetailpayment.CRDUSR == Utils.getusername()
+                        //                          select tbl_kacontractsdetailpayment;
+
+                        //if (newrequestpaymentRS != null && newrequestpaymentRS.Count() > 0)
+                        //{
+                        //    foreach (var item in newrequestpaymentRS)
+                        //    {
+
+                        //        item.BatchNo = maxbatcno + 1;
+                        //        item.CRDDAT = DateTime.Today;
+                        //        dc.SubmitChanges();
+                        //    }
+
+                        itemtempcontract.StatusNote = "OK";
+                        itemtempcontract.BATCHNO = (maxbatcno + 1).ToString();
 
 
-            //    // detail
+                        dc.SubmitChanges();
+
+                     //   tbl_kacontractsdatadetail newrequestpayment = new tbl_kacontractsdatadetail();
+
+
+                        #region insert to table payment
+                        tbl_kacontractsdetailpayment newrequestpayment = new tbl_kacontractsdetailpayment();
+
+                        newrequestpayment.ContractNo = itemtempcontract.ContractNo;
+                        newrequestpayment.ContracName = (from tbl_kacontractdata in dc.tbl_kacontractdatas
+                                                         where tbl_kacontractdata.ContractNo == itemtempcontract.ContractNo
+                                                         select tbl_kacontractdata.Fullname).FirstOrDefault();
+
+                        //  newrequestpayment.BLOCKED = false;
+
+                        newrequestpayment.PaidRequestAmt = itemtempcontract.PaidRequestAmt;
+                        //       newrequestpayment.PaidAmt = double.Parse(txt_paymentamount.Text);
+
+                        newrequestpayment.PayControl = "REQ";
+                        newrequestpayment.BatchNo = (maxbatcno + 1);
+                        newrequestpayment.PayID = itemtempcontract.PAYID;
+
+                        newrequestpayment.SubID = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
+                                                   where tbl_kacontractsdetailpayment.PayID == itemtempcontract.PAYID && tbl_kacontractsdetailpayment.ContractNo == itemtempcontract.ContractNo
+                                                   select tbl_kacontractsdetailpayment.SubID).Max().GetValueOrDefault(0) + 1;
+
+                        //newrequestpayment.PrdGrp = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                        //                            where tbl_kacontractsdatadetail.PayID == payiD && tbl_kacontractsdatadetail.ContractNo == contractno
+                        //                            select tbl_kacontractsdatadetail.PrdGrp).FirstOrDefault();
+
+
+                        newrequestpayment.PayType = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
+                                                     where tbl_kacontractsdatadetail.PayID == itemtempcontract.PAYID && tbl_kacontractsdatadetail.ContractNo == itemtempcontract.ContractNo
+                                                     select tbl_kacontractsdatadetail.PayType).FirstOrDefault();
+
+                        newrequestpayment.Description = "Payment for. " + itemtempcontract.PAYID + "-" + newrequestpayment.SubID;
+
+                        newrequestpayment.Remark = itemtempcontract.Noteofpayment;
+                        newrequestpayment.CRDUSR = Utils.getusername();
+
+                        //   cb_subid.Text = newrequestpayment.SubID.ToString();
+                     //   this.subid = (int)newrequestpayment.SubID;
+
+
+                        dc.tbl_kacontractsdetailpayments.InsertOnSubmit(newrequestpayment);
+                        dc.SubmitChanges();
+                        #endregion
+
+
+
+                        #endregion
+
+                    }
 
 
 
 
 
+                 
 
-            //    MessageBox.Show("Mass contract create done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-       //     }
+                var tempaymentlist2 = from p in dc.tbl_tempmasscreatepayments
+                                      where p.Username == username
+                                      select p;
 
+                gridviewmaster.DataSource = tempaymentlist2;
 
+                MessageBox.Show("Mass created payment done !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-            #endregion
+            }
 
         }
 
