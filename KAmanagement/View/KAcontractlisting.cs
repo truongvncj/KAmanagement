@@ -526,6 +526,7 @@ namespace KAmanagement.View
                                            BegindetailCotractAched = tbl_kacontractsdatadetail.BeginAchvmt,
 
                                            PayControl = tbl_kacontractsdatadetail.PayControl,
+                                           PayId = tbl_kacontractsdatadetail.PayID,
                                            tbl_kacontractsdatadetail.PayType,
                                            Description = tbl_kacontractsdatadetail.Description,
                                            PrdGrp = tbl_kacontractsdatadetail.PrdGrp,
