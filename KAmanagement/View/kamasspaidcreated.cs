@@ -283,11 +283,13 @@ namespace KAmanagement.View
 
                     double totalpairequest = (from tbl_kacontractsdetailpayment in dc.tbl_kacontractsdetailpayments
                                               where tbl_kacontractsdetailpayment.ContractNo == itemtempcontract.ContractNo
+                                              && tbl_kacontractsdetailpayment.PayID == itemtempcontract.PAYID
                                               select tbl_kacontractsdetailpayment.PaidRequestAmt).Sum().GetValueOrDefault(0);
 
 
                     double totalachived = (from tbl_kacontractsdatadetail in dc.tbl_kacontractsdatadetails
                                            where tbl_kacontractsdatadetail.ContractNo == itemtempcontract.ContractNo
+                                               && tbl_kacontractsdatadetail.PayID == itemtempcontract.PAYID
                                            select tbl_kacontractsdatadetail.SponsoredTotal).Sum().GetValueOrDefault(0);
 
 
