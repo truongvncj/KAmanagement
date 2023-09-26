@@ -371,7 +371,8 @@ namespace KAmanagement.View
 
                         newrequestpayment.Remark = itemtempcontract.Noteofpayment;
                         newrequestpayment.CRDUSR = Utils.getusername();
-
+                        newrequestpayment.PrintDate = DateTime.Today;
+                     
                         //   cb_subid.Text = newrequestpayment.SubID.ToString();
                      //   this.subid = (int)newrequestpayment.SubID;
 
